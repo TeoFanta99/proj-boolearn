@@ -10,7 +10,17 @@ export default {
       store,
     };
   },
-
+  methods: {
+    getRequest() {
+      console.log(
+        "PushTask:" +
+          store.NameSurname +
+          store.Email +
+          store.Title +
+          store.Message
+      );
+    },
+  },
   computed: {
     // numcard() {
     //   return store.CardList.length;
@@ -43,7 +53,7 @@ export default {
 
         <!-- Form seconda colonna -->
         <div class="col">
-          <form>
+          <form @submit.prevent="getRequest">
             <div class="mb-3">
               <label class="form-label"
                 >Nome e Cognome:<span class="required">*</span></label
@@ -51,8 +61,9 @@ export default {
               <input
                 type="text"
                 placeholder="Nome e cognome"
+                id="nmSr"
+                v-model.trim="store.NameSurname"
                 class="form-control"
-                aria-describedby="emailHelp"
               />
             </div>
             <div class="mb-3">
@@ -63,6 +74,8 @@ export default {
                 type="email"
                 placeholder="Email"
                 class="form-control"
+                id="e-mail"
+                v-model.trim="store.Email"
                 aria-describedby="emailHelp"
               />
             </div>
@@ -73,6 +86,8 @@ export default {
               <input
                 type="text"
                 class="form-control"
+                id="title"
+                v-model.trim="store.Title"
                 placeholder="Messaggio"
                 aria-describedby="emailHelp"
               />
@@ -88,6 +103,7 @@ export default {
                 id="messaggio"
                 rows="3"
                 placeholder="Messaggio"
+                v-model.trim="store.Message"
                 required=""
                 aria-required="true"
               ></textarea>
