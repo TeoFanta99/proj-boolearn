@@ -1,1 +1,16 @@
-@use './partials/variables' as *;
+@use "./partials/variables" as *;
+
+//importo bootstrap dopo averlo installato
+@import "node_modules/bootstrap/scss/bootstrap";
+
+// GENERAL
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+img {
+  width: 100%;
+}
