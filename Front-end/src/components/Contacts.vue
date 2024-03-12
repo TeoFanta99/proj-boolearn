@@ -21,11 +21,6 @@ export default {
       );
     },
   },
-  computed: {
-    // numcard() {
-    //   return store.CardList.length;
-    // },
-  },
 };
 </script>
 
