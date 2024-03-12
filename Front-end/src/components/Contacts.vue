@@ -1,4 +1,4 @@
-<script setup>
+<script>
 //importo store
 import { store } from "../store";
 
