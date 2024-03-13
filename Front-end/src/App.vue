@@ -1,5 +1,11 @@
 <script >
+import AppAbout from './components/AppAbout.vue';
+
 export default {
+    components: {
+        AppAbout,
+    },
+
     data(){
         return{
             
@@ -10,6 +16,8 @@ export default {
 
 <template>
  
+    <AppAbout />
+
 </template>
 
 <style lang="scss">
