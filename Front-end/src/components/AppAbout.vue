@@ -17,8 +17,6 @@ export default {
 
 <style scoped lang="scss">
 
-
-
     main {
         width: 100%;
         
@@ -29,4 +27,5 @@ export default {
             padding-bottom: 70px;
         }
     }
+    
 </style>
