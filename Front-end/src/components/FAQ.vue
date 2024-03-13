@@ -149,8 +149,8 @@ export default {
 
       label::before {
         content: "+";
-        margin-right: 15px;
-        font-size: 24px;
+        margin: 5px;
+        font-size: 20px;
         font-weight: 700;
         color: gray;
       }
