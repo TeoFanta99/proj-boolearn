@@ -9,7 +9,7 @@
             <nav class="navbar navbar-expand-lg bg-body-tertiary d-flex justify-content-between">
                 <div class="container">
                     <div class="user">
-                        <a data-bs-toggle="offcanvas" href="#offcanvasExample" aria-controls="offcanvasExample"> img</a>
+                        <a class="" data-bs-toggle="offcanvas" href="#offcanvasExample" aria-controls="offcanvasExample"> img</a>
                         <div class="offcanvas offcanvas-start d-lg-none" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
                             <div class="offcanvas-header">
                                 <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
@@ -17,14 +17,15 @@
                             </div>
                             <div class="offcanvas-body">
                                 <div>
-                                Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
+                                    Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="home"> 
                         <a href="">
-                            <img src="" alt="LOGO">
+                            <img src="../../public/BL1.svg" alt="LOGO">
+                            <!-- <span>BOOLEARN</span> -->
                         </a>
                     </div>
                     <button class="navbar-toggler d-md-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,10 +37,10 @@
                                 <a class="nav-link active text-center" aria-current="page" href="#">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-center" href="#">Features</a>
+                                <a class="nav-link text-center" href="#">About</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-center" href="#">Pricing</a>
+                                <a class="nav-link text-center" href="#">Contacts</a>
                             </li>
                         </ul>
                     </div>
