@@ -17,6 +17,7 @@ export default {
   <div class="background">
     <div class="container">
       <div class="row">
+        <h2>F.A.Q</h2>
         <!-- Sezione Accordion di sinistra -->
         <div class="col-sm-12 col-md-12 col-lg-6">
           <ul class="accordion">
@@ -109,6 +110,10 @@ export default {
 .background {
   background-color: rgb(113, 169, 253);
   .row {
+    h2 {
+      text-align: center;
+    }
+
     // Styles Accordion
     .accordion {
       width: 100%;
