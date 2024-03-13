@@ -110,6 +110,7 @@ export default {
 .background {
   background-color: rgb(113, 169, 253);
   .row {
+    width: 100%;
     h2 {
       text-align: center;
     }
