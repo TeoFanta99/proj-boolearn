@@ -1,5 +1,12 @@
 <script >
+
+import AppFooter from './components/AppFooter.vue';
+
 export default {
+    components: {
+        AppFooter
+    },
+
     data(){
         return{
             
@@ -10,6 +17,8 @@ export default {
 
 <template>
  
+    <AppFooter />
+
 </template>
 
 <style lang="scss">
