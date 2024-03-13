@@ -78,7 +78,11 @@ export default {
               
             </li>
             <li class="nav-item ">
-              <a class="nav-link  text-center" href="#">About</a>
+              <a class="nav-link  text-center" href="#">
+                <router-link :to="{ name: 'about'}">
+                  About
+                </router-link>
+              </a>
             </li>
             <li class="nav-item">
               <a class="nav-link text-center" href="#">

@@ -9,12 +9,15 @@ import { store } from "./store";
 import AppFooter from "./components/AppFooter.vue";
 import AppHeader from "./components/AppHeader.vue";
 
+import About from "./pages/About.vue"
+
 export default {
   components: {
     Contacts,
     FAQ,
     AppHeader,
     AppFooter,
+    About,
   },
   data() {
     return {
