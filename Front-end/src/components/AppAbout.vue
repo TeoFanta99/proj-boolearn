@@ -25,6 +25,8 @@ export default {
         .container {
             border: 1px solid black;
             margin-top: 10px;
+            padding-top: 50px;
+            padding-bottom: 70px;
         }
     }
 </style>
