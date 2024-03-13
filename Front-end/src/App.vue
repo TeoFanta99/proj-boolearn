@@ -1,30 +1,29 @@
-<script >
+<script>
+//importo componenti figli
+import Contacts from "./components/Contacts.vue";
+import FAQ from "./components/FAQ.vue";
+//importo store
+import { store } from "./store";
 
-import AppFooter from './components/AppFooter.vue';
-import AppHeader from './components/AppHeader.vue';
-
+import AppFooter from "./components/AppFooter.vue";
+import AppHeader from "./components/AppHeader.vue";
 
 export default {
-    components:{
-        AppHeader,
-        AppFooter
-},  
-    data(){
-              
-        return{
-            
-        }
-    }
-}
+  components: {
+    Contacts,
+    FAQ,
+    AppHeader,
+    AppFooter,
+  },
+  data() {
+    return {};
+  },
+};
 </script>
 
 <template>
- <AppHeader/>
- main belo
- <AppFooter/>
+    <!-- <Contacts /> -->
+  <FAQ />
 </template>
 
-<style lang="scss">
-    @use "./styles/general.scss";
-
-</style>
+<style lang="scss"></style>
