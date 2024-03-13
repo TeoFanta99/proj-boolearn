@@ -42,7 +42,7 @@ export default {
           <p>
             Boolearn Assistenza<br />
             +39 555 444 777 <br />
-            DA LUNEDI AL VENERDI : 10.00-11.00 / 16.00-17.00
+            DA LUNEDI AL VENERDI : 10.00-10.10 / 16.00-16.10
           </p>
         </div>
 
