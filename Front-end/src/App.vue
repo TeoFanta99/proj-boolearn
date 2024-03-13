@@ -27,4 +27,7 @@ export default {
   <FAQ />
 </template>
 
-<style lang="scss"></style>
+<style lang="scss">
+@use "./styles/general.scss";
+@use "./styles/partials/variables";
+</style>
