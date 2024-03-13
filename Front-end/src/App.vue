@@ -2,27 +2,26 @@
 
 import AppFooter from './components/AppFooter.vue';
 
-export default {
-    components: {
-        AppFooter
-    },
 
+import AppHeader from './components/AppHeader.vue';
+
+export default {
     data(){
         return{
-            
+            AppHeader,
+            AppFooter
         }
     }
 }
 </script>
 
 <template>
- 
-    <AppFooter />
-
+ <AppHeader />
+ main belo
+ <AppFooter />
 </template>
 
 <style lang="scss">
-
-
+    @use "./styles/general.scss";
 
 </style>
