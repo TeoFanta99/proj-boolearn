@@ -17,14 +17,17 @@ export default {
     AppFooter,
   },
   data() {
-    return {};
+    return {
+      store
+    };
   },
 };
 </script>
 
 <template>
-    <!-- <Contacts /> -->
-  <FAQ />
+  <AppHeader />
+   <router-view></router-view>
+   <AppFooter />
 </template>
 
 <style lang="scss">

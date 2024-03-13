@@ -101,11 +101,17 @@ export default {
       </div>
     </div>
   </div>
+  <a class="nav-link text-center" href="#">
+    <router-link :class="{ 'active-link': $route.path === '/contact' }" :to="{ name: 'contact' } "
+      ><i class="fa-solid fa-house me-2"></i> se vuoi contattarci, clicca qui</router-link
+    >
+  </a>
 </template>
 
 <style lang="scss" scoped>
 //Scss relativo alla sola sezione di header
 @use "../styles/partials/variables" as *;
+
 
 .background {
   background-color: rgb(113, 169, 253);

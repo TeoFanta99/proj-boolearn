@@ -69,14 +69,32 @@ export default {
                 class="nav-link active text-center"
                 aria-current="page"
                 href="#"
-                >Home</a
-              >
+                >
+                <router-link
+                  :to="{ path: '/' }"
+                  ><i class="fa-solid fa-house me-2 "></i> Home</router-link
+               
+              ></a>
+              
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link  text-center" href="#">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-center" href="#">About</a>
+              <a class="nav-link text-center" href="#">
+                <router-link
+                  :to="{ name: 'faq' }"
+                  ><i class="fa-solid fa-house me-2 "></i> FAQ</router-link
+                >
+              </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-center" href="#">Contacts</a>
+              <a class="nav-link text-center" href="#">
+                <router-link
+                  :to="{ name: 'contact' }"
+                  ><i class="fa-solid fa-house me-2 "></i> Contact</router-link
+                >
+              </a>
             </li>
           </ul>
         </div>
@@ -97,8 +115,6 @@ export default {
   flex-grow: 0;
 }
 .no_opacity {
-
   opacity: 0;
 }
-
 </style>
