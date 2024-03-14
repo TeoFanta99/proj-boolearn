@@ -17,8 +17,8 @@ class SubjectFactory extends Factory
     public function definition()
     {
         return [
-            'name' => fake() -> word();
-            'description' => fake() -> paragraph();
+            'name' => fake() -> word(),
+            'description' => fake() -> paragraph(),
         ];
     }
 }

@@ -17,10 +17,10 @@ class ReviewFactory extends Factory
     public function definition()
     {
         return [
-            'name' => fake() -> words(4)
-            'description' => fake() -> paragraph();
-            'email' => fake() -> safeEmail();
-            'date_of_review' => fake() -> dateTimeBetween('-1 year', 'now');
+            'name' => fake() -> sentence(3),
+            'description' => fake() -> paragraph(),
+            'email' => fake() -> safeEmail(),
+            'date_of_review' => fake() -> dateTime(),
         ];
     }
 }

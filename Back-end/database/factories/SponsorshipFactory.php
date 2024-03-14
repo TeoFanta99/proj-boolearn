@@ -17,9 +17,9 @@ class SponsorshipFactory extends Factory
     public function definition()
     {
         return [
-            'name' => fake() -> colorName();
-            'duration' => fake() -> time();
-            'price' => fake() -> randomFloat(2, 50, 200);
+            'name' => fake() -> colorName(),
+            'duration' => fake() -> time(),
+            'price' => fake() -> randomFloat(2, 50, 200),
         ];
     }
 }

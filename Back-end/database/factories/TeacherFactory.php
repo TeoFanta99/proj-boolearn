@@ -17,12 +17,12 @@ class TeacherFactory extends Factory
     public function definition()
     {
         return [
-            'tax_id' => fake() -> randomNumber(10, true);
-            'image_url' => fake() -> imageUrl(640, 480, 'projects', true);
-            'biography' => fake() -> paragraph();
-            'city' => fake() -> city();
-            'phone_number' => fake() -> phoneNumber();
-            'motto' => fake() -> word(10);
+            'tax_id' => fake() -> randomNumber(5, true),
+            'image_url' => fake() -> imageUrl(640, 480, 'projects', true),
+            'biography' => fake() -> paragraph(),
+            'city' => fake() -> city(),
+            'phone_number' => fake() -> phoneNumber(),
+            'motto' => fake() -> word(10),
         ];
     }
 }
