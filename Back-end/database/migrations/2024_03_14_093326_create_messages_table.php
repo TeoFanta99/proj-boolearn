@@ -16,10 +16,11 @@ return new class extends Migration
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
 
-            $table->string('name') -> nullable(false);
+            $table->string('title') -> nullable(false);
             $table->string('email') -> nullable(false);
             $table->text('description') -> nullable(false);
             $table->dateTime('date_of_message') -> nullable(false);
+            $table->string('user_name') -> nullable(false);
 
             $table->timestamps();
         });
