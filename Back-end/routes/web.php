@@ -17,6 +17,10 @@ use App\Http\Controllers\MainController;
 
 Route::get('/', [MainController::class, 'index'])->name('welcome');
 
+Route::get('/user/create', [MainController::class, 'create'])
+    ->name('user.create');
+
+
 Route::get('/user/{id}', [MainController::class, 'show'])->name('user.show');
 
 Route::get('/dashboard', function () {

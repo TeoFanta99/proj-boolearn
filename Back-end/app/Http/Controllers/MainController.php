@@ -26,7 +26,7 @@ class MainController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.create');
     }
 
     /**
