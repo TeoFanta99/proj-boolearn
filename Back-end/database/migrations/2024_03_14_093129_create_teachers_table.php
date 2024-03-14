@@ -17,7 +17,11 @@ return new class extends Migration
             $table->id();
 
             $table->string('tax_id') -> nullable();
-            $table->string('image') -> nullable();
+            $table->string('image_url') -> nullable();
+            $table->string('biography') -> nullable(false);
+            $table->string('city') -> nullable(false);
+            $table->tinyInteger('phone_number')->unique();
+            $table->string('motto') -> nullable();
 
             $table->timestamps();
         });

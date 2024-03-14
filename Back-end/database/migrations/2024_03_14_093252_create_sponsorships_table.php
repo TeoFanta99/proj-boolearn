@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
 
             $table->string('name') -> nullable(false);
-            $table->time('duration') -> nullable(false);
+            $table->time('duration', 2) -> nullable(false);
             $table->decimal('price', 5, 2) -> nullable(false);
 
             $table->timestamps();
