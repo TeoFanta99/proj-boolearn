@@ -18,9 +18,9 @@ return new class extends Migration
 
             $table->string('tax_id') -> nullable();
             $table->string('image_url') -> nullable();
-            $table->string('biography') -> nullable(false);
+            $table->text('biography') -> nullable(false);
             $table->string('city') -> nullable(false);
-            $table->tinyInteger('phone_number')->unique();
+            $table->string('phone_number')->unique();
             $table->string('motto') -> nullable();
 
             $table->timestamps();
