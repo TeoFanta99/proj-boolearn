@@ -35,13 +35,11 @@ return new class extends Migration {
             $table->foreignId('teacher_id')->constrained();
         });
 
-        Schema::table('users', function (Blueprint $table) {
-            $table->foreignId('teacher_id')->constrained();
-        });
-
         Schema::table('teachers', function (Blueprint $table) {
             $table->foreignId('user_id')->constrained();
         });
+
+       
     }
 
     /**
@@ -82,14 +80,11 @@ return new class extends Migration {
             $table->dropColumn(['teacher_id']);
         });
 
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropForeign(['teacher_id']);
-            $table->dropColumn(['teacher_id']);
-        });
-
         Schema::table('teachers', function (Blueprint $table) {
             $table->dropForeign(['user_id']);
             $table->dropColumn(['user_id']);
         });
+
+       
     }
 };

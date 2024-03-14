@@ -16,11 +16,7 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        User::factory()->count(20)->make()->each(function ($user) {
-            $teacher = Teacher::factory()->make();
-            $user->teacher()->save($teacher);
+        $users = User::factory()->count(20)->create();
 
-            $teacher->user()->save($user);
-        })->save();
     }
 }
