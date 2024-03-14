@@ -21,7 +21,7 @@ Route::get('/user/create', [MainController::class, 'create'])
     ->name('user.create');
 
 
-Route::get('/user/{id}', [MainController::class, 'show'])->name('user.show');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -32,5 +32,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::get('/user/{id}', [MainController::class, 'show'])->name('user.show');
 
 require __DIR__ . '/auth.php';
