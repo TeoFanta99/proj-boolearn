@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MainController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [MainController::class, 'index'])->name('welcome');
+
+Route::get('/user/create', [MainController::class, 'create'])
+    ->name('user.create');
+
+
+Route::get('/user/{id}', [MainController::class, 'show'])->name('user.show');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -28,4 +33,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
