@@ -16,11 +16,15 @@ class TeacherTableSeeder extends Seeder
      */
     public function run()
     {
-        Teacher :: factory() -> count(10) -> make()->each(function($teacher){
-            $user= User::inRandomOrder()->first();
-            $teacher ->user()->associate($user);
-            $teacher->save();
+        $users = User::inRandomOrder()->get();
 
+        Teacher::factory()->count(10)->make()->each(function ($teacher) use ($users) { // usiamo la variabile users all'interno del each
+            // "scalo" uno ad uno l'array dell'id ottenuto precedentemente
+            $user = $users->shift();
+            // lo associo tramite la funzione nel model di Teacher all'entità di teacher
+            $teacher->user()->associate($user);
+            // Salvo
+            $teacher->save();
         });
     }
 }

@@ -5,6 +5,7 @@ use App\Http\Requests\TeacherRequest;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class MainController extends Controller
@@ -37,7 +38,7 @@ class MainController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(TeacherRequest $request, $id)
+    public function store(TeacherRequest $request)
     {
         $data = $request->validated();
         $teacher = new Teacher;
@@ -52,7 +53,7 @@ class MainController extends Controller
         $teacher->image_url = $img_path;
         
 
-        $user = User::find($id);
+        $user = Auth::user();
         $teacher->user()->associate($user);
         $teacher->save();
 
@@ -78,9 +79,9 @@ class MainController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit()
     {
-        $user = User::find($id);
+        $user = Auth::user();
         $teacher = $user->teacher()->first();
         return view('pages.edit', compact('teacher'));
     }
@@ -92,10 +93,10 @@ class MainController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         $data = $request->all();
-        $user = User::find($id);
+        $user = Auth::user();
         $teacher = $user->teacher()->first();
         $teacher-> tax_id = $data['tax_id'];
         $teacher->biography = $data['biography'];
@@ -110,7 +111,7 @@ class MainController extends Controller
             $teacher->image_url = $img_path;
         }
 
-        $user = User::find($id);
+        
         $teacher->user()->associate($user);
         $teacher->save();
 

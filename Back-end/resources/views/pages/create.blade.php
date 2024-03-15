@@ -11,7 +11,7 @@
     </ul>
 </div>
 @endif
-<form action="{{route('user.store', Auth::user()->id)}}" method="POST" enctype="multipart/form-data">
+<form action="{{route('user.store')}}" method="POST" enctype="multipart/form-data">
 
     @csrf
     @method('PUT')

@@ -27,13 +27,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/user/edit', [MainController::class, 'edit'])->name('user.edit');
+    Route::put('/user/update', [MainController::class, 'update'])->name('user.update');
     
-    Route::get('/user/edit/{id}', [MainController::class, 'edit'])
-    ->name('user.edit');
-    Route::put('/user/create/{id}', [MainController::class, 'store'])
-    ->name('user.store');    
-    Route::put('/user/update/{id}', [MainController::class, 'update'])
-    ->name('user.update'); 
+    Route::put('/user/create', [MainController::class, 'store'])
+    ->name('user.store');     
     Route::delete('/user/del/{id}', [MainController::class, 'destroy'])
     ->name('user.del');  
     Route::get('/user/create', [MainController::class, 'create'])
