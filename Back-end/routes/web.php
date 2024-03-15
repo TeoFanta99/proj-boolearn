@@ -19,6 +19,8 @@ Route::get('/', [MainController::class, 'index'])->name('welcome');
 
 Route::get('/user/create', [MainController::class, 'create'])
     ->name('user.create');
+Route::put('/user/create/{id}', [MainController::class, 'store'])
+    ->name('user.store');
 
 
 Route::get('/user/{id}', [MainController::class, 'show'])->name('user.show');

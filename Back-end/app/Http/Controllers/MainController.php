@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Teacher;
 use Illuminate\Http\Request;
 use App\Models\User;
 
@@ -14,9 +15,9 @@ class MainController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $teachers = Teacher::all();
 
-        return view('welcome', compact('users'));
+        return view('welcome', compact('teachers'));
     }
 
     /**
@@ -35,9 +36,22 @@ class MainController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,$id)
     {
-        //
+        $data= $request->all();
+        $teacher= new Teacher;
+        $teacher->tax_id= $data['tax_id'];
+        $teacher->biography= $data['biography'];
+        $teacher->phone_number= $data['phone_number'];
+        $teacher->city= $data['city'];
+        $teacher->motto= $data['motto'];
+        $teacher->image_url= 'bohhhhhh';
+
+        $user = User::find($id);
+        $teacher->user()->associate($user);
+        $teacher->save();
+
+        return redirect()->route('welcome');
     }
 
     /**
