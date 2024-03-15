@@ -27,7 +27,7 @@
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
                     <div class="logo_header">
-                       <img src="{{ asset('public/storage/images/BL1.svg') }}" alt="">
+                       <img src="{{ Vite::asset('public/BL1.svg') }}" alt="">
                     </div>
                     {{-- config('app.name', 'Laravel') --}}
                 </a>
