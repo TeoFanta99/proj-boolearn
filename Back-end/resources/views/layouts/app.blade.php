@@ -10,7 +10,7 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <script src="{{ asset('js/app.js') }}" defer></script>
+   
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -27,7 +27,7 @@
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
                     <div class="logo_header">
-                       <img src="{{ Vite::asset('public/storage/images/BL1.svg') }}" alt="">
+                       <img src="{{ asset('public/storage/images/BL1.svg') }}" alt="">
                     </div>
                     {{-- config('app.name', 'Laravel') --}}
                 </a>
