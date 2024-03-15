@@ -1,0 +1,47 @@
+@extends('layouts.app')
+@section('content')
+    <h1>Modifica Profilo</h1>
+    {{-- @auth --}}
+    <form action="{{route('user.update', Auth::user()->id)}}" method="POST" enctype="multipart/form-data">
+
+        @csrf
+        @method('PUT')
+       
+        <div class="row flex-column gap-4">
+            <div class="col-3">
+                <label for="tax_id">P.IVA:</label>
+                <input type="number" id="tax_id" name="tax_id" value="{{$teacher->tax_id}}">
+
+            </div>
+            <div class="col-3">
+                <div class="d-flex flex-column">
+                    <label for="biography">Biografia</label>
+                    <textarea name="biography" id="biography">{{$teacher->biography}}</textarea>
+                </div>
+            </div>
+            <div class="col-3">
+                <label for="city">Citt&agrave;:</label>
+                <input type="text" id="city" name="city" value="{{$teacher->city}}">
+            </div>
+            <div class="col-3">
+                <label for="phone_number">Numero di telefono:</label>
+                <input type="number" id="phone_number" name="phone_number"value="{{$teacher->phone_number}}">
+
+            </div>
+
+            <div class="col-3">
+                <label for="image_url">Scegli immagine:</label>
+                <input type="file" id="image_url" name="image_url" accept="image/*">
+
+            </div>
+            <div class="col-3">
+                <label for="motto">Motto:</label>
+                <input type="text" id="motto" name="motto" value="{{$teacher->motto}}">
+            </div>
+
+            
+            <div class="col-3"><input type="submit" value="Conferma"></div>
+        </div>
+    </form>
+   
+@endsection

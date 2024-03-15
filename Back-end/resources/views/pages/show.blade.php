@@ -8,24 +8,27 @@
         <a href="{{ route('event.edit', $event -> id) }}">EDIT ME</a>
     @endauth --}}
     <br>
-    @if(session('error'))
-        <div> {{session('error')}}</div>
+    @if (session('error'))
+        <div> {{ session('error') }}</div>
     @endif
 
-    <div >
-        {{$user->name}}
+    <div>
+        {{ $teacher->user->name }}
     </div>
 
     <div>
-        {{$user->lastname}}
+        {{ $teacher->user->lastname }}
     </div>
 
     <div>
-        {{$user->date_of_birth}}
+        {{ $teacher->user->date_of_birth }}
     </div>
 
     <div>
-        {{$user->email}}
+        {{ $teacher->user->email }}
+    </div>
+    <div>
+        <img src="{{ asset('storage/' . $teacher->image_url) }}" alt="">
     </div>
     {{-- @auth
         <form action="{{route('event.delete' , $event -> id)}}" method="POST">
@@ -37,6 +40,4 @@
         
         </form>
     @endauth --}}
-
-
 @endsection

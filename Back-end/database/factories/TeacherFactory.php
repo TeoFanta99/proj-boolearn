@@ -17,7 +17,7 @@ class TeacherFactory extends Factory
     public function definition()
     {
         return [
-            'tax_id' => fake() -> randomNumber(5, true),
+            'tax_id' => fake() -> numberBetween(11111111111,99999999999),
             'image_url' => fake() -> imageUrl(640, 480, 'projects', true),
             'biography' => fake() -> paragraph(),
             'city' => fake() -> city(),

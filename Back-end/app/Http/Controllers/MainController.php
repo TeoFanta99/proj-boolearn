@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Requests\TeacherRequest;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Storage;
 
 class MainController extends Controller
 {
@@ -36,16 +37,20 @@ class MainController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,$id)
+    public function store(TeacherRequest $request, $id)
     {
-        $data= $request->all();
-        $teacher= new Teacher;
-        $teacher->tax_id= $data['tax_id'];
-        $teacher->biography= $data['biography'];
-        $teacher->phone_number= $data['phone_number'];
-        $teacher->city= $data['city'];
-        $teacher->motto= $data['motto'];
-        $teacher->image_url= 'bohhhhhh';
+        $data = $request->validated();
+        $teacher = new Teacher;
+        $teacher->tax_id = $data['tax_id'];
+        $teacher->biography = $data['biography'];
+        $teacher->phone_number = $data['phone_number'];
+        $teacher->city = $data['city'];
+        $teacher->motto = $data['motto'];
+        $img = $data['image_url'];
+        $img_path = Storage :: disk('public') -> put('images', $img);
+
+        $teacher->image_url = $img_path;
+        
 
         $user = User::find($id);
         $teacher->user()->associate($user);
@@ -63,8 +68,8 @@ class MainController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-
-        return view('pages.show', compact('user'));
+        $teacher = $user -> teacher()->first();
+        return view('pages.show', compact('teacher'));
     }
 
     /**
@@ -75,7 +80,9 @@ class MainController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+        $teacher = $user->teacher()->first();
+        return view('pages.edit', compact('teacher'));
     }
 
     /**
@@ -87,7 +94,27 @@ class MainController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $user = User::find($id);
+        $teacher = $user->teacher()->first();
+        $teacher-> tax_id = $data['tax_id'];
+        $teacher->biography = $data['biography'];
+        $teacher->phone_number = $data['phone_number'];
+        $teacher->city = $data['city'];
+        $teacher->motto = $data['motto'];
+        if ($request->hasFile('image_url')) {
+            // Carica l'immagine e salva il percorso
+            $img_path = $request->file('image_url')->store('images', 'public');
+        
+            // Aggiorna il percorso dell'immagine nel modello dell'insegnante
+            $teacher->image_url = $img_path;
+        }
+
+        $user = User::find($id);
+        $teacher->user()->associate($user);
+        $teacher->save();
+
+        return redirect()->route('welcome');
     }
 
     /**
@@ -98,6 +125,9 @@ class MainController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user= User :: find($id);
+        $teacher = $user -> teacher()->first();
+        $teacher -> delete();
+        return redirect()->route('welcome'); 
     }
 }
