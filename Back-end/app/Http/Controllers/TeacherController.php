@@ -48,7 +48,7 @@ class TeacherController extends Controller
 
         $newTeacher -> save();
 
-        return redirect() -> route('')
+        return redirect('') -> route('');
     }
 
     /**
