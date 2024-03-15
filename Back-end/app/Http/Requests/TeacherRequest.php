@@ -19,7 +19,8 @@ class TeacherRequest extends FormRequest
             'city' => 'required|alpha',
             'phone_number' => 'required|string|max:10|min:9',
             'motto' => 'max:100',
-            'image_url' => ['nullable', 'image']
+            'image_url' => ['nullable', 'image'],
+            'cv_url' => ['nullable', 'image']
         ];
     }
 
