@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Http\Requests\TeacherRequest;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
@@ -48,10 +49,13 @@ class MainController extends Controller
         $teacher->city = $data['city'];
         $teacher->motto = $data['motto'];
         $img = $data['image_url'];
-        $img_path = Storage :: disk('public') -> put('images', $img);
+        $img_path = Storage::disk('public')->put('images', $img);
+        $cv = $data['cv_url'];
+        $cv_path = Storage::disk('public')->put('cvs', $cv);
 
         $teacher->image_url = $img_path;
-        
+        $teacher->cv_url = $cv_path;
+
 
         $user = Auth::user();
         $teacher->user()->associate($user);
@@ -69,7 +73,7 @@ class MainController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        $teacher = $user -> teacher()->first();
+        $teacher = $user->teacher()->first();
         return view('pages.show', compact('teacher'));
     }
 
@@ -98,7 +102,7 @@ class MainController extends Controller
         $data = $request->all();
         $user = Auth::user();
         $teacher = $user->teacher()->first();
-        $teacher-> tax_id = $data['tax_id'];
+        $teacher->tax_id = $data['tax_id'];
         $teacher->biography = $data['biography'];
         $teacher->phone_number = $data['phone_number'];
         $teacher->city = $data['city'];
@@ -106,12 +110,12 @@ class MainController extends Controller
         if ($request->hasFile('image_url')) {
             // Carica l'immagine e salva il percorso
             $img_path = $request->file('image_url')->store('images', 'public');
-        
+
             // Aggiorna il percorso dell'immagine nel modello dell'insegnante
             $teacher->image_url = $img_path;
         }
 
-        
+
         $teacher->user()->associate($user);
         $teacher->save();
 
@@ -126,9 +130,9 @@ class MainController extends Controller
      */
     public function destroy($id)
     {
-        $user= User :: find($id);
-        $teacher = $user -> teacher()->first();
-        $teacher -> delete();
-        return redirect()->route('welcome'); 
+        $user = User::find($id);
+        $teacher = $user->teacher()->first();
+        $teacher->delete();
+        return redirect()->route('welcome');
     }
 }

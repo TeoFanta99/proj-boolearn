@@ -21,6 +21,13 @@
             <input type="text" id="tax_id" name="tax_id">
 
         </div>
+
+        <div class="col-3">
+            <label for="cv_url">Carica il tuo CV <span style="color: red;  font-size: 1.5em;">*</span> :</label>
+            <input type="file" id="cv_url" name="cv_url">
+
+        </div>
+
         <div class="col-3">
             <div class="d-flex flex-column">
                 <label for="biography">Biografia <span style="color: red;  font-size: 1.5em;">*</span></label>
