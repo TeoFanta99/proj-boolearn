@@ -4,7 +4,15 @@
         <div class="row">
             <div class="col">
                 <ul class="row mt-4">
-                    <a href="{{route('user.create' )}}">CREATE</a>
+                    @auth
+                    @if (!$teachers->where('user_id', Auth::id())->count())
+                        
+            
+                        {{-- CREATE --}}
+                        <a href="{{ route('user.create') }}">CREATE</a>
+                    @endif
+                @endauth
+                    {{-- <a href="{{route('user.create' )}}">CREATE</a> --}}
                     @foreach ($teachers as $teacher)
                         {{-- VERIFICO SE l'UTENTE E' LOGGATO --}}
                         @if (Auth::check())

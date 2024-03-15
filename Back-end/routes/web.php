@@ -17,13 +17,7 @@ use App\Http\Controllers\MainController;
 
 Route::get('/', [MainController::class, 'index'])->name('welcome');
 
-Route::get('/user/create', [MainController::class, 'create'])
-    ->name('user.create');
-Route::put('/user/create/{id}', [MainController::class, 'store'])
-    ->name('user.store');
 
-
-Route::get('/user/{id}', [MainController::class, 'show'])->name('user.show');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -33,6 +27,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    
+    Route::get('/user/create', [MainController::class, 'create'])
+    ->name('user.create');
+    Route::put('/user/create/{id}', [MainController::class, 'store'])
+    ->name('user.store');    
 });
+Route::get('/user/{id}', [MainController::class, 'show'])->name('user.show');
 
 require __DIR__ . '/auth.php';
