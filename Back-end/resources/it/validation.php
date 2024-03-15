@@ -32,7 +32,7 @@ return [
         'string' => ':attribute deve essere compreso tra :min and :max caratteri.',
     ],
     'boolean' => ':attribute deve essere vero o falso.',
-    'confirmed' => 'Le:attribute non corrispondono.',
+    'confirmed' => ':attribute non corrisponde.',
     'current_password' => 'La password inserita non è corretta.',
     'date' => ':attribute non è una data valida.',
     'date_equals' => ':attribute deve essere uguale a :date.',
@@ -150,7 +150,6 @@ return [
     'url' => ':attribute deve essere un URL valido.',
     'ulid' => ':attribute deve essere un ULID valido.',
     'uuid' => ':attribute deve essere un UUID valido.',
-
 
     /*
     |--------------------------------------------------------------------------

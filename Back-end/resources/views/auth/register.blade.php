@@ -13,7 +13,7 @@
 
                             <div class="mb-4 row">
                                 <label for="name"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Nome *') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="name" type="text"
@@ -29,7 +29,7 @@
                                 
                             </div>
                             <div class="mb-4 row">
-                                <label for="lastname" class="col-md-4 col-form-label text-md-right">{{ __('Lastname') }}</label>
+                                <label for="lastname" class="col-md-4 col-form-label text-md-right">{{ __('Cognome *') }}</label>
                             
                                 <div class="col-md-6">
                                     <input id="lastname" type="text" class="form-control @error('lastname') is-invalid @enderror" name="lastname" value="{{ old('lastname') }}" required autocomplete="lastname" autofocus>
@@ -44,7 +44,7 @@
 
                             <div class="mb-4 row">
                                 <label for="email"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Indirizzo Email *') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="email" type="email"
@@ -59,7 +59,7 @@
                                 </div>
                             </div>
                             <div class="mb-4 row">
-                                <label for="date_of_birth" class="col-md-4 col-form-label text-md-right">{{ __('Data di Nascita') }}</label>
+                                <label for="date_of_birth" class="col-md-4 col-form-label text-md-right">{{ __('Data di Nascita *') }}</label>
                             
                                 <div class="col-md-6">
                                     <input id="date_of_birth" type="date" class="form-control @error('date_of_birth') is-invalid @enderror" name="date_of_birth" value="{{ old('date_of_birth') }}" required>
@@ -74,7 +74,7 @@
                             
                             <div class="mb-4 row">
                                 <label for="password"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Password *') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="password" type="password"
@@ -91,7 +91,7 @@
 
                             <div class="mb-4 row">
                                 <label for="password-confirm"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password *') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="password-confirm" type="password" class="form-control"
@@ -105,6 +105,9 @@
                                         {{ __('Register') }}
                                     </button>
                                 </div>
+                            </div>
+                            <div class="mb-4 row mb-0">
+                                <h6>* <i>campi obbligatori</i></h6>
                             </div>
                         </form>
                     </div>
