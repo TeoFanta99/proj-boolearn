@@ -24,7 +24,7 @@
 
         <div class="col-3">
             <label for="cv_url">Carica il tuo CV <span style="color: red;  font-size: 1.5em;">*</span> :</label>
-            <input type="file" id="cv_url" name="cv_url">
+            <input type="file" id="cv_url" name="cv">
 
         </div>
 
@@ -46,7 +46,11 @@
         <div class="col-3">
             <label for="image_url">Scegli immagine:</label>
             <input type="file" id="image_url" name="image_url">
+        </div>
 
+        <div class="col-3">
+            <label for="image_url">CV:</label>
+            <input type="file" id="cv_url" name="cv_url">
         </div>
         <div class="col-3">
             <label for="motto">Motto:</label>

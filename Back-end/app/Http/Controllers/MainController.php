@@ -42,6 +42,7 @@ class MainController extends Controller
     public function store(TeacherRequest $request)
     {
         $data = $request->validated();
+        dd($data);
         $teacher = new Teacher;
         $teacher->tax_id = $data['tax_id'];
         $teacher->biography = $data['biography'];
