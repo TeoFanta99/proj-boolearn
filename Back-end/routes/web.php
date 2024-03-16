@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 
@@ -36,7 +37,7 @@ Route::middleware('auth')->group(function () {
     ->name('user.del');  
     Route::get('/user/create', [MainController::class, 'create'])
     ->name('user.create');
+    Route::get('/teacher/{id}', [TeacherController::class, 'index'])->name('teacher.index');
 });
 Route::get('/user/{id}', [MainController::class, 'show'])->name('user.show');
-
 require __DIR__ . '/auth.php';

@@ -36,12 +36,23 @@
                         <label for="motto">Motto:</label>
                         <input type="text" id="motto" name="motto" value="{{$teacher->motto}}">
                     </div>
+                    <div class="col-3">
+                        <label for="cv_url">Carica il tuo CV </label>
+                        <input type="file" id="cv_url" name="cv_url" accept=".pdf">
+                    </div>
                 </div>
                 <div class="col-1">
                     <div class="img_container">
                         <img src="{{ asset('storage/' . $teacher->image_url) }}" alt="">
                     </div>
                 </div>
+                
+                <a href="{{ route('teacher.index', Auth::user()->id) }}" target="_blank">CV</a>
+                {{-- <iframe src="{{asset('storage/' . $teacher->cv_url)}}"  frameborder="0" scrolling="auto"></iframe> --}}
+            </div>
+                        
+                    
+                
             
             
             </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Teacher;
+use App\Models\User;
 
 class TeacherController extends Controller
 {
@@ -12,11 +13,12 @@ class TeacherController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        $teachers = Teacher :: all();
+        $user = User::find($id);
+        $teacher = $user->teacher()->first();
 
-        return view ('welcome', compact('teachers'));
+        return view ('pages.pdf_show', compact('teacher'));
     }
 
     /**

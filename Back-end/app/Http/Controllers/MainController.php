@@ -42,7 +42,7 @@ class MainController extends Controller
     public function store(TeacherRequest $request)
     {
         $data = $request->validated();
-        dd($data);
+        
         $teacher = new Teacher;
         $teacher->tax_id = $data['tax_id'];
         $teacher->biography = $data['biography'];
@@ -51,8 +51,10 @@ class MainController extends Controller
         $teacher->motto = $data['motto'];
         $img = $data['image_url'];
         $img_path = Storage::disk('public')->put('images', $img);
-        $cv = $data['cv_url'];
-        $cv_path = Storage::disk('public')->put('cvs', $cv);
+        if ($request->hasFile('cv_url')) {
+            $cv_path = $request->file('cv_url')->store('cvs', 'public');
+            $teacher->cv_url = $cv_path;
+        }
 
         $teacher->image_url = $img_path;
         $teacher->cv_url = $cv_path;
@@ -114,6 +116,10 @@ class MainController extends Controller
 
             // Aggiorna il percorso dell'immagine nel modello dell'insegnante
             $teacher->image_url = $img_path;
+        }
+        if ($request->hasFile('cv_url')) {
+            $cv_path = $request->file('cv_url')->store('cvs', 'public');
+            $teacher->cv_url = $cv_path;
         }
 
 
