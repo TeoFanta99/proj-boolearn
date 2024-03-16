@@ -20,7 +20,7 @@ class TeacherRequest extends FormRequest
             'phone_number' => 'required|string|max:10|min:9',
             'motto' => 'max:100',
             'image_url' => ['nullable', 'image'],
-            'cv_url' => ['nullable', 'image']
+            'cv_url' => 'nullable|mimetypes:application/pdf|max:10000'
         ];
     }
 

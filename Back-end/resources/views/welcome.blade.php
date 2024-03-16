@@ -1,16 +1,19 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        <div class="row">
-            <div class="col">
                 <ul class="row mt-4">
+                    
+                    <!-- Se sono un insegnante -->
                     @auth
+                        <!-- che non ha profilo -->
                         @if (!$teachers->where('user_id', Auth::id())->count())
-                            {{-- CREATE --}}
+
+                            <!-- Visualizzo pulsante crea profilo -->
                             <a href="{{ route('user.create') }}">Crea Profilo</a>
+
                         @endif
                     @endauth
-                    {{-- <a href="{{route('user.create' )}}">CREATE</a> --}}
+                   
                     @foreach ($teachers as $teacher)
                         {{-- VERIFICO SE l'UTENTE E' LOGGATO --}}
                         @if (Auth::check())
@@ -42,7 +45,5 @@
                         @endif
                     @endforeach
                 </ul>
-            </div>
-        </div>
     </div>
 @endsection

@@ -11,8 +11,8 @@
     @if (session('error'))
         <div> {{ session('error') }}</div>
     @endif
-        <div class="row">
-            <div class="col-4">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
+            <div class="col p-5">
                 <div>
                     {{ $teacher->user->name }}
                 </div>
@@ -30,10 +30,22 @@
                 </div>
                
             </div>
-            <div class="col-3">
+            <div class="col p-5">
                 
-                <img src="{{ asset('storage/' . $teacher->image_url) }}" alt="">
+                <img src="{{ asset('storage/' . $teacher->image_url) }}" alt="image teacher">
                 
+            </div>
+
+            <div class="col p-5">
+
+                <!-- Imposto un collegamento al pdf del docente -->
+                <a href="{{URL::to('storage/' . $teacher->cv_url)}}">
+
+                    <!-- carico logo pdf -->
+                    <img src="{{ Vite::asset('public/storage/images/logo_pdf.jpg') }}" class="logo_pdf" alt="cv teacher">
+
+                </a>
+       
             </div>
         </div>
    

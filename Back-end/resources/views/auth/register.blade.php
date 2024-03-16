@@ -58,13 +58,15 @@
                                     @enderror
                                 </div>
                             </div>
+
+                            <!-- Sezione data di nascita -->
                             <div class="mb-4 row">
-                                <label for="date_of_birth" class="col-md-4 col-form-label text-md-right">{{ __('Data di Nascita *') }}</label>
+                                <label for="data_di_nascita" class="col-md-4 col-form-label text-md-right">{{ __('Data di Nascita *') }}</label>
                             
                                 <div class="col-md-6">
-                                    <input id="date_of_birth" type="date" class="form-control @error('date_of_birth') is-invalid @enderror" name="date_of_birth" value="{{ old('date_of_birth') }}" required>
+                                    <input id="data_di_nascita" type="date" class="form-control @error('data_di_nascita') is-invalid @enderror" name="data_di_nascita" value="{{ old('data_di_nascita') }}" required>
                             
-                                    @error('date_of_birth')
+                                    @error('data_di_nascita')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
