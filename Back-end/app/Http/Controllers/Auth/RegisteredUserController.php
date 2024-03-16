@@ -37,7 +37,7 @@ class RegisteredUserController extends Controller
             'lastname' => ['required', 'string', 'max:255'], // Aggiungi questa regola
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'data_di_nascita' => ['required','date','before:-18'],
+            'data_di_nascita' => ['required','date','before:01/01/2004'],
         ]);
         
         
