@@ -31,9 +31,9 @@
                
             </div>
             <div class="col-3">
-                <div class="img_container">
-                    <img src="{{ asset('storage/' . $teacher->image_url) }}" alt="">
-                </div>
+                
+                <img src="{{ asset('storage/' . $teacher->image_url) }}" alt="">
+                
             </div>
         </div>
    

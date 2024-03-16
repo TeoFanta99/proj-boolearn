@@ -27,9 +27,9 @@
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
                     <div class="logo_header">
-                       <img src="{{ Vite::asset('public/storage/images/BL1.svg') }}" alt="">
+                       <img src="{{ Vite::asset('public/storage/images/BL1.svg') }}" alt="Logo">
                     </div>
-                    {{-- config('app.name', 'Laravel') --}}
+                   
                 </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
