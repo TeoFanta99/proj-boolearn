@@ -25,7 +25,7 @@ class TeacherTableSeeder extends Seeder
             // lo associo tramite la funzione nel model di Teacher all'entità di teacher
             $teacher->user()->associate($user);
             $gender = $user->gender;
-            $imageUrl = "https://xsgames.co/randomusers/avatar.php?g={$gender}&random=" . uniqid();
+            $imageUrl = "https://xsgames.co/randomusers/avatar.php?g={$gender}&random=";
             // Scarica l'immagine dall'URL
             $imageData = file_get_contents($imageUrl);
 

@@ -36,14 +36,16 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'date_of_birth' => ['required', 'date'],
+            'gender' => ['nullable', 'string'],
         ]);
-        
+        $gender = $request->gender ?? array_rand(['male', 'female']);
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'date_of_birth' => $request->date_of_birth,
             'lastname' => $request->lastname,
+            'gender' =>$gender ,
         ]);
 
         event(new Registered($user));
