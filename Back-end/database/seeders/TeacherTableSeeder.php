@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Teacher;
 use App\Models\User;
+use Illuminate\Support\Facades\Storage;
 
 class TeacherTableSeeder extends Seeder
 {
@@ -23,6 +24,22 @@ class TeacherTableSeeder extends Seeder
             $user = $users->shift();
             // lo associo tramite la funzione nel model di Teacher all'entità di teacher
             $teacher->user()->associate($user);
+            $gender = $user->gender;
+            $imageUrl = "https://xsgames.co/randomusers/avatar.php?g={$gender}&random=" . uniqid();
+            // Scarica l'immagine dall'URL
+            $imageData = file_get_contents($imageUrl);
+
+            // Genera un nome univoco per il file immagine
+            $fileName = uniqid() . '.jpg';
+
+            // Salva l'immagine scaricata nella directory di archiviazione pubblica
+            Storage::disk('public')->put('images/teacher_avatars/' . $fileName, $imageData);
+
+            // Costruisci l'URL completo per l'immagine salvata
+            $imgPath = 'images/teacher_avatars/' . $fileName;
+
+            // Assegna l'URL dell'immagine al campo corrispondente nel modello Teacher
+            $teacher->image_url = $imgPath;
             // Salvo
             $teacher->save();
         });

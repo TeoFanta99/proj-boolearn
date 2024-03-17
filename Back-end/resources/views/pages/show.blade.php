@@ -14,7 +14,7 @@
     <div class="container mb-4">
         <div class="row">
             <div class="col-4">
-                <div class="img_container w-100 h-100">
+                <div class="img_container">
                     <img src="{{ asset('storage/' . $teacher->image_url) }}" alt="">
                 </div>
 
@@ -67,10 +67,6 @@
                         <div class="d-flex gap-2 align-items-center">
                             <h6 class="mb-0">Data di nascita: </h6>
                             <span id="DateBirth">{{ $teacher->user->date_of_birth }}</span>
-                        </div>
-                        <div class="d-flex gap-3 align-items-center">
-                            <h6 class="mb-0">Indirizzo Mail: </h6>
-                            <span>{{ $teacher->user->email }}</span>
                         </div>
                         <div class="d-flex gap-3 align-items-center">
                             <h6 class="mb-0">Partita Iva: </h6>

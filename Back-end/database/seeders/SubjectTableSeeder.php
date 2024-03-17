@@ -17,7 +17,7 @@ class SubjectTableSeeder extends Seeder
     public function run()
     {
         Subject :: factory() -> count(5) -> create() -> each(function($subject) {
-            $teacher = Teacher :: inRandomOrder() -> limit(3) -> get();
+            $teacher = Teacher::inRandomOrder()->take(3)->get();
             $subject -> teacher() -> attach($teacher);
             $subject -> save();
         });    
