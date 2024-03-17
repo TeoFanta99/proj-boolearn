@@ -53,7 +53,7 @@
                                     <input id="email" type="email"
                                         class="form-control @error('email') is-invalid @enderror" name="email"
                                         value="{{ old('email') }}" required autocomplete="email">
-
+                                        <span id="MailNo" class="d-none  text-danger"></span>
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -159,6 +159,13 @@
                     // console.log(email.includes(element));
                     if (email.includes(element)) {
                         yesOrNo = true;
+                        document.getElementById('MailNo').classList.add('d-none');
+                        document.getElementById('MailNo').innerHTML='';
+                    }
+                    else{
+                        yesOrNo = false;
+                        document.getElementById('MailNo').classList.remove('d-none');
+                        document.getElementById('MailNo').innerHTML='Estensione non valida!';
                     }
                 });
                 return yesOrNo;
