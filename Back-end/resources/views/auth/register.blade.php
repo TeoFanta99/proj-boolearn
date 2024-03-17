@@ -153,7 +153,7 @@
 
             function checkEmail(email) {
                 let yesOrNo;
-                let emailExtensions = ['.com', '.net', '.org', '.info', '.edu', '.gov', '.it'];
+                let emailExtensions = [ '.net', '.org', '.info', '.edu', '.gov', '.it','.com'];
                 emailExtensions.forEach(element => {
                     // Debug
                     // console.log(email.includes(element));
