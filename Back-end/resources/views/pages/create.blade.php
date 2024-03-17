@@ -12,7 +12,7 @@
 </div>
 @endif
 
-<form action="{{route('user.store')}}" method="POST" enctype="multipart/form-data">
+<form id="FormCreate" action="{{route('user.store')}}" method="POST" enctype="multipart/form-data">
 
     @csrf
     @method('PUT')
@@ -20,7 +20,7 @@
         <div class="col-3">
             <label for="tax_id">P.IVA <span style="color: red;  font-size: 1.5em;">*</span> :</label>
             <input type="text" id="tax_id" name="tax_id">
-
+            <span id="taxNo"class="text-danger d-none"></span>
         </div>
 
         {{-- <div class="col-3">
@@ -76,4 +76,34 @@
 
 </form>
 {{-- @endauth --}}
+<script>
+document.getElementById("FormCreate").addEventListener("submit", function(event) {
+    event.preventDefault();
+    let validation=0;
+
+    let taxID= document.getElementById('tax_id').value;
+
+    validation+=checkTaxID(taxID);
+    if(validation){
+        this.submit();
+    }
+    function checkTaxID(taxID){
+        let yesOrNo;
+        if(taxID.length != 11){
+            document.getElementById('taxNo').classList.remove('d-none');
+            document.getElementById('taxNo').innerHTML='La partita iva deve essere di 11 cifre numeriche!';
+        }
+        else if(isNaN(taxID)){
+            document.getElementById('taxNo').classList.remove('d-none');
+            document.getElementById('taxNo').innerHTML='La partita iva deve essere di 11 cifre numeriche!';
+        }
+        else{
+            document.getElementById('taxNo').classList.add('d-none');
+            yesOrNo = true;
+        }
+        return yesOrNo;
+    }
+
+});
+</script>
 @endsection

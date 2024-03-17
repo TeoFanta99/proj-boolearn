@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TeacherRequest;
+use App\Models\Rating;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -77,7 +78,9 @@ class MainController extends Controller
     {
         $user = User::find($id);
         $teacher = $user->teacher()->first();
-        return view('pages.show', compact('teacher'));
+        $ratings = Rating :: all();
+        
+        return view('pages.show', compact('teacher','ratings'));
     }
 
     /**

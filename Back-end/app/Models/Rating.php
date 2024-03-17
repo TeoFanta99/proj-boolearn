@@ -10,6 +10,6 @@ class Rating extends Model
     use HasFactory;
 
     public function teacher() {
-        return $this -> belongsToMany(Teacher :: class);
+        return $this->belongsToMany(Teacher::class);
     }
 }
