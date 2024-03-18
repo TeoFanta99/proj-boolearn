@@ -1,8 +1,5 @@
 <script>
 export default {
-<<<<<<< Updated upstream
-    name: "Home",
-=======
   name: "Home",
 
   data() {
@@ -101,6 +98,5 @@ export default {
 <style>
 .img_circle {
   width: 60%;
->>>>>>> Stashed changes
 }
-</script>
+</style>
