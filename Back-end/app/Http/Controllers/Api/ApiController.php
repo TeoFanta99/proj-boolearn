@@ -20,7 +20,25 @@ class ApiController extends Controller
     public function getTeachers()
     {
 
-        
+        $teachers = Teacher::with('user')->get();
+
+        // Recupera i ruoli dell'utente dalla tabella ponte
+        $roles = $teachers->roles;
+
+        // Oppure, se vuoi accedere direttamente alla tabella ponte senza passare per il modello
+        $pivotData = $teachers->roles()->pivot->where('custom_field', 'value')->get();
+
+
+        return response()->json([
+            'status' => 'success',
+            'teachers' => $teachers,
+            
+        ]);
+    }
+
+    public function getSubjects()
+    {
+
         $teachers = Teacher::with('user')->get();
 
         return response()->json([

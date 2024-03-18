@@ -22,7 +22,7 @@ export default {
   },
   data() {
     return {
-      store
+      store,
     };
   },
 };
@@ -30,8 +30,8 @@ export default {
 
 <template>
   <AppHeader />
-   <router-view></router-view>
-   <AppFooter />
+  <router-view></router-view>
+  <AppFooter />
 </template>
 
 <style lang="scss">
