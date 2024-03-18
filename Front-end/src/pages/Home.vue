@@ -11,6 +11,7 @@ export default {
   data() {
     return {
       store,
+      teachers:[]
     };
   },
 
@@ -19,6 +20,14 @@ export default {
       // Restituisci direttamente il percorso dell'immagine dell'insegnante
       return `http://localhost:8000/storage/${teacher.image_url}`;
     },
+    riempiVet(id){
+      this.teachers.forEach(element => {
+          if(element.id == id){
+            store.List=element;
+            console.log(store.List);
+          }
+      });
+    }
   },
   mounted() {
     axios
@@ -26,8 +35,8 @@ export default {
       .then((res) => {
         const data = res.data;
         if (data.status === "success") {
-          store.List = data.teachers;
-          console.log(store.List);
+          this.teachers = data.teachers;
+          
         }
       })
       .catch((err) => {
@@ -40,8 +49,8 @@ export default {
 <template>
   <div class="container">
     <div class="row mt-4">
-      <div class="col-3 p-2" v-for="teacher in store.List" :key="teacher.id">
-        <RouterLink :to="{ name: 'show', params: { id: teacher.id } }">
+      <div class="col-3 p-2" v-for="teacher in teachers" :key="teacher.id">
+        <RouterLink :to="{ name: 'show', params: { id: teacher.id } }" @click="riempiVet(teacher.id)">
           <div class="card pt-3 border-0 shadow">
             <div
               class="d-flex justify-content-center align-items-center img_circle mx-auto"
