@@ -32,21 +32,23 @@ export default {
 </script>
 
 <template>
-  <div class="row">
-    <div class="col-3 p-2" v-for="teacher in teachers" :key="teacher.id">
-      <div class="card pt-3 border-0 shadow">
-        <div
-          class="d-flex justify-content-center align-items-center img_circle mx-auto"
-          style="height: 250px"
-        >
-          <img
-            class="w-100 h-100 rounded-circle"
-            :src="getImageUrl(teacher)"
-            alt=""
-          />
-        </div>
-        <div class="card-body">
-          <h4>{{ teacher.user.name }} {{ teacher.user.lastname }}</h4>
+  <div class="container">
+    <div class="row mt-4">
+      <div class="col-3 p-2" v-for="teacher in teachers" :key="teacher.id">
+        <div class="card pt-3 border-0 shadow">
+          <div
+            class="d-flex justify-content-center align-items-center img_circle mx-auto"
+            style="height: 200px"
+          >
+            <img
+              class="w-100 h-100 rounded-circle"
+              :src="getImageUrl(teacher)"
+              alt=""
+            />
+          </div>
+          <div class="card-body">
+            <h4>{{ teacher.user.name }} {{ teacher.user.lastname }}</h4>
+          </div>
         </div>
       </div>
     </div>
