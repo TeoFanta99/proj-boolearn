@@ -16,10 +16,16 @@ class SubjectTableSeeder extends Seeder
      */
     public function run()
     {
-        Subject :: factory() -> count(5) -> create() -> each(function($subject) {
-            $teacher = Teacher::inRandomOrder()->take(3)->get();
-            $subject -> teacher() -> attach($teacher);
-            $subject -> save();
-        });    
+        $subjects = Subject::factory()->count(5)->create();
+
+        $teachers = Teacher::inRandomOrder()->get();
+
+        foreach ($teachers as  $teacher) {
+            $randomSubjects = $subjects->random(rand(1, $subjects->count()));
+            foreach($randomSubjects as $randomSubject){
+                $teacher->subjects()->attach($randomSubject->id);
+            }
+        }
+      
     }
 }

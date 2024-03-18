@@ -35,38 +35,35 @@ class ApiController extends Controller
 
     public function frontTeachers(Request $request)
     {
-        $risultato = [];
         $parametro = $request->input('nome_cognome');
+        $materie = $request->input('subjects');
 
         $teachers = Teacher::with('user', 'subjects')->get();
+        $risultato = [];
 
-        
-        if ($parametro === null) {
-            
-            $risultato = $teachers;
-        } else {
-           
-            foreach ($teachers as $teacher) {
-                
-                if (
-                    str_starts_with(strtolower($teacher->user->name), strtolower($parametro)) ||
-                    str_starts_with(strtolower($teacher->user->lastname), strtolower($parametro))
-                ) {
-                    
-                    $risultato[] = $teacher;
-                }
+        foreach ($teachers as $teacher) {
+            $cercaNome = false;
+            if (!$parametro || str_starts_with(strtolower($teacher->user->name), strtolower($parametro)) || str_starts_with(strtolower($teacher->user->lastname), strtolower($parametro))) {
+                $cercaNome = true;
+            }
+
+            $cercaMateria = false;
+            if (!$materie || $teacher->subjects->pluck('name')->intersect($materie)->count() === count($materie)) {
+                $cercaMateria = true;
+            }
+
+            if ($cercaNome && $cercaMateria) {
+                $risultato[] = $teacher;
             }
         }
 
-        // Verifica se ci sono insegnanti trovati
         if (empty ($risultato)) {
             return response()->json(['messaggio' => 'Nessun insegnante trovato', 'teachers' => []]);
         } else {
-            return response()->json(['messaggio' => 'Insegnanti trovati', 'teachers' => $risultato
-            
-        ]);
+            return response()->json(['messaggio' => 'Insegnanti trovati', 'teachers' => $risultato]);
         }
     }
+
 
     // public function getSubjects()
     // {
