@@ -24,6 +24,7 @@ export default {
       this.teachers.forEach(element => {
           if(element.id == id){
             store.List=element;
+            store.view=1;
             console.log(store.List);
           }
       });
@@ -50,7 +51,7 @@ export default {
   <div class="container">
     <div class="row mt-4">
       <div class="col-3 p-2" v-for="teacher in teachers" :key="teacher.id">
-        <RouterLink :to="{ name: 'show', params: { id: teacher.id } }" @click="riempiVet(teacher.id)">
+        <RouterLink :to="{ name: 'show', params: { id: teacher.id } }" @click="riempiVet(teacher.id)" class="text-decoration-none">
           <div class="card pt-3 border-0 shadow">
             <div
               class="d-flex justify-content-center align-items-center img_circle mx-auto"
