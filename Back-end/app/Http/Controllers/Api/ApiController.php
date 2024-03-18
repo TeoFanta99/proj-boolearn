@@ -21,7 +21,7 @@ class ApiController extends Controller
     {
 
         
-        $teachers = Teacher::all();
+        $teachers = Teacher::with('user')->get();
 
         return response()->json([
             'status' => 'success',
