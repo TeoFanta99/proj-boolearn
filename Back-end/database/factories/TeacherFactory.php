@@ -19,7 +19,7 @@ class TeacherFactory extends Factory
         return [
             'tax_id' => fake()->numberBetween(11111111111, 99999999999),
             'image_url' => fake()->imageUrl(640, 480, 'teachers', true),
-            'cv_url' => fake()->imageUrl(640, 480, 'teachers', true),
+            'cv_url' => '',
             'biography' => fake()->paragraph(),
             'city' => fake()->city(),
             'phone_number' => fake()->phoneNumber(),

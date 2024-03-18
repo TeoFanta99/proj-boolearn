@@ -45,7 +45,7 @@
                         <div class="d-flex gap-3 align-items-center">
                             <ul>
                                 @foreach ($teacher->subjects as $subject)
-                                    <li>{{$subject->name}}</li>
+                                    <li>{{ $subject->name }}</li>
                                 @endforeach
 
                             </ul>
@@ -57,7 +57,7 @@
                     <h5 class="mt-4 border-bottom"> Biografia</h5>
                     <div class="d-flex flex-column">
                         <div class="d-flex gap-3 align-items-center">
-                            <p>{{$teacher->biography}}</p>
+                            <p>{{ $teacher->biography }}</p>
                         </div>
                     </div>
                 </div>
@@ -91,14 +91,20 @@
                     <h5 class="mt-4 border-bottom"> Motto</h5>
                     <div class="d-flex flex-column">
                         <div class="d-flex gap-5">
-                            
+
                             <span>{{ $teacher->motto }}</span>
                         </div>
-                       
+
                     </div>
                 </div>
             </div>
         </div>
+
+        @if (!empty($teacher->cv_url))
+            <a href="{{ route('teacher.index', $teacher->user->id) }}" target="_blank">CV</a>
+        @else
+            NoCV
+        @endif
     </div>
 
 
@@ -118,13 +124,12 @@
         // DEBUG
         // console.log(data_nascita)
 
-            var dataNascita = new Date(data_nascita.textContent);
+        var dataNascita = new Date(data_nascita.textContent);
 
-            
-            var dataFormattata = `${dataNascita.getDate()}/${dataNascita.getMonth() + 1}/${dataNascita.getFullYear()}`;
 
-            
-            data_nascita.textContent = dataFormattata;
-        
+        var dataFormattata = `${dataNascita.getDate()}/${dataNascita.getMonth() + 1}/${dataNascita.getFullYear()}`;
+
+
+        data_nascita.textContent = dataFormattata;
     </script>
 @endsection

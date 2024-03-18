@@ -37,7 +37,7 @@ Route::middleware('auth')->group(function () {
     ->name('user.del');  
     Route::get('/user/create', [MainController::class, 'create'])
     ->name('user.create');
-    Route::get('/teacher/{id}', [TeacherController::class, 'index'])->name('teacher.index');
 });
+Route::get('/teacher/{id}', [TeacherController::class, 'index'])->name('teacher.index');
 Route::get('/user/{id}', [MainController::class, 'show'])->name('user.show');
 require __DIR__ . '/auth.php';
