@@ -12,6 +12,9 @@ export default {
     return {
       store,
       teachers: [],
+      subjects: [],
+      SubjectSelect:[],
+      teacher: "",
     };
   },
 
@@ -20,17 +23,40 @@ export default {
       // Restituisci direttamente il percorso dell'immagine dell'insegnante
       return `http://localhost:8000/storage/${teacher.image_url}`;
     },
+    handleCheckboxClick(subject) {
+    // Verifica se il subject è già presente in selectedSubjects
+    if (!this.selectedSubjects.includes(subject)) {
+      // Se non presente, aggiungi il subject a selectedSubjects
+      this.selectedSubjects.push(subject);
+    } else {
+      // Se presente, rimuovi il subject da selectedSubjects
+      const index = this.selectedSubjects.indexOf(subject);
+      if (index !== -1) {
+        this.selectedSubjects.splice(index, 1);
+      }
+    }
+  },
+    SearchProf(teacher) {
+      axios
+        .post("http://127.0.0.1:8000/api/v1/hgs", {
+          nome_cognome: teacher,
+        })
+        .then((response) => {
+          // console.log(response.data.teachers);
+          this.teachers = response.data.teachers;
 
-    SearchProf(subject) {
-      console.log(subject);
-
-      //quando avvio la pagina carica tutti i nomi con i vari indici poiche il tag input search è vuoto e non filtra nulla: restituisce un array con tutti i dati filtrati
-      const result = store.List.filter((user) => {
-        //faccio la ricerca per nome
-        return user.name.toLowerCase().includes(this.searchmex.toLowerCase());
-      });
-
-      return result;
+          this.teachers.forEach((teacher) => {
+            teacher.subjects.forEach((subject) => {
+              if (!this.subjects.includes(subject.name)) {
+                this.subjects.push(subject.name);
+              }
+            });
+          });
+        })
+        .catch((error) => {
+          console.error("Errore durante la richiesta API:", error);
+        });
+      console.log(this.subjects);
     },
 
     riempiVet(id) {
@@ -44,33 +70,50 @@ export default {
     },
   },
   mounted() {
-    axios
-      .get(store.apiURL)
-      .then((res) => {
-        const data = res.data;
-        if (data.status === "success") {
-          this.teachers = data.teachers;
-          console.log(this.teachers);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    // axios
+    //   .get(store.apiURL)
+    //   .then((res) => {
+    //     const data = res.data;
+    //     if (data.status === "success") {
+    //       this.teachers = data.teachers;
+    //       // console.log(this.teachers);
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+    this.SearchProf("");
   },
 };
 </script>
 
 <template>
   <div class="container">
-    <label for="search">Ricerca</label>
-    <input
-      class="form-control"
-      type="text"
-      placeholder="cerca o inizia una nuova chat"
-      aria-label="Search"
-      v-model="store.SearchT"
-      @keyup.enter="SearchProf(store.SearchT)"
-    />
+    <div class="col-3">
+      <label for="search">Ricerca</label>
+      <input
+        class="form-control"
+        type="text"
+        placeholder="cerca o inizia una nuova chat"
+        aria-label="Search"
+        v-model="store.SearchT"
+        @keyup.enter="SearchProf(store.SearchT)"
+      />
+    </div>
+
+    <!-- CHECKBOX -->
+
+    <div class="col-3" v-for="subject in subjects" :key="subject.id">
+      <label>
+        <input
+          type="checkbox"
+          :value="subject"
+          v-model="this.SubjectSelect"
+          @click="handleCheckboxClick(this.SubjectSelect)"
+        />
+        {{ subject }}
+      </label>
+    </div>
 
     <div class="row mt-4">
       <div class="col-3 p-2" v-for="teacher in teachers" :key="teacher.id">

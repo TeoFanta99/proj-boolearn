@@ -51,10 +51,9 @@ export default {
             <div class="d-flex flex-column">
               <div class="d-flex gap-3 align-items-center">
                 <ul>
-                  <!-- @foreach ($teacher->subjects as $subject)
-                                    <li>{{$subject->name}}</li>
-                                @endforeach -->
-                </ul>
+                <li v-for="subject in store.List.subjects " :key="subject.id">{{ subject.name }}</li>
+              </ul>
+                
               </div>
             </div>
           </div>

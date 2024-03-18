@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Subject;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
 
@@ -17,34 +18,65 @@ class ApiController extends Controller
             'message' => 'Testo di prova',
         ]);
     }
-    public function getTeachers()
+    // public function getTeachers()
+    // {
+    //     $subjects= Subject::all();
+    //     $teachers = Teacher::with( 'user')->get();
+
+
+
+    //     return response()->json([
+    //         'status' => 'success',
+    //         'teachers' => $teachers,
+    //         'subjects'=>$subjects
+
+    //     ]);
+    // }
+
+    public function frontTeachers(Request $request)
     {
+        $risultato = [];
+        $parametro = $request->input('nome_cognome');
 
-        $teachers = Teacher::with('user')->get();
+        $teachers = Teacher::with('user', 'subjects')->get();
 
-        // // Recupera i ruoli dell'utente dalla tabella ponte
-        // $roles = $teachers->roles;
+        
+        if ($parametro === null) {
+            
+            $risultato = $teachers;
+        } else {
+           
+            foreach ($teachers as $teacher) {
+                
+                if (
+                    str_starts_with(strtolower($teacher->user->name), strtolower($parametro)) ||
+                    str_starts_with(strtolower($teacher->user->lastname), strtolower($parametro))
+                ) {
+                    
+                    $risultato[] = $teacher;
+                }
+            }
+        }
 
-        // // Oppure, se vuoi accedere direttamente alla tabella ponte senza passare per il modello
-        // $pivotData = $teachers->roles()->pivot->where('custom_field', 'value')->get();
-
-
-        return response()->json([
-            'status' => 'success',
-            'teachers' => $teachers,
+        // Verifica se ci sono insegnanti trovati
+        if (empty ($risultato)) {
+            return response()->json(['messaggio' => 'Nessun insegnante trovato', 'teachers' => []]);
+        } else {
+            return response()->json(['messaggio' => 'Insegnanti trovati', 'teachers' => $risultato
             
         ]);
+        }
     }
 
-    public function getSubjects()
-    {
+    // public function getSubjects()
+    // {
 
-        $teachers = Teacher::with('user')->get();
+    //     $teachers = Teacher::with('user')->get();
 
-        return response()->json([
-            'status' => 'success',
-            'teachers' => $teachers,
-            
-        ]);
-    }
+    //     return response()->json([
+    //         'status' => 'success',
+    //         'teachers' => $teachers,
+
+    //     ]);
+    // }
 }

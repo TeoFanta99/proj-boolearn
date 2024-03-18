@@ -23,6 +23,7 @@ Route::group(['prefix' => '/v1'], function(){
     Route :: get('teachers', [ ApiController :: class, 'getTeachers']);
 
     Route :: get('subject', [ ApiController :: class, 'getSubjects']);
+    Route :: post('hgs', [ ApiController :: class, 'frontTeachers']);
    
     // Route :: get('technologies', [ApiController :: class, 'getTechnologies']);
 
