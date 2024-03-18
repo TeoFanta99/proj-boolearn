@@ -47,7 +47,16 @@ export default {
     .then((response) => {
       this.teachers = response.data.teachers;
       // Se non ci sono materie selezionate, reimposta l'array di materie
-     
+      
+        this.subjects = [];
+        this.teachers.forEach((teacher) => {
+          teacher.subjects.forEach((subject) => {
+            if (!this.subjects.includes(subject.name)) {
+              this.subjects.push(subject.name);
+            }
+          });
+        });
+      
     })
     .catch((error) => {
       console.error("Errore durante la richiesta API:", error);
