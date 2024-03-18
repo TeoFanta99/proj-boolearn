@@ -8,7 +8,20 @@
     align-items: center;
 }
 
-.navbar img {
+.logo-mobile {
     max-width: 150px;
     max-height: 150px;
+}
+
+.logo-desktop {
+    width: 50%;
+}
+
+.offcanvas-body a {
+    text-decoration: none;
+    color: #2B2D31;
+
+    &:hover {
+        color: red;
+    }
 }

@@ -37,16 +37,20 @@ export default {
             </div>
             <div class="offcanvas-body">
               <div>
-                Some text as placeholder. In real life you can have the elements
-                you have chosen. Like, text, images, lists, etc.
+                <a href="http://localhost:8000/login">Login</a>
+                <br><br>
+                <a href="http://localhost:8000/register">Registrati</a>
               </div>
             </div>
           </div>
         </div>
-        <div class="home d-lg-none">
-          <a href="">
-            <img src="../../public/BL1.svg" alt="LOGO" />
+        <div class="home" >
+          <a href="" class="d-block d-lg-none">
+            <img src="../../public/BL1.svg" alt="LOGO" class="logo-mobile"/>
             <!-- <span>BOOLEARN</span> -->
+          </a>
+          <a href="" class="d-none d-lg-block">
+            <img src="../../public/Crop_BooLEARN.svg" alt="LOGO DESKTOP" class="logo-desktop"/>
           </a>
         </div>
         <button
@@ -121,4 +125,5 @@ export default {
 .no_opacity {
   opacity: 0;
 }
+
 </style>
