@@ -39,6 +39,7 @@ export default {
 
   // Se è stata selezionata almeno una materia, aggiungi il parametro 'subject' ai dati da inviare
   if (this.SubjectSelect.length > 0) {
+    console.log(this.SubjectSelect);
     dataToSend.subjects = this.SubjectSelect;
   }
 
@@ -47,20 +48,22 @@ export default {
     .then((response) => {
       this.teachers = response.data.teachers;
       // Se non ci sono materie selezionate, reimposta l'array di materie
+      this.subjects= response.data.subjects;
       
-        this.subjects = [];
-        this.teachers.forEach((teacher) => {
-          teacher.subjects.forEach((subject) => {
-            if (!this.subjects.includes(subject.name)) {
-              this.subjects.push(subject.name);
-            }
-          });
-        });
+        // this.teachers.forEach((teacher) => {
+        //   teacher.subjects.forEach((subject) => {
+        //     if (!this.subjects.includes(subject)) {
+        //       this.subjects.push(subject);
+              
+        //     }
+        //   });
+        // });
       
     })
     .catch((error) => {
       console.error("Errore durante la richiesta API:", error);
     });
+    
 },
 
     riempiVet(id) {
@@ -87,6 +90,7 @@ export default {
     //     console.log(err);
     //   });
     this.SearchProf("");
+   
   },
 };
 </script>
@@ -110,11 +114,11 @@ export default {
         <label v-for="subject in subjects" :key="subject.id" class="px-2">
           <input
             type="checkbox"
-            :value="subject"
+            :value="subject.name"
             v-model="SubjectSelect"
-            @click="handleCheckboxClick(subject)"
+            @click="handleCheckboxClick(subject.name)"
           />
-          {{ subject }}
+          {{ subject.name }}
         </label>
       </div>
     </div>

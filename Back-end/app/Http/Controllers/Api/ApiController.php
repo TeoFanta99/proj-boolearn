@@ -37,7 +37,7 @@ class ApiController extends Controller
     {
         $parametro = $request->input('nome_cognome');
         $materie = $request->input('subjects');
-
+        $subjects= Subject::all();
         $teachers = Teacher::with('user', 'subjects')->get();
         $risultato = [];
 
@@ -58,9 +58,10 @@ class ApiController extends Controller
         }
 
         if (empty ($risultato)) {
-            return response()->json(['messaggio' => 'Nessun insegnante trovato', 'teachers' => []]);
+            return response()->json(['messaggio' => 'Nessun insegnante trovato', 'teachers' => [],
+        'subjects'=>$subjects]);
         } else {
-            return response()->json(['messaggio' => 'Insegnanti trovati', 'teachers' => $risultato]);
+            return response()->json(['messaggio' => 'Insegnanti trovati', 'teachers' => $risultato,'subjects'=>$subjects]);
         }
     }
 
