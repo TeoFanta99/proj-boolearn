@@ -17,8 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-<<<<<<< Updated upstream
-=======
 Route::group(['prefix' => '/v1'], function(){
     
     // Route::get('login', [ApiController::class, 'VerifyCredit']);
@@ -32,5 +30,4 @@ Route::group(['prefix' => '/v1'], function(){
 
 
 });
->>>>>>> Stashed changes
 
