@@ -15,8 +15,12 @@ export default {
   methods: {
     getImageUrl(teacher) {
       // Restituisci direttamente il percorso dell'immagine dell'insegnante
-      return `http://localhost:8000/storage/${store.List.image_url}`;
+      return `http://localhost:8000/storage/${teacher.image_url}`;
     },
+    getCVUrl(teacher){
+      return `http://localhost:8000/storage/${teacher.cv_url}`;
+    },
+    
   },
 
   mounted() {
@@ -100,10 +104,13 @@ export default {
               </div>
             </div>
           </div>
+          
         </div>
+        <a :class="store.List.cv_url !== '' ? 'd-block' : 'd-none'" :href="getCVUrl(store.List)" target="_blank">Mostra CV</a>
       </div>
     </div>
   </div>
+  
 </template>
 <style>
 .img_circle {
