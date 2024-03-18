@@ -66,7 +66,7 @@ export default {
     <input
       class="form-control"
       type="text"
-      placeholder="cerca o inizia una nuova chat"
+      placeholder="cerca la materia che desideri imparare"
       aria-label="Search"
       v-model="store.SearchT"
       @keyup.enter="SearchProf(store.SearchT)"
