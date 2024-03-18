@@ -161,6 +161,7 @@
                         yesOrNo = true;
                         document.getElementById('MailNo').classList.add('d-none');
                         document.getElementById('MailNo').innerHTML='';
+                        break;
                     }
                     else{
                         yesOrNo = false;

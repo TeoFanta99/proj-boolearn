@@ -9,7 +9,8 @@ import { store } from "./store";
 import AppFooter from "./components/AppFooter.vue";
 import AppHeader from "./components/AppHeader.vue";
 
-import About from "./pages/About.vue"
+import About from "./pages/About.vue";
+import Home from "./pages/Home.vue";
 
 export default {
   components: {
