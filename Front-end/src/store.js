@@ -8,5 +8,4 @@ export const store = reactive({
   Email: "",
   Title: "",
   Message: "",
-  image_url: "",
 });
