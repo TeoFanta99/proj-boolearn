@@ -35,8 +35,10 @@ class ApiController extends Controller
 
     public function frontTeachers(Request $request)
     {
+        
         $parametro = $request->input('nome_cognome');
         $materie = $request->input('subjects');
+        
         $subjects= Subject::all();
         $teachers = Teacher::with('user', 'subjects')->get();
         $risultato = [];
@@ -66,15 +68,16 @@ class ApiController extends Controller
     }
 
 
-    // public function getSubjects()
-    // {
+     public function getSubjects(Request $request)
+    {
+        dd($request);
+        $subjects= Subject::all();
+        $teachers = Teacher::with('user', 'subjects')->get();
 
-    //     $teachers = Teacher::with('user')->get();
+         return response()->json([
+            'status' => 'success',
+           'message' => 'ok',
 
-    //     return response()->json([
-    //         'status' => 'success',
-    //         'teachers' => $teachers,
-
-    //     ]);
-    // }
+         ]);
+     }
 }

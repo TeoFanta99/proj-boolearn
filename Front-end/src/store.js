@@ -2,7 +2,7 @@ import { reactive } from "vue";
 
 export const store = reactive({
   List: [],
-  materie:[],
+  materie: [],
   apiURL: "http://127.0.0.1:8000/api/v1/teachers",
   view: 0,
   NameSurname: "",
@@ -10,4 +10,5 @@ export const store = reactive({
   Email: "",
   Title: "",
   Message: "",
+  searchText: "",
 });

@@ -20,9 +20,10 @@ export default {
       return `http://localhost:8000/storage/${teacher.image_url}`;
     },
 
+    //funzione chiamata appena la pagina viene caricata dal browser
     SearchProf() {
       let dataToSend = { nome_cognome: this.teacher };
-
+      console.log(dataToSend);
       if (this.SubjectSelect.length > 0) {
         dataToSend.subjects = this.SubjectSelect;
       }
@@ -38,6 +39,7 @@ export default {
         });
     },
 
+    // funzione chiamata quando si clicca su un docente
     riempiVet(id) {
       this.teachers.forEach((element) => {
         if (element.id == id) {
@@ -47,14 +49,26 @@ export default {
         }
       });
     },
+
+    FixSubject(subject) {
+      axios
+        .post("http://127.0.0.1:8000/api/v1/subject", subject)
+        .then((response) => {
+          this.teachers = response.data.teachers;
+          this.subjects = response.data.subjects;
+        })
+        .catch((error) => {
+          console.error("Errore durante la richiesta API:", error);
+        });
+    },
   },
 
   watch: {
     // Osserva le modifiche nella variabile SubjectSelect
-    SubjectSelect: function(newVal, oldVal) {
+    SubjectSelect: function (newVal, oldVal) {
       // Quando SubjectSelect cambia, chiama la funzione SearchProf
       this.SearchProf();
-    }
+    },
   },
 
   mounted() {
@@ -63,7 +77,6 @@ export default {
   },
 };
 </script>
-
 
 <template>
   <div class="container">
@@ -81,16 +94,20 @@ export default {
       </div> -->
       <!-- CHECKBOX -->
       <div class="col-12 col-md-8 align-self-end pb-2">
-        <select v-model="selectedSubject">
-    <option :value="this.teacher">Seleziona un soggetto</option>
-    <option
-        v-for="subject in subjects"
-        :key="subject.id"
-        :value="subject.name"
-    >
-        {{ subject.name }}
-    </option>
-</select>
+        <select
+          v-model="store.searchText"
+          class="form-select w-25"
+          id="selected-searchText"
+          @change="FixSubject(store.searchText)"
+        >
+          <option
+            v-for="subject in subjects"
+            :key="subject.id"
+            :value="subject.name"
+          >
+            {{ subject.name }}
+          </option>
+        </select>
       </div>
     </div>
 

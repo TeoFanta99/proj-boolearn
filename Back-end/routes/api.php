@@ -22,7 +22,8 @@ Route::group(['prefix' => '/v1'], function(){
     // Route::get('login', [ApiController::class, 'VerifyCredit']);
     Route :: get('teachers', [ ApiController :: class, 'getTeachers']);
 
-    Route :: get('subject', [ ApiController :: class, 'getSubjects']);
+    Route :: post('subject', [ ApiController :: class, 'getSubjects']);
+
     Route :: post('hgs', [ ApiController :: class, 'frontTeachers']);
    
     // Route :: get('technologies', [ApiController :: class, 'getTechnologies']);
