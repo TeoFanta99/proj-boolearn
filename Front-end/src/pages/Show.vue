@@ -24,11 +24,11 @@ export default {
 
     // funzione chiamata quando si clicca su un docente
     riempiVet(id) {
-      this.teachers.forEach((element) => {
-        if (element.id == id) {
-          store.List = element;
-          store.view = 1;
-          console.log(store.List);
+      this.reviews.forEach((element) => {
+        //console.log(element.teacher_id);
+        if (element.teacher_id == store.List.id) {
+          this.reviews = element;
+          console.log(this.reviews);
         }
       });
     },
@@ -38,12 +38,11 @@ export default {
         .get("http://127.0.0.1:8000/api/v1/review")
         .then((response) => {
           this.reviews = response.data.reviews;
+          this.riempiVet(this.reviews);
         })
         .catch((error) => {
           console.error("Errore durante la richiesta API:", error);
         });
-
-      // this.riempiVet(this.);
     },
   },
 
@@ -121,6 +120,18 @@ export default {
             <div class="d-flex flex-column">
               <div class="d-flex gap-5">
                 <span>{{ store.List.motto }}</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <h5 class="mt-4 border-bottom">Recensioni</h5>
+            <div class="d-flex flex-column">
+              <div class="d-flex gap-5">
+                <ul>
+                  <li v-for="review in reviews" :key="review.id">
+                    <span>{{ reviews.description }}</span>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
