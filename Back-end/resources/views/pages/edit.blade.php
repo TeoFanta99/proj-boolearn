@@ -17,68 +17,110 @@
         @csrf
         @method('PUT')
         <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-        <div class="row  gap-4">
-            
-            <div class="col-6">
-                <div class="col-3">
-                    <label for="tax_id">P.IVA <span style="color: red;  font-size: 1.5em;">*</span> :</label>
-                    <input type="text" id="tax_id" name="tax_id" value="{{ $teacher->tax_id }}">
-                    <span id="taxNo" class="text-danger d-none"></span>
-                </div>
-                <div class="col-3">
-                    <div class="d-flex flex-column">
-                        <label for="biography">Biografia <span style="color: red;  font-size: 1.5em;">*</span></label>
-                        <textarea name="biography" id="biography">{{ $teacher->biography }}</textarea>
-                        <span id="bioNo" class="text-danger d-none"></span>
+
+         <div class="container">
+            <div class="row gutters">
+                <div class="col-xl-4 col-lg-3 col-md-12 col-sm-12 col-12 mb-3">
+                    <div class="card p-0 h-20">
+                        <div class="card-header bg-transparent border-primary text-primary" style="font-weight: bold">FOTO PROFILO
+                        </div>
+                        <div class="card-body border-dark p-3 m-0 d-flex flex-row justify-content-center">
+                            <div class="account-settings">
+                                <div class="mb-3">
+                                    <img src="{{ asset('storage/' . $teacher->image_url) }}" alt="">
+                                </div>
+                                <div style="text-align: center">
+                                    <label for="image_url" class="btn btn-success">MODIFICA FOTO</label>
+                                    <input type="file" id="image_url" name="image_url" style="display: none;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="col-xl-8 col-lg-9 col-md-12 col-sm-12 col-12">
+                    <div class="card h-100">
+                        <div class="card-header bg-transparent border-primary text-primary" style="font-weight: bold">DETTAGLI PROFILO
+                        </div>
+                        <div class="card-body">
+                            <div class="row gutters">
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                    <div class="form-group"> 
+                                        <div class="form-group">
+                                            <label for="phone_number">TELEFONO 
+                                                <span style="color: red; font-size: 1.5em;">*</span> 
+                                            </label>
+                                            <input type="number" class="form-control" id="phone_number" name="phone_number" value="{{ $teacher->phone_number }}"">
+                                            <span id="PhoneNo"class="text-danger d-none"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                    <div class="form-group">
+                                        <div class="form-group">
+                                            <label for="city">CITTÀ <span style="color: red;  font-size: 1.5em;">*</span></label>
+                                            <select id="city" class="form-control" name="city">
+                                                <optionvalue="{{ $teacher->city }}" selected>{{ $teacher->city }}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row gutters">
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                    <div class="form-group">
+                                        <label for="tax_id">P.IVA <span style="color: red;  font-size: 1.5em;">*</span></label>
+                                        <input type="text" class="form-control" id="tax_id" name="tax_id" value="{{ $teacher->tax_id }}">
+                                        <span id="taxNo"class="text-danger d-none"></span> 
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                    <div class="form-group">
+                                        <label for="cv_url">CARICA CV <span style="color: red;  font-size: 1.5em;"> *</span></label>
+                                        <input type="file" class="form-control" id="cv_url" name="cv_url" accept=".pdf">          
+                                    </div>
+                                </div>
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <div class="form-group">
+                                        <div class="d-flex flex-column">
+                                            <label for="biography">BIOGRAFIA <span style="color: red;  font-size: 1.5em;">*</span></label>
+                                            <textarea name="biography" class="form-control" id="biography">{{ $teacher->biography }}</textarea>
+                                            <span id="bioNo"class="text-danger d-none"></span>
+                                        </div>      
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                    <div class="form-group mb-3">
+                                        <label class="mb-2">SELEZIONA MATERIE  <span style="color: red; font-size: 1.5em;"> *</span></label>
+                                        <br>
+
+                                        @foreach ($subjects as $subject)
+                                            <input type="checkbox" class="form-check-input"  id="subject{{ $subject->id }}" name="subjects[]"
+                                                value="{{ $subject->id }}" {{ $teacher->subjects->contains($subject->id) ? 'checked' : '' }}>
+                                            <label for="subject{{ $subject->id }}">{{ $subject->name }}</label><br>
+                                        @endforeach          
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row gutters">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <div class="form-group">
+                                       <label for="motto">MOTTO</label>
+                                       <textarea class="form-control" id="motto" name="motto">{{ $teacher->motto }}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row gutters">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <div class="d-flex justify-content-between mt-4 text-right">
+                                         <div style="color: red; font-size: 1em; text-align: left; font-weight:bold; ">* I seguenti campi sono obbligatori</div>
+                                        <input type="submit" class="btn btn-primary" value="AGGIORNA PROFILO">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-3">
-                
-                    <label for="city">Seleziona una città:<span style="color: red; font-size: 1.5em;">*</span></label>
-                    <select id="city" name="city" >
-                        <option value="{{ $teacher->city }}" selected>{{ $teacher->city }}</option>
-                    </select>
-                </div>
-                <div class="col-3">
-                    <label for="phone_number">Numero di telefono <span style="color: red;  font-size: 1.5em;">*</span> :</label>
-                    <input type="number" id="phone_number" name="phone_number" value="{{ $teacher->phone_number }}">
-                    <span id="PhoneNo" class="text-danger d-none"></span>
-                </div>
-                <div class="col-3">
-                    <label for="image_url">Scegli immagine:</label>
-                    <input type="file" id="image_url" name="image_url">
-                </div>
-                <div class="col-3">
-                    <label for="motto">Motto:</label>
-                    <input type="text" id="motto" name="motto" value="{{ $teacher->motto }}">
-                </div>
-                <div class="col-3">
-                    <label for="cv_url">Carica il tuo CV <span style="color: red;  font-size: 1.5em;">*</span>:</label>
-                    <input type="file" id="cv_url" name="cv_url" accept=".pdf">
-                </div>
-    
-                <div class="col-3">
-                    <input type="submit" value="Aggiorna Profilo">
-                </div>
-                <div>
-                    <label>Materie:</label><br>
-                    @foreach ($subjects as $subject)
-                        <input type="checkbox" id="subject{{ $subject->id }}" name="subjects[]" value="{{ $subject->id }}"
-                            {{ $teacher->subjects->contains($subject->id) ? 'checked' : '' }}>
-                        <label for="subject{{ $subject->id }}">{{ $subject->name }}</label><br>
-                    @endforeach
-                </div>
             </div>
-            <div class="col-4">
-                <div class="img_container">
-                    <img src="{{ asset('storage/' . $teacher->image_url) }}" alt="">
-                </div>
-
-
-            </div>
-
-            
-            <span style="color: red;  font-size: 2em;">* i seguenti campi sono obbligatori</span>
         </div>
     </form>
     {{-- @endauth --}}
