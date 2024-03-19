@@ -35,10 +35,10 @@ export default {
 
     getReviews() {
       axios
-        .get("http://127.0.0.1:8000/api/v1/review")
+        .get(`http://127.0.0.1:8000/api/v1/review?teacher_id=${store.List.id}`)
         .then((response) => {
           this.reviews = response.data.reviews;
-          this.riempiVet(this.reviews);
+          // this.riempiVet(this.reviews);
         })
         .catch((error) => {
           console.error("Errore durante la richiesta API:", error);
@@ -129,7 +129,9 @@ export default {
               <div class="d-flex gap-5">
                 <ul>
                   <li v-for="review in reviews" :key="review.id">
-                    <span>{{ reviews.description }}</span>
+                    <h5>{{ review.name }}</h5>
+                    <span>{{review.description}}</span>
+                    <br><br>
                   </li>
                 </ul>
               </div>

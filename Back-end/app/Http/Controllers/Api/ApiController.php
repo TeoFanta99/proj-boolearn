@@ -77,22 +77,25 @@ class ApiController extends Controller
         $teachers = $subjects->teacher()->with('user','subjects')->get();
 
         return response()->json([
-                    'status' => 'success',
-                    'message' => 'sono andata al front_end',
-                    'teachers'=>$teachers,
-                ]);
+            'status' => 'success',
+            'message' => 'sono andata al front_end',
+            'teachers'=>$teachers,
+        ]);
 
     }
 
-    public function reviews(){
+    public function reviews(Request $request){
 
-        $review = Review::all();
+        $teacher_id = $request->input('teacher_id');
+
+        // riferimento: slide 72 del 12/02/24, pagina 19
+        $reviews = Review::where('teacher_id', $teacher_id)->get();
 
         return response()->json([
-                    'status' => 'success',
-                    'message' => 'sono andata al front_end',
-                    'reviews'=>$review,
-                ]);
+            'status' => 'success',
+            'message' => 'sono andata al front_end',
+            'reviews' => $reviews,
+        ]);
 
     }
 
