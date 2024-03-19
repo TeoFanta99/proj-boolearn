@@ -56,9 +56,10 @@
                 <div class="col-6">
                     <h5 class="mt-4 border-bottom"> Biografia</h5>
                     <div class="d-flex flex-column">
-                        <div class="d-flex gap-3 align-items-center">
-                            <p>{{ $teacher->biography }}</p>
+                        <div class="d-flex gap-3 align-items-center" >
+                            <p class="text_wrap">{{ $teacher->biography }}</p>
                         </div>
+                        
                     </div>
                 </div>
                 <div class="col-6">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TeacherRequest;
 use App\Models\Rating;
+use App\Models\Subject;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -20,7 +21,7 @@ class MainController extends Controller
     public function index()
     {
         $teachers = Teacher::all();
-
+        
         return view('welcome', compact('teachers'));
     }
 
@@ -31,7 +32,9 @@ class MainController extends Controller
      */
     public function create()
     {
-        return view('pages.create');
+        $teachers = Teacher::all();
+        $subjects = Subject::all();
+        return view('pages.create',compact('teachers','subjects'));
     }
 
     /**
@@ -65,6 +68,12 @@ class MainController extends Controller
         $teacher->user()->associate($user);
         $teacher->save();
 
+        $materie = $request->input('subjects', []);
+    
+        // Associare le tipologie selezionate al ristorante
+        // $restaurant = Auth::user()->restaurant;
+        $teacher->subjects()->sync($materie);
+
         return redirect()->route('welcome');
     }
 
@@ -93,7 +102,9 @@ class MainController extends Controller
     {
         $user = Auth::user();
         $teacher = $user->teacher()->first();
-        return view('pages.edit', compact('teacher'));
+        $teachers= Teacher::all();
+        $subjects= Subject::all();
+        return view('pages.edit', compact('teacher','subjects','teachers'));
     }
 
     /**
@@ -128,7 +139,11 @@ class MainController extends Controller
 
         $teacher->user()->associate($user);
         $teacher->save();
-
+        $materie = $request->input('subjects', []);
+    
+        // Associare le tipologie selezionate al ristorante
+        // $restaurant = Auth::user()->restaurant;
+        $teacher->subjects()->sync($materie);
         return redirect()->route('welcome');
     }
 

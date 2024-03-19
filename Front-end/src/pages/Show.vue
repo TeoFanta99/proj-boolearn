@@ -36,7 +36,7 @@ export default {
 
 <template>
   <div v-if="store.view">
-    <div class="container mb-4">
+    <div class="container my-4">
       <div class="row">
         <div class="col-4">
           <div class="img_container">
@@ -66,7 +66,7 @@ export default {
             <h5 class="mt-4 border-bottom">Biografia</h5>
             <div class="d-flex flex-column">
               <div class="d-flex gap-3 align-items-center">
-                <p>{{ store.List.biography }}</p>
+                <p class="text_wrap">{{ store.List.biography }}</p>
               </div>
             </div>
           </div>
@@ -115,5 +115,8 @@ export default {
 <style>
 .img_circle {
   width: 60%;
+}
+.text_wrap{
+    overflow-wrap: anywhere;
 }
 </style>

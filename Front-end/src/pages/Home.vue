@@ -98,7 +98,7 @@ export default {
 <template>
   <div class="container">
     <div class="row align-items-center">
-      <div class="col-3">
+      <div class="col-12 col-md-4">
         <label for="search">Ricerca</label>
         <input
           class="form-control"
@@ -110,7 +110,7 @@ export default {
         />
       </div>
       <!-- CHECKBOX -->
-      <div class="col-7 align-self-end pb-2">
+      <div class="col-12 col-md-8 align-self-end pb-2">
         <label v-for="subject in subjects" :key="subject.id" class="px-2">
           <input
             type="checkbox"
@@ -125,7 +125,7 @@ export default {
 
     <div v-if="teachers.length > 0">
       <div class="row mt-4">
-        <div class="col-3 p-2" v-for="teacher in teachers" :key="teacher.id">
+        <div class="col-12 col-md-4 col-lg-3 p-2" v-for="teacher in teachers" :key="teacher.id">
           <RouterLink
             :to="{ name: 'show', params: { id: teacher.id } }"
             @click="riempiVet(teacher.id)"
@@ -133,8 +133,7 @@ export default {
           >
             <div class="card pt-3 border-0 shadow">
               <div
-                class="d-flex justify-content-center align-items-center img_circle mx-auto"
-                style="height: 200px"
+                class="d-flex justify-content-center align-items-center img_circle mx-auto height_img_query"
               >
                 <img
                   class="w-100 h-100 rounded-circle"
