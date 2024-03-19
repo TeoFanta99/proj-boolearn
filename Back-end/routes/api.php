@@ -26,6 +26,8 @@ Route::group(['prefix' => '/v1'], function(){
 
     Route :: get('subject', [ ApiController :: class, 'test']);
 
+    Route :: get('review', [ ApiController :: class, 'reviews']);
+
     Route :: post('hgs', [ ApiController :: class, 'frontTeachers']);
    
     // Route :: get('technologies', [ApiController :: class, 'getTechnologies']);

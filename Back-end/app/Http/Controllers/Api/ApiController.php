@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Subject;
 use App\Models\Teacher;
+use App\Models\Review;
 use Illuminate\Http\Request;
 
 class ApiController extends Controller
@@ -79,6 +80,18 @@ class ApiController extends Controller
                     'status' => 'success',
                     'message' => 'sono andata al front_end',
                     'teachers'=>$teachers,
+                ]);
+
+    }
+
+    public function reviews(){
+
+        $review = Review::all();
+
+        return response()->json([
+                    'status' => 'success',
+                    'message' => 'sono andata al front_end',
+                    'reviews '=>$review ,
                 ]);
 
     }

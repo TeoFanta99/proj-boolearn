@@ -10,6 +10,7 @@ export default {
   data() {
     return {
       store,
+      reviews: [],
     };
   },
   methods: {
@@ -17,19 +18,26 @@ export default {
       // Restituisci direttamente il percorso dell'immagine dell'insegnante
       return `http://localhost:8000/storage/${teacher.image_url}`;
     },
-    getCVUrl(teacher){
+    getCVUrl(teacher) {
       return `http://localhost:8000/storage/${teacher.cv_url}`;
     },
-    
+
+    getReviews() {
+      axios
+        .get("http://127.0.0.1:8000/api/v1/review")
+        .then((response) => {
+          this.reviews = response.data.reviews;
+
+          console.log(this.reviews);
+        })
+        .catch((error) => {
+          console.error("Errore durante la richiesta API:", error);
+        });
+    },
   },
 
   mounted() {
-    console.log(store.List);
-
-    // Ottieni i parametri di query
-    const params = this.$route.query;
-
-    // console.log(params);
+    this.getReviews();
   },
 };
 </script>
@@ -55,9 +63,10 @@ export default {
             <div class="d-flex flex-column">
               <div class="d-flex gap-3 align-items-center">
                 <ul>
-                <li v-for="subject in store.List.subjects " :key="subject.id">{{ subject.name }}</li>
-              </ul>
-                
+                  <li v-for="subject in store.List.subjects" :key="subject.id">
+                    {{ subject.name }}
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
@@ -104,19 +113,22 @@ export default {
               </div>
             </div>
           </div>
-          
         </div>
-        <a :class="store.List.cv_url !== '' ? 'd-block' : 'd-none'" :href="getCVUrl(store.List)" target="_blank">Mostra CV</a>
+        <a
+          :class="store.List.cv_url !== '' ? 'd-block' : 'd-none'"
+          :href="getCVUrl(store.List)"
+          target="_blank"
+          >Mostra CV</a
+        >
       </div>
     </div>
   </div>
-  
 </template>
 <style>
 .img_circle {
   width: 60%;
 }
-.text_wrap{
-    overflow-wrap: anywhere;
+.text_wrap {
+  overflow-wrap: anywhere;
 }
 </style>

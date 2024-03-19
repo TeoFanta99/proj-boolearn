@@ -16,7 +16,7 @@ class ReviewTableSeeder extends Seeder
      */
     public function run()
     {
-        Review :: factory() -> count(10) -> make() -> each(function($review) {
+        Review :: factory() -> count(100) -> make() -> each(function($review) {
             $teacher = Teacher :: inRandomOrder() -> first();
             $review -> teacher() -> associate($teacher);
             $review -> save();
