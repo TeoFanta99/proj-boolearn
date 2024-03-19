@@ -89,6 +89,7 @@ export default {
       </div> -->
       <!-- CHECKBOX -->
       <div class="col-12 col-md-8 align-self-end pb-2">
+        <h4>Scegli la materia</h4>
         <select
           v-model="store.searchText"
           class="form-select w-25"
