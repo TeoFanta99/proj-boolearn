@@ -28,7 +28,13 @@
                 </div>
             </a>
         </div>
-        <a href="{{ route('user.edit', $teacher->user->id) }}">Gestisci Profilo</a>
+        <form id="profileForm" action="{{ route('teacher.edit') }}" method="POST">
+            @csrf
+            <input type="hidden" name="user_id" value="{{ $teacher->user->id }}">
+        </form>
+        
+        <a href="#" onclick="document.getElementById('profileForm').submit(); return false;">Gestisci Profilo</a>
+       
         <form class="ms-3 d-block" action="{{ route('user.del', $teacher->user->id) }}" method="POST"
             onsubmit="return confirm('Confermare?');">
             @csrf

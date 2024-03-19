@@ -22,7 +22,7 @@ class MainController extends Controller
     public function index()
     {
         $teachers = Teacher::all();
-        
+
         return view('welcome', compact('teachers'));
     }
 
@@ -35,7 +35,7 @@ class MainController extends Controller
     {
         $teachers = Teacher::all();
         $subjects = Subject::all();
-        return view('pages.create',compact('teachers','subjects'));
+        return view('pages.create', compact('teachers', 'subjects'));
     }
 
     /**
@@ -47,7 +47,7 @@ class MainController extends Controller
     public function store(TeacherRequest $request)
     {
         $data = $request->validated();
-        
+
         $teacher = new Teacher;
         $teacher->tax_id = $data['tax_id'];
         $teacher->biography = $data['biography'];
@@ -70,7 +70,7 @@ class MainController extends Controller
         $teacher->save();
 
         $materie = $request->input('subjects', []);
-    
+
         // Associare le tipologie selezionate al ristorante
         // $restaurant = Auth::user()->restaurant;
         $teacher->subjects()->sync($materie);
@@ -88,9 +88,9 @@ class MainController extends Controller
     {
         $user = User::find($id);
         $teacher = $user->teacher()->first();
-        $ratings = Rating :: all();
-        
-        return view('pages.show', compact('teacher','ratings'));
+        $ratings = Rating::all();
+
+        return view('pages.show', compact('teacher', 'ratings'));
     }
 
     /**
@@ -99,13 +99,14 @@ class MainController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit(Request $request)
     {
-        $user = Auth::user();
+        $user_id = $request->input('user_id');
+        $user = User::find($user_id);
         $teacher = $user->teacher()->first();
-        $teachers= Teacher::all();
-        $subjects= Subject::all();
-        return view('pages.edit', compact('teacher','subjects','teachers'));
+        $teachers = Teacher::all();
+        $subjects = Subject::all();
+        return view('pages.edit', compact('teacher', 'subjects', 'teachers'));
     }
 
     /**
@@ -118,7 +119,8 @@ class MainController extends Controller
     public function update(Request $request)
     {
         $data = $request->all();
-        $user = Auth::user();
+        $user_id = $request->input('user_id');
+        $user = User::find($user_id);
         $teacher = $user->teacher()->first();
         $teacher->tax_id = $data['tax_id'];
         $teacher->biography = $data['biography'];
@@ -141,7 +143,7 @@ class MainController extends Controller
         $teacher->user()->associate($user);
         $teacher->save();
         $materie = $request->input('subjects', []);
-    
+
         // Associare le tipologie selezionate al ristorante
         // $restaurant = Auth::user()->restaurant;
         $teacher->subjects()->sync($materie);
@@ -157,7 +159,7 @@ class MainController extends Controller
     public function destroy($id)
     {
         $user = User::find($id);
-        
+
         $teacher = $user->teacher()->first();
         $messages = $teacher->messages;
         $reviews = $teacher->reviews;

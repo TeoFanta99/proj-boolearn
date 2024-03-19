@@ -12,67 +12,72 @@
         </div>
     @endif
 
-    <form action="{{ route('user.update', Auth::user()->id) }}" method="POST" enctype="multipart/form-data" id="Form_update">
+    <form action="{{ route('user.update') }}" method="POST" enctype="multipart/form-data" id="Form_update">
 
         @csrf
         @method('PUT')
-        <div class="row flex-column gap-4">
-            <div class="col-3">
-                <label for="tax_id">P.IVA <span style="color: red;  font-size: 1.5em;">*</span> :</label>
-                <input type="text" id="tax_id" name="tax_id" value="{{ $teacher->tax_id }}">
-                <span id="taxNo" class="text-danger d-none"></span>
-            </div>
-
-            <div class="col-3">
-                <div class="d-flex flex-column">
-                    <label for="biography">Biografia <span style="color: red;  font-size: 1.5em;">*</span></label>
-                    <textarea name="biography" id="biography">{{ $teacher->biography }}</textarea>
-                    <span id="bioNo" class="text-danger d-none"></span>
+        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+        <div class="row  gap-4">
+            
+            <div class="col-6">
+                <div class="col-3">
+                    <label for="tax_id">P.IVA <span style="color: red;  font-size: 1.5em;">*</span> :</label>
+                    <input type="text" id="tax_id" name="tax_id" value="{{ $teacher->tax_id }}">
+                    <span id="taxNo" class="text-danger d-none"></span>
+                </div>
+                <div class="col-3">
+                    <div class="d-flex flex-column">
+                        <label for="biography">Biografia <span style="color: red;  font-size: 1.5em;">*</span></label>
+                        <textarea name="biography" id="biography">{{ $teacher->biography }}</textarea>
+                        <span id="bioNo" class="text-danger d-none"></span>
+                    </div>
+                </div>
+                <div class="col-3">
+                
+                    <label for="city">Seleziona una città:<span style="color: red; font-size: 1.5em;">*</span></label>
+                    <select id="city" name="city" >
+                        <option value="{{ $teacher->city }}" selected>{{ $teacher->city }}</option>
+                    </select>
+                </div>
+                <div class="col-3">
+                    <label for="phone_number">Numero di telefono <span style="color: red;  font-size: 1.5em;">*</span> :</label>
+                    <input type="number" id="phone_number" name="phone_number" value="{{ $teacher->phone_number }}">
+                    <span id="PhoneNo" class="text-danger d-none"></span>
+                </div>
+                <div class="col-3">
+                    <label for="image_url">Scegli immagine:</label>
+                    <input type="file" id="image_url" name="image_url">
+                </div>
+                <div class="col-3">
+                    <label for="motto">Motto:</label>
+                    <input type="text" id="motto" name="motto" value="{{ $teacher->motto }}">
+                </div>
+                <div class="col-3">
+                    <label for="cv_url">Carica il tuo CV <span style="color: red;  font-size: 1.5em;">*</span>:</label>
+                    <input type="file" id="cv_url" name="cv_url" accept=".pdf">
+                </div>
+    
+                <div class="col-3">
+                    <input type="submit" value="Aggiorna Profilo">
+                </div>
+                <div>
+                    <label>Materie:</label><br>
+                    @foreach ($subjects as $subject)
+                        <input type="checkbox" id="subject{{ $subject->id }}" name="subjects[]" value="{{ $subject->id }}"
+                            {{ $teacher->subjects->contains($subject->id) ? 'checked' : '' }}>
+                        <label for="subject{{ $subject->id }}">{{ $subject->name }}</label><br>
+                    @endforeach
                 </div>
             </div>
-            <div class="col-3">
+            <div class="col-4">
+                <div class="img_container">
+                    <img src="{{ asset('storage/' . $teacher->image_url) }}" alt="">
+                </div>
 
-               
-                <label for="city">Seleziona una città:<span style="color: red; font-size: 1.5em;">*</span></label>
-                <select id="city" name="city" >
-                    <option value="{{ $teacher->city }}" selected>{{ $teacher->city }}</option>
-                </select>
 
             </div>
-            <div class="col-3">
-                <label for="phone_number">Numero di telefono <span style="color: red;  font-size: 1.5em;">*</span> :</label>
-                <input type="number" id="phone_number" name="phone_number" value="{{ $teacher->phone_number }}">
-                <span id="PhoneNo" class="text-danger d-none"></span>
 
-            </div>
-            <div class="col-3">
-                <label for="image_url">Scegli immagine:</label>
-                <input type="file" id="image_url" name="image_url">
-            </div>
-
-
-            <div class="col-3">
-                <label for="motto">Motto:</label>
-                <input type="text" id="motto" name="motto" value="{{ $teacher->motto }}">
-            </div>
-
-            <div class="col-3">
-                <label for="cv_url">Carica il tuo CV <span style="color: red;  font-size: 1.5em;">*</span>:</label>
-                <input type="file" id="cv_url" name="cv_url" accept=".pdf">
-            </div>
-
-            <div class="col-3">
-                <input type="submit" value="Aggiorna Profilo">
-            </div>
             
-            <div>
-                <label>Materie:</label><br>
-                @foreach ($subjects as $subject)
-                    <input type="checkbox" id="subject{{ $subject->id }}" name="subjects[]" value="{{ $subject->id }}"
-                        {{ $teacher->subjects->contains($subject->id) ? 'checked' : '' }}>
-                    <label for="subject{{ $subject->id }}">{{ $subject->name }}</label><br>
-                @endforeach
-            </div>
             <span style="color: red;  font-size: 2em;">* i seguenti campi sono obbligatori</span>
         </div>
     </form>
@@ -119,19 +124,21 @@
 
             validation += checkTaxID(taxID, teachers,teacherSingle); // Non è necessario passare teacher qui
             validation += checkBio(bio);
-            validation += checkPhone(phone_number);
+            validation += checkPhone(phone_number,teacherSingle);
 
             if (validation == 3) {
                 this.submit();
             }
 
 
-            function checkPhone(phone) {
+            function checkPhone(phone,teacherSingle) {
                 let isUnique = true;
 
-                // Cicla attraverso gli insegnanti
+                
                 for (let i = 0; i < teachers.length; i++) {
-                    // Controlla se la partita IVA è un duplicato
+                    if(phone.value == teachers[i].phone_number && teachers[i].id ==teacherSingle.id ){
+                        break;
+                    }
                     if (phone.value === teachers[i].phone_number) {
                         // La partita IVA è un duplicato
                         isUnique = false;
