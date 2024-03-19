@@ -64,7 +64,7 @@
             <div class="col-3">
                 <input type="submit" value="Aggiorna Profilo">
             </div>
-
+            
             <div>
                 <label>Materie:</label><br>
                 @foreach ($subjects as $subject)

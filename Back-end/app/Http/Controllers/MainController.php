@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TeacherRequest;
+use App\Models\Message;
 use App\Models\Rating;
 use App\Models\Subject;
 use App\Models\Teacher;
@@ -156,7 +157,25 @@ class MainController extends Controller
     public function destroy($id)
     {
         $user = User::find($id);
+        
         $teacher = $user->teacher()->first();
+        $messages = $teacher->messages;
+        $reviews = $teacher->reviews;
+        $subjects = $teacher->subjects;
+        $ratings = $teacher->ratings;
+        // Delete all associated messages
+        foreach ($messages as $message) {
+            $message->delete();
+        }
+        foreach ($reviews as $review) {
+            $review->delete();
+        }
+        foreach ($subjects as $subject) {
+            $subject->teacher()->detach();
+        }
+        foreach ($ratings as $rating) {
+            $rating->teacher()->detach();
+        }
         $teacher->delete();
         return redirect()->route('welcome');
     }

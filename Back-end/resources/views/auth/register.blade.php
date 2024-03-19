@@ -5,10 +5,10 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Register') }}</div>
+                    <div class="card-header">{{ __('Registrazione') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" id="FormRegistrazione" action="{{ route('register') }}" id="Form_register">
+                        <form method="POST" action="{{ route('register') }}" id="Form_register">
                             @csrf
 
                             <div class="mb-4 row">
@@ -18,7 +18,7 @@
                                 <div class="col-md-6">
                                     <input id="name" type="text"
                                         class="form-control @error('name') is-invalid @enderror" name="name"
-                                        value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                        value="{{ old('name') }}"  autocomplete="name" autofocus>
 
                                     @error('name')
                                         <span class="invalid-feedback" role="alert">
@@ -35,7 +35,7 @@
                                 <div class="col-md-6">
                                     <input id="lastname" type="text"
                                         class="form-control @error('lastname') is-invalid @enderror" name="lastname"
-                                        value="{{ old('lastname') }}" required autocomplete="lastname" autofocus>
+                                        value="{{ old('lastname') }}"  autocomplete="lastname" autofocus>
 
                                     @error('lastname')
                                         <span class="invalid-feedback" role="alert">
@@ -52,7 +52,7 @@
                                 <div class="col-md-6">
                                     <input id="email" type="email"
                                         class="form-control @error('email') is-invalid @enderror" name="email"
-                                        value="{{ old('email') }}" required autocomplete="email">
+                                        value="{{ old('email') }}"  autocomplete="email">
                                         <span id="MailNo" class="d-none  text-danger"></span>
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
@@ -68,7 +68,7 @@
                                 <div class="col-md-6">
                                     <input id="date_of_birth" type="date"
                                         class="form-control @error('date_of_birth') is-invalid @enderror"
-                                        name="date_of_birth" value="{{ old('date_of_birth') }}" required>
+                                        name="date_of_birth" value="{{ old('date_of_birth') }}" >
 
                                     @error('date_of_birth')
                                         <span class="invalid-feedback" role="alert">
@@ -125,7 +125,7 @@
         </div>
     </div>
     <script>
-        document.getElementById("FormRegistrazione").addEventListener("submit", function(event) {
+        document.getElementById("Form_register").addEventListener("submit", function(event) {
             event.preventDefault();
             let password = document.getElementById('password').value;
             let password_confirm = document.getElementById('password-confirm').value;
@@ -152,25 +152,23 @@
             }
 
             function checkEmail(email) {
-                let yesOrNo;
-                let emailExtensions = [ '.net', '.org', '.info', '.edu', '.gov', '.it','.com'];
-                emailExtensions.forEach(element => {
-                    // Debug
-                    // console.log(email.includes(element));
-                    if (email.includes(element)) {
-                        yesOrNo = true;
-                        document.getElementById('MailNo').classList.add('d-none');
-                        document.getElementById('MailNo').innerHTML='';
-                        break;
-                    }
-                    else{
-                        yesOrNo = false;
-                        document.getElementById('MailNo').classList.remove('d-none');
-                        document.getElementById('MailNo').innerHTML='Estensione non valida!';
-                    }
-                });
-                return yesOrNo;
-            }
+    let validExtension = false;
+    let emailExtensions = ['.net', '.org', '.info', '.edu', '.gov', '.it', '.com'];
+    for (let i = 0; i < emailExtensions.length; i++) {
+        if (email.includes(emailExtensions[i])) {
+            validExtension = true;
+            break;
+        }
+    }
+    if (!validExtension) {
+        document.getElementById('MailNo').classList.remove('d-none');
+        document.getElementById('MailNo').innerHTML = 'Estensione non valida!';
+    } else {
+        document.getElementById('MailNo').classList.add('d-none');
+        document.getElementById('MailNo').innerHTML = '';
+    }
+    return validExtension;
+}
 
             function checkDateOfBirth(date_of_birth) {
                 let yesOrNo;
