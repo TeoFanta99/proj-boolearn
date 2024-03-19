@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <h1>Crea Profilo</h1>
+    <h1 id="crea">Crea il tuo Profilo</h1>
     {{-- @auth --}}
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -16,81 +16,106 @@
 
         @csrf
         @method('PUT')
-        <div class="row flex-column gap-4">
-            <div class="col-3">
-                <label for="tax_id">P.IVA <span style="color: red;  font-size: 1.5em;">*</span> :</label>
-                <input type="text" id="tax_id" name="tax_id">
-                <span id="taxNo"class="text-danger d-none"></span>
-            </div>
 
-            {{-- <div class="col-3">
-            <label for="cv_url">Carica il tuo CV <span style="color: red;  font-size: 1.5em;">*</span> :</label>
-            <input type="file" id="cv_url" name="cv">
+        <div class="container">
+            <div class="row gutters">
+                <div class="col-xl-4 col-lg-3 col-md-12 col-sm-12 col-12 mb-3">
+                    <div class="card p-0 h-50">
+                        <div class="card-header bg-transparent border-primary text-primary" style="font-weight: bold">FOTO PROFILO
+                        </div>
+                        <div class="card-body p-0 m-0 d-flex align-items-center justify-content-center">
+                            <div class="account-settings">
+                                <label for="image_url"></label>
+                                <input type="file" class="form-control" id="image_url" name="image_url">
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="col-xl-8 col-lg-9 col-md-12 col-sm-12 col-12">
+                    <div class="card h-100">
+                        <div class="card-header bg-transparent border-primary text-primary" style="font-weight: bold">DETTAGLI PROFILO
+                        </div>
+                        <div class="card-body">
+                            <div class="row gutters">
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                    <div class="form-group"> 
+                                        <div class="form-group">
+                                            <label for="phone_number">TELEFONO 
+                                                <span style="color: red; font-size: 1.5em;">*</span> 
+                                            </label>
+                                            <input type="number" class="form-control" id="phone_number" name="phone_number">
+                                            <span id="PhoneNo"class="text-danger d-none"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                    <div class="form-group">
+                                        <div class="form-group">
+                                            <label for="city">CITTÀ <span style="color: red;  font-size: 1.5em;">*</span></label>
+                                            <select id="city" class="form-control" name="city">
+                                                <option value="">Seleziona la tua città</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row gutters">
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                    <div class="form-group">
+                                        <label for="tax_id">P.IVA <span style="color: red;  font-size: 1.5em;">*</span></label>
+                                        <input type="text" class="form-control" id="tax_id" name="tax_id">
+                                        <span id="taxNo"class="text-danger d-none"></span> 
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                    <div class="form-group">
+                                        <label for="cv_url">CARICA CV <span style="color: red;  font-size: 1.5em;"> *</span></label>
+                                        <input type="file" class="form-control" id="cv_url" name="cv_url" accept=".pdf">          
+                                    </div>
+                                </div>
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <div class="form-group">
+                                        <div class="d-flex flex-column">
+                                            <label for="biography">BIOGRAFIA <span style="color: red;  font-size: 1.5em;">*</span></label>
+                                            <textarea name="biography" class="form-control" id="biography"></textarea>
+                                            <span id="bioNo"class="text-danger d-none"></span>
+                                        </div>      
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                    <div class="form-group mb-3">
+                                        <label class="mb-2">SELEZIONA MATERIE  <span style="color: red; font-size: 1.5em;"> *</span></label>
+                                        <br>
 
-        </div> --}}
-
-            <div class="col-3">
-                <div class="d-flex flex-column">
-                    <label for="biography">Biografia <span style="color: red;  font-size: 1.5em;">*</span></label>
-                    <textarea name="biography" id="biography"></textarea>
-                    <span id="bioNo"class="text-danger d-none"></span>
+                                        @foreach ($subjects as $subject)
+                                            <input type="checkbox" class="form-check-input"  id="subject{{ $subject->id }}" name="subjects[]"
+                                                value="{{ $subject->id }}">
+                                            <label for="subject{{ $subject->id }}">{{ $subject->name }}</label><br>
+                                        @endforeach          
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row gutters">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <div class="form-group">
+                                       <label for="motto">MOTTO</label>
+                                       <textarea class="form-control" id="motto" name="motto"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row gutters">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <div class="d-flex justify-content-between mt-4 text-right">
+                                         <div style="color: red; font-size: 1em; text-align: left; font-weight:bold; ">* I seguenti campi sono obbligatori</div>
+                                        <input type="submit" class="btn btn-primary" value="CREA">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-3">
-
-                <label for="city">Seleziona una città:<span style="color: red;  font-size: 1.5em;">*</span></label>
-                <select id="city" name="city">
-                    <option value="">Seleziona una città</option>
-                </select>
-
-            </div>
-            <div class="col-3">
-                <label for="phone_number">Numero di telefono <span style="color: red;  font-size: 1.5em;">*</span> :</label>
-                <input type="number" id="phone_number" name="phone_number">
-                <span id="PhoneNo"class="text-danger d-none"></span>
-
-            </div>
-            <div class="col-3">
-                <label for="image_url">Scegli immagine:</label>
-                <input type="file" id="image_url" name="image_url">
-            </div>
-
-
-            <div class="col-3">
-                <label for="motto">Motto:</label>
-                <input type="text" id="motto" name="motto">
-            </div>
-
-            {{-- @foreach ($tags as $tag)
-        <div>
-            <input type="checkbox" name="tag_id[]" value="{{ $tag -> id }}" id="tag{{ $tag -> id }}">
-            <label for="tag{{ $tag -> id }}">{{ $tag -> title }}</label>
-            <br>
         </div>
-        @endforeach --}}
-
-            <div class="col-3">
-                <label for="cv_url">Carica il tuo CV <span style="color: red;  font-size: 1.5em;">*</span>:</label>
-                <input type="file" id="cv_url" name="cv_url" accept=".pdf">
-            </div>
-
-            <div class="col-3"><input type="submit" value="CREA"></div>
-
-            <div>
-                <label>Materie:</label><br>
-                
-                    @foreach ($subjects as $subject)
-                        <input type="checkbox" id="subject{{ $subject->id }}" name="subjects[]"
-                            value="{{ $subject->id }}">
-                        <label for="subject{{ $subject->id }}">{{ $subject->name }}</label><br>
-                    @endforeach
-                
-
-
-            </div>
-            <span style="color: red;  font-size: 2em;">* i seguenti campi sono obbligatori</span>
-
-
     </form>
     {{-- @endauth --}}
     <script>
