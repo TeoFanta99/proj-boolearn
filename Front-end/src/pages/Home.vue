@@ -67,6 +67,7 @@ export default {
   },
 
   mounted() {
+
     // Chiamata iniziale per caricare i dati
     this.SearchProf();
   },
@@ -74,7 +75,8 @@ export default {
 </script>
 
 <template>
-  <div class="container">
+  
+  <div class="container" id="main-container">
     <div class="row align-items-center">
       <!-- <div class="col-12 col-md-4">
         <label for="search">Ricerca</label>
@@ -143,6 +145,7 @@ export default {
   </div>
 </template>
 <style>
+
 .img_circle {
   width: 60%;
 }
