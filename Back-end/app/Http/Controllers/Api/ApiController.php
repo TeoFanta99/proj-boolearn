@@ -91,7 +91,7 @@ class ApiController extends Controller
         return response()->json([
                     'status' => 'success',
                     'message' => 'sono andata al front_end',
-                    'reviews '=>$review ,
+                    'reviews'=>$review,
                 ]);
 
     }
