@@ -23,7 +23,7 @@ export default {
     //funzione chiamata appena la pagina viene caricata dal browser
     SearchProf() {
       let dataToSend = { nome_cognome: this.teacher };
-      console.log(dataToSend);
+
       if (this.SubjectSelect.length > 0) {
         dataToSend.subjects = this.SubjectSelect;
       }
@@ -51,11 +51,12 @@ export default {
     },
 
     FixSubject(subject) {
+      console.log(subject);
       axios
-        .post("http://127.0.0.1:8000/api/v1/subject", subject)
+        .get("http://127.0.0.1:8000/api/v1/subject?subjects=" + subject)
         .then((response) => {
           this.teachers = response.data.teachers;
-          this.subjects = response.data.subjects;
+          console.log(this.teachers);
         })
         .catch((error) => {
           console.error("Errore durante la richiesta API:", error);
@@ -103,7 +104,7 @@ export default {
           <option
             v-for="subject in subjects"
             :key="subject.id"
-            :value="subject.name"
+            :value="subject.id"
           >
             {{ subject.name }}
           </option>

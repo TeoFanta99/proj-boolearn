@@ -67,17 +67,20 @@ class ApiController extends Controller
         }
     }
 
+    public function test(Request $request){
 
-     public function getSubjects(Request $request)
-    {
-        dd($request);
-        $subjects= Subject::all();
-        $teachers = Teacher::with('user', 'subjects')->get();
+        $id = $request->input('subjects');
 
-         return response()->json([
-            'status' => 'success',
-           'message' => 'ok',
+        $subjects= Subject::find($id);
 
-         ]);
-     }
-}
+        $teachers = $subjects->teacher()->with('user','subjects')->get();
+
+        return response()->json([
+                    'status' => 'success',
+                    'message' => 'sono andata al front_end',
+                    'teachers'=>$teachers,
+                ]);
+
+    }
+
+ }
