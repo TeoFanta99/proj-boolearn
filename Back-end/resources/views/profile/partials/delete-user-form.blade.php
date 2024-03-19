@@ -5,7 +5,8 @@
         </h2>
 
         <p class="mt-1 text-sm text-gray-600">
-            {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.') }}
+            {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Before
+            deleting your account, please download any data or information that you wish to retain.') }}
         </p>
     </header>
 
@@ -16,7 +17,8 @@
 
     <!-- Modal Body -->
     <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
-    <div class="modal fade" id="delete-account" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="delete-account" aria-hidden="true">
+    <div class="modal fade" id="delete-account" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+        role="dialog" aria-labelledby="delete-account" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -28,7 +30,8 @@
                         {{ __('Are you sure you want to delete your account?') }}
                     </h2>
                     <p class="mt-1 text-sm text-gray-600">
-                        {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.') }}
+                        {{ __('Once your account is deleted, all of its resources and data will be permanently deleted.
+                        Please enter your password to confirm you would like to permanently delete your account.') }}
                     </p>
                 </div>
                 <div class="modal-footer">
@@ -41,7 +44,8 @@
 
                         <div class="input-group">
 
-                            <input id="password" name="password" type="password" class="form-control" placeholder="{{ __('Password') }}" />
+                            <input id="password" name="password" type="password" class="form-control"
+                                placeholder="{{ __('Password') }}" />
 
                             @error('password')
                             <span class="invalid-feedback mt-2" role="alert">
