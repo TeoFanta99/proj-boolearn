@@ -51,16 +51,21 @@ export default {
     },
 
     FixSubject(subject) {
-      console.log(subject);
-      axios
-        .get("http://127.0.0.1:8000/api/v1/subject?subjects=" + subject)
-        .then((response) => {
-          this.teachers = response.data.teachers;
-          console.log(this.teachers);
-        })
-        .catch((error) => {
-          console.error("Errore durante la richiesta API:", error);
-        });
+      // Ottieni l'ID della materia selezionata
+      const subjectId = this.store.searchText;
+
+      // Utilizza Vue Router per navigare alla pagina 'filt' con l'ID della materia come parametro
+      this.$router.push({ name: "filt", params: { id: subjectId } });
+
+      //   axios
+      //     .get("http://127.0.0.1:8000/api/v1/subject?subjects=" + subject)
+      //     .then((response) => {
+      //       this.teachers = response.data.teachers;
+      //       console.log(this.teachers);
+      //     })
+      //     .catch((error) => {
+      //       console.error("Errore durante la richiesta API:", error);
+      //     });
     },
   },
 

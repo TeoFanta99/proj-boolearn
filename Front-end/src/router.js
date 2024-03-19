@@ -6,6 +6,7 @@ import contact from "./components/Contacts.vue";
 import Faq from "./components/FAQ.vue";
 import Home from "./pages/Home.vue";
 import Show from "./pages/Show.vue";
+import Filt_res from "./pages/Filt_res.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -34,6 +35,11 @@ const router = createRouter({
       path: "/show/:id",
       name: "show",
       component: Show,
+    },
+    {
+      path: "/filt/:id",
+      name: "filt",
+      component: Filt_res,
     },
   ],
 });
