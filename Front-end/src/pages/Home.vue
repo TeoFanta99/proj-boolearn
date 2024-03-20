@@ -76,6 +76,74 @@ export default {
       // Utilizza Vue Router per navigare alla pagina 'filt' con l'ID della materia che mi interessa
       //this.$router.push({ name: "filt", params: { id: subjectId } });
     },
+
+
+    // OTTIENI I RISULTATI DEL FILTRO 1: SUBJECT
+    getSubject(optionValue) {
+      let selectedOption = optionValue.target.value;
+      console.log("Opzione selezionata:", selectedOption);
+    },
+
+
+    // OTTIENI I RISULTATI DEL FILTRO 2: RATINGS
+    getRating() {
+
+      let medie;
+      let medieN;
+
+      let ind = 0;
+      let val = 0;
+      let teacher = 0;
+
+      for (let i = 0; i < this.teachers.length; i++) {
+        console.log();
+        // let rec = this.teachers[i].ratings;
+
+        // let idTeacher = this.teachers[i].id;
+
+        // if (idTeacher != teacher) {
+
+        //   for (let j = 0; j < rec.length; j++) {
+        //     let recId = rec[j].id;
+
+        //     val += recId;
+        //   }
+
+        //   let FinalResult = val / rec.length;
+
+        //   medie[ind] = FinalResult;
+
+        //   ind++;
+        // }
+      }
+
+      ind = 0;
+
+      for (let j = 0; j < medie.length; j++) {
+        let value = medie[j];
+
+        if (value >= store.Rating) {
+          medieN[ind] = value;
+
+          ind++;
+        }
+      }
+
+      console.log("medie corrette: " + medieN);
+    },
+
+    getResults() {
+
+      // OTTIENI I RISULTATI DEL FILTRO 1: SUBJECT
+
+
+
+      // OTTIENI I RISULTATI DEL FILTRO 2: RATINGS
+
+
+
+      // OTTIENI I RISULTATI DEL FILTRO 3: REVIEWS
+    }
   },
 
   watch: {
@@ -115,6 +183,7 @@ export default {
     };
     textLoad();
     setInterval(textLoad, 13500);
+    this.getResults();
   },
 };
 </script>
@@ -123,66 +192,46 @@ export default {
   <jumbo id="boh" />
 
   <div class="container">
-    <!-- <div class="row align-items-center">
-      <div class="col-12 col-md-4">
-        <label for="search">Ricerca</label>
-        <input
-          class="form-control"
-          type="text"
-          placeholder="Cerca un insegnante"
-          aria-label="Search"
-          v-model="store.SearchT"
-          @keyup.enter="SearchProf(store.SearchT)"
-        />
-      </div> -->
+
     <!-- SELECT -->
     <form class="d-flex">
+
+
+      <!-- FILTRA PER MATERIA (SUBJECT)-->
       <div class="col-12 col-md-4 align-self-end pb-2">
         <h4>Scegli la materia</h4>
-
-        <select
-          v-model="store.Subject"
-          class="form-select w-25"
-          id="selected-Subject"
-        >
-          <option
-            v-for="subject in subjects"
-            :key="subject.id"
-            :value="subject.id"
-          >
+        <select v-model="store.Subject" class="form-select w-25" id="selected-Subject" @change="getSubject">
+          <option v-for="subject in subjects" :key="subject.id" :value="subject.id">
             {{ subject.name }}
           </option>
         </select>
       </div>
 
+
+      <!-- FILTRA PER VOTO (RATING) -->
       <div class="col-12 col-md-4 align-self-end pb-2">
         <h4>Filtra per voto</h4>
-        <select
-          v-model="store.Rating"
-          class="form-select w-25"
-          id="selected-Rating"
-        >
+        <select v-model="store.Rating" class="form-select w-25" id="selected-Rating" @change="getRating">
           <option v-for="rating in ratings" :key="rating.id" :value="rating.id">
             {{ rating.name }}
           </option>
         </select>
       </div>
 
+
+
+      <!-- FILTRA PER NUMERO DI RECENSIONI (REVIEWS) -->
       <div class="col-12 col-md-4 align-self-end pb-2">
         <h4>Filtra per numero di recensioni</h4>
-        <select
-          v-model="store.Review"
-          class="form-select w-25"
-          id="selected-Review"
-        >
-          >
+        <select v-model="store.Review" class="form-select w-25" id="selected-Review">
           <option value="5">min 5</option>
           <option value="10">min 10</option>
           <option value="12">min 12</option>
-          <!-- Aggiungi altre condizioni v-if per le altre opzioni -->
         </select>
       </div>
 
+
+      <!-- BOTTONE CHE RECUPERA I CAMPI -->
       <button type="submit" form="nameform" value="Submit" @click="riempiRec()">
         ricerca
       </button>
@@ -190,25 +239,12 @@ export default {
 
     <div v-if="teachers.length > 0">
       <div class="row mt-4">
-        <div
-          class="col-12 col-md-4 col-lg-3 p-2"
-          v-for="teacher in teachers"
-          :key="teacher.id"
-        >
-          <RouterLink
-            :to="{ name: 'show', params: { id: teacher.user.name } }"
-            @click="riempiVet(teacher.id)"
-            class="text-decoration-none"
-          >
+        <div class="col-12 col-md-4 col-lg-3 p-2" v-for="teacher in teachers" :key="teacher.id">
+          <RouterLink :to="{ name: 'show', params: { id: teacher.user.name } }" @click="riempiVet(teacher.id)"
+            class="text-decoration-none">
             <div class="card pt-3 border-0 shadow">
-              <div
-                class="d-flex justify-content-center align-items-center img_circle mx-auto height_img_query"
-              >
-                <img
-                  class="w-100 h-100 rounded-circle"
-                  :src="getImageUrl(teacher)"
-                  alt=""
-                />
+              <div class="d-flex justify-content-center align-items-center img_circle mx-auto height_img_query">
+                <img class="w-100 h-100 rounded-circle" :src="getImageUrl(teacher)" alt="" />
               </div>
               <div class="card-body">
                 <h4>{{ teacher.user.name }} {{ teacher.user.lastname }}</h4>
@@ -227,6 +263,7 @@ export default {
 .img_circle {
   width: 60%;
 }
+
 #boh {
   margin-top: 10px;
 }

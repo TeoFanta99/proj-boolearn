@@ -19,33 +19,15 @@ export default {
     },
 
     FixSubject() {
-      // Ottieni i parametri di query
-      // axios
-      //   .get(
-      //     "http://127.0.0.1:8000/api/v1/subject?subjects=" +
-      //       params1 +
-      //       "?ratings=" +
-      //       params2 +
-      //       "?"
-      //   )
-      //   .then((response) => {
-      //     this.teachers = response.data.teachers;
-      //     console.log(this.teachers);
-      //   })
-      //   .catch((error) => {
-      //     console.error("Errore durante la richiesta API:", error);
-      //   });
 
-      console.log("valutazione: " + store.Rating);
-      console.log("materia: " + store.Subject);
-      console.log("Recensioni: almeno " + store.Review);
 
-      for (let i = 0; i < this.teachers.length - 1; i++) {
+      for (let i = 0; i < this.teachers.length; i++) {
+
         let rec = this.teachers[i].reviews;
 
         if (rec.length >= store.Review) {
-          //console.log(rec);
-          //return rec;
+          console.log(rec);
+          return rec;
         }
       }
 
@@ -61,10 +43,9 @@ export default {
       for (let i = 0; i < this.teachers.length; i++) {
         let rec = this.teachers[i].ratings;
 
-        let Id_teacher = this.teachers[i].id;
+        let idTeacher = this.teachers[i].id;
 
-        if (Id_teacher != teacher) {
-          val = 0;
+        if (idTeacher != teacher) {
 
           for (let j = 0; j < rec.length; j++) {
             let recId = rec[j].id;
@@ -95,9 +76,10 @@ export default {
       console.log("medie corrette: " + medieN);
 
       // Utilizza Vue Router per navigare alla pagina 'filt' con l'ID della materia che mi interessa
-      this.$router.push({
-        name: "filt",
-      });
+      // this.$router.push({
+      //   name: "filt",
+      //   params: { param1: "", param2: "", param3: "" }
+      // });
     },
 
     // funzione chiamata quando si clicca su un docente
@@ -113,7 +95,7 @@ export default {
   },
   mounted() {
     // Chiamata iniziale per caricare i dati
-    this.FixSubject();
+    console.log(this.teachers);
   },
 };
 </script>
@@ -122,25 +104,12 @@ export default {
   <div class="container">
     <div v-if="teachers.length > 0">
       <div class="row mt-4">
-        <div
-          class="col-12 col-md-4 col-lg-3 p-2"
-          v-for="teacher in teachers"
-          :key="teacher.id"
-        >
-          <RouterLink
-            :to="{ name: 'show', params: { id: teacher.user.name } }"
-            @click="riempiVet(teacher.id)"
-            class="text-decoration-none"
-          >
+        <div class="col-12 col-md-4 col-lg-3 p-2" v-for="teacher in teachers" :key="teacher.id">
+          <RouterLink :to="{ name: 'show', params: { id: teacher.user.name } }" @click="riempiVet(teacher.id)"
+            class="text-decoration-none">
             <div class="card pt-3 border-0 shadow">
-              <div
-                class="d-flex justify-content-center align-items-center img_circle mx-auto height_img_query"
-              >
-                <img
-                  class="w-100 h-100 rounded-circle"
-                  :src="getImageUrl(teacher)"
-                  alt=""
-                />
+              <div class="d-flex justify-content-center align-items-center img_circle mx-auto height_img_query">
+                <img class="w-100 h-100 rounded-circle" :src="getImageUrl(teacher)" alt="" />
               </div>
               <div class="card-body">
                 <h4>{{ teacher.user.name }} {{ teacher.user.lastname }}</h4>
