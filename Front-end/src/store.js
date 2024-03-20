@@ -10,5 +10,9 @@ export const store = reactive({
   Email: "",
   Title: "",
   Message: "",
-  searchText: "",
+
+  // Pagina Home.vue
+  Subject: "",
+  Rating: "",
+  Review: "",
 });

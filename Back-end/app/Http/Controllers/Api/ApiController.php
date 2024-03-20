@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Subject;
 use App\Models\Teacher;
 use App\Models\Review;
+use App\Models\Rating;
 use Illuminate\Http\Request;
 
 class ApiController extends Controller
@@ -41,7 +42,9 @@ class ApiController extends Controller
         $materie = $request->input('subjects');
         
         $subjects= Subject::all();
-        $teachers = Teacher::with('user', 'subjects')->get();
+        $reviews= Review::all();
+        $ratings= Rating::all();
+        $teachers = Teacher::with('user', 'subjects', 'reviews', 'ratings')->get();
         $risultato = [];
 
         foreach ($teachers as $teacher) {

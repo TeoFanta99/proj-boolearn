@@ -5,8 +5,8 @@ import jumbo from "./jumbo.vue";
 
 export default {
   name: "Home",
-  components:{
-    jumbo
+  components: {
+    jumbo,
   },
 
   data() {
@@ -54,11 +54,12 @@ export default {
     },
 
     FixSubject(subject) {
+      console.log(subject);
       // Ottieni l'ID della materia selezionata
       const subjectId = this.store.searchText;
 
       // Utilizza Vue Router per navigare alla pagina 'filt' con l'ID della materia che mi interessa
-      this.$router.push({ name: "filt", params: { id: subjectId } });
+      //this.$router.push({ name: "filt", params: { id: subjectId } });
     },
   },
 
@@ -71,7 +72,6 @@ export default {
   },
 
   mounted() {
-    
     const boh = document.getElementById("boh");
     boh.style.opacity = "0";
     setTimeout(() => {
@@ -79,7 +79,7 @@ export default {
       boh.classList.add("fade-in");
 
       // Chiamata iniziale per caricare i dati
-    this.SearchProf();
+      this.SearchProf();
     }, 2300);
 
     const text = document.querySelector(".sec-text");
@@ -100,14 +100,12 @@ export default {
     };
     textLoad();
     setInterval(textLoad, 13500);
-
-    
   },
 };
 </script>
 
 <template class="bg-light">
-  <jumbo id="boh"/>
+  <jumbo id="boh" />
 
   <div class="container">
     <!-- <div class="row align-items-center">
@@ -123,22 +121,61 @@ export default {
         />
       </div> -->
     <!-- SELECT -->
-    <div class="col-12 col-md-8 align-self-end pb-2">
-      <h4>Scegli la materia</h4>
-      <select
-        v-model="store.searchText"
-        class="form-select w-25"
-        id="selected-searchText"
-        @change="FixSubject(store.searchText)"
-      >
-        <option
-          v-for="subject in subjects"
-          :key="subject.id"
-          :value="subject.id"
+    <div class="d-flex">
+      <div class="col-12 col-md-4 align-self-end pb-2">
+        <h4>Scegli la materia</h4>
+
+        <select
+          v-model="store.Subject"
+          class="form-select w-25"
+          id="selected-Subject"
+          @change="FixSubject(store.Subject)"
         >
-          {{ subject.name }}
-        </option>
-      </select>
+          <option
+            v-for="subject in subjects"
+            :key="subject.id"
+            :value="subject.id"
+          >
+            {{ subject.name }}
+          </option>
+        </select>
+      </div>
+
+      <div class="col-12 col-md-4 align-self-end pb-2">
+        <h4>Filtra per voto</h4>
+        <select
+          v-model="store.Rating"
+          class="form-select w-25"
+          id="selected-Rating"
+          @change="FixSubject(store.Rating)"
+        >
+          <option
+            v-for="subject in subjects"
+            :key="subject.id"
+            :value="subject.id"
+          >
+            {{ subject.name }}
+          </option>
+        </select>
+      </div>
+
+      <div class="col-12 col-md-4 align-self-end pb-2">
+        <h4>Filtra per numero di recensioni</h4>
+        <select
+          v-model="store.Review"
+          class="form-select w-25"
+          id="selected-Review"
+          @change="FixSubject(store.Review)"
+        >
+          <option
+            v-for="subject in subjects"
+            :key="subject.id"
+            :value="subject.id"
+          >
+            {{ subject.name }}
+          </option>
+        </select>
+      </div>
     </div>
 
     <div v-if="teachers.length > 0">
@@ -177,12 +214,10 @@ export default {
   </div>
 </template>
 <style>
-
 .img_circle {
   width: 60%;
 }
-#boh{
+#boh {
   margin-top: 10px;
 }
-
 </style>
