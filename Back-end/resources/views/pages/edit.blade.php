@@ -78,6 +78,13 @@
                                         <label for="cv_url">CARICA CV <span style="color: red;  font-size: 1.5em;"> *</span></label>
                                         <input type="file" class="form-control" id="cv_url" name="cv_url" accept=".pdf">          
                                     </div>
+                                    <!-- Imposto un collegamento al pdf del docente -->
+                                    <a href="{{URL::to('storage/' . $teacher->cv_url)}}">
+
+                                        <!-- carico logo pdf -->
+                                        <img src="{{ Vite::asset('public/storage/images/logo_pdf.jpg') }}" class="logo_pdf" alt="cv teacher">
+
+                                    </a>
                                 </div>
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="form-group">
