@@ -39,9 +39,8 @@ export default {
           this.teachers = response.data.teachers;
           this.subjects = response.data.subjects;
           store.recensioni = response.data.reviews;
-          this.riempiRec();
-
           this.ratings = response.data.ratings;
+          console.log(this.teachers);
         })
         .catch((error) => {
           console.error("Errore durante la richiesta API:", error);
@@ -60,19 +59,74 @@ export default {
 
     // funzione chiamata quando si clicca su un docente
     riempiRec(number) {
-      for (let i = 0; i < this.teachers.length; i++) {
+      console.log("valutazione: " + store.Rating);
+      console.log("materia: " + store.Subject);
+      console.log("Recensioni: almeno " + store.Review);
+      for (let i = 0; i < this.teachers.length - 1; i++) {
         let rec = this.teachers[i].reviews;
 
-        if (number >= rec.length) {
-          console.log(rec);
+        if (rec.length >= store.Review) {
+          //console.log(rec);
+          //return rec;
         }
       }
+
+      let medie = [];
+
+      let medieN = [];
+
+      let ind = 0;
+      let val = 0;
+
+      let teacher = 0;
+
+      for (let i = 0; i < this.teachers.length; i++) {
+        let rec = this.teachers[i].ratings;
+
+        let Id_teacher = this.teachers[i].id;
+
+        if (Id_teacher != teacher) {
+          val = 0;
+
+          for (let j = 0; j < rec.length; j++) {
+            let recId = rec[j].id;
+
+            val += recId;
+          }
+
+          let FinalResult = val / rec.length;
+
+          medie[ind] = FinalResult;
+
+          ind++;
+        }
+      }
+
+      ind = 0;
+
+      for (let j = 0; j < medie.length; j++) {
+        let value = medie[j];
+
+        if (value >= store.Rating) {
+          medieN[ind] = value;
+
+          ind++;
+        }
+      }
+
+      console.log("medie corrette: " + medieN);
+
+      // Utilizza Vue Router per navigare alla pagina 'filt' con l'ID della materia che mi interessa
+      this.$router.push({
+        name: "filt",
+        params: { id1: store.Subject, id2: store.Rating, id3: store.Review },
+      });
     },
 
     FixSubject() {
-      console.log(store.Subject);
-      console.log(store.Rating);
-      console.log(store.Review);
+      // console.log(store.Subject);
+      // console.log(store.Rating);
+      // console.log(store.Review);
 
       // Ottieni l'ID della materia selezionata
       const subjectId = this.store.Review;
@@ -140,7 +194,7 @@ export default {
         />
       </div> -->
     <!-- SELECT -->
-    <div class="d-flex">
+    <form class="d-flex">
       <div class="col-12 col-md-4 align-self-end pb-2">
         <h4>Scegli la materia</h4>
 
@@ -148,7 +202,6 @@ export default {
           v-model="store.Subject"
           class="form-select w-25"
           id="selected-Subject"
-          @change="FixSubject()"
         >
           <option
             v-for="subject in subjects"
@@ -166,7 +219,6 @@ export default {
           v-model="store.Rating"
           class="form-select w-25"
           id="selected-Rating"
-          @change="FixSubject()"
         >
           <option v-for="rating in ratings" :key="rating.id" :value="rating.id">
             {{ rating.name }}
@@ -180,28 +232,19 @@ export default {
           v-model="store.Review"
           class="form-select w-25"
           id="selected-Review"
-          @change="FixSubject()"
         >
           >
           <option value="5">min 5</option>
-          <option value="15">min 15</option>
-          <option value="20">min 20</option>
+          <option value="10">min 10</option>
+          <option value="12">min 12</option>
           <!-- Aggiungi altre condizioni v-if per le altre opzioni -->
         </select>
-
-        <div v-if="store.Review === '5'">
-          <ul>
-            <li
-              v-for="teacher in teachers"
-              :key="teacher.id"
-              v-if="teacher.reviews.length >= 5"
-            >
-              {{ teacher.name }} - Recensioni: {{ teacher.reviews.length }}
-            </li>
-          </ul>
-        </div>
       </div>
-    </div>
+
+      <button type="submit" form="nameform" value="Submit" @click="riempiRec()">
+        ricerca
+      </button>
+    </form>
 
     <div v-if="teachers.length > 0">
       <div class="row mt-4">

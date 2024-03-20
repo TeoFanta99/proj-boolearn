@@ -20,17 +20,19 @@ export default {
 
     FixSubject() {
       // Ottieni i parametri di query
-      const params = this.$route.params.id;
-
-      axios
-        .get("http://127.0.0.1:8000/api/v1/subject?subjects=" + params)
-        .then((response) => {
-          this.teachers = response.data.teachers;
-          console.log(this.teachers);
-        })
-        .catch((error) => {
-          console.error("Errore durante la richiesta API:", error);
-        });
+      const params1 = this.$route.params.id1;
+      const params2 = this.$route.params.id2;
+      const params3 = this.$route.params.id3;
+      console.log(params1);
+      // axios
+      //   .get("http://127.0.0.1:8000/api/v1/subject?subjects=" + params)
+      //   .then((response) => {
+      //     this.teachers = response.data.teachers;
+      //     console.log(this.teachers);
+      //   })
+      //   .catch((error) => {
+      //     console.error("Errore durante la richiesta API:", error);
+      //   });
     },
 
     // funzione chiamata quando si clicca su un docente
@@ -86,16 +88,6 @@ export default {
     <div v-else>
       <h3 class="my-4">Nessun risultato trovato!</h3>
     </div>
-
-    <ul>
-      <li
-        v-for="teacher in teachers"
-        :key="teacher.id"
-        v-if="teacher.reviews.length >= params"
-      >
-        {{ teacher.name }} - Recensioni: {{ teacher.reviews.length }}
-      </li>
-    </ul>
   </div>
 </template>
 <style></style>

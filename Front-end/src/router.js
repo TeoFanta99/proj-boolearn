@@ -37,7 +37,7 @@ const router = createRouter({
       component: Show,
     },
     {
-      path: "/filt/:id",
+      path: "/filt/:id1",
       name: "filt",
       component: Filt_res,
     },
