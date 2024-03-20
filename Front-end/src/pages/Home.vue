@@ -5,7 +5,7 @@ import jumbo from "./jumbo.vue";
 
 export default {
   name: "Home",
-  components:{
+  components: {
     jumbo
   },
 
@@ -24,7 +24,7 @@ export default {
       return `http://localhost:8000/storage/${teacher.image_url}`;
     },
 
-    //funzione chiamata appena la pagina viene caricata dal browser
+    // funzione chiamata appena la pagina viene caricata dal browser
     SearchProf() {
       let dataToSend = { nome_cognome: this.teacher };
 
@@ -71,7 +71,7 @@ export default {
   },
 
   mounted() {
-    
+
     const boh = document.getElementById("boh");
     boh.style.opacity = "0";
     setTimeout(() => {
@@ -79,7 +79,7 @@ export default {
       boh.classList.add("fade-in");
 
       // Chiamata iniziale per caricare i dati
-    this.SearchProf();
+      this.SearchProf();
     }, 2300);
 
     const text = document.querySelector(".sec-text");
@@ -101,13 +101,13 @@ export default {
     textLoad();
     setInterval(textLoad, 13500);
 
-    
+
   },
 };
 </script>
 
 <template class="bg-light">
-  <jumbo id="boh"/>
+  <jumbo id="boh" />
 
   <div class="container">
     <!-- <div class="row align-items-center">
@@ -125,17 +125,9 @@ export default {
     <!-- SELECT -->
     <div class="col-12 col-md-8 align-self-end pb-2">
       <h4>Scegli la materia</h4>
-      <select
-        v-model="store.searchText"
-        class="form-select w-25"
-        id="selected-searchText"
-        @change="FixSubject(store.searchText)"
-      >
-        <option
-          v-for="subject in subjects"
-          :key="subject.id"
-          :value="subject.id"
-        >
+      <select v-model="store.searchText" class="form-select w-25" id="selected-searchText"
+        @change="FixSubject(store.searchText)">
+        <option v-for="subject in subjects" :key="subject.id" :value="subject.id">
           {{ subject.name }}
         </option>
       </select>
@@ -143,25 +135,12 @@ export default {
 
     <div v-if="teachers.length > 0">
       <div class="row mt-4">
-        <div
-          class="col-12 col-md-4 col-lg-3 p-2"
-          v-for="teacher in teachers"
-          :key="teacher.id"
-        >
-          <RouterLink
-            :to="{ name: 'show', params: { id: teacher.user.name } }"
-            @click="riempiVet(teacher.id)"
-            class="text-decoration-none"
-          >
+        <div class="col-12 col-md-4 col-lg-3 p-2" v-for="teacher in teachers" :key="teacher.id">
+          <RouterLink :to="{ name: 'show', params: { id: teacher.user.name } }" @click="riempiVet(teacher.id)"
+            class="text-decoration-none">
             <div class="card pt-3 border-0 shadow">
-              <div
-                class="d-flex justify-content-center align-items-center img_circle mx-auto height_img_query"
-              >
-                <img
-                  class="w-100 h-100 rounded-circle"
-                  :src="getImageUrl(teacher)"
-                  alt=""
-                />
+              <div class="d-flex justify-content-center align-items-center img_circle mx-auto height_img_query">
+                <img class="w-100 h-100 rounded-circle" :src="getImageUrl(teacher)" alt="" />
               </div>
               <div class="card-body">
                 <h4>{{ teacher.user.name }} {{ teacher.user.lastname }}</h4>
@@ -177,12 +156,11 @@ export default {
   </div>
 </template>
 <style>
-
 .img_circle {
   width: 60%;
 }
-#boh{
+
+#boh {
   margin-top: 10px;
 }
-
 </style>
