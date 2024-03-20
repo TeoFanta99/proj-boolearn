@@ -22,23 +22,11 @@ export default {
       return `http://localhost:8000/storage/${teacher.cv_url}`;
     },
 
-    // funzione chiamata quando si clicca su un docente
-    riempiVet(id) {
-      this.reviews.forEach((element) => {
-        //console.log(element.teacher_id);
-        if (element.teacher_id == store.List.id) {
-          this.reviews = element;
-          console.log(this.reviews);
-        }
-      });
-    },
-
     getReviews() {
       axios
         .get(`http://127.0.0.1:8000/api/v1/review?teacher_id=${store.List.id}`)
         .then((response) => {
           this.reviews = response.data.reviews;
-          // this.riempiVet(this.reviews);
         })
         .catch((error) => {
           console.error("Errore durante la richiesta API:", error);
@@ -130,8 +118,8 @@ export default {
                 <ul>
                   <li v-for="review in reviews" :key="review.id">
                     <h5>{{ review.name }}</h5>
-                    <span>{{review.description}}</span>
-                    <br><br>
+                    <span>{{ review.description }}</span>
+                    <br /><br />
                   </li>
                 </ul>
               </div>
