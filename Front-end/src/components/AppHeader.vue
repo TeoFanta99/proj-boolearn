@@ -9,7 +9,7 @@ export default {
     <nav
       class="navbar navbar-expand-lg bg-body-tertiary d-flex justify-content-between h-100"
     >
-      <div class=" col-1 d-flex justify-content-start">
+      <div class="col-1 d-flex justify-content-start">
         <div class="gap-2 d-lg-flex d-md-none">
           <a href="http://localhost:8000/login" class="d-lg-block d-none"
             >Login</a
@@ -32,7 +32,7 @@ export default {
       </div>
       <!-- Off-canvas -->
       <div
-        class="offcanvas offcanvas-start offcanvas-lg d-lg-none "
+        class="offcanvas offcanvas-start offcanvas-lg d-lg-none"
         tabindex="-1"
         id="offcanvasRight"
         aria-labelledby="offcanvasRightLabel"
@@ -91,7 +91,7 @@ export default {
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="col-3 d-flex justify-content-end">
+      <div class="col-3 d-flex justify-content-center">
         <div class="collapse navbar-collapse d-lg-none col-3" id="navbarText">
           <ul
             class="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-center justify-content-lg-end"
@@ -157,9 +157,9 @@ header {
 .no_opacity {
   opacity: 0;
 }
-@media (min-width: 0px) and (max-width:990px){
-  .image{
-    background-image: url('../../public/BL1.svg');
+@media (min-width: 0px) and (max-width: 990px) {
+  .image {
+    background-image: url("../../public/BL1.svg");
     background-position: 100% 50%;
   }
 }
