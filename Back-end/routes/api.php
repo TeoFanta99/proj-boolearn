@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Api\ApiController;
+use App\Http\Controllers\Api\SponsorshipController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,6 +31,10 @@ Route::group(['prefix' => '/v1'], function(){
     Route :: get('review', [ ApiController :: class, 'reviews']);
 
     Route :: post('hgs', [ ApiController :: class, 'frontTeachers']);
+
+    Route::get('products',[SponsorshipController::class, 'index']);
+    Route :: get('orders/generate', [ SponsorshipController :: class, 'generate']);
+    Route :: post('orders/payment', [ SponsorshipController :: class, 'makePayments']);
    
     // Route :: get('technologies', [ApiController :: class, 'getTechnologies']);
 
