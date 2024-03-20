@@ -58,68 +58,10 @@ export default {
     },
 
     // funzione chiamata quando si clicca su un docente
-    riempiRec(number) {
-      console.log("valutazione: " + store.Rating);
-      console.log("materia: " + store.Subject);
-      console.log("Recensioni: almeno " + store.Review);
-      for (let i = 0; i < this.teachers.length - 1; i++) {
-        let rec = this.teachers[i].reviews;
-
-        if (rec.length >= store.Review) {
-          //console.log(rec);
-          //return rec;
-        }
-      }
-
-      let medie = [];
-
-      let medieN = [];
-
-      let ind = 0;
-      let val = 0;
-
-      let teacher = 0;
-
-      for (let i = 0; i < this.teachers.length; i++) {
-        let rec = this.teachers[i].ratings;
-
-        let Id_teacher = this.teachers[i].id;
-
-        if (Id_teacher != teacher) {
-          val = 0;
-
-          for (let j = 0; j < rec.length; j++) {
-            let recId = rec[j].id;
-
-            val += recId;
-          }
-
-          let FinalResult = val / rec.length;
-
-          medie[ind] = FinalResult;
-
-          ind++;
-        }
-      }
-
-      ind = 0;
-
-      for (let j = 0; j < medie.length; j++) {
-        let value = medie[j];
-
-        if (value >= store.Rating) {
-          medieN[ind] = value;
-
-          ind++;
-        }
-      }
-
-      console.log("medie corrette: " + medieN);
-
+    riempiRec() {
       // Utilizza Vue Router per navigare alla pagina 'filt' con l'ID della materia che mi interessa
       this.$router.push({
         name: "filt",
-        params: { id1: store.Subject, id2: store.Rating, id3: store.Review },
       });
     },
 
