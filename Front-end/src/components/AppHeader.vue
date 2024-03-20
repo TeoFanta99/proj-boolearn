@@ -59,12 +59,10 @@ export default {
           <!-- <span>BOOLEARN</span> -->
         </a>
         <a href="" class="d-none d-lg-block">
-          <div class="d-lg-flex justify-content-center logo-desktop">
-            <img
-              src="../../public/Crop_BooLEARN.svg"
-              alt="LOGO DESKTOP"
-              class="w-100 h-100 object-fit-contain"
-            />
+          <div class="d-lg-flex justify-content-center logo-desktop overflow-hidden">
+            <div class="image"></div>
+              
+            
           </div>
         </a>
       </div>
@@ -115,6 +113,19 @@ export default {
 <style lang="scss" scoped>
 @use "../styles/header.scss";
 @use "../styles/general.scss";
+.logo-desktop{
+  width: 200px; 
+  height: 100px;
+}
+.image{
+  background-image: url("/public/Crop_BooLEARN.svg");
+  width: 100%;
+  height: 100%;
+  background-size: 90%;
+  background-position: 200% 0%;
+  object-fit: cover;
+  background-repeat: no-repeat;
+}
 
 header{
   height: 100px;
