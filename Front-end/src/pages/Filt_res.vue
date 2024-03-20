@@ -86,6 +86,16 @@ export default {
     <div v-else>
       <h3 class="my-4">Nessun risultato trovato!</h3>
     </div>
+
+    <ul>
+      <li
+        v-for="teacher in teachers"
+        :key="teacher.id"
+        v-if="teacher.reviews.length >= params"
+      >
+        {{ teacher.name }} - Recensioni: {{ teacher.reviews.length }}
+      </li>
+    </ul>
   </div>
 </template>
 <style></style>

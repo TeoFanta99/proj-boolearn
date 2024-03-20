@@ -67,7 +67,7 @@ class ApiController extends Controller
             return response()->json(['messaggio' => 'Nessun insegnante trovato', 'teachers' => [],
         'subjects'=>$subjects]);
         } else {
-            return response()->json(['messaggio' => 'Insegnanti trovati', 'teachers' => $risultato,'subjects'=>$subjects]);
+            return response()->json(['messaggio' => 'Insegnanti trovati', 'teachers' => $risultato,'subjects'=>$subjects,'reviews'=>$reviews,'ratings'=>$ratings]);
         }
     }
 

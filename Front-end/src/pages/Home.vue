@@ -14,6 +14,7 @@ export default {
       store,
       teachers: [],
       subjects: [],
+      ratings: [],
       SubjectSelect: [],
       teacher: "",
     };
@@ -37,6 +38,10 @@ export default {
         .then((response) => {
           this.teachers = response.data.teachers;
           this.subjects = response.data.subjects;
+          store.recensioni = response.data.reviews;
+          this.riempiRec();
+
+          this.ratings = response.data.ratings;
         })
         .catch((error) => {
           console.error("Errore durante la richiesta API:", error);
@@ -53,10 +58,24 @@ export default {
       });
     },
 
-    FixSubject(subject) {
-      console.log(subject);
+    // funzione chiamata quando si clicca su un docente
+    riempiRec(number) {
+      for (let i = 0; i < this.teachers.length; i++) {
+        let rec = this.teachers[i].reviews;
+
+        if (number >= rec.length) {
+          console.log(rec);
+        }
+      }
+    },
+
+    FixSubject() {
+      console.log(store.Subject);
+      console.log(store.Rating);
+      console.log(store.Review);
+
       // Ottieni l'ID della materia selezionata
-      const subjectId = this.store.searchText;
+      const subjectId = this.store.Review;
 
       // Utilizza Vue Router per navigare alla pagina 'filt' con l'ID della materia che mi interessa
       //this.$router.push({ name: "filt", params: { id: subjectId } });
@@ -129,7 +148,7 @@ export default {
           v-model="store.Subject"
           class="form-select w-25"
           id="selected-Subject"
-          @change="FixSubject(store.Subject)"
+          @change="FixSubject()"
         >
           <option
             v-for="subject in subjects"
@@ -147,14 +166,10 @@ export default {
           v-model="store.Rating"
           class="form-select w-25"
           id="selected-Rating"
-          @change="FixSubject(store.Rating)"
+          @change="FixSubject()"
         >
-          <option
-            v-for="subject in subjects"
-            :key="subject.id"
-            :value="subject.id"
-          >
-            {{ subject.name }}
+          <option v-for="rating in ratings" :key="rating.id" :value="rating.id">
+            {{ rating.name }}
           </option>
         </select>
       </div>
@@ -165,16 +180,26 @@ export default {
           v-model="store.Review"
           class="form-select w-25"
           id="selected-Review"
-          @change="FixSubject(store.Review)"
+          @change="FixSubject()"
         >
-          <option
-            v-for="subject in subjects"
-            :key="subject.id"
-            :value="subject.id"
           >
-            {{ subject.name }}
-          </option>
+          <option value="5">min 5</option>
+          <option value="15">min 15</option>
+          <option value="20">min 20</option>
+          <!-- Aggiungi altre condizioni v-if per le altre opzioni -->
         </select>
+
+        <div v-if="store.Review === '5'">
+          <ul>
+            <li
+              v-for="teacher in teachers"
+              :key="teacher.id"
+              v-if="teacher.reviews.length >= 5"
+            >
+              {{ teacher.name }} - Recensioni: {{ teacher.reviews.length }}
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
 
