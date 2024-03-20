@@ -7,7 +7,7 @@ export default {
 <template>
   <header>
     <nav
-      class="navbar navbar-expand-lg bg-body-tertiary d-flex justify-content-between"
+      class="navbar navbar-expand-lg bg-body-tertiary d-flex justify-content-between h-100"
     >
       <div class="d-flex gap-2">
         <a href="http://localhost:8000/login" class="d-lg-block d-none"
@@ -116,6 +116,14 @@ export default {
 @use "../styles/header.scss";
 @use "../styles/general.scss";
 
+header{
+  height: 100px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 99999;
+}
 #navbarText {
   flex-grow: 0;
 }

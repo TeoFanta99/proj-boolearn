@@ -57,7 +57,9 @@ export default {
 <style scoped lang="scss">
 
     footer {
+
         min-height: 150px;
+        
         color: #d8d8d8;
         background-color: #2B2D31;
 

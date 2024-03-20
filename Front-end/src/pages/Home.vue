@@ -1,9 +1,13 @@
 <script>
 import axios from "axios";
 import { store } from "../store";
+import jumbo from "./jumbo.vue";
 
 export default {
   name: "Home",
+  components:{
+    jumbo
+  },
 
   data() {
     return {
@@ -67,18 +71,47 @@ export default {
   },
 
   mounted() {
+    
+    const boh = document.getElementById("boh");
+    boh.style.opacity = "0";
+    setTimeout(() => {
+      boh.style.opacity = "1";
+      boh.classList.add("fade-in");
 
-    // Chiamata iniziale per caricare i dati
+      // Chiamata iniziale per caricare i dati
     this.SearchProf();
+    }, 2300);
+
+    const text = document.querySelector(".sec-text");
+
+    const textLoad = () => {
+      setTimeout(() => {
+        text.textContent = "HTML";
+        text.style.color = "#e5532d";
+      }, 0);
+      setTimeout(() => {
+        text.textContent = "CSS";
+        text.style.color = "#254bdd";
+      }, 4500);
+      setTimeout(() => {
+        text.textContent = "JS";
+        text.style.color = "#efd81d";
+      }, 9000);
+    };
+    textLoad();
+    setInterval(textLoad, 13500);
+
+    
   },
 };
 </script>
 
-<template>
-  
-  <div class="container" id="main-container">
-    <div class="row align-items-center">
-      <!-- <div class="col-12 col-md-4">
+<template class="bg-light">
+  <jumbo id="boh"/>
+
+  <div class="container">
+    <!-- <div class="row align-items-center">
+      <div class="col-12 col-md-4">
         <label for="search">Ricerca</label>
         <input
           class="form-control"
@@ -89,24 +122,23 @@ export default {
           @keyup.enter="SearchProf(store.SearchT)"
         />
       </div> -->
-      <!-- CHECKBOX -->
-      <div class="col-12 col-md-8 align-self-end pb-2">
-        <h4>Scegli la materia</h4>
-        <select
-          v-model="store.searchText"
-          class="form-select w-25"
-          id="selected-searchText"
-          @change="FixSubject(store.searchText)"
+    <!-- SELECT -->
+    <div class="col-12 col-md-8 align-self-end pb-2">
+      <h4>Scegli la materia</h4>
+      <select
+        v-model="store.searchText"
+        class="form-select w-25"
+        id="selected-searchText"
+        @change="FixSubject(store.searchText)"
+      >
+        <option
+          v-for="subject in subjects"
+          :key="subject.id"
+          :value="subject.id"
         >
-          <option
-            v-for="subject in subjects"
-            :key="subject.id"
-            :value="subject.id"
-          >
-            {{ subject.name }}
-          </option>
-        </select>
-      </div>
+          {{ subject.name }}
+        </option>
+      </select>
     </div>
 
     <div v-if="teachers.length > 0">
@@ -149,4 +181,8 @@ export default {
 .img_circle {
   width: 60%;
 }
+#boh{
+  margin-top: 10px;
+}
+
 </style>
