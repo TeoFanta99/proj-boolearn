@@ -40,6 +40,7 @@ class SponsorshipController extends Controller
             'amount' => $product->price,
             'paymentMethodNonce' => $request->token,
             'options' => [
+                'verifyCard' => true,
                 'submitForSettlement' => true
             ]
         ]);
