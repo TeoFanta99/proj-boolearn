@@ -109,7 +109,7 @@ class ApiController extends Controller
         $min_number_review = $request->input('review');
 
        
-        // solo in caso sia stato selezionato la ricerca per numero recensioni
+        // REVIEW = YES  ||||| RATING + SUBJECT = NO
         if(!empty ($min_number_review) && empty ($subject_id) && empty ($rating_id)){
 
             $subjects= Subject::all();
@@ -118,10 +118,10 @@ class ApiController extends Controller
             //Conta il numero di recensioni per insegnante e mi restituisce gli insegnanti con le materie che possiedono un numero di recensioni maggiore o uguale a quello richiesto sotto forma di array
             $teachers = Teacher::has('reviews', '>=', $min_number_review)->with('user','subjects','ratings')->get();
           
-            
         }
 
-         // solo in caso sia stato selezionato la materia
+
+         // SUBJECT = YES  ||||| RATING + REVIEWS = NO
         else if(empty ($min_number_review) && !empty ($subject_id) && empty ($rating_id)){
 
             $subjects= Subject::find($subject_id);
@@ -130,24 +130,16 @@ class ApiController extends Controller
             
         }
 
-        //  // solo in caso sia stato selezionato la votazione
-        // else if(empty ($min_number_review) && empty ($subject_id) && !empty ($rating_id)){
-
-        //     $subjects= Subject::all();
-        //     $ratings= Rating::all();
-            
-           
-        // }
     
-        // solo in caso sia stato selezionato la materia e la ricerca per numero recensioni
+        // SUBJECT + REVIEW = YES  ||||| RATING = NO
         else if(!empty ($min_number_review) && !empty ($subject_id) && empty ($rating_id)){
 
-                $subjects= Subject::find($subject_id);
+            $subjects= Subject::find($subject_id);
 
-                //Conta il numero di recensioni per insegnante e mi restituisce gli insegnanti con le materie che possiedono un numero di recensioni maggiore o uguale a quello richiesto sotto forma di array
-                $teachers = Teacher::has('reviews', '>=', $min_number_review)->with('user')->get();
-                $teachers = $subjects->teacher()->with('user','subjects')->get();
-                
+            //Conta il numero di recensioni per insegnante e mi restituisce gli insegnanti con le materie che possiedono un numero di recensioni maggiore o uguale a quello richiesto sotto forma di array
+            $teachers = Teacher::has('reviews', '>=', $min_number_review)->with('user')->get();
+            $teachers = $subjects->teacher()->with('user','subjects')->get();
+            
         }
 
         // solo in caso sia stato selezionato la ricerca per numero recensioni

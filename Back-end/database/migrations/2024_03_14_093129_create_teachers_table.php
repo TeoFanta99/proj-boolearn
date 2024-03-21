@@ -22,9 +22,17 @@ return new class extends Migration {
             $table->string('city')->nullable(false);
             $table->string('phone_number')->unique();
             $table->string('motto')->nullable();
+            $table->decimal('rating_avg', 2, 1)->nullable();
 
             $table->timestamps();
         });
+
+        // Dopo la creazione della tabella, aggiorna gli insegnanti esistenti con la valutazione media
+        DB::table('teachers')
+        ->update([
+            'rating_avg' => DB::raw('AVG(ratings.rating)')
+        ])
+        ->join('ratings', 'ratings.teacher_id', '=', 'teachers.id');
     }
 
     /**
