@@ -58,7 +58,7 @@ export default {
           </div>
           <h6>Teacher</h6>
 
-          <div class="col-6">
+          <div class="col-12">
             <h5 class="mt-4 border-bottom">Materie</h5>
             <div class="d-flex flex-column">
               <div class="d-flex gap-3 align-items-center">
@@ -71,7 +71,7 @@ export default {
             </div>
           </div>
 
-          <div class="col-6">
+          <div class="col-12">
             <h5 class="mt-4 border-bottom">Biografia</h5>
             <div class="d-flex flex-column">
               <div class="d-flex gap-3 align-items-center">
@@ -79,7 +79,7 @@ export default {
               </div>
             </div>
           </div>
-          <div class="col-6">
+          <div class="col-12">
             <h5 class="mt-2 border-bottom">Anagrafica</h5>
             <div class="d-flex flex-column">
               <div class="d-flex gap-2 align-items-center">
@@ -92,7 +92,7 @@ export default {
               </div>
             </div>
           </div>
-          <div class="col-6">
+          <div class="col-12">
             <h5 class="mt-4 border-bottom">Contatti</h5>
             <div class="d-flex flex-column">
               <div class="d-flex gap-5">
@@ -105,7 +105,7 @@ export default {
               </div>
             </div>
           </div>
-          <div class="col-6">
+          <div class="col-12">
             <h5 class="mt-4 border-bottom">Motto</h5>
             <div class="d-flex flex-column">
               <div class="d-flex gap-5">
@@ -117,10 +117,10 @@ export default {
         </div>
         <div class="col-4 border border-danger d-flex flex-column align-items-center">
           <h3>Recensioni</h3>
-          <div class="review-container mt-4 border border-primary">
-            Titolo Recensione: <b>{{ store.Review[0].name }}</b>
-            <br>
-            Descrizione bla bla bla
+          <div v-for="review in reviews" :key="review.id" class="review-container mt-4 border border-primary">
+            <h5>{{ review.name }}</h5>
+            <span>{{ review.description }}</span>
+            <br /><br />
           </div>
         </div>
 
@@ -141,5 +141,6 @@ export default {
 
 .review-container {
   width: 100%;
+  height: 200px;
 }
 </style>
