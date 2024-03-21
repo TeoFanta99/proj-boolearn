@@ -32,7 +32,7 @@ export default {
       </div>
       <form method="post">
         <h3>CONTATTACI SUBITO!</h3>
-        <div class="row">
+        <div class="row justify-content-center">
           <div class="col-md-6">
             <div class="form-group mb-3">
               <input type="text" name="txtName" class="form-control" placeholder="NOME *" value="" />
@@ -43,14 +43,14 @@ export default {
             <div class="form-group  mb-3">
               <input type="text" name="txtPhone" class="form-control" placeholder="EMAIL *" value="" />
             </div>
-            <div class="form-group mb-3">
-              <input type="submit" name="btnSubmit" class="btnContact" value="INVIA MESSAGGIO" />
+            <div class="col-md-12  mb-3">
+              <div class="form-group">
+                <textarea name="txtMsg" class="form-control" placeholder="MESSAGGIO *"
+                  style="width: 100%; height: 150px;"></textarea>
+              </div>
             </div>
-          </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              <textarea name="txtMsg" class="form-control" placeholder="MESSAGGIO *"
-                style="width: 100%; height: 150px;"></textarea>
+            <div class="form-group d-flex justify-content-center mb-3">
+              <input type="submit" name="btnSubmit" class="btnContact" value="INVIA MESSAGGIO" />
             </div>
           </div>
         </div>

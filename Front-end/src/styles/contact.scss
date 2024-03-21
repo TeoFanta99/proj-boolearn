@@ -3,9 +3,6 @@
 }
 
 .contact-form {
-    background: #fff;
-    margin-top: 10%;
-    margin-bottom: 5%;
     width: 100%;
 }
 
@@ -20,7 +17,7 @@
 .contact-image img {
     border-radius: 6rem;
     width: 100px;
-    margin-top: -3%;
+    margin-top: 10%;
     transform: rotate(29deg);
 }
 
@@ -36,11 +33,11 @@
     margin-bottom: 8%;
     margin-top: -10%;
     text-align: center;
-    color: #0062cc;
+    color: black;
 }
 
 .contact-form .btnContact {
-    width: 50%;
+    width: 250px;
     border: none;
     border-radius: 1rem;
     padding: 1.5%;
