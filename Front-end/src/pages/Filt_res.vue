@@ -92,7 +92,30 @@ export default {
         }
       }
 
-      console.log("medie corrette: " + medieN);
+      this.teachers = this.teachers.filter(teacher => {
+        // Verifica se l'insegnante ha tutte le recensioni necessarie
+        if (teacher.reviews.length < store.Review) {
+          return false; // Salta questo insegnante se non ha abbastanza recensioni
+        }
+
+        // Verifica se l'insegnante ha la valutazione richiesta
+        // const averageRating = teacher.ratings.reduce((total, rating) => total + rating.value, 0) / teacher.ratings.length;
+        // if (averageRating < store.Rating) {
+        //   return false; // Salta questo insegnante se la valutazione media è inferiore al rating richiesto
+        // }
+
+        // Verifica se l'insegnante insegna la materia selezionata
+        if (!teacher.subjects.includes(store.Subject)) {
+          return false; // Salta questo insegnante se non insegna la materia selezionata
+        }
+
+        // Se l'insegnante ha superato tutti i controlli, includilo nei risultati finali
+        return true;
+      });
+
+      console.log("Insegnanti che soddisfano tutti e tre i filtri:", this.teachers);
+
+
 
       // Utilizza Vue Router per navigare alla pagina 'filt' con l'ID della materia che mi interessa
       this.$router.push({
@@ -122,25 +145,12 @@ export default {
   <div class="container">
     <div v-if="teachers.length > 0">
       <div class="row mt-4">
-        <div
-          class="col-12 col-md-4 col-lg-3 p-2"
-          v-for="teacher in teachers"
-          :key="teacher.id"
-        >
-          <RouterLink
-            :to="{ name: 'show', params: { id: teacher.user.name } }"
-            @click="riempiVet(teacher.id)"
-            class="text-decoration-none"
-          >
+        <div class="col-12 col-md-4 col-lg-3 p-2" v-for="teacher in teachers" :key="teacher.id">
+          <RouterLink :to="{ name: 'show', params: { id: teacher.user.name } }" @click="riempiVet(teacher.id)"
+            class="text-decoration-none">
             <div class="card pt-3 border-0 shadow">
-              <div
-                class="d-flex justify-content-center align-items-center img_circle mx-auto height_img_query"
-              >
-                <img
-                  class="w-100 h-100 rounded-circle"
-                  :src="getImageUrl(teacher)"
-                  alt=""
-                />
+              <div class="d-flex justify-content-center align-items-center img_circle mx-auto height_img_query">
+                <img class="w-100 h-100 rounded-circle" :src="getImageUrl(teacher)" alt="" />
               </div>
               <div class="card-body">
                 <h4>{{ teacher.user.name }} {{ teacher.user.lastname }}</h4>
