@@ -22,27 +22,27 @@ export default {
       let subject = store.Subject;
       let rating = store.Rating;
       let review = store.Review;
-      let params = this.$route.params.id;
-      console.log(params);
+      //let params = this.$route.params.medieN;
+      //console.log(params);
       // Ottieni i parametri di query
-      // axios
-      //   .get(
-      //     "http://127.0.0.1:8000/api/v1/result?subject=" +
-      //       subject +
-      //       "&rating=" +
-      //       rating +
-      //       "&review=" +
-      //       review
-      //   )
-      //   .then((response) => {
-      //     this.teachers = response.data.teachers;
-      //     console.log(this.teachers);
+      axios
+        .get(
+          "http://127.0.0.1:8000/api/v1/result?subject=" +
+            subject +
+            "&rating=" +
+            rating +
+            "&review=" +
+            review
+        )
+        .then((response) => {
+          this.teachers = response.data.teachers;
+          console.log(this.teachers);
 
-      //     console.log(store.Subject);
-      //   })
-      //   .catch((error) => {
-      //     console.error("Errore durante la richiesta API:", error);
-      //   });
+          console.log(store.Subject);
+        })
+        .catch((error) => {
+          console.error("Errore durante la richiesta API:", error);
+        });
     },
 
     // funzione chiamata quando si clicca su un docente

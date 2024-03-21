@@ -69,9 +69,7 @@ export default {
       }
 
       let medie = [];
-
       let medieN = [];
-
       let ind = 0;
       let val = 0;
 
@@ -107,9 +105,13 @@ export default {
       console.log("medie corrette: " + medieN);
 
       // Utilizza Vue Router per navigare alla pagina 'filt' con l'ID della materia che mi interessa
+      // this.$router.push({
+      //   name: "filt",
+      //   params: { medieN: medieN },
+      // });
+
       this.$router.push({
         name: "filt",
-        params: { id: medieN },
       });
     },
   },
@@ -127,6 +129,7 @@ export default {
     store.Subject = 0;
     store.Rating = 0;
     store.Review = 0;
+    //let medieN = [];
 
     const boh = document.getElementById("boh");
     boh.style.opacity = "0";

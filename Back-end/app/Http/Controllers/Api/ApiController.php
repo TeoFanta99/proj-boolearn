@@ -155,7 +155,11 @@ class ApiController extends Controller
 
                 //Conta il numero di recensioni per insegnante e mi restituisce gli insegnanti con le materie che possiedono un numero di recensioni maggiore o uguale a quello richiesto sotto forma di array
                 $teachers = Teacher::has('reviews', '>=', $min_number_review)->with('user')->get();
-                $teachers = $subjects->teacher()->with('user','subjects')->get();
+                
+                foreach ($teachers as $teacher) {
+
+                    $teachers = $subjects->teacher()->with('user','subjects')->get();
+                }
                 
         }
 
