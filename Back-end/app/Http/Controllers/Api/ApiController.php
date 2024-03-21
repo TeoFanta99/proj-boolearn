@@ -8,6 +8,7 @@ use App\Models\Teacher;
 use App\Models\Review;
 use App\Models\Rating;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
 
 class ApiController extends Controller
 {
@@ -130,14 +131,22 @@ class ApiController extends Controller
             
         }
 
-        //  // solo in caso sia stato selezionato la votazione
-        // else if(empty ($min_number_review) && empty ($subject_id) && !empty ($rating_id)){
+         // solo in caso sia stato selezionato la votazione
+        else if(empty ($min_number_review) && empty ($subject_id) && !empty ($ratings)){
 
-        //     $subjects= Subject::all();
-        //     $ratings= Rating::all();
-            
+            $subjects= Subject::all();
+
+            $result = [];
            
-        // }
+            foreach ($ratings as $rating) {
+
+                $teacher= Teacher::find($rating)->with('user','subjects')->get();
+
+                $result [] = $teacher;
+            }
+            
+            
+        }
     
         // solo in caso sia stato selezionato la materia e la ricerca per numero recensioni
         else if(!empty ($min_number_review) && !empty ($subject_id) && empty ($rating_id)){
@@ -150,26 +159,16 @@ class ApiController extends Controller
                 
         }
 
-        // solo in caso sia stato selezionato la ricerca per numero recensioni
-        // if(!empty ($subject_id )){
-        //     //Conta il numero di recensioni per insegnante e mi restituisce gli insegnanti con le materie che possiedono un numero di recensioni maggiore o uguale a quello richiesto sotto forma di array
-        //     $teachersWithReviews = Teacher::has('reviews', '>=', $min_number_review)->with('subjects')->get();
-        // }
-    
-        
-
-        //$teachers = $subjects->teacher()->with('user','subjects','prova')->get();
-
-        //$reviews = Review::where('teacher_id', $review_id)->get();
-
-        //$teachers = Teacher::with('user', 'subjects', 'risultato', 'ratings')->get();
-
-        
-        return response()->json([
-            'status' => 'success',
-            'message' => 'sono andata al front_end',
-            'teachers' => $teachers,
-        ]);
+        if (empty ($teachers)) {
+            return response()->json(['messaggio' => 'sono tornato con rating', 'teachers' => $result,]);
+        }
+         else {
+            return response()->json([
+                'status' => 'success',
+                'message' => 'sono andata al front_end',
+                'teachers' => $teachers,
+            ]);
+        }
 
     }
 
