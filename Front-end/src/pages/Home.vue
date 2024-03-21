@@ -87,6 +87,11 @@ export default {
   },
 
   mounted() {
+    //setto a zero tutte le variabili dello store
+    store.Subject = 0;
+    store.Rating = 0;
+    store.Review = 0;
+
     const boh = document.getElementById("boh");
     boh.style.opacity = "0";
     setTimeout(() => {

@@ -36,6 +36,8 @@ export default {
         .then((response) => {
           this.teachers = response.data.teachers;
           console.log(this.teachers);
+
+          console.log(store.Subject);
         })
         .catch((error) => {
           console.error("Errore durante la richiesta API:", error);
