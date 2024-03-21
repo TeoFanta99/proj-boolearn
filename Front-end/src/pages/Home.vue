@@ -59,60 +59,24 @@ export default {
 
     // funzione chiamata quando si clicca su un docente
     riempiRec() {
-      for (let i = 0; i < this.teachers.length - 1; i++) {
-        let rec = this.teachers[i].reviews;
-
-        if (rec.length >= store.Review) {
-          //console.log(rec);
-          //return rec;
-        }
-      }
-
-      let medie = [];
-      let medieN = [];
-      let ind = 0;
-      let val = 0;
-
-      let teacher = 0;
-      let FinalResult = 0;
-
-      for (let i = 0; i < this.teachers.length; i++) {
-        let rec = this.teachers[i].ratings;
-
-        let Id_teacher = this.teachers[i].id;
-
-        if (Id_teacher != teacher) {
-          val = 0;
-
-          for (let j = 0; j < rec.length; j++) {
-            let recId = rec[j].id;
-
-            val += recId;
-          }
-
-          FinalResult = val / rec.length;
-
-          console.log(FinalResult);
-
-          if (FinalResult >= store.Rating) {
-            medieN[ind] = Id_teacher;
-
-            ind++;
-          }
-        }
-      }
-
-      console.log("medie corrette: " + medieN);
-
-      // Utilizza Vue Router per navigare alla pagina 'filt' con l'ID della materia che mi interessa
-      // this.$router.push({
-      //   name: "filt",
-      //   params: { medieN: medieN },
-      // });
-
-      this.$router.push({
-        name: "filt",
-      });
+      const dataToSend = {
+        subject : store.Subject,
+        rating: store.Rating,
+        review : store.Review,
+      };
+      axios
+        .post("http://127.0.0.1:8000/api/v1/result", dataToSend)
+        .then((response) => {
+          // this.teachers = response.data.teachers;
+          console.log(response.data);
+          // this.subjects = response.data.subjects;
+          // store.recensioni = response.data.reviews;
+          // this.ratings = response.data.ratings;
+          // console.log(this.teachers);
+        })
+        .catch((error) => {
+          console.error("Errore durante la richiesta API:", error);
+        });
     },
   },
 

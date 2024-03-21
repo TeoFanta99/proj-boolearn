@@ -38,13 +38,13 @@ class ApiController extends Controller
 
     public function frontTeachers(Request $request)
     {
-        
+
         $parametro = $request->input('nome_cognome');
         $materie = $request->input('subjects');
-        
-        $subjects= Subject::all();
-        $reviews= Review::all();
-        $ratings= Rating::all();
+
+        $subjects = Subject::all();
+        $reviews = Review::all();
+        $ratings = Rating::all();
         $teachers = Teacher::with('user', 'subjects', 'reviews', 'ratings')->get();
         $risultato = [];
 
@@ -65,30 +65,35 @@ class ApiController extends Controller
         }
 
         if (empty ($risultato)) {
-            return response()->json(['messaggio' => 'Nessun insegnante trovato', 'teachers' => [],
-        'subjects'=>$subjects]);
+            return response()->json([
+                'messaggio' => 'Nessun insegnante trovato',
+                'teachers' => [],
+                'subjects' => $subjects
+            ]);
         } else {
-            return response()->json(['messaggio' => 'Insegnanti trovati', 'teachers' => $risultato,'subjects'=>$subjects,'reviews'=>$reviews,'ratings'=>$ratings]);
+            return response()->json(['messaggio' => 'Insegnanti trovati', 'teachers' => $risultato, 'subjects' => $subjects, 'reviews' => $reviews, 'ratings' => $ratings]);
         }
     }
 
-    public function test(Request $request){
+    public function test(Request $request)
+    {
 
         $id = $request->input('subjects');
 
-        $subjects= Subject::find($id);
+        $subjects = Subject::find($id);
 
-        $teachers = $subjects->teacher()->with('user','subjects')->get();
+        $teachers = $subjects->teacher()->with('user', 'subjects')->get();
 
         return response()->json([
             'status' => 'success',
             'message' => 'sono andata al front_end',
-            'teachers'=>$teachers,
+            'teachers' => $teachers,
         ]);
 
     }
 
-    public function reviews(Request $request){
+    public function reviews(Request $request)
+    {
 
         $teacher_id = $request->input('teacher_id');
 
@@ -103,77 +108,52 @@ class ApiController extends Controller
 
     }
 
-    public function results(Request $request){
-
+    public function results(Request $request)
+    {
         $subject_id = $request->input('subject');
         $rating_id = $request->input('rating');
         $min_number_review = $request->input('review');
 
+
        
-        // solo in caso sia stato selezionato la ricerca per numero recensioni
-        if(!empty ($min_number_review) && empty ($subject_id) && empty ($rating_id)){
+        // Ottieni tutti i teachers con le relazioni pre-caricate
+        $teachers = Teacher::with(['subjects', 'ratings', 'reviews'])->get();
 
-            $subjects= Subject::all();
-            $ratings= Rating::all();
-            
-            //Conta il numero di recensioni per insegnante e mi restituisce gli insegnanti con le materie che possiedono un numero di recensioni maggiore o uguale a quello richiesto sotto forma di array
-            $teachers = Teacher::has('reviews', '>=', $min_number_review)->with('user','subjects','ratings')->get();
-          
-            
-        }
+        // Array per memorizzare i risultati filtrati
+        $filteredTeachers = [];
 
-         // solo in caso sia stato selezionato la materia
-        else if(empty ($min_number_review) && !empty ($subject_id) && empty ($rating_id)){
-
-            $subjects= Subject::find($subject_id);
-
-            $teachers = $subjects->teacher()->with('user','subjects')->get();
-            
-        }
-
-         // solo in caso sia stato selezionato la votazione
-        else if(empty ($min_number_review) && empty ($subject_id) && !empty ($ratings)){
-
-            $subjects= Subject::all();
-
-            $result = [];
-           
-            foreach ($ratings as $rating) {
-
-                $teacher= Teacher::find($rating)->with('user','subjects')->get();
-
-                $result [] = $teacher;
-            }
-            
-            
-        }
-    
-        // solo in caso sia stato selezionato la materia e la ricerca per numero recensioni
-        else if(!empty ($min_number_review) && !empty ($subject_id) && empty ($rating_id)){
-
-                $subjects= Subject::find($subject_id);
-
-                //Conta il numero di recensioni per insegnante e mi restituisce gli insegnanti con le materie che possiedono un numero di recensioni maggiore o uguale a quello richiesto sotto forma di array
-                $teachers = Teacher::has('reviews', '>=', $min_number_review)->with('user')->get();
-                
-                foreach ($teachers as $teacher) {
-
-                    $teachers = $subjects->teacher()->with('user','subjects')->get();
+        foreach ($teachers as $teacher) {
+            // Controlla se il teacher ha tutte le materie specificate, se il parametro subject_id è presente
+            if ($subject_id !== 0) {
+                if (!$teacher->subjects->pluck('id')->contains($subject_id)) {
+                    continue;
                 }
-                
+            }
+
+            // Filtraggio per rating
+            if ($rating_id !== 0) {
+                if (!$teacher->ratings->pluck('id')->contains($rating_id)) {
+                    continue;
+                }
+            }
+
+            // Filtraggio per numero minimo di recensioni
+            if ($min_number_review !== 0) {
+                if ($teacher->reviews->count() < $min_number_review) {
+                    continue;
+                }
+            }
+
+            // Nessun parametro di filtro specificato
+            if ($subject_id === 0 && $rating_id === 0 && $min_number_review === 0) {
+                $filteredTeachers[] = $teacher;
+            }
+
+            // Se il teacher supera tutti i filtri, aggiungilo ai risultati filtrati
+            $filteredTeachers[] = $teacher;
         }
 
-        if (empty ($teachers)) {
-            return response()->json(['messaggio' => 'sono tornato con rating', 'teachers' => $result,]);
-        }
-         else {
-            return response()->json([
-                'status' => 'success',
-                'message' => 'sono andata al front_end',
-                'teachers' => $teachers,
-            ]);
-        }
-
+        // Invia una risposta JSON contenente i teachers filtrati
+        return response()->json($filteredTeachers);
     }
-
- }
+}
