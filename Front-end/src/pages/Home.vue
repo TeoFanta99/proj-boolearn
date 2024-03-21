@@ -59,15 +59,18 @@ export default {
     // Funzione che filtra i TEACHERS applicando i filtri
     getResults() {
 
-      // FILTRO PER SUBJECTS
+      //////////////// FILTRO PER SUBJECTS
 
       // Ottieni l'ID della materia selezionata
       const subjectId = this.store.Subject;
       console.log(subjectId);
 
+      // Verifico quali Teacher hanno il "subjectID" selezionato 
 
 
-      // FILTRO PER RATINGS
+
+
+      //////////////// FILTRO PER RATINGS
 
       // Ottieni l'ID della materia selezionata
       const ratingId = this.store.Rating;
@@ -76,7 +79,7 @@ export default {
 
 
 
-      // FILTRO PER REVIEWS
+      //////////////// FILTRO PER REVIEWS
 
       // Ottieni l'ID della materia selezionata
       const reviewId = this.store.Review;
