@@ -1,4 +1,4 @@
-<script >
+<script>
 export default {
     name: 'AppFooter',
 }
@@ -25,12 +25,14 @@ export default {
                     </li>
                 </ul>
             </div>
-            <div class="ms_col col-xs-12 col-sm-12 col-md-4 d-flex flex-column justify-content-center align-items-center">
+            <div
+                class="ms_col col-xs-12 col-sm-12 col-md-4 d-flex flex-column justify-content-center align-items-center">
                 <span class="footer-address">BooLearn Inc.</span>
                 <span class="footer-address">61 W 47th St, New York, NY 10036</span>
                 <span class="footer-address">Stati Uniti</span>
             </div>
-            <div class="ms_col col-xs-12 col-sm-12 col-md-4 d-flex flex-column justify-content-center align-items-around">
+            <div
+                class="ms_col col-xs-12 col-sm-12 col-md-4 d-flex flex-column justify-content-center align-items-around">
                 <ul class="d-flex justify-content-around">
                     <li>
                         <a href="#" class="social-link">
@@ -55,47 +57,45 @@ export default {
 </template>
 
 <style scoped lang="scss">
+footer {
+    min-height: 150px;
+    color: #d8d8d8;
+    background-color: #2B2D31;
 
-    footer {
-        min-height: 150px;
-        color: #d8d8d8;
-        background-color: #2B2D31;
+    .row {
+        width: 90%;
 
-        .row {
-            width: 90%;
+        .ms_col {
+            border: 1px solid #d8d8d8;
+            margin-top: 50px;
 
-            .ms_col {
-                border: 1px solid #d8d8d8;
-                margin-top: 50px;
-                
-                ul {
-                    list-style: none;
+            ul {
+                list-style: none;
 
-                    li {
-                        margin-top: 10px;
+                li {
+                    margin-top: 10px;
 
-                        a {
-                            text-decoration: none;
-                            color: #d8d8d8;
-                        }
-                    }
-
-                    .internal-link:hover {
-                        color: white;
-                        font-weight: bold;
+                    a {
+                        text-decoration: none;
+                        color: #d8d8d8;
                     }
                 }
 
-                img {
-                    width: 100%;
-                    height: 50px;
+                .internal-link:hover {
+                    color: white;
+                    font-weight: bold;
                 }
+            }
 
-                .footer-address {
-                    display: block;
-                }
+            img {
+                width: 100%;
+                height: 50px;
+            }
+
+            .footer-address {
+                display: block;
             }
         }
     }
-
+}
 </style>

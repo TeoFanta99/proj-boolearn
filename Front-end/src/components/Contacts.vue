@@ -60,6 +60,7 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+@use "../styles/header.scss";
 //Scss relativo alla sola sezione di header
 @use "../styles/partials/variables" as *;
 @use "../styles/contact.scss";
