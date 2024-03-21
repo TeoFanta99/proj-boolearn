@@ -18,7 +18,7 @@ export default {
       return `http://localhost:8000/storage/${teacher.image_url}`;
     },
 
-    FixSubject() {
+    getResults() {
       // Ottieni i parametri di query
       // axios
       //   .get(
@@ -93,11 +93,6 @@ export default {
       }
 
       console.log("medie corrette: " + medieN);
-
-      // Utilizza Vue Router per navigare alla pagina 'filt' con l'ID della materia che mi interessa
-      this.$router.push({
-        name: "filt",
-      });
     },
 
     // funzione chiamata quando si clicca su un docente
@@ -113,7 +108,7 @@ export default {
   },
   mounted() {
     // Chiamata iniziale per caricare i dati
-    this.FixSubject();
+    this.getResults();
   },
 };
 </script>
