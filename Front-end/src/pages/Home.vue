@@ -40,7 +40,6 @@ export default {
           this.subjects = response.data.subjects;
           store.recensioni = response.data.reviews;
           this.ratings = response.data.ratings;
-          console.log(this.teachers);
         })
         .catch((error) => {
           console.error("Errore durante la richiesta API:", error);
@@ -62,12 +61,26 @@ export default {
 
       // FILTRO PER SUBJECTS
 
+      // Ottieni l'ID della materia selezionata
+      const subjectId = this.store.Subject;
+      console.log(subjectId);
+
+
 
       // FILTRO PER RATINGS
+
+      // Ottieni l'ID della materia selezionata
+      const ratingId = this.store.Rating;
+      console.log(ratingId);
+
+
 
 
       // FILTRO PER REVIEWS
 
+      // Ottieni l'ID della materia selezionata
+      const reviewId = this.store.Review;
+      console.log(reviewId);
 
     }
   },
@@ -117,23 +130,12 @@ export default {
   <jumbo id="boh" />
 
   <div class="container">
-    <!-- <div class="row align-items-center">
-      <div class="col-12 col-md-4">
-        <label for="search">Ricerca</label>
-        <input
-          class="form-control"
-          type="text"
-          placeholder="Cerca un insegnante"
-          aria-label="Search"
-          v-model="store.SearchT"
-          @keyup.enter="SearchProf(store.SearchT)"
-        />
-      </div> -->
-    <!-- SELECT -->
+
     <form class="d-flex">
+
+      <!-- SUBJECTS -->
       <div class="col-12 col-md-4 align-self-end pb-2">
         <h4>Scegli la materia</h4>
-
         <select v-model="store.Subject" class="form-select w-25" id="selected-Subject">
           <option v-for="subject in subjects" :key="subject.id" :value="subject.id">
             {{ subject.name }}
@@ -141,6 +143,7 @@ export default {
         </select>
       </div>
 
+      <!-- RATINGS -->
       <div class="col-12 col-md-4 align-self-end pb-2">
         <h4>Filtra per voto</h4>
         <select v-model="store.Rating" class="form-select w-25" id="selected-Rating">
@@ -150,6 +153,7 @@ export default {
         </select>
       </div>
 
+      <!-- REVIEWS -->
       <div class="col-12 col-md-4 align-self-end pb-2">
         <h4>Filtra per numero di recensioni</h4>
         <select v-model="store.Review" class="form-select w-25" id="selected-Review">
