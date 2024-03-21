@@ -63,9 +63,24 @@ export default {
 
       // Ottieni l'ID della materia selezionata
       const subjectId = this.store.Subject;
-      console.log(subjectId);
+      // console.log(subjectId);
 
-      // Verifico quali Teacher hanno il "subjectID" selezionato 
+      // Verifico quali Teacher hanno il "subjectID" selezionato
+
+      // Step 1: ciclo tutti i teacher 
+      for (let i = 0; i < this.teachers.length; i++) {
+
+        // Step 2: ciclo le subjects di quel teacher
+        for (let j = 0; j < this.teachers[i].subjects.length; j++) {
+
+          // Step 3: verifico se è presente il subjectId nell'array di subjects
+          if (this.teachers[i].subjects.includes(subjectId)) {
+
+            // Step 4: se è presente, pusho il teacher in un array dedicato
+            store.filtTeachers.push(this.teachers[i])
+          }
+        }
+      }
 
 
 
@@ -74,7 +89,7 @@ export default {
 
       // Ottieni l'ID della materia selezionata
       const ratingId = this.store.Rating;
-      console.log(ratingId);
+      // console.log(ratingId);
 
 
 
@@ -83,7 +98,7 @@ export default {
 
       // Ottieni l'ID della materia selezionata
       const reviewId = this.store.Review;
-      console.log(reviewId);
+      // console.log(reviewId);
 
     }
   },
@@ -150,7 +165,7 @@ export default {
       <div class="col-12 col-md-4 align-self-end pb-2">
         <h4>Filtra per voto</h4>
         <select v-model="store.Rating" class="form-select w-25" id="selected-Rating">
-          <option v-for="rating in ratings" :key="rating.id" :value="rating.id">
+          <option v-for="rating in ratings" :key="rating.id" :value="rating.name">
             {{ rating.name }}
           </option>
         </select>
