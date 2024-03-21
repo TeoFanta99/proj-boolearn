@@ -33,14 +33,14 @@ Route::middleware('auth')->group(function () {
     Route::post('/teacher/edit', [MainController::class, 'edit'])->name('teacher.edit');
     Route::put('/user/update', [MainController::class, 'update'])->name('user.update');
     
+    Route::post('/sponsorship', [SponsorshipController::class, 'index'])
+    ->name('user.sponsorship');
     Route::put('/user/create', [MainController::class, 'store'])
     ->name('user.store');     
     Route::delete('/user/del/{id}', [MainController::class, 'destroy'])
     ->name('user.del');  
     Route::get('/user/create', [MainController::class, 'create'])
     ->name('user.create');
-    Route::post('/sponsorship', [SponsorshipController::class, 'index'])
-    ->name('user.sponsorship');
 });
 // Route::post('/make-payment', [SponsorshipController::class, 'makePayments'])->name('make.payment');
 Route::get('/teacher/{id}', [TeacherController::class, 'index'])->name('teacher.index');
