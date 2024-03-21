@@ -34,7 +34,9 @@ Route::group(['prefix' => '/v1'], function(){
 
     Route::get('products',[SponsorshipController::class, 'index']);
     Route :: get('orders/generate', [ SponsorshipController :: class, 'generate']);
-    Route :: post('orders/payment', [ SponsorshipController :: class, 'makePayments']);
+    Route :: post('orders/payment', [ SponsorshipController :: class, 'makePayments'])->name('make.payment');
+    Route::post('/sponsorship-associate', [SponsorshipController::class, 'storeSponsorship'])
+    ->name('save.sponsorship');
    
     // Route :: get('technologies', [ApiController :: class, 'getTechnologies']);
 

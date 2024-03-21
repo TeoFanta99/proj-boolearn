@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <h1>Modifica Profilo</h1>
+    
     {{-- @auth --}}
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -11,7 +12,13 @@
             </ul>
         </div>
     @endif
-
+    <form id="sponsorship-form" method="POST" action="{{ route('user.sponsorship') }}">
+        @csrf
+        <!-- Campo nascosto per l'ID dell'insegnante -->
+        <input type="hidden" name="teacher_id" value="{{ $teacher->id }}">
+        <!-- Bottone per inviare il modulo -->
+        <button type="submit">Sponsorizzazione</button>
+    </form>
     <form action="{{ route('user.update') }}" method="POST" enctype="multipart/form-data" id="Form_update">
 
         @csrf
