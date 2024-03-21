@@ -3,6 +3,7 @@ import axios from "axios";
 
 //importo store
 import { store } from "../store";
+import Home from "./Home.vue";
 
 export default {
   name: "Show",
@@ -36,6 +37,7 @@ export default {
 
   mounted() {
     this.getReviews();
+    console.log(store.Review);
   },
 };
 </script>
@@ -49,7 +51,7 @@ export default {
             <img class="w-100 h-100" :src="getImageUrl(store.List)" alt="" />
           </div>
         </div>
-        <div class="col-8">
+        <div class="col-4">
           <div class="d-flex align-items-center gap-2">
             <h2>{{ store.List.user.name }} {{ store.List.user.lastname }}</h2>
             <span>{{ store.List.city }}</span>
@@ -111,28 +113,20 @@ export default {
               </div>
             </div>
           </div>
-          <div class="col-6">
-            <h5 class="mt-4 border-bottom">Recensioni</h5>
-            <div class="d-flex flex-column">
-              <div class="d-flex gap-5">
-                <ul>
-                  <li v-for="review in reviews" :key="review.id">
-                    <h5>{{ review.name }}</h5>
-                    <span>{{ review.description }}</span>
-                    <br /><br />
-                  </li>
-                </ul>
-              </div>
-            </div>
+
+        </div>
+        <div class="col-4 border border-danger d-flex flex-column align-items-center">
+          <h3>Recensioni</h3>
+          <div class="review-container mt-4 border border-primary">
+            Titolo Recensione: <b>{{ store.Review[0].name }}</b>
+            <br>
+            Descrizione bla bla bla
           </div>
         </div>
-        <a
-          :class="store.List.cv_url !== '' ? 'd-block' : 'd-none'"
-          :href="getCVUrl(store.List)"
-          target="_blank"
-          >Mostra CV</a
-        >
+
       </div>
+      <a :class="store.List.cv_url !== '' ? 'd-block' : 'd-none'" :href="getCVUrl(store.List)" target="_blank">Mostra
+        CV</a>
     </div>
   </div>
 </template>
@@ -140,7 +134,12 @@ export default {
 .img_circle {
   width: 60%;
 }
+
 .text_wrap {
   overflow-wrap: anywhere;
+}
+
+.review-container {
+  width: 100%;
 }
 </style>

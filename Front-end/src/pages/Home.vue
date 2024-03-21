@@ -40,7 +40,7 @@ export default {
           this.subjects = response.data.subjects;
           store.recensioni = response.data.reviews;
           this.ratings = response.data.ratings;
-          console.log(this.teachers);
+          // console.log(this.teachers);
         })
         .catch((error) => {
           console.error("Errore durante la richiesta API:", error);
@@ -60,9 +60,9 @@ export default {
     // funzione chiamata quando si clicca su un docente
     riempiRec() {
       const dataToSend = {
-        subject : store.Subject,
+        subject: store.Subject,
         rating: store.Rating,
-        review : store.Review,
+        review: store.Review,
       };
       axios
         .post("http://127.0.0.1:8000/api/v1/result", dataToSend)
@@ -148,16 +148,8 @@ export default {
       <div class="col-12 col-md-4 align-self-end pb-2">
         <h4>Scegli la materia</h4>
 
-        <select
-          v-model="store.Subject"
-          class="form-select w-25"
-          id="selected-Subject"
-        >
-          <option
-            v-for="subject in subjects"
-            :key="subject.id"
-            :value="subject.id"
-          >
+        <select v-model="store.Subject" class="form-select w-25" id="selected-Subject">
+          <option v-for="subject in subjects" :key="subject.id" :value="subject.id">
             {{ subject.name }}
           </option>
         </select>
@@ -165,11 +157,7 @@ export default {
 
       <div class="col-12 col-md-4 align-self-end pb-2">
         <h4>Filtra per voto</h4>
-        <select
-          v-model="store.Rating"
-          class="form-select w-25"
-          id="selected-Rating"
-        >
+        <select v-model="store.Rating" class="form-select w-25" id="selected-Rating">
           <option v-for="rating in ratings" :key="rating.id" :value="rating.id">
             {{ rating.name }}
           </option>
@@ -178,11 +166,7 @@ export default {
 
       <div class="col-12 col-md-4 align-self-end pb-2">
         <h4>Filtra per numero di recensioni</h4>
-        <select
-          v-model="store.Review"
-          class="form-select w-25"
-          id="selected-Review"
-        >
+        <select v-model="store.Review" class="form-select w-25" id="selected-Review">
           >
           <option value="5">min 5</option>
           <option value="10">min 10</option>
@@ -198,25 +182,12 @@ export default {
 
     <div v-if="teachers.length > 0">
       <div class="row mt-4">
-        <div
-          class="col-12 col-md-4 col-lg-3 p-2"
-          v-for="teacher in teachers"
-          :key="teacher.id"
-        >
-          <RouterLink
-            :to="{ name: 'show', params: { id: teacher.user.name } }"
-            @click="riempiVet(teacher.id)"
-            class="text-decoration-none"
-          >
+        <div class="col-12 col-md-4 col-lg-3 p-2" v-for="teacher in teachers" :key="teacher.id">
+          <RouterLink :to="{ name: 'show', params: { id: teacher.user.name } }" @click="riempiVet(teacher.id)"
+            class="text-decoration-none">
             <div class="card pt-3 border-0 shadow">
-              <div
-                class="d-flex justify-content-center align-items-center img_circle mx-auto height_img_query"
-              >
-                <img
-                  class="w-100 h-100 rounded-circle"
-                  :src="getImageUrl(teacher)"
-                  alt=""
-                />
+              <div class="d-flex justify-content-center align-items-center img_circle mx-auto height_img_query">
+                <img class="w-100 h-100 rounded-circle" :src="getImageUrl(teacher)" alt="" />
               </div>
               <div class="card-body">
                 <h4>{{ teacher.user.name }} {{ teacher.user.lastname }}</h4>
@@ -235,6 +206,7 @@ export default {
 .img_circle {
   width: 60%;
 }
+
 #boh {
   margin-top: 10px;
 }
