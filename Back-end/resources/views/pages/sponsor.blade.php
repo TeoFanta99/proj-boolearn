@@ -25,7 +25,7 @@
             }, function(err, instance) {
                 button.addEventListener('click', function() {
                     instance.requestPaymentMethod(function(err, payload) {
-
+                        
                         // Ottieni il nonce del pagamento e invia il pagamento al server
                         var paymentMethodNonce = payload.nonce;
                         makePayment(paymentMethodNonce);
