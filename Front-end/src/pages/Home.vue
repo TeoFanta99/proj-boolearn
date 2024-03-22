@@ -6,11 +6,7 @@ import jumbo from "./jumbo.vue";
 export default {
   name: "Home",
   components: {
-<<<<<<< HEAD
-    jumbo
-=======
     jumbo,
->>>>>>> fix_bug
   },
 
   data() {
@@ -78,13 +74,10 @@ export default {
   },
 
   mounted() {
-<<<<<<< HEAD
-=======
     //setto a zero tutte le variabili dello store
     store.Subject = 0;
     store.Rating = 0;
     store.Review = 0;
->>>>>>> fix_bug
 
     const boh = document.getElementById("boh");
     boh.style.opacity = "0";
@@ -114,11 +107,6 @@ export default {
     };
     textLoad();
     setInterval(textLoad, 13500);
-<<<<<<< HEAD
-
-
-=======
->>>>>>> fix_bug
   },
 };
 </script>
@@ -140,17 +128,7 @@ export default {
         />
       </div> -->
     <!-- SELECT -->
-<<<<<<< HEAD
-    <div class="col-12 col-md-8 align-self-end pb-2">
-      <h4>Scegli la materia</h4>
-      <select v-model="store.searchText" class="form-select w-25" id="selected-searchText"
-        @change="FixSubject(store.searchText)">
-        <option v-for="subject in subjects" :key="subject.id" :value="subject.id">
-          {{ subject.name }}
-        </option>
-      </select>
-    </div>
-=======
+
     <form class="d-flex">
       <div class="col-12 col-md-4 align-self-end pb-2">
         <h4>Scegli la materia</h4>
@@ -190,7 +168,6 @@ export default {
           class="form-select w-25"
           id="selected-Review"
         >
-          >
           <option value="5">min 5</option>
           <option value="10">min 10</option>
           <option value="12">min 12</option>
@@ -202,16 +179,28 @@ export default {
         ricerca
       </button>
     </form>
->>>>>>> fix_bug
 
     <div v-if="teachers.length > 0">
       <div class="row mt-4">
-        <div class="col-12 col-md-4 col-lg-3 p-2" v-for="teacher in teachers" :key="teacher.id">
-          <RouterLink :to="{ name: 'show', params: { id: teacher.user.name } }" @click="riempiVet(teacher.id)"
-            class="text-decoration-none">
+        <div
+          class="col-12 col-md-4 col-lg-3 p-2"
+          v-for="teacher in teachers"
+          :key="teacher.id"
+        >
+          <RouterLink
+            :to="{ name: 'show', params: { id: teacher.user.name } }"
+            @click="riempiVet(teacher.id)"
+            class="text-decoration-none"
+          >
             <div class="card pt-3 border-0 shadow">
-              <div class="d-flex justify-content-center align-items-center img_circle mx-auto height_img_query">
-                <img class="w-100 h-100 rounded-circle" :src="getImageUrl(teacher)" alt="" />
+              <div
+                class="d-flex justify-content-center align-items-center img_circle mx-auto height_img_query"
+              >
+                <img
+                  class="w-100 h-100 rounded-circle"
+                  :src="getImageUrl(teacher)"
+                  alt=""
+                />
               </div>
               <div class="card-body">
                 <h4>{{ teacher.user.name }} {{ teacher.user.lastname }}</h4>
@@ -230,10 +219,6 @@ export default {
 .img_circle {
   width: 60%;
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> fix_bug
 #boh {
   margin-top: 10px;
 }
