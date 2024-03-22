@@ -146,10 +146,12 @@ class ApiController extends Controller
             // Nessun parametro di filtro specificato
             if ($subject_id === 0 && $rating_id === 0 && $min_number_review === 0) {
                 $filteredTeachers[] = $teacher;
+            }else{
+                // Se il teacher supera tutti i filtri, aggiungilo ai risultati filtrati
+                $filteredTeachers[] = $teacher;
+
             }
 
-            // Se il teacher supera tutti i filtri, aggiungilo ai risultati filtrati
-            $filteredTeachers[] = $teacher;
         }
 
         // Invia una risposta JSON contenente i teachers filtrati

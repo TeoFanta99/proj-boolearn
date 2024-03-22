@@ -161,7 +161,7 @@ export default {
         </select>
       </div>
 
-      <button type="submit" form="nameform" value="Submit" @click="riempiRec()">
+      <button type="submit" form="nameform" value="Submit" class="btn btn-danger" @click="riempiRec()">
         ricerca
       </button>
     </form>
