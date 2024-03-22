@@ -17,13 +17,13 @@ export default {
   <div class="background">
     <div class="container">
       <div class="row">
-        <h2>F.A.Q</h2>
+        <h2 class="p-4">F.A.Q</h2>
         <!-- Sezione Accordion di sinistra -->
-        <div class="col-sm-12 col-md-12 col-lg-6">
+        <div class="col-sm-12 col-md-12 col-lg-6 mt-3 p-4">
           <ul>
             <li>
               <input type="checkbox" name="accordian" id="first" />
-              <label for="first">High Rate of Success</label>
+              <label for="first">Informativa privacy</label>
               <div class="content">
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
@@ -35,7 +35,7 @@ export default {
 
             <li>
               <input type="checkbox" name="accordian" id="second" />
-              <label for="second">Zero Accident Rate</label>
+              <label for="second">Come posso contattare il docente al di fuori della piattaforma?</label>
               <div class="content">
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
@@ -47,7 +47,7 @@ export default {
 
             <li>
               <input type="checkbox" name="accordian" id="third" />
-              <label for="third">We're Never Late</label>
+              <label for="third">Politica di rimborso</label>
               <div class="content">
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
@@ -59,11 +59,11 @@ export default {
           </ul>
         </div>
         <!-- Sezione Accordion di destra -->
-        <div class="col-sm-12 col-md-12 col-lg-6">
+        <div class="col-sm-12 col-md-12 col-lg-6 mt-3 p-4">
           <ul>
             <li>
               <input type="checkbox" name="accordian" id="fourth" />
-              <label for="fourth">Price Promise</label>
+              <label for="fourth">Come posso pagare?</label>
               <div class="content">
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
@@ -75,7 +75,7 @@ export default {
 
             <li>
               <input type="checkbox" name="accordian" id="fifth" />
-              <label for="fifth">True Professionals</label>
+              <label for="fifth">Quali sono i nostri punti di forza?</label>
               <div class="content">
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
@@ -87,7 +87,7 @@ export default {
 
             <li>
               <input type="checkbox" name="accordian" id="sixth" />
-              <label for="sixth">We Work Around You</label>
+              <label for="sixth">Lavoriamo per te 24/7!</label>
               <div class="content">
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
@@ -101,76 +101,11 @@ export default {
       </div>
     </div>
   </div>
-  <a class="nav-link text-center" href="#">
-    <router-link :class="{ 'active-link': $route.path === '/contact' }" :to="{ name: 'contact' } "
-      ><i class="fa-solid fa-house me-2"></i> se vuoi contattarci, clicca qui</router-link
-    >
-  </a>
 </template>
 
 <style lang="scss" scoped>
+@use "../styles/faq.scss";
+@use "../styles/header.scss";
 //Scss relativo alla sola sezione di header
 @use "../styles/partials/variables" as *;
-
-
-.background {
-  background-color: rgb(113, 169, 253);
-  .row {
-    width: 100%;
-    h2 {
-      text-align: center;
-    }
-
-    li {
-      list-style: none;
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 20px;
-      border: 2px solid gray;
-      background: #ffff;
-      box-shadow: 6px 6px 10px -1px rgba(0, 0, 0, 0.15),
-        -6px -6px 10px -1px rgba(255, 255, 255, 0.7);
-      border-radius: 10px;
-
-      input[type="checkbox"] {
-        display: none;
-      }
-
-      input[type="checkbox"]:checked + label + .content {
-        max-height: 400px;
-        padding: 10px 10px 20px;
-      }
-
-      input[type="checkbox"]:checked + label::before {
-        content: "-";
-      }
-
-      label {
-        display: flex;
-        align-items: center;
-        color: #7abc64;
-        font-size: 18px;
-        font-weight: 600;
-        cursor: pointer;
-      }
-
-      label::before {
-        content: "+";
-        margin: 5px;
-        font-size: 20px;
-        font-weight: 700;
-        color: gray;
-      }
-
-      .content {
-        color: #7099a5;
-        padding: 0 10px;
-        line-height: 26px;
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.4s, padding 0.4s;
-      }
-    }
-  }
-}
 </style>

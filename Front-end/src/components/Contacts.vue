@@ -14,10 +14,10 @@ export default {
     getRequest() {
       console.log(
         "PushTask:" +
-          store.NameSurname +
-          store.Email +
-          store.Title +
-          store.Message
+        store.NameSurname +
+        store.Email +
+        store.Title +
+        store.Message
       );
     },
   },
@@ -25,112 +25,43 @@ export default {
 </script>
 
 <template>
-  <div class="background">
-    <div class="container">
-      <div class="row">
-        <h2>Contattaci subito!</h2>
-
-        <!-- Contatti -->
-        <div class="col">
-          <h3>Scrivici</h3>
-          <p>
-            Boolearn <br />
-            Via Vattela a Pesca 91 <br />
-            prova(PR)
-          </p>
-          <h3>Contattaci</h3>
-          <p>
-            Boolearn Assistenza<br />
-            +39 555 444 777 <br />
-            DA LUNEDI AL VENERDI : 10.00-10.10 / 16.00-16.10
-          </p>
-        </div>
-
-        <!-- Form seconda colonna -->
-        <div class="col">
-          <form @submit.prevent="getRequest">
-            <div class="mb-3">
-              <label class="form-label"
-                >Nome e Cognome:<span class="required">*</span></label
-              >
-              <input
-                type="text"
-                placeholder="Nome e cognome"
-                id="nmSr"
-                v-model.trim="store.NameSurname"
-                class="form-control"
-              />
-            </div>
-            <div class="mb-3">
-              <label class="form-label"
-                >Email:<span class="required">*</span></label
-              >
-              <input
-                type="email"
-                placeholder="Email"
-                class="form-control"
-                id="e-mail"
-                v-model.trim="store.Email"
-                aria-describedby="emailHelp"
-              />
-            </div>
-            <div class="mb-3">
-              <label class="form-label"
-                >Titolo:<span class="required">*</span></label
-              >
-              <input
-                type="text"
-                class="form-control"
-                id="title"
-                v-model.trim="store.Title"
-                placeholder="Messaggio"
-                aria-describedby="emailHelp"
-              />
-            </div>
-
-            <div class="mb-3">
-              <label class="form-label"
-                >Messaggio:<span class="required">*</span></label
-              >
-              <textarea
-                name="body"
-                class="form-control"
-                id="messaggio"
-                rows="3"
-                placeholder="Messaggio"
-                v-model.trim="store.Message"
-                required=""
-                aria-required="true"
-              ></textarea>
-            </div>
-
-            <button type="submit" class="btn btn-primary">Invia</button>
-          </form>
-        </div>
+  <section class="background">
+    <div class="container contact-form">
+      <div class="contact-image">
+        <img src="https://image.ibb.co/kUagtU/rocket_contact.png" alt="rocket_contact" />
       </div>
+      <form method="post">
+        <h3>CONTATTACI SUBITO!</h3>
+        <div class="row justify-content-center">
+          <div class="col-md-6">
+            <div class="form-group mb-3">
+              <input type="text" name="txtName" class="form-control" placeholder="NOME *" value="" />
+            </div>
+            <div class="form-group  mb-3">
+              <input type="text" name="txtEmail" class="form-control" placeholder="COGNOME *" value="" />
+            </div>
+            <div class="form-group  mb-3">
+              <input type="text" name="txtPhone" class="form-control" placeholder="EMAIL *" value="" />
+            </div>
+            <div class="col-md-12  mb-3">
+              <div class="form-group">
+                <textarea name="txtMsg" class="form-control" placeholder="MESSAGGIO *"
+                  style="width: 100%; height: 150px;"></textarea>
+              </div>
+            </div>
+            <div class="form-group d-flex justify-content-center mb-3">
+              <input type="submit" name="btnSubmit" class="btnContact" value="INVIA MESSAGGIO" />
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
-  </div>
+  </section>
 </template>
 
 <style lang="scss" scoped>
+@use "../styles/header.scss";
 //Scss relativo alla sola sezione di header
 @use "../styles/partials/variables" as *;
-
-.background {
-  background-color: rgb(113, 169, 253);
-
-  .row {
-    justify-content: center;
-    margin-top: 150px;
-    border-radius: 10px;
-    text-align: center;
-    padding: 20px;
-    background-color: white;
-    box-shadow: 0 4px 10px -3px rgba(0, 0, 0, 0.2);
-
-    .required {
-      color: $required;
-    }
-  }
-}
+@use "../styles/contact.scss";
 </style>

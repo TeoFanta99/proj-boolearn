@@ -32,15 +32,19 @@
             @csrf
             <input type="hidden" name="user_id" value="{{ $teacher->user->id }}">
         </form>
-        
-        <a href="#" onclick="document.getElementById('profileForm').submit(); return false;">Gestisci Profilo</a>
-       
-        <form class="ms-3 d-block" action="{{ route('user.del', $teacher->user->id) }}" method="POST"
-            onsubmit="return confirm('Confermare?');">
-            @csrf
-            @method('DELETE')
-            <input type="submit" value="CANCELLA">
-        </form>
+        <div class="d-flex mt-2">
+            <div>
+                <button type="button" class="btn btn-warning" style="width: 200px"><a style="text-decoration: none; color:black" href="#" onclick="document.getElementById('profileForm').submit(); return false;">GESTIONE PROFILO</a></button>
+            </div>
+            <div>
+                <form class="ms-3 d-block" action="{{ route('user.del', $teacher->user->id) }}" method="POST"
+                onsubmit="return confirm('Confermare?');">
+                    @csrf
+                    @method('DELETE')
+                    <input class="btn btn-danger" type="submit" value="CANCELLA" style="color: black">
+                </form>
+            </div>
+        </div>
         @endif
         {{-- SE NESSUNO E' LOGGATO --}}
         @else
