@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Api\SponsorshipController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TeacherController;
+use App\Models\Sponsorship;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 
@@ -31,6 +33,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/teacher/edit', [MainController::class, 'edit'])->name('teacher.edit');
     Route::put('/user/update', [MainController::class, 'update'])->name('user.update');
     
+    Route::post('/sponsorship', [SponsorshipController::class, 'index'])
+    ->name('user.sponsorship');
     Route::put('/user/create', [MainController::class, 'store'])
     ->name('user.store');     
     Route::delete('/user/del/{id}', [MainController::class, 'destroy'])
@@ -38,6 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/create', [MainController::class, 'create'])
     ->name('user.create');
 });
+// Route::post('/make-payment', [SponsorshipController::class, 'makePayments'])->name('make.payment');
 Route::get('/teacher/{id}', [TeacherController::class, 'index'])->name('teacher.index');
 Route::get('/user/{id}', [MainController::class, 'show'])->name('user.show');
 require __DIR__ . '/auth.php';

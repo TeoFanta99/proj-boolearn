@@ -31,7 +31,7 @@ class Teacher extends Model
 
     public function sponsorships()
     {
-        return $this->hasMany(Sponsorship::class);
+        return $this->belongsToMany(Sponsorship::class);
     }
 
     public function user()
