@@ -9,11 +9,14 @@ export const store = reactive({
   valutazioni: [], // insieme dei voti (ratings)
 
   view: 0,
-  NameSurname: "",
+
   SearchT: "",
-  Email: "",
-  Title: "",
-  Message: "",
+
+  // Invio mail al singolo professore
+  NameSurname: "",
+  UserEmail: "",
+  EmailTitle: "",
+  EmailMessage: "",
 
   // Pagina Home.vue
   Subject: "",
