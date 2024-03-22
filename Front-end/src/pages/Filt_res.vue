@@ -11,6 +11,7 @@ export default {
     return {
       store,
       teachers: [],
+      loading: true,
     };
   },
   methods: {
@@ -18,27 +19,18 @@ export default {
       return `http://localhost:8000/storage/${teacher.image_url}`;
     },
 
-    getResults() {
-      let subject = store.Subject;
-      let rating = store.Rating;
-      let review = store.Review;
-      //let params = this.$route.params.medieN;
-      //console.log(params);
-      // Ottieni i parametri di query
+    population() {
+      const dataToSend = {
+        subject: store.Subject,
+        rating: store.Rating,
+        review: store.Review,
+      };
       axios
-        .get(
-          "http://127.0.0.1:8000/api/v1/result?subject=" +
-            subject +
-            "&rating=" +
-            rating +
-            "&review=" +
-            review
-        )
+        .post("http://127.0.0.1:8000/api/v1/result", dataToSend)
         .then((response) => {
-          this.teachers = response.data.teachers;
-          console.log(this.teachers);
-
-          console.log(store.Subject);
+          console.log(response.data);
+          this.teachers = response.data;
+          this.loading = false;
         })
         .catch((error) => {
           console.error("Errore durante la richiesta API:", error);
@@ -57,15 +49,15 @@ export default {
     },
   },
   mounted() {
-    // Chiamata iniziale per caricare i dati
-    this.getResults();
+    this.population();
   },
 };
 </script>
 
 <template>
   <div class="container">
-    <div v-if="teachers.length > 0">
+    <div v-if="loading"><h3>Caricamento...</h3></div>
+    <div v-else-if="teachers.length > 0">
       <div class="row mt-4">
         <div
           class="col-12 col-md-4 col-lg-3 p-2"

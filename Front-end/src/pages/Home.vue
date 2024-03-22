@@ -59,24 +59,9 @@ export default {
 
     // funzione chiamata quando si clicca su un docente
     riempiRec() {
-      const dataToSend = {
-        subject : store.Subject,
-        rating: store.Rating,
-        review : store.Review,
-      };
-      axios
-        .post("http://127.0.0.1:8000/api/v1/result", dataToSend)
-        .then((response) => {
-          // this.teachers = response.data.teachers;
-          console.log(response.data);
-          // this.subjects = response.data.subjects;
-          // store.recensioni = response.data.reviews;
-          // this.ratings = response.data.ratings;
-          // console.log(this.teachers);
-        })
-        .catch((error) => {
-          console.error("Errore durante la richiesta API:", error);
-        });
+      this.$router.push({
+        name: "filt",
+      });
     },
   },
 
@@ -93,7 +78,6 @@ export default {
     store.Subject = 0;
     store.Rating = 0;
     store.Review = 0;
-    //let medieN = [];
 
     const boh = document.getElementById("boh");
     boh.style.opacity = "0";

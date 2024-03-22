@@ -117,7 +117,7 @@ class ApiController extends Controller
 
        
         // Ottieni tutti i teachers con le relazioni pre-caricate
-        $teachers = Teacher::with(['subjects', 'ratings', 'reviews'])->get();
+        $teachers = Teacher::with(['user','subjects', 'ratings', 'reviews'])->get();
 
         // Array per memorizzare i risultati filtrati
         $filteredTeachers = [];
