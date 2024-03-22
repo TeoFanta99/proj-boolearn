@@ -13,7 +13,6 @@ export default {
     return {
       store,
       teachers: [],
-      ratings: [],
       SubjectSelect: [],
       teacher: "",
       loading: true,
@@ -39,7 +38,7 @@ export default {
           this.teachers = response.data.teachers;
           store.materie = response.data.subjects;
           store.recensioni = response.data.reviews;
-          this.ratings = response.data.ratings;
+          store.valutazioni = response.data.ratings;
           console.log(this.teachers);
           this.loading = false;
         })
@@ -133,32 +132,6 @@ export default {
           >
             {{ subject.name }}
           </option>
-        </select>
-      </div>
-
-      <div class="col-12 col-md-4 align-self-end pb-2">
-        <h4>Filtra per voto</h4>
-        <select
-          v-model="store.Rating"
-          class="form-select w-25"
-          id="selected-Rating"
-        >
-          <option v-for="rating in ratings" :key="rating.id" :value="rating.id">
-            {{ rating.name }}
-          </option>
-        </select>
-      </div>
-
-      <div class="col-12 col-md-4 align-self-end pb-2">
-        <h4>Filtra per numero di recensioni</h4>
-        <select
-          v-model="store.Review"
-          class="form-select w-25"
-          id="selected-Review"
-        >
-          <option value="5">min 5</option>
-          <option value="10">min 10</option>
-          <option value="12">min 12</option>
         </select>
       </div>
 

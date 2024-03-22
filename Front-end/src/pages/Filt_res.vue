@@ -30,6 +30,7 @@ export default {
         .then((response) => {
           console.log(response.data);
           this.teachers = response.data;
+          console.log(this.teachers);
           this.loading = false;
         })
         .catch((error) => {
@@ -68,7 +69,11 @@ export default {
           class="form-select w-25"
           id="selected-Rating"
         >
-          <option v-for="rating in ratings" :key="rating.id" :value="rating.id">
+          <option
+            v-for="rating in store.valutazioni"
+            :key="rating.id"
+            :value="rating.id"
+          >
             {{ rating.name }}
           </option>
         </select>
@@ -92,7 +97,7 @@ export default {
         form="nameform"
         value="Submit"
         class="btn btn-danger"
-        @click="riempiRec()"
+        @click="population()"
       >
         ricerca
       </button>

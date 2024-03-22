@@ -78,7 +78,7 @@ class ApiController extends Controller
     public function test(Request $request)
     {
 
-        $id = $request->input('subjects');
+        $id = $request->input('subject');
 
         $subjects = Subject::find($id);
 
@@ -114,8 +114,6 @@ class ApiController extends Controller
         $rating_id = $request->input('rating');
         $min_number_review = $request->input('review');
 
-        
-       
         // Ottieni tutti i teachers con le relazioni pre-caricate
         $teachers = Teacher::with(['user','subjects', 'ratings', 'reviews'])->get();
 
