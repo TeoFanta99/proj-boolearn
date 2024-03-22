@@ -26,7 +26,6 @@ export default {
     };
   },
   mounted() {
-    
     const loading = document.getElementById("loader");
     const container = document.getElementById("main-container");
 
@@ -35,7 +34,7 @@ export default {
       loading.classList.add("fade-in");
     }, 1000); // Fade out del loader dopo 1 secondo
     setTimeout(() => {
-      loading.classList.add('d-none');
+      loading.classList.add("d-none");
       container.classList.remove("d-none");
       // Assicura che il contenitore principale sia visibile dopo l'animazione
     }, 1500); // Fade in del contenitore principale dopo 1.5 secondi
@@ -48,12 +47,12 @@ export default {
     <div id="preloader"></div>
   </div>
   <div class="d-none" id="main-container">
-      <AppHeader />
-      <div class="main_views">
-        <router-view></router-view>
-      
-        <AppFooter />
-      </div>
+    <AppHeader />
+    <div class="main_views">
+      <router-view></router-view>
+
+      <AppFooter />
+    </div>
   </div>
 </template>
 
@@ -75,13 +74,13 @@ export default {
 }
 
 .main_views {
-  margin-top: 100px;
-  height: calc(100vh - 100px); /* Altezza della finestra meno l'altezza dell'header */
+  height: calc(
+    100vh - 100px
+  ); /* Altezza della finestra meno l'altezza dell'header */
   overflow-y: auto; /* Abilita lo scrolling verticale quando necessario */
   position: relative;
 }
-body{
-
+body {
   background-color: #fcfefc;
 }
 .back_gif {

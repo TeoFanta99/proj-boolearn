@@ -115,20 +115,6 @@ export default {
   <jumbo id="boh" />
 
   <div class="container">
-    <!-- <div class="row align-items-center">
-      <div class="col-12 col-md-4">
-        <label for="search">Ricerca</label>
-        <input
-          class="form-control"
-          type="text"
-          placeholder="Cerca un insegnante"
-          aria-label="Search"
-          v-model="store.SearchT"
-          @keyup.enter="SearchProf(store.SearchT)"
-        />
-      </div> -->
-    <!-- SELECT -->
-
     <form class="d-flex">
       <div class="col-12 col-md-4 align-self-end pb-2">
         <h4>Scegli la materia</h4>
