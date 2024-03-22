@@ -6,7 +6,11 @@ import jumbo from "./jumbo.vue";
 export default {
   name: "Home",
   components: {
+<<<<<<< HEAD
     jumbo
+=======
+    jumbo,
+>>>>>>> fix_bug
   },
 
   data() {
@@ -14,6 +18,7 @@ export default {
       store,
       teachers: [],
       subjects: [],
+      ratings: [],
       SubjectSelect: [],
       teacher: "",
     };
@@ -37,6 +42,9 @@ export default {
         .then((response) => {
           this.teachers = response.data.teachers;
           this.subjects = response.data.subjects;
+          store.recensioni = response.data.reviews;
+          this.ratings = response.data.ratings;
+          console.log(this.teachers);
         })
         .catch((error) => {
           console.error("Errore durante la richiesta API:", error);
@@ -53,12 +61,11 @@ export default {
       });
     },
 
-    FixSubject(subject) {
-      // Ottieni l'ID della materia selezionata
-      const subjectId = this.store.searchText;
-
-      // Utilizza Vue Router per navigare alla pagina 'filt' con l'ID della materia che mi interessa
-      this.$router.push({ name: "filt", params: { id: subjectId } });
+    // funzione chiamata quando si clicca su un docente
+    riempiRec() {
+      this.$router.push({
+        name: "filt",
+      });
     },
   },
 
@@ -71,6 +78,13 @@ export default {
   },
 
   mounted() {
+<<<<<<< HEAD
+=======
+    //setto a zero tutte le variabili dello store
+    store.Subject = 0;
+    store.Rating = 0;
+    store.Review = 0;
+>>>>>>> fix_bug
 
     const boh = document.getElementById("boh");
     boh.style.opacity = "0";
@@ -100,8 +114,11 @@ export default {
     };
     textLoad();
     setInterval(textLoad, 13500);
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> fix_bug
   },
 };
 </script>
@@ -123,6 +140,7 @@ export default {
         />
       </div> -->
     <!-- SELECT -->
+<<<<<<< HEAD
     <div class="col-12 col-md-8 align-self-end pb-2">
       <h4>Scegli la materia</h4>
       <select v-model="store.searchText" class="form-select w-25" id="selected-searchText"
@@ -132,6 +150,59 @@ export default {
         </option>
       </select>
     </div>
+=======
+    <form class="d-flex">
+      <div class="col-12 col-md-4 align-self-end pb-2">
+        <h4>Scegli la materia</h4>
+
+        <select
+          v-model="store.Subject"
+          class="form-select w-25"
+          id="selected-Subject"
+        >
+          <option
+            v-for="subject in subjects"
+            :key="subject.id"
+            :value="subject.id"
+          >
+            {{ subject.name }}
+          </option>
+        </select>
+      </div>
+
+      <div class="col-12 col-md-4 align-self-end pb-2">
+        <h4>Filtra per voto</h4>
+        <select
+          v-model="store.Rating"
+          class="form-select w-25"
+          id="selected-Rating"
+        >
+          <option v-for="rating in ratings" :key="rating.id" :value="rating.id">
+            {{ rating.name }}
+          </option>
+        </select>
+      </div>
+
+      <div class="col-12 col-md-4 align-self-end pb-2">
+        <h4>Filtra per numero di recensioni</h4>
+        <select
+          v-model="store.Review"
+          class="form-select w-25"
+          id="selected-Review"
+        >
+          >
+          <option value="5">min 5</option>
+          <option value="10">min 10</option>
+          <option value="12">min 12</option>
+          <!-- Aggiungi altre condizioni v-if per le altre opzioni -->
+        </select>
+      </div>
+
+      <button type="submit" form="nameform" value="Submit" @click="riempiRec()">
+        ricerca
+      </button>
+    </form>
+>>>>>>> fix_bug
 
     <div v-if="teachers.length > 0">
       <div class="row mt-4">
@@ -159,7 +230,10 @@ export default {
 .img_circle {
   width: 60%;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> fix_bug
 #boh {
   margin-top: 10px;
 }
