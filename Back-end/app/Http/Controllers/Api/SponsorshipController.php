@@ -74,7 +74,8 @@ class SponsorshipController extends Controller
             $teacher = Teacher::findOrFail($request->teacher_id);
             
             // Associa la sponsorizzazione all'insegnante
-            $teacher->sponsorships()->syncWithoutDetaching($sponsorship);
+            $teacher->sponsorships()->attach($sponsorship, ['expire_date' => now()]);
+
         
             // Ritorna una risposta di successo
             return response()->json(['success' => true, 'message' => 'Sponsorizzazione associata all\'insegnante con successo'], 200);

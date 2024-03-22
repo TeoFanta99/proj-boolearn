@@ -15,11 +15,13 @@ return new class extends Migration {
         Schema::table('sponsorship_teacher', function (Blueprint $table) {
             $table->foreignId('sponsorship_id')->constrained();
             $table->foreignId('teacher_id')->constrained();
+            $table->dateTime('expire_date')->nullable();
         });
 
         Schema::table('subject_teacher', function (Blueprint $table) {
             $table->foreignId('subject_id')->constrained();
             $table->foreignId('teacher_id')->constrained();
+            
         });
 
         Schema::table('rating_teacher', function (Blueprint $table) {
@@ -54,6 +56,8 @@ return new class extends Migration {
             $table->dropColumn(['sponsorship_id']);
             $table->dropForeign(['teacher_id']);
             $table->dropColumn(['teacher_id']);
+            $table->dropColumn('expire_date');
+            
         });
 
         Schema::table('subject_teacher', function (Blueprint $table) {
