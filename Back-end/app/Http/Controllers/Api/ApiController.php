@@ -114,7 +114,7 @@ class ApiController extends Controller
         $rating_id = $request->input('rating');
         $min_number_review = $request->input('review');
 
-
+        
        
         // Ottieni tutti i teachers con le relazioni pre-caricate
         $teachers = Teacher::with(['user','subjects', 'ratings', 'reviews'])->get();
@@ -130,13 +130,12 @@ class ApiController extends Controller
                 }
             }
 
-            // Filtraggio per rating
+            $averageRating = $teacher->ratings()->avg('ratings.id');
             if ($rating_id !== 0) {
-                if (!$teacher->ratings->pluck('id')->contains($rating_id)) {
+                if ($averageRating < $rating_id) {
                     continue;
                 }
             }
-
             // Filtraggio per numero minimo di recensioni
             if ($min_number_review !== 0) {
                 if ($teacher->reviews->count() < $min_number_review) {
