@@ -1,5 +1,6 @@
 <script>
 //importo store
+import axios from "axios";
 import { store } from "../store";
 
 export default {
@@ -19,9 +20,25 @@ export default {
             console.log(store.EmailTitle);
             console.log(store.EmailMessage);
 
+            axios
+                .post('http://127.0.0.1:8000/api/v1/message')
+                .then((response) => {
+                    ;
+                })
+                .catch((error) => {
+                    console.error("Errore durante la richiesta API:", error);
+                });
+
+
+
+
             this.success = true;
         },
 
+    },
+
+    mounted() {
+        console.log(store.List.user.email);
     }
 }
 </script>
@@ -36,6 +53,8 @@ export default {
         <input v-model="store.NameSurname" type="text" name="name_surname" id="name_surname"
             placeholder="Inserisci il tuo nome e cognome">
         <input v-model="store.UserEmail" type="email" name="email" id="email" placeholder="Inserisci la tua email">
+        <br><br>
+        <input type="email" v-model=store.List.user.email readonly>
         <input v-model="store.EmailTitle" type="text" name="email_title" id="email_title"
             placeholder="Oggetto della mail">
         <textarea v-model="store.EmailMessage" name="" id="" placeholder="Scrivi un messaggio"

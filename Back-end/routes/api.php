@@ -34,6 +34,8 @@ Route::group(['prefix' => '/v1'], function(){
 
     Route :: post('hgs', [ ApiController :: class, 'frontTeachers']);
 
+    Route :: post('message', [ApiController :: class, 'getMessage']);
+
     Route::get('products',[SponsorshipController::class, 'index']);
     Route :: post('orders/generate', [ SponsorshipController :: class, 'generate'])->name('generate.token');
     Route :: post('orders/payment', [ SponsorshipController :: class, 'makePayments'])->name('make.payment');

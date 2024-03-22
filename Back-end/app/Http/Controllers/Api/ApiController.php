@@ -7,6 +7,7 @@ use App\Models\Subject;
 use App\Models\Teacher;
 use App\Models\Review;
 use App\Models\Rating;
+use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -131,5 +132,14 @@ class ApiController extends Controller
 
         // Invia una risposta JSON contenente i teachers filtrati
         return response()->json($filteredTeachers);
+    }
+
+    public function getMessage(Request $request) {
+
+        return response() -> json([
+            'status' => 'success',
+            'message' => 'Yee sono andato di là',
+        ]);
+
     }
 }
