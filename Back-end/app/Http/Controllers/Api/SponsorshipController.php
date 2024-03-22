@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Order\OrderRequest;
 
 use App\Models\Teacher;
-
+use Carbon\Carbon;
 use Braintree\Gateway;
 
 class SponsorshipController extends Controller
@@ -72,9 +72,12 @@ class SponsorshipController extends Controller
             
             // Trova l'insegnante tramite l'ID
             $teacher = Teacher::findOrFail($request->teacher_id);
+            $durationString = $sponsorship->duration;
+            sscanf($durationString, '%d:%d:%d', $hours, $minutes, $seconds);
+            $expire_date = Carbon::now()->addHours($hours)->addMinutes($minutes)->addSeconds($seconds);
             
             // Associa la sponsorizzazione all'insegnante
-            $teacher->sponsorships()->attach($sponsorship, ['expire_date' => now()]);
+            $teacher->sponsorships()->attach($sponsorship, ['expire_date' => $expire_date]);
 
         
             // Ritorna una risposta di successo
