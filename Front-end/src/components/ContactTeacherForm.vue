@@ -8,6 +8,7 @@ export default {
     data() {
         return {
             store,
+            success: false,
         };
     },
 
@@ -17,9 +18,12 @@ export default {
             console.log(store.UserEmail);
             console.log(store.EmailTitle);
             console.log(store.EmailMessage);
-        }
+
+            this.success = true;
+        },
+
     }
-};
+}
 </script>
 
 <template>
@@ -27,7 +31,7 @@ export default {
     <br><br>
     <h2>Contatta l'insegnante!</h2>
     <br>
-    <form>
+    <form @submit.prevent="test">
 
         <input v-model="store.NameSurname" type="text" name="name_surname" id="name_surname"
             placeholder="Inserisci il tuo nome e cognome">
@@ -36,9 +40,11 @@ export default {
             placeholder="Oggetto della mail">
         <textarea v-model="store.EmailMessage" name="" id="" placeholder="Scrivi un messaggio"
             style="width: 100%; height: 150px;"></textarea>
-        <input type="submit" value="INVIA MESSAGGIO" @click="test()" />
+        <input type="submit" value="INVIA MESSAGGIO" />
 
     </form>
+
+    <div v-if="success" style="color: green;">Messaggio inviato con successo!</div>
 </template>
 
 <style lang="scss" scoped>
