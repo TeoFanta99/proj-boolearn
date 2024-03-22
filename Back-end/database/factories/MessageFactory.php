@@ -17,11 +17,11 @@ class MessageFactory extends Factory
     public function definition()
     {
         return [
-            'title' => fake() -> name(),
-            'email' => fake() -> safeEmail(),
+            'email_title' => fake() -> word(),
+            'user_email' => fake() -> safeEmail(),
             'description' => fake() -> paragraph(),
             'date_of_message' => fake() -> dateTimeBetween('-1 year', 'now'),
-            'user_name' => fake() -> word(),
+            'user_name' => fake() -> name(),
         ];
     }
 }

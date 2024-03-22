@@ -4,8 +4,15 @@ import axios from "axios";
 //importo store
 import { store } from "../store";
 
+// importo componente form per inviare messaggio al teacher
+import ContactTeacherForm from "../components/ContactTeacherForm.vue";
+
 export default {
   name: "Show",
+
+  components: {
+    ContactTeacherForm,
+  },
 
   data() {
     return {
@@ -48,6 +55,7 @@ export default {
           <div class="img_container">
             <img class="w-100 h-100" :src="getImageUrl(store.List)" alt="" />
           </div>
+          <ContactTeacherForm />
         </div>
         <div class="col-8">
           <div class="d-flex align-items-center gap-2">
@@ -126,12 +134,8 @@ export default {
             </div>
           </div>
         </div>
-        <a
-          :class="store.List.cv_url !== '' ? 'd-block' : 'd-none'"
-          :href="getCVUrl(store.List)"
-          target="_blank"
-          >Mostra CV</a
-        >
+        <a :class="store.List.cv_url !== '' ? 'd-block' : 'd-none'" :href="getCVUrl(store.List)" target="_blank">Mostra
+          CV</a>
       </div>
     </div>
   </div>
@@ -140,6 +144,7 @@ export default {
 .img_circle {
   width: 60%;
 }
+
 .text_wrap {
   overflow-wrap: anywhere;
 }
