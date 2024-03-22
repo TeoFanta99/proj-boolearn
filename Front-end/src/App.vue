@@ -77,8 +77,6 @@ export default {
   height: calc(
     100vh - 100px
   ); /* Altezza della finestra meno l'altezza dell'header */
-  overflow-y: auto; /* Abilita lo scrolling verticale quando necessario */
-  position: relative;
 }
 body {
   background-color: #fcfefc;

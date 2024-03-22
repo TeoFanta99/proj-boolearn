@@ -56,6 +56,48 @@ export default {
 
 <template>
   <div class="container">
+    <div v-for="materia in store.materie">
+      <h2 v-if="store.Subject == materia.id">Materia: {{ materia.name }}</h2>
+    </div>
+
+    <form class="d-flex">
+      <div class="col-12 col-md-4 align-self-end pb-2">
+        <h4>Filtra per voto</h4>
+        <select
+          v-model="store.Rating"
+          class="form-select w-25"
+          id="selected-Rating"
+        >
+          <option v-for="rating in ratings" :key="rating.id" :value="rating.id">
+            {{ rating.name }}
+          </option>
+        </select>
+      </div>
+
+      <div class="col-12 col-md-4 align-self-end pb-2">
+        <h4>Filtra per numero di recensioni</h4>
+        <select
+          v-model="store.Review"
+          class="form-select w-25"
+          id="selected-Review"
+        >
+          <option value="5">min 5</option>
+          <option value="10">min 10</option>
+          <option value="12">min 12</option>
+        </select>
+      </div>
+
+      <button
+        type="submit"
+        form="nameform"
+        value="Submit"
+        class="btn btn-danger"
+        @click="riempiRec()"
+      >
+        ricerca
+      </button>
+    </form>
+
     <div v-if="loading"><h3>Caricamento...</h3></div>
     <div v-else-if="teachers.length > 0">
       <div class="row mt-4">

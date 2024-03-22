@@ -13,10 +13,10 @@ export default {
     return {
       store,
       teachers: [],
-      subjects: [],
       ratings: [],
       SubjectSelect: [],
       teacher: "",
+      loading: true,
     };
   },
 
@@ -37,10 +37,11 @@ export default {
         .post("http://127.0.0.1:8000/api/v1/hgs", dataToSend)
         .then((response) => {
           this.teachers = response.data.teachers;
-          this.subjects = response.data.subjects;
+          store.materie = response.data.subjects;
           store.recensioni = response.data.reviews;
           this.ratings = response.data.ratings;
           console.log(this.teachers);
+          this.loading = false;
         })
         .catch((error) => {
           console.error("Errore durante la richiesta API:", error);
@@ -119,13 +120,14 @@ export default {
       <div class="col-12 col-md-4 align-self-end pb-2">
         <h4>Scegli la materia</h4>
 
+        <!-- Sezione Select -->
         <select
           v-model="store.Subject"
           class="form-select w-25"
           id="selected-Subject"
         >
           <option
-            v-for="subject in subjects"
+            v-for="subject in store.materie"
             :key="subject.id"
             :value="subject.id"
           >
@@ -157,16 +159,24 @@ export default {
           <option value="5">min 5</option>
           <option value="10">min 10</option>
           <option value="12">min 12</option>
-          <!-- Aggiungi altre condizioni v-if per le altre opzioni -->
         </select>
       </div>
 
-      <button type="submit" form="nameform" value="Submit" class="btn btn-danger" @click="riempiRec()">
+      <button
+        type="submit"
+        form="nameform"
+        value="Submit"
+        class="btn btn-danger"
+        @click="riempiRec()"
+      >
         ricerca
       </button>
     </form>
 
-    <div v-if="teachers.length > 0">
+    <!-- Sezione icone teachers -->
+    <div v-if="loading"><h3>Caricamento...</h3></div>
+
+    <div v-else-if="teachers.length > 0">
       <div class="row mt-4">
         <div
           class="col-12 col-md-4 col-lg-3 p-2"
@@ -195,9 +205,10 @@ export default {
           </RouterLink>
         </div>
       </div>
-    </div>
-    <div v-else>
-      <h3 class="my-4">Nessun risultato trovato!</h3>
+
+      <div v-if="teachers.length == 0">
+        <h3 class="my-4">Nessun risultato trovato!</h3>
+      </div>
     </div>
   </div>
 </template>
