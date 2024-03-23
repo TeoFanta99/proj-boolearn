@@ -3,10 +3,12 @@ import axios from "axios";
 import { store } from "../store";
 import jumbo from "./jumbo.vue";
 
+import Carousel from '../components/Carousel.vue';
 export default {
   name: "Home",
   components: {
     jumbo,
+    Carousel
   },
 
   data() {
@@ -31,51 +33,14 @@ export default {
         .then((res) => {
           this.teachers = res.data.teachers;
           this.store.materie = res.data.subjects;
-          this.store.valutazioni=res.data.ratings;
+          this.store.valutazioni = res.data.ratings;
           console.log(this.teachers);
           this.loading = false;
         })
         .catch((error) => {
           console.error("Errore durante la richiesta API:", error);
         });
-      // let dataToSend = { nome_cognome: this.teacher };
 
-      // if (this.SubjectSelect.length > 0) {
-      //   dataToSend.subjects = this.SubjectSelect;
-      // }
-
-      //       axios
-      //         .post("http://127.0.0.1:8000/api/v1/hgs", dataToSend)
-      //         .then((response) => {
-      //           this.teachers = response.data.teachers;
-      //           store.materie = response.data.subjects;
-      //           store.recensioni = response.data.reviews;
-      //           store.valutazioni = response.data.ratings;
-      //           console.log(this.teachers);
-      //           this.loading = false;
-      //         })
-      //         .catch((error) => {
-      // >>>>>>> fix_bug
-      //           console.error("Errore durante la richiesta API:", error);
-      //         });
-      // let dataToSend = { nome_cognome: this.teacher };
-
-      // if (this.SubjectSelect.length > 0) {
-      //   dataToSend.subjects = this.SubjectSelect;
-      // }
-
-      // axios
-      //   .post("http://127.0.0.1:8000/api/v1/hgs", dataToSend)
-      //   .then((response) => {
-      //     this.teachers = response.data.teachers;
-      //     this.subjects = response.data.subjects;
-      //     store.recensioni = response.data.reviews;
-      //     this.ratings = response.data.ratings;
-      //     console.log(this.teachers);
-      //   })
-      //   .catch((error) => {
-      //     console.error("Errore durante la richiesta API:", error);
-      //   });
     },
 
     // funzione chiamata quando si clicca su un docente
@@ -118,8 +83,31 @@ export default {
   },
 
   mounted() {
+    const swiper = new Swiper('.swiper', {
+  // Optional parameters
+  direction: 'vertical',
+  loop: true,
+
+  // If we need pagination
+  pagination: {
+    el: '.swiper-pagination',
+  },
+
+  // Navigation arrows
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+
+  // And if we need scrollbar
+  scrollbar: {
+    el: '.swiper-scrollbar',
+  },
+});
+
+
     //setto a zero tutte le variabili dello store
-    store.Subject = 0;
+
     store.Rating = 0;
     store.Review = 0;
 
@@ -131,26 +119,34 @@ export default {
 
       // Chiamata iniziale per caricare i dati
       this.SearchProf();
+      var swiper = new Swiper(".swiper-container", {
+        // Configurazione aggiuntiva opzionale:
+        loop: true, // Per rendere il carosello infinito
+        navigation: {
+          nextEl: ".swiper-button-next", // Selettore dell'elemento per il pulsante "Next"
+          prevEl: ".swiper-button-prev", // Selettore dell'elemento per il pulsante "Prev"
+        },
+      });
     }, 2300);
 
-    const text = document.querySelector(".sec-text");
+    // const text = document.querySelector(".sec-text");
 
-    const textLoad = () => {
-      setTimeout(() => {
-        text.textContent = "HTML";
-        text.style.color = "#e5532d";
-      }, 0);
-      setTimeout(() => {
-        text.textContent = "CSS";
-        text.style.color = "#254bdd";
-      }, 4500);
-      setTimeout(() => {
-        text.textContent = "JS";
-        text.style.color = "#efd81d";
-      }, 9000);
-    };
-    textLoad();
-    setInterval(textLoad, 13500);
+    // const textLoad = () => {
+    //   setTimeout(() => {
+    //     text.textContent = "HTML";
+    //     text.style.color = "#e5532d";
+    //   }, 0);
+    //   setTimeout(() => {
+    //     text.textContent = "CSS";
+    //     text.style.color = "#254bdd";
+    //   }, 4500);
+    //   setTimeout(() => {
+    //     text.textContent = "JS";
+    //     text.style.color = "#efd81d";
+    //   }, 9000);
+    // };
+    // textLoad();
+    // setInterval(textLoad, 13500);
   },
 };
 </script>
@@ -158,9 +154,10 @@ export default {
 <template class="bg-light">
   <jumbo id="boh" />
 
+  <Carousel/>
   <div class="container">
     <form class="d-flex align-items-center">
-      <div class="col-12 col-md-2  align-self-end pb-2">
+      <div class="col-12 col-md-2 align-self-end pb-2">
         <h4>Scegli la materia</h4>
 
         <!-- Sezione Select -->
@@ -169,10 +166,12 @@ export default {
           class="form-select w-75"
           id="selected-Subject"
         >
+          <option value="Tutte">Tutte</option>
           <option
             v-for="subject in store.materie"
             :key="subject.id"
             :value="subject.name"
+            :selected="store.Subject === subject.name ? 'selected' : ''"
           >
             {{ subject.name }}
           </option>
@@ -238,38 +237,39 @@ export default {
   </div>
 </template>
 <style lang="scss">
-
 .loading-gif {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100px; /* Regola l'altezza secondo le tue preferenze */
-    width: 100px; /* Regola la larghezza secondo le tue preferenze */
-    opacity: 0;
-    animation: fadeInOut 1.5s ease-in-out forwards;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px; /* Regola l'altezza secondo le tue preferenze */
+  width: 100px; /* Regola la larghezza secondo le tue preferenze */
+  opacity: 0;
+  animation: fadeInOut 1.5s ease-in-out forwards;
 }
 
 .loading-image {
-    width: 100%; /* Per adattare l'immagine alla grandezza del contenitore */
-    animation: zoomInOut 1.5s ease-in-out infinite;
+  width: 100%; /* Per adattare l'immagine alla grandezza del contenitore */
+  animation: zoomInOut 1.5s ease-in-out infinite;
 }
 
 @keyframes fadeInOut {
-    0%, 100% {
-        opacity: 0;
-    }
-    50% {
-        opacity: 1;
-    }
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 @keyframes zoomInOut {
-    0%, 100% {
-        transform: scale(0.7);
-    }
-    50% {
-        transform: scale(1);
-    }
+  0%,
+  100% {
+    transform: scale(0.7);
+  }
+  50% {
+    transform: scale(1);
+  }
 }
 .star_sponsor {
   top: 10%;
