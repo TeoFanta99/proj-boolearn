@@ -13,30 +13,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 class ApiController extends Controller
 {
-    public function getEvent()
-    {
-
-        return response()->json([
-
-            'status' => 'success',
-            'message' => 'Testo di prova',
-        ]);
-    }
-    // public function getTeachers()
-    // {
-    //     $subjects= Subject::all();
-    //     $teachers = Teacher::with( 'user')->get();
-
-
-
-    //     return response()->json([
-    //         'status' => 'success',
-    //         'teachers' => $teachers,
-    //         'subjects'=>$subjects
-
-    //     ]);
-    // }
-
+   
     public function frontTeachers(Request $request)
     {
 
@@ -79,7 +56,7 @@ class ApiController extends Controller
     public function test(Request $request)
     {
 
-        $id = $request->input('subjects');
+        $id = $request->input('subject');
 
         $subjects = Subject::find($id);
 

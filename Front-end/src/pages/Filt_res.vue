@@ -30,6 +30,7 @@ export default {
         .then((response) => {
           console.log(response.data);
           this.teachers = response.data;
+          console.log(this.teachers);
           this.loading = false;
         })
         .catch((error) => {
@@ -56,28 +57,46 @@ export default {
 
 <template>
   <div class="container">
-    <div v-if="loading"><h3>Caricamento...</h3></div>
+    <div v-for="materia in store.materie">
+      <h2 v-if="store.Subject == materia.id">Materia: {{ materia.name }}</h2>
+    </div>
+
+    <form class="d-flex">
+      <div class="col-12 col-md-4 align-self-end pb-2">
+        <h4>Filtra per voto</h4>
+        <select v-model="store.Rating" class="form-select w-75" id="selected-Rating">
+          <option v-for="rating in store.valutazioni" :key="rating.id" :value="rating.id">
+            {{ rating.name }}
+          </option>
+        </select>
+      </div>
+
+      <div class="col-12 col-md-4 align-self-end pb-2">
+        <h4>Filtra per numero di recensioni</h4>
+        <select v-model="store.Review" class="form-select w-75" id="selected-Review">
+          <option value="0">Qualsiasi </option>
+          <option value="5">Minimo 5 recensioni</option>
+          <option value="10">Minimo 10 recensioni</option>
+          <option value="12">Minimo 12 recensioni</option>
+        </select>
+      </div>
+
+      <button type="submit" form="nameform" value="Submit" class="btn btn-danger" @click="population()">
+        ricerca
+      </button>
+    </form>
+
+    <div v-if="loading">
+      <h3>Caricamento...</h3>
+    </div>
     <div v-else-if="teachers.length > 0">
       <div class="row mt-4">
-        <div
-          class="col-12 col-md-4 col-lg-3 p-2"
-          v-for="teacher in teachers"
-          :key="teacher.id"
-        >
-          <RouterLink
-            :to="{ name: 'show', params: { id: teacher.user.name } }"
-            @click="riempiVet(teacher.id)"
-            class="text-decoration-none"
-          >
+        <div class="col-12 col-md-4 col-lg-3 p-2" v-for="teacher in teachers" :key="teacher.id">
+          <RouterLink :to="{ name: 'show', params: { id: teacher.user.name } }" @click="riempiVet(teacher.id)"
+            class="text-decoration-none">
             <div class="card pt-3 border-0 shadow">
-              <div
-                class="d-flex justify-content-center align-items-center img_circle mx-auto height_img_query"
-              >
-                <img
-                  class="w-100 h-100 rounded-circle"
-                  :src="getImageUrl(teacher)"
-                  alt=""
-                />
+              <div class="d-flex justify-content-center align-items-center img_circle mx-auto height_img_query">
+                <img class="w-100 h-100 rounded-circle" :src="getImageUrl(teacher)" alt="" />
               </div>
               <div class="card-body">
                 <h4>{{ teacher.user.name }} {{ teacher.user.lastname }}</h4>
@@ -92,4 +111,8 @@ export default {
     </div>
   </div>
 </template>
-<style></style>
+<style>
+/* option {
+  width: 100%;
+} */
+</style>
