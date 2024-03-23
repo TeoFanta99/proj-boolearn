@@ -26,38 +26,37 @@ export default {
 
     // funzione chiamata appena la pagina viene caricata dal browser
     SearchProf() {
-
-      axios.post('http://127.0.0.1:8000/api/v1/result')
-      .then((res) =>{
-        
-        this.teachers= res.data.teachers;
-        this.store.materie=res.data.subjects;
-        console.log(this.teachers);
-        this.loading=false;
-      })
-      .catch((error) => {
-        console.error("Errore durante la richiesta API:", error);
-      });
+      axios
+        .post("http://127.0.0.1:8000/api/v1/result")
+        .then((res) => {
+          this.teachers = res.data.teachers;
+          this.store.materie = res.data.subjects;
+          console.log(this.teachers);
+          this.loading = false;
+        })
+        .catch((error) => {
+          console.error("Errore durante la richiesta API:", error);
+        });
       // let dataToSend = { nome_cognome: this.teacher };
 
       // if (this.SubjectSelect.length > 0) {
       //   dataToSend.subjects = this.SubjectSelect;
       // }
 
-//       axios
-//         .post("http://127.0.0.1:8000/api/v1/hgs", dataToSend)
-//         .then((response) => {
-//           this.teachers = response.data.teachers;
-//           store.materie = response.data.subjects;
-//           store.recensioni = response.data.reviews;
-//           store.valutazioni = response.data.ratings;
-//           console.log(this.teachers);
-//           this.loading = false;
-//         })
-//         .catch((error) => {
-// >>>>>>> fix_bug
-//           console.error("Errore durante la richiesta API:", error);
-//         });
+      //       axios
+      //         .post("http://127.0.0.1:8000/api/v1/hgs", dataToSend)
+      //         .then((response) => {
+      //           this.teachers = response.data.teachers;
+      //           store.materie = response.data.subjects;
+      //           store.recensioni = response.data.reviews;
+      //           store.valutazioni = response.data.ratings;
+      //           console.log(this.teachers);
+      //           this.loading = false;
+      //         })
+      //         .catch((error) => {
+      // >>>>>>> fix_bug
+      //           console.error("Errore durante la richiesta API:", error);
+      //         });
       // let dataToSend = { nome_cognome: this.teacher };
 
       // if (this.SubjectSelect.length > 0) {
@@ -95,10 +94,10 @@ export default {
       });
     },
     hasExpireDate(teacher) {
-      if(teacher.sponsorships.length > 0){
+      if (teacher.sponsorships.length > 0) {
         return true;
       }
-    }
+    },
   },
 
   watch: {
@@ -110,13 +109,11 @@ export default {
     teachers: {
       deep: true,
       handler(newTeachers) {
-        newTeachers.forEach(teacher => {
+        newTeachers.forEach((teacher) => {
           teacher.hasExpireDate = teacher.sponsorships.length > 0;
         });
-      }
-    }
-     
-    
+      },
+    },
   },
 
   mounted() {
@@ -193,14 +190,19 @@ export default {
     </form>
 
     <!-- Sezione icone teachers -->
-    <div v-if="loading"><h3>Caricamento...</h3></div>
-
+    <div v-if="loading" class="loading-gif">
+      <img
+        src="https://media1.tenor.com/m/_dGu36t3VNEAAAAC/loading-buffering.gif"
+        alt="Caricamento..."
+        class="loading-image"
+      />
+    </div>
     <div v-else-if="teachers.length > 0">
       <div class="row mt-4">
         <div
           class="col-12 col-md-4 col-lg-3 p-2"
           v-for="teacher in teachers"
-          :key="teacher.id" 
+          :key="teacher.id"
         >
           <RouterLink
             :to="{ name: 'show', params: { id: teacher.user.name } }"
@@ -208,7 +210,9 @@ export default {
             class="text-decoration-none"
           >
             <div class="card pt-3 border-0 shadow">
-              <div class="position-absolute star_sponsor"><i class="fa-solid fa-star"></i></div>
+              <div class="position-absolute star_sponsor">
+                <i class="fa-solid fa-star"></i>
+              </div>
               <div
                 class="d-flex justify-content-center align-items-center img_circle mx-auto height_img_query"
               >
@@ -218,7 +222,7 @@ export default {
                   alt=""
                 />
               </div>
-              <div class="card-body" >
+              <div class="card-body">
                 <h4>{{ teacher.user.name }} {{ teacher.user.lastname }}</h4>
               </div>
             </div>
@@ -233,14 +237,47 @@ export default {
   </div>
 </template>
 <style lang="scss">
-.star_sponsor{
+
+.loading-gif {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px; /* Regola l'altezza secondo le tue preferenze */
+    width: 100px; /* Regola la larghezza secondo le tue preferenze */
+    opacity: 0;
+    animation: fadeInOut 1.5s ease-in-out forwards;
+}
+
+.loading-image {
+    width: 100%; /* Per adattare l'immagine alla grandezza del contenitore */
+    animation: zoomInOut 1.5s ease-in-out infinite;
+}
+
+@keyframes fadeInOut {
+    0%, 100% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+@keyframes zoomInOut {
+    0%, 100% {
+        transform: scale(0.7);
+    }
+    50% {
+        transform: scale(1);
+    }
+}
+.star_sponsor {
   top: 10%;
   right: 5%;
-  .fa-star{
+  .fa-star {
     color: #5353ff;
   }
 }
-.testo-rosso{
+.testo-rosso {
   color: red;
 }
 .img_circle {
