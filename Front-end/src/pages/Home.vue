@@ -208,6 +208,7 @@ export default {
             class="text-decoration-none"
           >
             <div class="card pt-3 border-0 shadow">
+              <div class="position-absolute star_sponsor"><i class="fa-solid fa-star"></i></div>
               <div
                 class="d-flex justify-content-center align-items-center img_circle mx-auto height_img_query"
               >
@@ -218,7 +219,7 @@ export default {
                 />
               </div>
               <div class="card-body" >
-                <h4 :class="{ 'testo-rosso': hasExpireDate(teacher) }">{{ teacher.user.name }} {{ teacher.user.lastname }}</h4>
+                <h4>{{ teacher.user.name }} {{ teacher.user.lastname }}</h4>
               </div>
             </div>
           </RouterLink>
@@ -231,7 +232,14 @@ export default {
     </div>
   </div>
 </template>
-<style>
+<style lang="scss">
+.star_sponsor{
+  top: 10%;
+  right: 5%;
+  .fa-star{
+    color: #5353ff;
+  }
+}
 .testo-rosso{
   color: red;
 }

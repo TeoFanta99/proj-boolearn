@@ -112,6 +112,19 @@ class ApiController extends Controller
                 if ($farthestExpireDate > Carbon::now()) {
                     $filteredTeachers[] = $teacher;
                 }
+                if (!empty($filteredTeachers)) {
+                    // Ordina gli insegnanti in base alla data di scadenza più lontana delle sponsorizzazioni
+                    $filteredTeachers = collect($filteredTeachers)->sortByDesc(function($teacher) {
+                        return $teacher->sponsorships()->max('expire_date');
+                    });
+                
+                    // // Ottieni l'insegnante con la data di scadenza più lontana
+                    $filteredTeachers = $filteredTeachers->values()->all();
+
+                
+                    // Esegui il salvataggio del primo insegnante con la data di scadenza più lontana
+                    // ...
+                }
             }
 
 

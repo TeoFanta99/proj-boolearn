@@ -1,0 +1,68 @@
+{
+    "backEndSubjects": [
+      {
+        "nome": "PHP",
+        "descrizione": "PHP è un linguaggio di scripting ampiamente utilizzato per lo sviluppo web, noto per la sua facilità di integrazione con HTML e la sua ampia adozione."
+      },
+      {
+        "nome": "Node.js",
+        "descrizione": "Node.js è un runtime JavaScript basato su Chrome V8 che consente di eseguire JavaScript lato server, adatto per la creazione di applicazioni web ad alta scalabilità."
+      },
+      {
+        "nome": "Django",
+        "descrizione": "Django è un framework web Python ad alto livello che favorisce lo sviluppo rapido e pulito di applicazioni web."
+      },
+      {
+        "nome": "Spring Boot",
+        "descrizione": "Spring Boot è un framework Java per la creazione di applicazioni web e servizi basati su Spring, con un approccio opinionato e convenzioni predefinite."
+      },
+      {
+        "nome": "Ruby on Rails",
+        "descrizione": "Ruby on Rails è un framework web open-source scritto in Ruby che favorisce la scrittura di codice pulito e la rapidità di sviluppo."
+      }
+    ],
+    "frontEndSubjects": [
+      {
+        "nome": "HTML",
+        "descrizione": "HTML (HyperText Markup Language) è il linguaggio standard per la creazione di pagine web e applicazioni web."
+      },
+      {
+        "nome": "CSS",
+        "descrizione": "CSS (Cascading Style Sheets) è utilizzato per lo stile e la presentazione delle pagine web, inclusi layout, colori e tipografia."
+      },
+      {
+        "nome": "JavaScript",
+        "descrizione": "JavaScript è un linguaggio di programmazione ampiamente utilizzato per aggiungere interattività e dinamicità alle pagine web."
+      },
+      {
+        "nome": "React",
+        "descrizione": "React è una libreria JavaScript per la creazione di interfacce utente, sviluppata da Facebook, che permette la costruzione di componenti riutilizzabili."
+      },
+      {
+        "nome": "Angular",
+        "descrizione": "Angular è un framework JavaScript sviluppato da Google per la creazione di applicazioni web single-page (SPA) e app mobili."
+      }
+    ],
+    "databaseSubjects": [
+      {
+        "nome": "SQL",
+        "descrizione": "SQL (Structured Query Language) è un linguaggio standardizzato per la gestione di database relazionali, utilizzato per interrogare e manipolare i dati."
+      },
+      {
+        "nome": "MySQL",
+        "descrizione": "MySQL è un sistema di gestione di database relazionali open-source ampiamente utilizzato per lo sviluppo web e altre applicazioni."
+      },
+      {
+        "nome": "PostgreSQL",
+        "descrizione": "PostgreSQL è un sistema di gestione di database relazionali open-source con una robusta architettura e numerose funzionalità avanzate."
+      },
+      {
+        "nome": "MongoDB",
+        "descrizione": "MongoDB è un database NoSQL orientato ai documenti, noto per la sua flessibilità e scalabilità, adatto per applicazioni web moderne."
+      },
+      {
+        "nome": "phpMyAdmin",
+        "descrizione": "phpMyAdmin è un'applicazione web open-source che fornisce un'interfaccia grafica per la gestione dei database MySQL tramite il browser web."
+      }
+    ]
+  }

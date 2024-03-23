@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,9 +17,10 @@ class SponsorshipFactory extends Factory
      */
     public function definition()
     {
+        
         return [
             'name' => fake() -> colorName(),
-            'duration' => fake() -> time(),
+            'duration' => Carbon::instance($this->faker->dateTime())->format('H:i:s'),
             'price' => fake() -> randomFloat(2, 50, 200),
         ];
     }

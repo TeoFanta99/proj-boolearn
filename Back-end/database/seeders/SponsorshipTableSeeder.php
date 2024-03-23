@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Support\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Sponsorship;
@@ -18,7 +19,8 @@ class SponsorshipTableSeeder extends Seeder
     {
         Sponsorship :: factory() -> count(3) -> create() -> each(function($sponsorship) {
             $teacher = Teacher :: inRandomOrder() -> first();
-            $sponsorship -> teacher() -> attach($teacher);
+            $expireDate = Carbon::now()->addDays(rand(1, 30))->addHours(rand(1,5));
+            $sponsorship->teacher()->attach($teacher, ['expire_date' => $expireDate]);
             $sponsorship -> save();
         });  
     }
