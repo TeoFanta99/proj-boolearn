@@ -122,8 +122,7 @@ class ApiController extends Controller
                     $filteredTeachers = $filteredTeachers->values()->all();
 
                 
-                    // Esegui il salvataggio del primo insegnante con la data di scadenza più lontana
-                    // ...
+                
                 }
             }
 
