@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Message;
 use App\Models\Subject;
 use App\Models\Teacher;
 use App\Models\Review;
@@ -13,7 +14,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 class ApiController extends Controller
 {
-   
+
     public function frontTeachers(Request $request)
     {
 
@@ -69,7 +70,30 @@ class ApiController extends Controller
         ]);
 
     }
+    public function getMessage(Request $request)
+    {
+        
+        $user_name = $request->input('user_name');
+        $user_email = $request->input('user_email');
+        $email_title = $request->input('email_title');
+        $description = $request->input('description');
+        $teacher_id = $request->input('teacher_id');
+        // dd($user_name, $user_email, $email_title, $description, $teacher_id);
 
+        $teacher = Teacher::find($teacher_id);
+
+        $new_message = new Message();
+        $new_message->user_name= $user_name;
+        $new_message->user_email= $user_email;
+        $new_message->email_title= $email_title;
+        $new_message->description= $description;
+        $new_message->date_of_message= Carbon::now()->toDateString();
+        $new_message->teacher()->associate($teacher);
+        $new_message -> save();
+
+        
+
+    }
     public function reviews(Request $request)
     {
 
@@ -88,12 +112,9 @@ class ApiController extends Controller
 
     public function results(Request $request)
     {
-        $subject_id = $request->input('subject');
-        $rating_id = $request->input('rating');
-        $min_number_review = $request->input('review');
-
 
         $subjects = Subject::all();
+        $ratings = Rating::all();
         // Ottieni tutti i teachers con le relazioni pre-caricate
         $teachers = Teacher::with(['user', 'subjects', 'ratings', 'reviews', 'sponsorships'])->get();
 
@@ -107,22 +128,22 @@ class ApiController extends Controller
             if ($teacher->sponsorships->isNotEmpty()) {
                 // Ottieni la sponsorizzazione più recente e la sua data di scadenza
                 $farthestExpireDate = $teacher->sponsorships()->max('expire_date');
-            
+
                 // Controllo se la sponsorizzazione con la data di scadenza più lontana non è scaduta
                 if ($farthestExpireDate > Carbon::now()) {
                     $filteredTeachers[] = $teacher;
                 }
-                if (!empty($filteredTeachers)) {
+                if (!empty ($filteredTeachers)) {
                     // Ordina gli insegnanti in base alla data di scadenza più lontana delle sponsorizzazioni
-                    $filteredTeachers = collect($filteredTeachers)->sortByDesc(function($teacher) {
+                    $filteredTeachers = collect($filteredTeachers)->sortByDesc(function ($teacher) {
                         return $teacher->sponsorships()->max('expire_date');
                     });
-                
+
                     // // Ottieni l'insegnante con la data di scadenza più lontana
                     $filteredTeachers = $filteredTeachers->values()->all();
 
-                
-                
+
+
                 }
             }
 
@@ -130,59 +151,69 @@ class ApiController extends Controller
         }
 
         // Invia una risposta JSON contenente i teachers con sponsorizzazioni attive
-        return response()->json(['teachers'=>$filteredTeachers,'subjects'=>$subjects]);
+        return response()->json(['teachers' => $filteredTeachers, 'subjects' => $subjects, "ratings" => $ratings]);
+    }
+    public function filtered(Request $request)
+    {
+        $subject = $request->input('subject');
+        $rating_id = $request->input('rating');
+        $min_number_review = $request->input('review');
+
+        $subject_ = Subject::whereRaw('LOWER(name) = ?', [strtolower($subject)])->first();
+        $subject_id = $subject_->id;
+        // // Ottieni tutti i teachers con le relazioni pre-caricate
+        $teachers = Teacher::with(['user', 'subjects', 'ratings', 'reviews'])->get();
+
+        // Array per memorizzare i risultati filtrati
+        $filteredTeachers = [];
+
+        foreach ($teachers as $teacher) {
+            // Controlla se il teacher ha tutte le materie specificate, se il parametro subject_id è presente
+            if ($subject_id !== 0) {
+                if (!$teacher->subjects->pluck('id')->contains($subject_id)) {
+                    continue;
+                }
+            }
+
+            $averageRating = $teacher->ratings()->avg('ratings.id');
+            if ($rating_id !== 0) {
+                if ($averageRating < $rating_id) {
+                    continue;
+                }
+            }
+            // Filtraggio per numero minimo di recensioni
+            if ($min_number_review !== 0) {
+                if ($teacher->reviews->count() < $min_number_review) {
+                    continue;
+                }
+            }
+            if ($teacher->sponsorships->isNotEmpty()) {
+                // Ordino le sponsorizzazioni per data di scadenza in modo decrescente e prendo la prima
+                $expire_date = $teacher->sponsorships->sortByDesc('expire_date')->first()->expire_date;
+                // Controllo se la sponsorizzazione non è scaduta
+                if ($expire_date >= Carbon::now()) {
+                    $filteredTeachers[] = $teacher;
+                    continue;
+                }
+            }
+
+            // Nessun parametro di filtro specificato
+            if ($rating_id === 0 && $min_number_review === 0) {
+                $filteredTeachers[] = $teacher;
+            } else {
+                // Se il teacher supera tutti i filtri, aggiungilo ai risultati filtrati
+                $filteredTeachers[] = $teacher;
+
+            }
+
+        }
+
+        // Invia una risposta JSON contenente i teachers filtrati
+        return response()->json($filteredTeachers);
     }
 }
+
+
 // CODICE CON I FILTRI E SPONSORIZZAZIONI
 
-// // Ottieni tutti i teachers con le relazioni pre-caricate
-// $teachers = Teacher::with(['user','subjects', 'ratings', 'reviews'])->get();
 
-// // Array per memorizzare i risultati filtrati
-// $filteredTeachers = [];
-
-// foreach ($teachers as $teacher) {
-//     // Controlla se il teacher ha tutte le materie specificate, se il parametro subject_id è presente
-//     if ($subject_id !== 0) {
-//         if (!$teacher->subjects->pluck('id')->contains($subject_id)) {
-//             continue;
-//         }
-//     }
-
-//     $averageRating = $teacher->ratings()->avg('ratings.id');
-//     if ($rating_id !== 0) {
-//         if ($averageRating < $rating_id) {
-//             continue;
-//         }
-//     }
-//     // Filtraggio per numero minimo di recensioni
-//     if ($min_number_review !== 0) {
-//         if ($teacher->reviews->count() < $min_number_review) {
-//             continue;
-//         }
-//     }
-//     if ($teacher->sponsorships->isNotEmpty()) {
-//         // Ordino le sponsorizzazioni per data di scadenza in modo decrescente e prendo la prima
-//         $expire_date = $teacher->sponsorships->sortByDesc('expire_date')->first()->expire_date;
-//         // Controllo se la sponsorizzazione non è scaduta
-//         if ($expire_date >=  Carbon::now()) {
-//             $filteredTeachers[] = $teacher;
-//             continue;
-//         }
-//     }
-
-//     // Nessun parametro di filtro specificato
-//     if ($subject_id === 0 && $rating_id === 0 && $min_number_review === 0) {
-//         $filteredTeachers[] = $teacher;
-//     }else{
-//         // Se il teacher supera tutti i filtri, aggiungilo ai risultati filtrati
-//         $filteredTeachers[] = $teacher;
-
-//     }
-
-// }
-
-// // Invia una risposta JSON contenente i teachers filtrati
-// return response()->json($filteredTeachers);
-// }
-// }

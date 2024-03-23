@@ -11,7 +11,7 @@ export default {
     return {
       store,
       teachers: [],
-      loading: true,
+      loading: true
     };
   },
   methods: {
@@ -25,12 +25,16 @@ export default {
         rating: store.Rating,
         review: store.Review,
       };
+      
       axios
-        .post("http://127.0.0.1:8000/api/v1/result", dataToSend)
+        .post("http://127.0.0.1:8000/api/v1/filtered", dataToSend)
         .then((response) => {
           console.log(response.data);
           this.teachers = response.data;
-          console.log(this.teachers);
+          // DEBUG
+          // console.log(response.data);
+          // console.log(this.teachers);
+          // CONFERMO LA FINE DEL CARICAMENTO DEGLI INSEGNANTI 
           this.loading = false;
         })
         .catch((error) => {
@@ -57,9 +61,9 @@ export default {
 
 <template>
   <div class="container">
-    <div v-for="materia in store.materie">
-      <h2 v-if="store.Subject == materia.id">Materia: {{ materia.name }}</h2>
-    </div>
+    
+      <h2 >Materia: {{ store.Subject }}</h2>
+  
 
     <form class="d-flex">
       <div class="col-12 col-md-4 align-self-end pb-2">

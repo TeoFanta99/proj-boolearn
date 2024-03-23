@@ -31,6 +31,7 @@ export default {
         .then((res) => {
           this.teachers = res.data.teachers;
           this.store.materie = res.data.subjects;
+          this.store.valutazioni=res.data.ratings;
           console.log(this.teachers);
           this.loading = false;
         })
@@ -158,20 +159,20 @@ export default {
   <jumbo id="boh" />
 
   <div class="container">
-    <form class="d-flex">
-      <div class="col-12 col-md-4 align-self-end pb-2">
+    <form class="d-flex align-items-center">
+      <div class="col-12 col-md-2  align-self-end pb-2">
         <h4>Scegli la materia</h4>
 
         <!-- Sezione Select -->
         <select
           v-model="store.Subject"
-          class="form-select w-25"
+          class="form-select w-75"
           id="selected-Subject"
         >
           <option
             v-for="subject in store.materie"
             :key="subject.id"
-            :value="subject.id"
+            :value="subject.name"
           >
             {{ subject.name }}
           </option>
@@ -182,10 +183,10 @@ export default {
         type="submit"
         form="nameform"
         value="Submit"
-        class="btn btn-danger"
+        class="btn btn-danger h-50 mt-4"
         @click="riempiRec()"
       >
-        ricerca
+        Ricerca
       </button>
     </form>
 

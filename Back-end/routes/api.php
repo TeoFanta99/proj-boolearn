@@ -31,6 +31,7 @@ Route::group(['prefix' => '/v1'], function(){
     Route :: get('review', [ ApiController :: class, 'reviews']);
 
     Route :: post('result', [ ApiController :: class, 'results']);
+    Route :: post('filtered', [ ApiController :: class, 'filtered']);
 
     Route :: post('hgs', [ ApiController :: class, 'frontTeachers']);
 

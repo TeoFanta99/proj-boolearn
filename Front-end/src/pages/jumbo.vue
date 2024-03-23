@@ -1,6 +1,7 @@
 <script>
 import axios from "axios";
 import { store } from "../store";
+import { useAttrs } from "vue";
 
 export default {
   name: "jumbo",
@@ -10,28 +11,48 @@ export default {
      
     };
   },
+  methods:{
 
+  },
 
   mounted() {
 
     const text = document.querySelector(".sec-text");
+   
+    const textLoad = (text) => {
+  // Array di oggetti contenenti il testo e il colore per ciascun elemento
+  const texts = [
+    { singleText: "HTML", color: "#e5532d" },
+    { singleText: "CSS", color: "#254bdd" },
+    { singleText: "JS", color: "#efd81d" },
+    { singleText: "PHP", color: "#254bdd" },
+    { singleText: "LARAVEL", color: "#ff554d" },
+    { singleText: "VueJS", color: "#3fb27f" }
+  ];
 
-    const textLoad = () => {
-      setTimeout(() => {
-        text.textContent = "HTML";
-        text.style.color = "#e5532d";
-      }, 0);
-      setTimeout(() => {
-        text.textContent = "CSS";
-        text.style.color = "#254bdd";
-      }, 4500);
-      setTimeout(() => {
-        text.textContent = "JS";
-        text.style.color = "#efd81d";
-      }, 9000);
-    };
-    textLoad();
-    setInterval(textLoad, 13500);
+  const setTextAndColor = (index) => {
+    // Ottieni il testo e il colore dall'array
+    const { singleText, color } = texts[index];
+    
+    // Imposta il testo e il colore
+    text.textContent = singleText;
+    text.style.color = color;
+    
+    // Incrementa l'indice, se è oltre la lunghezza dell'array, torna a 0
+    const nextIndex = (index + 1) % texts.length;
+    
+    // Richiama ricorsivamente la funzione per il prossimo testo dopo un ritardo
+    setTimeout(() => {
+      setTextAndColor(nextIndex); // Passa l'indice successivo
+    }, 4500); // Ritardo tra ogni testo in millisecondi
+  };
+
+  // Avvia il processo impostando il testo e il colore per il primo elemento nell'array
+  setTextAndColor(0);
+};
+
+textLoad(text); // Avvia la sequenza
+
 
 
   },

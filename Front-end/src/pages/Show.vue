@@ -17,6 +17,7 @@ export default {
   data() {
     return {
       store,
+      switchForm:false,
       reviews: [],
     };
   },
@@ -55,7 +56,8 @@ export default {
           <div class="img_container">
             <img class="w-100 h-100" :src="getImageUrl(store.List)" alt="" />
           </div>
-          <ContactTeacherForm />
+          <button class="btn mt-4" :class="!this.switchForm? 'btn-success' : 'btn-danger'" @click="this.switchForm= !this.switchForm">{{ this.switchForm? 'Annulla' : 'Contatta' }}</button>
+          <ContactTeacherForm v-if="this.switchForm" />
         </div>
         <div class="col-8">
           <div class="d-flex align-items-center gap-2">
