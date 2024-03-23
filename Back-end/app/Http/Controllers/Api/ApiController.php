@@ -93,7 +93,7 @@ class ApiController extends Controller
         $min_number_review = $request->input('review');
 
 
-
+        $subjects = Subject::all();
         // Ottieni tutti i teachers con le relazioni pre-caricate
         $teachers = Teacher::with(['user', 'subjects', 'ratings', 'reviews', 'sponsorships'])->get();
 
@@ -118,7 +118,7 @@ class ApiController extends Controller
         }
 
         // Invia una risposta JSON contenente i teachers con sponsorizzazioni attive
-        return response()->json($filteredTeachers);
+        return response()->json(['teachers'=>$filteredTeachers,'subjects'=>$subjects]);
     }
 }
 // CODICE CON I FILTRI E SPONSORIZZAZIONI

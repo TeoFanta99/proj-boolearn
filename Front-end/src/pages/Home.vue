@@ -26,24 +26,38 @@ export default {
 
     // funzione chiamata appena la pagina viene caricata dal browser
     SearchProf() {
-      let dataToSend = { nome_cognome: this.teacher };
 
-      if (this.SubjectSelect.length > 0) {
-        dataToSend.subjects = this.SubjectSelect;
-      }
+      axios.post('http://127.0.0.1:8000/api/v1/result')
+      .then((res) =>{
+        
+        this.teachers= res.data.teachers;
+        this.store.materie=res.data.subjects;
+        console.log(this.teachers);
+        this.loading=false;
+      })
+      .catch((error) => {
+        console.error("Errore durante la richiesta API:", error);
+      });
+      // let dataToSend = { nome_cognome: this.teacher };
 
-      axios
-        .post("http://127.0.0.1:8000/api/v1/hgs", dataToSend)
-        .then((response) => {
-          this.teachers = response.data.teachers;
-          this.subjects = response.data.subjects;
-          store.recensioni = response.data.reviews;
-          this.ratings = response.data.ratings;
-          console.log(this.teachers);
-        })
-        .catch((error) => {
-          console.error("Errore durante la richiesta API:", error);
-        });
+      // if (this.SubjectSelect.length > 0) {
+      //   dataToSend.subjects = this.SubjectSelect;
+      // }
+
+//       axios
+//         .post("http://127.0.0.1:8000/api/v1/hgs", dataToSend)
+//         .then((response) => {
+//           this.teachers = response.data.teachers;
+//           store.materie = response.data.subjects;
+//           store.recensioni = response.data.reviews;
+//           store.valutazioni = response.data.ratings;
+//           console.log(this.teachers);
+//           this.loading = false;
+//         })
+//         .catch((error) => {
+// >>>>>>> fix_bug
+//           console.error("Errore durante la richiesta API:", error);
+//         });
       // let dataToSend = { nome_cognome: this.teacher };
 
       // if (this.SubjectSelect.length > 0) {
@@ -80,6 +94,11 @@ export default {
         name: "filt",
       });
     },
+    hasExpireDate(teacher) {
+      if(teacher.sponsorships.length > 0){
+        return true;
+      }
+    }
   },
 
   watch: {
@@ -88,6 +107,16 @@ export default {
       // Quando SubjectSelect cambia, chiama la funzione SearchProf
       this.SearchProf();
     },
+    teachers: {
+      deep: true,
+      handler(newTeachers) {
+        newTeachers.forEach(teacher => {
+          teacher.hasExpireDate = teacher.sponsorships.length > 0;
+        });
+      }
+    }
+     
+    
   },
 
   mounted() {
@@ -171,7 +200,7 @@ export default {
         <div
           class="col-12 col-md-4 col-lg-3 p-2"
           v-for="teacher in teachers"
-          :key="teacher.id"
+          :key="teacher.id" 
         >
           <RouterLink
             :to="{ name: 'show', params: { id: teacher.user.name } }"
@@ -188,8 +217,8 @@ export default {
                   alt=""
                 />
               </div>
-              <div class="card-body">
-                <h4>{{ teacher.user.name }} {{ teacher.user.lastname }}</h4>
+              <div class="card-body" >
+                <h4 :class="{ 'testo-rosso': hasExpireDate(teacher) }">{{ teacher.user.name }} {{ teacher.user.lastname }}</h4>
               </div>
             </div>
           </RouterLink>
@@ -203,6 +232,9 @@ export default {
   </div>
 </template>
 <style>
+.testo-rosso{
+  color: red;
+}
 .img_circle {
   width: 60%;
 }
