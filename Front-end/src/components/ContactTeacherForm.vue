@@ -41,7 +41,7 @@ export default {
   },
 
   mounted() {
-    console.log(store.List.user.email);
+    // console.log(store.List.user.email);
   },
 };
 </script>

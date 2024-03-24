@@ -72,7 +72,7 @@ class ApiController extends Controller
     }
     public function getMessage(Request $request)
     {
-        
+
         $user_name = $request->input('user_name');
         $user_email = $request->input('user_email');
         $email_title = $request->input('email_title');
@@ -83,15 +83,15 @@ class ApiController extends Controller
         $teacher = Teacher::find($teacher_id);
 
         $new_message = new Message();
-        $new_message->user_name= $user_name;
-        $new_message->user_email= $user_email;
-        $new_message->email_title= $email_title;
-        $new_message->description= $description;
-        $new_message->date_of_message= Carbon::now()->toDateString();
+        $new_message->user_name = $user_name;
+        $new_message->user_email = $user_email;
+        $new_message->email_title = $email_title;
+        $new_message->description = $description;
+        $new_message->date_of_message = Carbon::now();
         $new_message->teacher()->associate($teacher);
-        $new_message -> save();
+        $new_message->save();
 
-        
+
 
     }
     public function reviews(Request $request)
@@ -161,11 +161,13 @@ class ApiController extends Controller
 
         $subject_ = Subject::whereRaw('LOWER(name) = ?', [strtolower($subject)])->first();
         $subject_id = $subject_->id;
-        // // Ottieni tutti i teachers con le relazioni pre-caricate
-        $teachers = Teacher::with(['user', 'subjects', 'ratings', 'reviews'])->get();
+
+        // Ottieni tutti i teachers con le relazioni pre-caricate
+        $teachers = Teacher::with(['user', 'subjects', 'ratings', 'reviews', 'sponsorships'])->get();
 
         // Array per memorizzare i risultati filtrati
         $filteredTeachers = [];
+        $sponsoredTeachers = [];
 
         foreach ($teachers as $teacher) {
             // Controlla se il teacher ha tutte le materie specificate, se il parametro subject_id è presente
@@ -188,32 +190,43 @@ class ApiController extends Controller
                 }
             }
             if ($teacher->sponsorships->isNotEmpty()) {
-                // Ordino le sponsorizzazioni per data di scadenza in modo decrescente e prendo la prima
-                $expire_date = $teacher->sponsorships->sortByDesc('expire_date')->first()->expire_date;
-                // Controllo se la sponsorizzazione non è scaduta
-                if ($expire_date >= Carbon::now()) {
-                    $filteredTeachers[] = $teacher;
-                    continue;
+                // Ottieni la sponsorizzazione più recente e la sua data di scadenza
+                $farthestExpireDate = $teacher->sponsorships()->max('expire_date');
+
+                // Controllo se la sponsorizzazione con la data di scadenza più lontana non è scaduta
+                if ($farthestExpireDate > Carbon::now()) {
+                    $sponsoredTeachers[] = $teacher;
+                }
+                if (!empty ($sponsoredTeachers)) {
+                    // Ordina gli insegnanti in base alla data di scadenza più lontana delle sponsorizzazioni
+                    $sponsoredTeachers = collect($sponsoredTeachers)->sortByDesc(function ($teacher) {
+                        return $teacher->sponsorships()->max('expire_date');
+                    });
+
+                    // // Ottieni l'insegnante con la data di scadenza più lontana
+                    $sponsoredTeachers = $sponsoredTeachers->values()->all();
+
+
+
                 }
             }
 
-            // Nessun parametro di filtro specificato
-            if ($rating_id === 0 && $min_number_review === 0) {
-                $filteredTeachers[] = $teacher;
-            } else {
-                // Se il teacher supera tutti i filtri, aggiungilo ai risultati filtrati
-                $filteredTeachers[] = $teacher;
 
-            }
 
+            // Se il teacher non è sponsorizzato o la sponsorizzazione è scaduta
+            $filteredTeachers[] = $teacher;
         }
+        $filteredTeachers = collect($filteredTeachers)->diff($sponsoredTeachers)->values()->all();
 
+        // Riunisci i teacher sponsorizzati all'inizio dell'array restituito
+        $filteredTeachers = array_merge($sponsoredTeachers, $filteredTeachers);
+      
+        // dd($sponsoredTeachers);
         // Invia una risposta JSON contenente i teachers filtrati
         return response()->json($filteredTeachers);
     }
 }
 
 
-// CODICE CON I FILTRI E SPONSORIZZAZIONI
 
 
