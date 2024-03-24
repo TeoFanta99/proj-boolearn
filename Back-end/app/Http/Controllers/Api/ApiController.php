@@ -158,9 +158,13 @@ class ApiController extends Controller
         $subject = $request->input('subject');
         $rating_id = $request->input('rating');
         $min_number_review = $request->input('review');
+        if($subject == 'Tutte'){
+            $subject_id = 0;
+        }else{
 
-        $subject_ = Subject::whereRaw('LOWER(name) = ?', [strtolower($subject)])->first();
-        $subject_id = $subject_->id;
+            $subject_ = Subject::whereRaw('LOWER(name) = ?', [strtolower($subject)])->first();
+            $subject_id = $subject_->id;
+        }
 
         // Ottieni tutti i teachers con le relazioni pre-caricate
         $teachers = Teacher::with(['user', 'subjects', 'ratings', 'reviews', 'sponsorships'])->get();
