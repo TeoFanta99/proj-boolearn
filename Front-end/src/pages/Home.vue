@@ -55,9 +55,14 @@ export default {
 
     // funzione chiamata quando si clicca su un docente
     riempiRec() {
+      event.preventDefault();
+      if(store.Subject != 0){
+      }else{
+        store.Subject='Tutte';
+      }
       this.$router.push({
-        name: "filt",
-      });
+          name: "filt",
+        })
     },
     hasExpireDate(teacher) {
       if (teacher.sponsorships.length > 0) {
@@ -154,7 +159,6 @@ export default {
 <template class="bg-light">
   <jumbo id="boh" />
 
-  <Carousel/>
   <div class="container">
     <form class="d-flex align-items-center">
       <div class="col-12 col-md-2 align-self-end pb-2">
@@ -166,7 +170,6 @@ export default {
           class="form-select w-75"
           id="selected-Subject"
         >
-          <option value="Tutte">Tutte</option>
           <option
             v-for="subject in store.materie"
             :key="subject.id"
