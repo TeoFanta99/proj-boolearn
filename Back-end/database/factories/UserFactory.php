@@ -16,6 +16,7 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        
         $this->faker->addProvider(new Person($this->faker));
         $gender = $this->faker->randomElement(['male', 'female']);
          $name = $this->faker->firstName($gender);

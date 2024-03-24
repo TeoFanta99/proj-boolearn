@@ -16,14 +16,14 @@ export default {
 <template>
   <div class="background">
     <div class="container">
-      <div class="row">
+      <div class="row align-items-end">
         <h2 class="p-4">F.A.Q</h2>
         <!-- Sezione Accordion di sinistra -->
         <div class="col-sm-12 col-md-12 col-lg-6 mt-3 p-4">
           <ul>
             <li>
               <input type="checkbox" name="accordian" id="first" />
-              <label for="first">Informativa privacy</label>
+              <label for="first" class="fs-6">Informativa privacy</label>
               <div class="content">
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
@@ -35,7 +35,7 @@ export default {
 
             <li>
               <input type="checkbox" name="accordian" id="second" />
-              <label for="second">Come posso contattare il docente al di fuori della piattaforma?</label>
+              <label for="second" class="fs-6">Come posso contattare il docente al di fuori della piattaforma?</label>
               <div class="content">
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
@@ -47,7 +47,7 @@ export default {
 
             <li>
               <input type="checkbox" name="accordian" id="third" />
-              <label for="third">Politica di rimborso</label>
+              <label for="third" class="fs-6">Politica di rimborso</label>
               <div class="content">
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
@@ -63,7 +63,7 @@ export default {
           <ul>
             <li>
               <input type="checkbox" name="accordian" id="fourth" />
-              <label for="fourth">Come posso pagare?</label>
+              <label for="fourth" class="fs-6">Come posso pagare?</label>
               <div class="content">
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
@@ -75,7 +75,7 @@ export default {
 
             <li>
               <input type="checkbox" name="accordian" id="fifth" />
-              <label for="fifth">Quali sono i nostri punti di forza?</label>
+              <label for="fifth" class="fs-6">Quali sono i nostri punti di forza?</label>
               <div class="content">
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
@@ -87,7 +87,7 @@ export default {
 
             <li>
               <input type="checkbox" name="accordian" id="sixth" />
-              <label for="sixth">Lavoriamo per te 24/7!</label>
+              <label for="sixth" class="fs-6">Lavoriamo per te 24/7!</label>
               <div class="content">
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc

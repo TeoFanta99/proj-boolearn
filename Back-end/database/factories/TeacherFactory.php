@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Teacher>
  */
+use Faker\Factory as FakerFactory;
 class TeacherFactory extends Factory
 {
     /**
@@ -16,13 +17,15 @@ class TeacherFactory extends Factory
      */
     public function definition()
     {
+        $faker = FakerFactory::create('it_IT');
         $phoneNumber = fake()->numerify('##########');
+        $city = $faker->city;
         return [
             'tax_id' => fake()->numberBetween(11111111111, 99999999999),
             'image_url' => fake()->imageUrl(640, 480, 'teachers', true),
             'cv_url' => '',
-            'biography' => fake()->paragraph(),
-            'city' => fake()->city(),
+            'biography' => $faker->text(),
+            'city' =>$city,
             'phone_number' => $phoneNumber,
             'motto' => fake()->word(10),
         ];

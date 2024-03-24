@@ -10,7 +10,7 @@ export default {
       class="navbar navbar-expand-lg bg-body-tertiary d-flex justify-content-between h-100"
     >
       <div class="d-flex gap-2">
-        <a href="http://localhost:8000/login" class="d-lg-block d-none ms-4"
+        <a href="http://localhost:8000/login" class="d-lg-block d-none ms-4" target="_blank"
           ><i
             class="fa-solid fa-circle-user"
             style="color: #b3b3b3; font-size: 40px"
@@ -18,7 +18,7 @@ export default {
         ></a>
         <a
           href="http://localhost:8000/register"
-          class="d-lg-block d-none mt-1 ms-4"
+          class="d-lg-block d-none mt-1 ms-4" target="_blank"
           ><i
             class="fa-solid fa-user-plus"
             style="color: rgb(83, 83, 255); font-size: 30px"

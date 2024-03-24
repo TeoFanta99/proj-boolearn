@@ -209,7 +209,7 @@ export default {
             @click="riempiVet(teacher.id)"
             class="text-decoration-none"
           >
-            <div class="card pt-3 border-0 shadow">
+            <div class="card pt-3 border-0 shadow on_hover">
               <div class="position-absolute star_sponsor">
                 <i class="fa-solid fa-star"></i>
               </div>
@@ -286,5 +286,16 @@ export default {
 }
 #boh {
   margin-top: 10px;
+}
+
+.on_hover{
+  
+    transition: all ease-in 0.5s;
+    transform:scale(1);
+  
+  &:hover{
+    transition: all ease-in 0.5s;
+    transform:scale(1.08);
+  }
 }
 </style>
