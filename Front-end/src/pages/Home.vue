@@ -206,7 +206,7 @@ export default {
         >
           <RouterLink
             :to="{ name: 'show', params: { id: teacher.user.name } }"
-            @click="riempiVet(teacher.id)"
+            @click="riempiVet(teacher.id),store.view= 2"
             class="text-decoration-none"
           >
             <div class="card pt-3 border-0 shadow on_hover">

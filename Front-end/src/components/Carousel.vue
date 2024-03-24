@@ -2,13 +2,13 @@
   <div>
     <div class="mySwiper">
       <swiper
-        slidesPerView="1"
+        slidesPerView="2"
         :loop="true"
-        :speed="1500"
+        :speed="500"
         :autoplay="{
-          delay: 2500,
+          delay: 1500,
           disableOnInteraction: false,
-          pauseOnMouseEnter: true,
+          pauseOnMouseEnter: false,
         }"
         :spaceBetween="10"
         :navigation="{
@@ -19,10 +19,16 @@
         ref="mySwiper"
         class="swiper-container position-relative"
       >
-        <swiper-slide > asdasd 1</swiper-slide>
-        <swiper-slide > asdaasdadasd23123sd 2</swiper-slide>
-        <swiper-slide>asdasdasd 3 </swiper-slide>
-        <swiper-slide>sdadsad 4 </swiper-slide>
+      <swiper-slide v-for="review in store.recensioni" :key="review.id" >
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{ review.name }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Subtitle</h6>
+            <p class="card-text">{{ review.description }}</p>
+            
+          </div>
+        </div>
+      </swiper-slide>
       </swiper>
       <div class="swiper-button-next custom-next rounded-circle">
         <!-- Replace with your next button icon (Font Awesome example) -->
@@ -33,19 +39,17 @@
         <i class="fas fa-chevron-left"></i>
       </div>
     </div>
-
-    <!-- Navigation Buttons -->
   </div>
 </template>
 
 <script>
-import { Swiper, SwiperSlide } from "swiper/vue";
-import "swiper/css";
-import "swiper/css/grid";
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import 'swiper/swiper-bundle.css';
+import 'swiper/components/navigation/navigation.min.css';
+import 'swiper/components/pagination/pagination.min.css';
+import SwiperCore, { Navigation, Pagination } from 'swiper/core';
 
-import "swiper/css/navigation"; // Import navigation styles
-import "bootstrap/dist/css/bootstrap.css"; // Import Bootstrap CSS
-import { Navigation } from "swiper/modules";
+SwiperCore.use([Navigation, Pagination]);
 import { store } from "../store";
 
 export default {
@@ -60,6 +64,9 @@ export default {
       store,
     };
   },
+  mounted(){
+    console.log(store.recensioni)
+  }
 };
 </script>
 
@@ -72,17 +79,19 @@ export default {
   background-color: white;
   position: relative;
 }
-
+.swiper_slide{
+  width: 300px;
+}
 .swiper-container {
-  max-width: 100%; /* Set the desired maximum width for the container */
+  max-width: 100%;
 }
 
 .custom-next,
 .custom-prev {
   position: absolute;
   top: 45%;
-  width: 35px; /* Set the desired width */
-  height: 35px; /* Set the desired height */
+  width: 35px;
+  height: 35px;
   background-color: white;
   color: red;
   cursor: pointer;
@@ -98,11 +107,11 @@ export default {
 }
 
 .custom-next {
-  right: 50px; /* Adjust the distance from the right as needed */
+  right: 50px;
 }
 
 .custom-prev {
-  left: 50px; /* Adjust the distance from the left as needed */
+  left: 50px;
 }
 
 .swiper-button-next::after,
