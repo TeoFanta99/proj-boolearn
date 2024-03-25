@@ -88,27 +88,8 @@ export default {
   },
 
   mounted() {
-    const swiper = new Swiper('.swiper', {
-  // Optional parameters
-  direction: 'vertical',
-  loop: true,
+    
 
-  // If we need pagination
-  pagination: {
-    el: '.swiper-pagination',
-  },
-
-  // Navigation arrows
-  navigation: {
-    nextEl: '.swiper-button-next',
-    prevEl: '.swiper-button-prev',
-  },
-
-  // And if we need scrollbar
-  scrollbar: {
-    el: '.swiper-scrollbar',
-  },
-});
 
 
     //setto a zero tutte le variabili dello store
@@ -124,14 +105,7 @@ export default {
 
       // Chiamata iniziale per caricare i dati
       this.SearchProf();
-      var swiper = new Swiper(".swiper-container", {
-        // Configurazione aggiuntiva opzionale:
-        loop: true, // Per rendere il carosello infinito
-        navigation: {
-          nextEl: ".swiper-button-next", // Selettore dell'elemento per il pulsante "Next"
-          prevEl: ".swiper-button-prev", // Selettore dell'elemento per il pulsante "Prev"
-        },
-      });
+      
     }, 2300);
 
     // const text = document.querySelector(".sec-text");
