@@ -66,7 +66,7 @@
                                         <div class="form-group">
                                             <label for="city">CITTÀ <span style="color: red;  font-size: 1.5em;">*</span></label>
                                             <select id="city" class="form-control" name="city">
-                                                <optionvalue="{{ $teacher->city }}" selected>{{ $teacher->city }}</option>
+                                                <option value="{{ $teacher->city }}" selected>{{ $teacher->city }}</option>
                                             </select>
                                         </div>
                                     </div>
@@ -83,8 +83,9 @@
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div class="form-group">
                                         <label for="cv_url">CARICA CV <span style="color: red;  font-size: 1.5em;"> *</span></label>
-                                        <input type="file" class="form-control" id="cv_url" name="cv_url" accept=".pdf">          
+                                        <input type="file" class="form-control" id="cv_url" name="cv_url"  accept=".pdf">          
                                     </div>
+                                    <a href="{{ route('teacher.index', Auth::user()->id) }}" target="_blank">CV</a>
                                 </div>
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="form-group">

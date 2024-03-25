@@ -16,7 +16,7 @@ export default {
 <template>
   <div class="background">
     <div class="container">
-      <div class="row align-items-end">
+      <div class="row">
         <h2 class="p-4">F.A.Q</h2>
         <!-- Sezione Accordion di sinistra -->
         <div class="col-sm-12 col-md-12 col-lg-6 mt-3 p-4">

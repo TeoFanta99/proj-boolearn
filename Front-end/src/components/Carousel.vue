@@ -1,34 +1,24 @@
 <template>
   <div>
     <div class="mySwiper">
-      <swiper
-        slidesPerView="2"
-        :loop="true"
-        :speed="500"
-        :autoplay="{
-          delay: 1500,
-          disableOnInteraction: false,
-          pauseOnMouseEnter: false,
-        }"
-        :spaceBetween="10"
-        :navigation="{
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-        }"
-        :modules="modules"
-        ref="mySwiper"
-        class="swiper-container position-relative"
-      >
-      <swiper-slide v-for="review in store.recensioni" :key="review.id" >
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">{{ review.name }}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Subtitle</h6>
-            <p class="card-text">{{ review.description }}</p>
-            
+      <swiper slidesPerView="2" :loop="true" :speed="500" :autoplay="{
+        delay: 1500,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: false,
+      }" :spaceBetween="10" :navigation="{
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      }" :modules="modules" ref="mySwiper" class="swiper-container position-relative">
+        <swiper-slide v-for="review in store.recensioni" :key="review.id">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{ review.name }}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Subtitle</h6>
+              <p class="card-text">{{ review.description }}</p>
+
+            </div>
           </div>
-        </div>
-      </swiper-slide>
+        </swiper-slide>
       </swiper>
       <div class="swiper-button-next custom-next rounded-circle">
         <!-- Replace with your next button icon (Font Awesome example) -->
@@ -64,7 +54,7 @@ export default {
       store,
     };
   },
-  mounted(){
+  mounted() {
     console.log(store.recensioni)
   }
 };
@@ -79,9 +69,11 @@ export default {
   background-color: white;
   position: relative;
 }
-.swiper_slide{
+
+.swiper_slide {
   width: 300px;
 }
+
 .swiper-container {
   max-width: 100%;
 }
@@ -100,6 +92,7 @@ export default {
   justify-content: center;
   align-items: center;
   font-size: 15px;
+
   &:hover {
     background-color: red;
     color: white;
@@ -107,11 +100,11 @@ export default {
 }
 
 .custom-next {
-  right: 50px;
+  right: -20px;
 }
 
 .custom-prev {
-  left: 50px;
+  left: -20px;
 }
 
 .swiper-button-next::after,
