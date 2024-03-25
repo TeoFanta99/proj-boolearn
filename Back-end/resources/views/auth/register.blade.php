@@ -46,21 +46,6 @@
                         </div>
 
                         <div class="mb-4 row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Indirizzo Email *')
-                                }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                                    name="email" value="{{ old('email') }}" autocomplete="email">
-                                <span id="MailNo" class="d-none  text-danger"></span>
-                                @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="mb-4 row">
                             <label for="date_of_birth" class="col-md-4 col-form-label text-md-right">{{ __('Data di
                                 Nascita *') }}</label>
 
@@ -75,11 +60,40 @@
                                 </span>
                                 @enderror
                             </div>
-                            <span id="DateNo" class="d-none  text-danger"> Data di nascita non valida! Devi essere
-                                maggiorenne!</span>
-
+                            <span id="DateNo" class="d-none  text-danger"> Data di nascita non valida! Devi essere maggiorenne!</span>
                         </div>
 
+                        <div class="mb-4 row">
+                            <label for="city" class="col-md-4 col-form-label text-md-right">{{ __('Città *') }}</label>
+
+                            <div class="col-md-6">
+                                <select id="city" class="form-control" name="city" value="{{ old('city') }}">
+                                   <option value="">Seleziona la tua città</option>
+                                </select>
+                                @error('city')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                            <span id="DateNo" class="d-none  text-danger"> Seleziona una città per continuare!</span>
+                        </div>
+
+                        <div class="mb-4 row">
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Indirizzo Email *')
+                                }}</label>
+
+                            <div class="col-md-6">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
+                                    name="email" value="{{ old('email') }}" autocomplete="email">
+                                <span id="MailNo" class="d-none  text-danger"></span>
+                                @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
                         <div class="mb-4 row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password *')
                                 }}</label>
@@ -124,6 +138,35 @@
     </div>
 </div>
 <script>
+    document.addEventListener("DOMContentLoaded", function() {
+            getCities();
+
+            function populateCitySelect(cities) {
+                const select = document.getElementById("city");
+                cities.forEach(city => {
+                    const option = document.createElement("option");
+                    option.value = city.nome;
+                    option.textContent = city.nome;
+                    select.appendChild(option);
+                });
+            }
+
+            function getCities() {
+                fetch('https://axqvoqvbfjpaamphztgd.functions.supabase.co/comuni')
+                    .then(response => response.json())
+                    .then(data => {
+                        // Controlla se ci sono risultati
+                        if (Array.isArray(data) && data.length > 0) {
+                            populateCitySelect(data);
+                        } else {
+                            console.log("Nessuna città trovata.");
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Si è verificato un errore:", error);
+                    });
+            }
+        });
     document.getElementById("Form_register").addEventListener("submit", function(event) {
             event.preventDefault();
 
@@ -258,6 +301,6 @@
                 return yesOrNo;
                 
             }
-        });
+    });
 </script>
 @endsection
