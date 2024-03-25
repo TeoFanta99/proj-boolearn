@@ -165,6 +165,7 @@ class MainController extends Controller
         $reviews = $teacher->reviews;
         $subjects = $teacher->subjects;
         $ratings = $teacher->ratings;
+        $sponsorships = $teacher->sponsorships;
         // Delete all associated messages
         foreach ($messages as $message) {
             $message->delete();
@@ -178,6 +179,11 @@ class MainController extends Controller
         foreach ($ratings as $rating) {
             $rating->teacher()->detach();
         }
+
+        foreach ($sponsorships as $sponsorship) {
+            $sponsorship->teacher()->detach();
+        }
+
         $teacher->delete();
         return redirect()->route('welcome');
     }
