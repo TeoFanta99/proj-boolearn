@@ -9,6 +9,8 @@ import ContactTeacherForm from "../components/ContactTeacherForm.vue";
 
 import ReviewForm from "../components/ReviewForm.vue";
 
+import RatingForm from "../components/RatingForm.vue";
+
 import Carousel from '../components/Carousel.vue';
 export default {
   name: "Show",
@@ -17,6 +19,7 @@ export default {
     ContactTeacherForm,
     Carousel,
     ReviewForm,
+    RatingForm,
   },
 
   data() {
@@ -24,6 +27,7 @@ export default {
       store,
       switchForm: false,
       switchReviewForm: false,
+      switchRatingForm: false,
       reviews: [],
     };
   },
@@ -48,6 +52,27 @@ export default {
           console.error("Errore durante la richiesta API:", error);
         });
     },
+    toggleForms(formName) {
+
+      // Accende il form "messaggio al professore"
+      if (formName === 'contact') {
+        this.switchForm = !this.switchForm;
+        this.switchReviewForm = false;
+        this.switchRatingForm = false;
+
+        // Accende il form "lascia una recensione"
+      } else if (formName === 'review') {
+        this.switchReviewForm = !this.switchReviewForm;
+        this.switchForm = false;
+        this.switchRatingForm = false;
+
+        // Accende il form "vota l'insegnante"
+      } else if (formName === 'rating') {
+        this.switchRatingForm = !this.switchRatingForm;
+        this.switchReviewForm = false;
+        this.switchForm = false;
+      }
+    },
   },
 
   mounted() {
@@ -66,18 +91,26 @@ export default {
           <div class="img_container">
             <img class="w-100 h-100" :src="getImageUrl(store.List)" alt="" />
           </div>
+
           <div class="buttons-container d-flex">
-            <button class="btn mt-4 me-3" :class="!this.switchForm ? 'btn-success' : 'btn-danger'"
-              @click="this.switchForm = !this.switchForm">
-              {{ this.switchForm ? "Annulla" : "Contatta" }}
+            <button class="btn mt-4 me-1" :class="!switchForm ? 'btn-success' : 'btn-danger'"
+              @click="toggleForms('contact')">
+              {{ switchForm ? "Annulla" : "Contatta" }}
             </button>
-            <button class="btn mt-4" :class="!this.switchReviewForm ? 'btn-success' : 'btn-danger'"
-              @click="this.switchReviewForm = !this.switchReviewForm">
-              {{ this.switchReviewForm ? "Annulla" : "Recensisci" }}
+            <button class="btn mt-4" :class="!switchReviewForm ? 'btn-success' : 'btn-danger'"
+              @click="toggleForms('review')">
+              {{ switchReviewForm ? "Annulla" : "Recensisci" }}
             </button>
+            <button class="btn mt-4" :class="!switchRatingForm ? 'btn-success' : 'btn-danger'"
+              @click="toggleForms('rating')">
+              {{ switchRatingForm ? "Annulla" : "Vota" }}
+            </button>
+
           </div>
-          <ContactTeacherForm v-if="this.switchForm && this.switchReviewForm == false" />
-          <ReviewForm v-if="this.switchReviewForm && this.switchForm == false" />
+
+          <ContactTeacherForm v-if="this.switchForm" />
+          <ReviewForm v-if="this.switchReviewForm" />
+          <RatingForm v-if="this.switchRatingForm" />
         </div>
         <div class="col-8">
           <div class="d-flex align-items-center gap-2">
