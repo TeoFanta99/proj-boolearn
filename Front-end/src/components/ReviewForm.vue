@@ -1,0 +1,83 @@
+<script>
+//importo store
+import axios from "axios";
+import { store } from "../store";
+
+export default {
+    name: "ContactTeacherForm",
+
+    data() {
+        return {
+            store,
+            success: false,
+        };
+    },
+
+    methods: {
+        test() {
+            //   console.log(store.NameSurname);
+            //   console.log(store.UserEmail);
+            //   console.log(store.EmailTitle);
+            //   console.log(store.EmailMessage);
+            //   console.log(store.List.user.id);
+            const DatatoSend = {
+                user_name: store.NameSurname,
+                user_email: store.UserEmail,
+                email_title: store.EmailTitle,
+                description: store.EmailMessage,
+                teacher_id: store.List.user.id,
+            };
+            axios.post("http://127.0.0.1:8000/api/v1/message", DatatoSend)
+
+                .then((response) => {
+                    this.success = true;
+
+                }).catch((error) => {
+
+                    console.error("Errore durante la richiesta API:", error);
+                });
+
+        },
+    },
+
+    mounted() {
+        // console.log(store.List.user.email);
+    },
+};
+</script>
+
+<template>
+    <br /><br />
+    <h2>Lascia una recensione all'insegnante!</h2>
+    <br />
+
+    <form @submit.prevent="test">
+        <div class="mb-3">
+            <input v-model="store.NameSurname" type="text" name="user_name" id="name_surname" class="form-control"
+                placeholder="Inserisci il tuo nome e cognome" />
+            <textarea class="w-100 mt-3" style="height: 200px;" name="review" id="review"></textarea>
+        </div>
+        <input type="submit" class="mt-3 btn btn-primary w-75" value="AGGIUNGI RECENSIONE" />
+    </form>
+
+    <div v-if="success" style="color: green">Recensione aggiunta con successo!</div>
+</template>
+
+<style lang="scss" scoped>
+form {
+    input {
+        width: 100%;
+    }
+
+    .btnContact {
+        width: 250px;
+        border: none;
+        border-radius: 1rem;
+        // padding: 1.5%;
+        background: #dc3545;
+        font-weight: 600;
+        color: #fff;
+        cursor: pointer;
+    }
+}
+</style>

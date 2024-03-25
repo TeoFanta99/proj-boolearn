@@ -7,19 +7,23 @@ import { store } from "../store";
 // importo componente form per inviare messaggio al teacher
 import ContactTeacherForm from "../components/ContactTeacherForm.vue";
 
+import ReviewForm from "../components/ReviewForm.vue";
+
 import Carousel from '../components/Carousel.vue';
 export default {
   name: "Show",
 
   components: {
     ContactTeacherForm,
-    Carousel
+    Carousel,
+    ReviewForm,
   },
 
   data() {
     return {
       store,
       switchForm: false,
+      switchReviewForm: false,
       reviews: [],
     };
   },
@@ -37,7 +41,7 @@ export default {
         .get(`http://127.0.0.1:8000/api/v1/review?teacher_id=${store.List.id}`)
         .then((response) => {
           this.reviews = response.data.reviews;
-          store.recensioni=response.data.reviews;
+          store.recensioni = response.data.reviews;
           // console.log(response.data.reviews)
         })
         .catch((error) => {
@@ -47,9 +51,9 @@ export default {
   },
 
   mounted() {
-    
-      this.getReviews();
-    
+
+    this.getReviews();
+
   },
 };
 </script>
@@ -62,14 +66,18 @@ export default {
           <div class="img_container">
             <img class="w-100 h-100" :src="getImageUrl(store.List)" alt="" />
           </div>
-          <button
-            class="btn mt-4"
-            :class="!this.switchForm ? 'btn-success' : 'btn-danger'"
-            @click="this.switchForm = !this.switchForm"
-          >
-            {{ this.switchForm ? "Annulla" : "Contatta" }}
-          </button>
-          <ContactTeacherForm v-if="this.switchForm" />
+          <div class="buttons-container d-flex">
+            <button class="btn mt-4 me-3" :class="!this.switchForm ? 'btn-success' : 'btn-danger'"
+              @click="this.switchForm = !this.switchForm">
+              {{ this.switchForm ? "Annulla" : "Contatta" }}
+            </button>
+            <button class="btn mt-4" :class="!this.switchReviewForm ? 'btn-success' : 'btn-danger'"
+              @click="this.switchReviewForm = !this.switchReviewForm">
+              {{ this.switchReviewForm ? "Annulla" : "Recensisci" }}
+            </button>
+          </div>
+          <ContactTeacherForm v-if="this.switchForm && this.switchReviewForm == false" />
+          <ReviewForm v-if="this.switchReviewForm && this.switchForm == false" />
         </div>
         <div class="col-8">
           <div class="d-flex align-items-center gap-2">
@@ -135,15 +143,11 @@ export default {
           </div>
           <div class="col-12">
             <h5 class="mt-4 border-bottom">Recensioni</h5>
-              <Carousel/>
+            <Carousel />
           </div>
         </div>
-        <a
-          :class="store.List.cv_url !== '' ? 'd-block' : 'd-none'"
-          :href="getCVUrl(store.List)"
-          target="_blank"
-          >Mostra CV</a
-        >
+        <a :class="store.List.cv_url !== '' ? 'd-block' : 'd-none'" :href="getCVUrl(store.List)" target="_blank">Mostra
+          CV</a>
       </div>
     </div>
   </div>
