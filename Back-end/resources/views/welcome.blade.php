@@ -4,8 +4,22 @@
     <div class="row mt-4">
         @auth
         @if (!$teachers->where('user_id', Auth::id())->count())
-        {{-- CREATE --}}
-        <a href="{{ route('user.create') }}">Crea Profilo</a>
+        <div class="container bootstrap snippets bootdeys">
+            <div class="row justify-content-center">
+                <div class="col-md-4 col-sm-6 content-card">
+                     <div class="card-big-shadow">
+                        <div class="card card-just-text" data-background="color" data-color="green" data-radius="none">
+                            <div class="content">
+                                <div class="plus title radius">
+                                    {{-- CREATE --}}
+                                    <a style="text-decoration: none;" href="{{ route('user.create') }}">&#43;</a>
+                                </div>
+                            </div>
+                        </div> <!-- end card -->
+                    </div>
+                </div>   
+            </div> 
+        </div>
         @endif
         @endauth
         {{-- <a href="{{route('user.create' )}}">CREATE</a> --}}
