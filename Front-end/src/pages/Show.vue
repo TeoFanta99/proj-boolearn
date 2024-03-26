@@ -103,12 +103,12 @@ export default {
                 </div>
               </div>
               <div class="d-flex align-items-center justify-content-center mb-2">
-                <p>
+                <span>
                   <i v-for="(index, i) in 5" :key="i"
                     :class="{ 'fas fa-star': i < store.List.average_rating, 'far fa-star': i >= store.List.average_rating }"
                     style="color: #FFD43B;">
                   </i>
-                </p>
+                </span>
               </div>
               <p id="teacher">INSEGNANTE</p>
             </div>
@@ -144,7 +144,7 @@ export default {
       </div> <!-- end col  -->
       <div class="col-12 col-md-7 col-xl-8">
         <div class="card border-success right-profile-card">
-          <div class="card-header border-success" style="font-weight: bold;">
+          <div class="card-header border-success" style="font-weight: bold; font-size: 30px; color: rgb(83, 83, 255);">
             ALTRE INFO
           </div>
           <div class="card-body">
@@ -167,9 +167,13 @@ export default {
                 target="_blank"></a>VEDI CV</button>
           </div>
         </div>
-        <div class="col-12">
-          <h5 class="mt-4 border-bottom">Recensioni</h5>
-          <Carousel />
+        <div class="card border-success mt-3 right-profile-card">
+          <div class="card-header border-success" style="font-weight: bold; font-size: 30px; color: rgb(83, 83, 255);">
+            Recensioni
+          </div>
+          <div class="card-body">
+            <Carousel />
+          </div>
         </div>
       </div>
     </div> <!-- end row  -->
