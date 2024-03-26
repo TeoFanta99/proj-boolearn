@@ -70,6 +70,8 @@ class ApiController extends Controller
         ]);
 
     }
+
+    // Ottiene messaggio dal form (contactTeacherForm.vue)
     public function getMessage(Request $request)
     {
 
@@ -94,6 +96,45 @@ class ApiController extends Controller
 
 
     }
+
+    // Ottiene recensione dal form (reviewForm.vue)
+    public function getReview(Request $request)
+    {
+
+        $user_name = $request->input('user_name');
+        $user_email = $request->input('user_email');
+        $description = $request->input('description');
+        $teacher_id = $request->input('teacher_id');
+     
+        $teacher = Teacher::find($teacher_id);
+
+        $new_review = new Review();
+        $new_review->name = $user_name;
+        $new_review->email = $user_email;
+        $new_review->description = $description;
+        $new_review->date_of_review = Carbon::now();
+        $new_review->teacher()->associate($teacher);
+        $new_review->save();
+
+    }
+
+    // Ottiene rating dal form (ratingForm.vue)
+    public function getRating(Request $request)
+    {
+
+        $rating_id = $request->input('idRating');
+        $teacher_id = $request->input('teacher_id');
+     
+        $teacher = Teacher::find($teacher_id);
+        $rating = Rating::find($rating_id);
+
+   
+        $teacher->ratings()->attach($rating);
+        
+        $teacher->save();
+
+    }
+
     public function reviews(Request $request)
     {
 
@@ -109,6 +150,8 @@ class ApiController extends Controller
         ]);
 
     }
+
+   
 
     public function results(Request $request)
     {

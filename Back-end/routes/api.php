@@ -35,7 +35,14 @@ Route::group(['prefix' => '/v1'], function(){
 
     Route :: post('hgs', [ ApiController :: class, 'frontTeachers']);
 
+
+    //inserimento nuovo messaggio,recensione,votazione 
     Route :: post('message', [ApiController :: class, 'getMessage']);
+
+    Route :: post('review', [ ApiController :: class, 'getReview']);
+
+    Route :: post('rating', [ ApiController :: class, 'getRating']);
+    
 
     Route::get('products',[SponsorshipController::class, 'index']);
     Route :: post('orders/generate', [ SponsorshipController :: class, 'generate'])->name('generate.token');

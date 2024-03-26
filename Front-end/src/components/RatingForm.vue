@@ -15,20 +15,12 @@ export default {
 
   methods: {
     test() {
-      //   console.log(store.NameSurname);
-      //   console.log(store.UserEmail);
-      //   console.log(store.EmailTitle);
-      //   console.log(store.EmailMessage);
-      //   console.log(store.List.user.id);
       const DatatoSend = {
-        user_name: store.NameSurname,
-        user_email: store.UserEmail,
-        email_title: store.EmailTitle,
-        description: store.EmailMessage,
+        idRating: store.Rating,
         teacher_id: store.List.user.id,
       };
       axios
-        .post("http://127.0.0.1:8000/api/v1/message", DatatoSend)
+        .post("http://127.0.0.1:8000/api/v1/rating", DatatoSend)
 
         .then((response) => {
           this.success = true;
@@ -52,26 +44,52 @@ export default {
 
   <form @submit.prevent="test">
     <div class="mb-3">
-      <input
-        v-model="store.NameSurname"
-        type="text"
-        name="user_name"
-        id="name_surname"
-        class="form-control"
-        placeholder="Inserisci il tuo nome e cognome"
-      />
-      <textarea
-        class="w-100 mt-3"
-        style="height: 200px"
-        name="review"
-        id="review"
-      ></textarea>
+      <div class="d-flex flex-column">
+        <p>Dai il tuo voto:</p>
+        <label class="radio-inline">
+          <input
+            type="radio"
+            name="optradio"
+            value="1"
+            v-model="store.Rating"
+          />Pessimo
+        </label>
+        <label class="radio-inline">
+          <input
+            type="radio"
+            name="optradio"
+            value="2"
+            v-model="store.Rating"
+          />Scarso
+        </label>
+        <label class="radio-inline">
+          <input
+            type="radio"
+            name="optradio"
+            value="3"
+            v-model="store.Rating"
+          />Sufficiente
+        </label>
+        <label class="radio-inline">
+          <input
+            type="radio"
+            name="optradio"
+            value="4"
+            v-model="store.Rating"
+          />Buono
+        </label>
+        <label class="radio-inline">
+          <input
+            type="radio"
+            name="optradio"
+            value="5"
+            v-model="store.Rating"
+          />Ottimo
+        </label>
+      </div>
     </div>
-    <input
-      type="submit"
-      class="mt-3 btn btn-primary w-75"
-      value="AGGIUNGI RECENSIONE"
-    />
+
+    <input type="submit" class="mt-3 btn btn-primary w-75" value="INVIA VOTO" />
   </form>
 
   <div v-if="success" style="color: green">Votazione inviata con successo!</div>

@@ -33,10 +33,12 @@
             <input type="hidden" name="user_id" value="{{ $teacher->user->id }}">
         </form>
         <div class="d-flex mt-2">
+            <!-- Modifica profilo -->
             <div>
-                <button type="button" class="btn btn-warning" style="width: 200px"><a style="text-decoration: none; color:black" href="#" onclick="document.getElementById('profileForm').submit(); return false;">GESTIONE PROFILO</a></button>
+                <button type="button" class="btn btn-warning" style="width: 200px"><a style="text-decoration: none; color:black" href="#" onclick="document.getElementById('profileForm').submit(); return false;">MODIFICA PROFILO</a></button>
             </div>
             <div>
+                <!-- Cancellazione profilo -->
                 <form class="ms-3 d-block" action="{{ route('user.del', $teacher->user->id) }}" method="POST"
                 onsubmit="return confirm('Confermare?');">
                     @csrf
