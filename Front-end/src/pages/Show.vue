@@ -65,11 +65,23 @@ export default {
 
       data_nascita.textContent = dataFormattata;
     },
+
+    getStars(num) {
+
+      const stellePiene = '★'.repeat(num);
+      const stelleVuote = '☆'.repeat(5 - num);
+
+      return stellePiene + stelleVuote
+    }
+
+
   },
 
   mounted() {
 
     this.getReviews();
+    console.log(store.List);
+
 
   },
 };
@@ -78,7 +90,7 @@ export default {
 <template>
   <div v-if="store.view">
     <div class="row p-5 justify-content-center" style="width: 95%; margin:0 auto;">
-      <div class="col-12 col-md-4 col-xl-3">
+      <div class="col-12 col-md-5 col-xl-4">
         <div class="card border-success mb-4 left-profile-card">
           <div class="card-body">
             <div class="text-center">
@@ -90,10 +102,10 @@ export default {
                   <h2>{{ store.List.user.name }} {{ store.List.user.lastname }}</h2>
                 </div>
               </div>
+              <div class="d-flex align-items-center justify-content-center mb-2">
+                <span style="color: #FFD43B;">{{ getStars(store.List.average_rating) }}</span>
+              </div>
               <p id="teacher">INSEGNANTE</p>
-              <!-- <div class="d-flex align-items-center justify-content-center mb-3">
-                <i class="fas fa-star"> {{ store.valutazioni[0].name }}</i>
-              </div> -->
             </div>
             <div class="personal-info mt-4">
               <h3>INFORMAZIONI PERSONALI</h3>
@@ -125,7 +137,7 @@ export default {
           <RatingForm v-if="this.switchRatingForm" />
         </div>
       </div> <!-- end col  -->
-      <div class="col-6">
+      <div class="col-12 col-md-7 col-xl-8">
         <div class="card border-success right-profile-card">
           <div class="card-header border-success" style="font-weight: bold;">
             ALTRE INFO

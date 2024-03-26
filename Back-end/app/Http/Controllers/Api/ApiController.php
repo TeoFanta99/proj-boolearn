@@ -238,9 +238,9 @@ class ApiController extends Controller
                 }
             }
 
-            $averageRating = $teacher->ratings()->avg('ratings.id');
+            $averageRating = $teacher->ratings()->round(avg('ratings.id'));
             if ($rating_id !== 0) {
-                if ($averageRating < $rating_id) {
+                if (round($averageRating) < $rating_id) {
                     continue;
                 }
             }

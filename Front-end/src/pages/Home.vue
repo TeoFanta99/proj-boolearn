@@ -70,6 +70,16 @@ export default {
         return true;
       }
     },
+
+    getStars(num) {
+      const numStellePiene = Math.ceil(num / 2);
+      const numStelleVuote = 5 - numStellePiene;
+
+      const stellePiene = '★'.repeat(numStellePiene);
+      const stelleVuote = '☆'.repeat(numStelleVuote);
+
+      return stellePiene + stelleVuote
+    }
   },
 
   watch: {
@@ -90,7 +100,7 @@ export default {
 
   mounted() {
     //setto a zero tutte le variabili dello store
-
+    console.log(store.List);
     store.Rating = 0;
     store.Review = 0;
 
@@ -135,71 +145,42 @@ export default {
         <h4>Scegli la materia</h4>
 
         <!-- Sezione Select -->
-        <select
-          v-model="store.Subject"
-          class="form-select w-75"
-          id="selected-Subject"
-        >
-          <option
-            v-for="subject in store.materie"
-            :key="subject.id"
-            :value="subject.name"
-            :selected="store.Subject === subject.name ? 'selected' : ''"
-          >
+        <select v-model="store.Subject" class="form-select w-75" id="selected-Subject">
+          <option v-for="subject in store.materie" :key="subject.id" :value="subject.name"
+            :selected="store.Subject === subject.name ? 'selected' : ''">
             {{ subject.name }}
           </option>
         </select>
       </div>
 
-      <button
-        type="submit"
-        form="nameform"
-        value="Submit"
-        class="btn btn-danger h-50 mt-4"
-        @click="riempiRec()"
-      >
+      <button type="submit" form="nameform" value="Submit" class="btn btn-danger h-50 mt-4" @click="riempiRec()">
         Ricerca
       </button>
     </form>
 
     <!-- Sezione icone teachers -->
     <div v-if="loading" class="loading-gif">
-      <img
-        src="https://media1.tenor.com/m/_dGu36t3VNEAAAAC/loading-buffering.gif"
-        alt="Caricamento..."
-        class="loading-image"
-      />
+      <img src="https://media1.tenor.com/m/_dGu36t3VNEAAAAC/loading-buffering.gif" alt="Caricamento..."
+        class="loading-image" />
     </div>
     <div v-else-if="teachers.length > 0">
       <div class="row mt-4">
-        <div
-          class="col-12 col-md-4 col-lg-3 p-2"
-          v-for="teacher in teachers"
-          :key="teacher.id"
-        >
-          <RouterLink
-            :to="{ name: 'show', params: { id: teacher.user.name } }"
-            @click="riempiVet(teacher.id), (store.view = 2)"
-            class="text-decoration-none"
-          >
+        <div class="col-12 col-md-4 col-lg-3 p-2" v-for="teacher in teachers" :key="teacher.id">
+          <RouterLink :to="{ name: 'show', params: { id: teacher.user.name } }"
+            @click="riempiVet(teacher.id), (store.view = 2)" class="text-decoration-none">
             <div class="card pt-3 border-0 shadow on_hover">
               <div class="position-absolute star_sponsor">
                 <i class="fa-solid fa-star"></i>
               </div>
-              <div
-                class="d-flex justify-content-center align-items-center img_circle mx-auto height_img_query"
-              >
-                <img
-                  class="w-100 h-100 rounded-circle"
-                  :src="getImageUrl(teacher)"
-                  alt=""
-                />
+              <div class="d-flex justify-content-center align-items-center img_circle mx-auto height_img_query">
+                <img class="w-100 h-100 rounded-circle" :src="getImageUrl(teacher)" alt="" />
               </div>
               <div class="card-body">
                 <h4>{{ teacher.user.name }} {{ teacher.user.lastname }}</h4>
-                <div v-if="store.List[teacher.id].average_rating > 2">
+                <span>{{ getStars(store.List[teacher.id].average_rating) }}</span>
+                <!-- <div v-if="store.List[teacher.id].average_rating > 2">
                   {{ store.List[teacher.id].average_rating }}
-                </div>
+                </div> -->
               </div>
             </div>
           </RouterLink>
@@ -217,49 +198,61 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100px; /* Regola l'altezza secondo le tue preferenze */
-  width: 100px; /* Regola la larghezza secondo le tue preferenze */
+  height: 100px;
+  /* Regola l'altezza secondo le tue preferenze */
+  width: 100px;
+  /* Regola la larghezza secondo le tue preferenze */
   opacity: 0;
   animation: fadeInOut 1.5s ease-in-out forwards;
 }
 
 .loading-image {
-  width: 100%; /* Per adattare l'immagine alla grandezza del contenitore */
+  width: 100%;
+  /* Per adattare l'immagine alla grandezza del contenitore */
   animation: zoomInOut 1.5s ease-in-out infinite;
 }
 
 @keyframes fadeInOut {
+
   0%,
   100% {
     opacity: 0;
   }
+
   50% {
     opacity: 1;
   }
 }
 
 @keyframes zoomInOut {
+
   0%,
   100% {
     transform: scale(0.7);
   }
+
   50% {
     transform: scale(1);
   }
 }
+
 .star_sponsor {
   top: 10%;
   right: 5%;
+
   .fa-star {
     color: #5353ff;
   }
 }
+
 .testo-rosso {
   color: red;
 }
+
 .img_circle {
   width: 60%;
 }
+
 #boh {
   margin-top: 10px;
 }
