@@ -104,12 +104,12 @@ export default {
               </div>
               <div class="d-flex align-items-center justify-content-center mb-2">
                 <p>
-      <i v-for="(index, i) in 5" :key="i"
-         :class="{
-           'fas fa-star': i < store.List.average_rating, 
-           'far fa-star': i >= store.List.average_rating
-         }"></i>
-    </p>             </div>
+                  <i v-for="(index, i) in 5" :key="i"
+                    :class="{ 'fas fa-star': i < store.List.average_rating, 'far fa-star': i >= store.List.average_rating }"
+                    style="color: #FFD43B;">
+                  </i>
+                </p>
+              </div>
               <p id="teacher">INSEGNANTE</p>
             </div>
             <div class="personal-info mt-4">
