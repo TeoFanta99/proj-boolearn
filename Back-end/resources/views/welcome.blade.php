@@ -6,6 +6,7 @@
         @if (!$teachers->where('user_id', Auth::id())->count())
         <div class="container bootstrap snippets bootdeys">
             <div class="row justify-content-center">
+                <h1>Amplia il tuo profilo qui!</h1>
                 <div class="col-md-4 col-sm-6 content-card">
                      <div class="card-big-shadow">
                         <div class="card card-just-text" data-background="color" data-color="green" data-radius="none">
