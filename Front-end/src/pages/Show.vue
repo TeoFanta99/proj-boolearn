@@ -47,6 +47,19 @@ export default {
         .catch((error) => {
           console.error("Errore durante la richiesta API:", error);
         });
+
+      let data_nascita = document.getElementById('DateBirth');
+
+      // DEBUG
+      // console.log(data_nascita)
+
+      var dataNascita = new Date(data_nascita.textContent);
+
+
+      var dataFormattata = `${dataNascita.getDate()}/${dataNascita.getMonth() + 1}/${dataNascita.getFullYear()}`;
+
+
+      data_nascita.textContent = dataFormattata;
     },
   },
 
@@ -60,104 +73,87 @@ export default {
 
 <template>
   <div v-if="store.view">
-    <div class="container my-4">
-      <div class="row">
-        <div class="col-4">
-          <div class="img_container">
-            <img class="w-100 h-100" :src="getImageUrl(store.List)" alt="" />
+    <div class="row p-5 justify-content-center" style="width: 95%; margin:0 auto;">
+      <div class="col-12 col-md-4 col-xl-3">
+        <div class="card border-success mb-4 left-profile-card">
+          <div class="card-body">
+            <div class="text-center">
+              <div class="img_container">
+                <img class="w-100 h-100" :src="getImageUrl(store.List)" alt="" />
+              </div>
+              <div>
+                <div class="d-flex justify-content-center align-items-center mt-2 gap-2">
+                  <h2>{{ store.List.user.name }} {{ store.List.user.lastname }}</h2>
+                </div>
+              </div>
+              <p id="teacher">INSEGNANTE</p>
+              <!-- <div class="d-flex align-items-center justify-content-center mb-3">
+                <i class="fas fa-star"> {{ store.valutazioni[0].name }}</i>
+              </div> -->
+            </div>
+            <div class="personal-info mt-4">
+              <h3>INFORMAZIONI PERSONALI</h3>
+              <ul class="personal-list">
+                <li><i class="fas fa-cake-candles "></i><span id="DateBirth">{{ store.List.user.date_of_birth }}</span>
+                </li>
+                <li><i class="fas fa-map-marker-alt "></i><span class="text_info">{{ store.List.city }}</span></li>
+                <li><i class="fas fa-briefcase "></i><span class="text_info">Web Developer</span></li>
+                <li><i class="far fa-envelope "></i><span class="text_info">{{ store.List.user.email }}</span></li>
+                <li><i class="fas fa-mobile "></i><span class="text_info">{{ store.List.phone_number }}</span></li>
+                <li><i class="fas fa-receipt "></i><span class="text_info">{{ store.List.tax_id }}</span></li>
+              </ul>
+            </div>
           </div>
-          <div class="buttons-container d-flex">
-            <button class="btn mt-4 me-3" :class="!this.switchForm ? 'btn-success' : 'btn-danger'"
+          <div class="buttons-container d-flex justify-content-center mb-4">
+            <button class="btn me-3" :class="!this.switchForm ? 'btn-primary' : 'btn-danger'"
               @click="this.switchForm = !this.switchForm">
-              {{ this.switchForm ? "Annulla" : "Contatta" }}
+              {{ this.switchForm ? "Annulla" : "CONTATTA" }}
             </button>
-            <button class="btn mt-4" :class="!this.switchReviewForm ? 'btn-success' : 'btn-danger'"
+            <button class="btn" :class="!this.switchReviewForm ? 'btn-success' : 'btn-danger'"
               @click="this.switchReviewForm = !this.switchReviewForm">
-              {{ this.switchReviewForm ? "Annulla" : "Recensisci" }}
+              {{ this.switchReviewForm ? "Annulla" : "RECENSISCI" }}
             </button>
           </div>
           <ContactTeacherForm v-if="this.switchForm && this.switchReviewForm == false" />
           <ReviewForm v-if="this.switchReviewForm && this.switchForm == false" />
         </div>
-        <div class="col-8">
-          <div class="d-flex align-items-center gap-2">
-            <h2>{{ store.List.user.name }} {{ store.List.user.lastname }}</h2>
-            <span>{{ store.List.city }}</span>
+      </div> <!-- end col  -->
+      <div class="col-6">
+        <div class="card border-success right-profile-card">
+          <div class="card-header border-success" style="font-weight: bold;">
+            ALTRE INFO
           </div>
-          <h6>Teacher</h6>
+          <div class="card-body">
+            <h5>BIOGRAFIA</h5>
+            <p class="text_wrap" style="font-size: larger;">{{ store.List.biography }}</p>
 
-          <div class="col-6">
-            <h5 class="mt-4 border-bottom">Materie</h5>
-            <div class="d-flex flex-column">
-              <div class="d-flex gap-3 align-items-center">
-                <ul>
-                  <li v-for="subject in store.List.subjects" :key="subject.id">
-                    {{ subject.name }}
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
+            <h5>MATERIE</h5>
+            <ul>
+              <li v-for="subject in store.List.subjects" :key="subject.id" style="font-size: larger;">
+                {{ subject.name }}
+              </li>
+            </ul>
 
-          <div class="col-6">
-            <h5 class="mt-4 border-bottom">Biografia</h5>
-            <div class="d-flex flex-column">
-              <div class="d-flex gap-3 align-items-center">
-                <p class="text_wrap">{{ store.List.biography }}</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-6">
-            <h5 class="mt-2 border-bottom">Anagrafica</h5>
-            <div class="d-flex flex-column">
-              <div class="d-flex gap-2 align-items-center">
-                <h6 class="mb-0">Data di nascita:</h6>
-                <span id="DateBirth">{{ store.List.user.date_of_birth }}</span>
-              </div>
-              <div class="d-flex gap-3 align-items-center">
-                <h6 class="mb-0">Partita Iva:</h6>
-                <span>{{ store.List.tax_id }}</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-6">
-            <h5 class="mt-4 border-bottom">Contatti</h5>
-            <div class="d-flex flex-column">
-              <div class="d-flex gap-5">
-                <h6>Telefono:</h6>
-                <span>{{ store.List.phone_number }}</span>
-              </div>
-              <div class="d-flex gap-3 align-items-center">
-                <h6 class="mb-0">Indirizzo Mail:</h6>
-                <span>{{ store.List.user.email }}</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-6">
-            <h5 class="mt-4 border-bottom">Motto</h5>
-            <div class="d-flex flex-column">
-              <div class="d-flex gap-5">
-                <span>{{ store.List.motto }}</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-12">
-            <h5 class="mt-4 border-bottom">Recensioni</h5>
-            <Carousel />
+            <h5>MOTTO</h5>
+            <p style="font-size: larger;">{{ store.List.motto }}</p>
+
+            <h5>CV</h5>
+            <button type="button" class="btn cv btn-info" style="color: aliceblue;"><a
+                :class="store.List.cv_url !== '' ? 'd-block' : 'd-none'" :href="getCVUrl(store.List)"
+                target="_blank"></a>VEDI CV</button>
           </div>
         </div>
-        <a :class="store.List.cv_url !== '' ? 'd-block' : 'd-none'" :href="getCVUrl(store.List)" target="_blank">Mostra
-          CV</a>
+        <div class="col-12">
+          <h5 class="mt-4 border-bottom">Recensioni</h5>
+          <Carousel />
+        </div>
       </div>
-    </div>
+    </div> <!-- end row  -->
   </div>
-</template>
-<style>
-.img_circle {
-  width: 60%;
-}
 
-.text_wrap {
-  overflow-wrap: anywhere;
-}
+</template>
+
+
+<style lang="scss">
+@use "../styles/show.scss";
 </style>
