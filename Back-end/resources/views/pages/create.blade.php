@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <h1>Crea il tuo Profilo</h1>
+    <h1>IL TUO Profilo</h1>
     {{-- @auth --}}
     @if ($errors->any())
         <div class="alert alert-danger">
