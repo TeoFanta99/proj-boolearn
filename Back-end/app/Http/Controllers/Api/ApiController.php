@@ -225,13 +225,6 @@ class ApiController extends Controller
         $sponsoredTeachers = [];
 
         foreach ($teachers as $teacher) {
-
-            $averageRating = $teacher->ratings()->avg('rating');
-
-            // Aggiungi la media dei voti all'insegnante
-            $teacher->average_rating = $averageRating;
-
-
             // Controlla se il teacher ha tutte le materie specificate, se il parametro subject_id è presente
             if ($subject_id !== 0) {
                 if (!$teacher->subjects->pluck('id')->contains($subject_id)) {
@@ -267,6 +260,9 @@ class ApiController extends Controller
 
                     // // Ottieni l'insegnante con la data di scadenza più lontana
                     $sponsoredTeachers = $sponsoredTeachers->values()->all();
+
+
+
                 }
             }
 
