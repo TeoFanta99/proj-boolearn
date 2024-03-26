@@ -34,9 +34,8 @@ export default {
           this.teachers = res.data.teachers;
           this.store.materie = res.data.subjects;
           this.store.valutazioni = res.data.ratings;
-          store.List = res.data.teachers2;
-
-          console.log(store.List);
+          // store.List = res.data.teachers2;;
+          // console.log(store.List);
           this.loading = false;
         })
         .catch((error) => {
@@ -100,7 +99,7 @@ export default {
 
   mounted() {
     //setto a zero tutte le variabili dello store
-    console.log(store.List);
+    // console.log(store.List);
     store.Rating = 0;
     store.Review = 0;
 
@@ -177,7 +176,7 @@ export default {
               </div>
               <div class="card-body">
                 <h4>{{ teacher.user.name }} {{ teacher.user.lastname }}</h4>
-                <span>{{ getStars(store.List[teacher.id].average_rating) }}</span>
+                <!-- <span>{{ getStars(store.List[teacher.id].average_rating) }}</span> -->
                 <!-- <div v-if="store.List[teacher.id].average_rating > 2">
                   {{ store.List[teacher.id].average_rating }}
                 </div> -->
