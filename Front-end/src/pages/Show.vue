@@ -90,8 +90,8 @@ export default {
 <template>
   <div v-if="store.view">
     <div class="row p-5 justify-content-center" style="width: 95%; margin:0 auto;">
-      <div class="col-12 col-md-5 col-xl-4">
-        <div class="card border-success mb-4 left-profile-card">
+      <div class="col-12 col-md-5 col-xl-4 border border-success">
+        <div class="card mb-4 left-profile-card border-0">
           <div class="card-body">
             <div class="text-center">
               <div class="img_container">
