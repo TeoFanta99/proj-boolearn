@@ -164,6 +164,8 @@ class ApiController extends Controller
         // Array per memorizzare i risultati filtrati
         $filteredTeachers = [];
 
+        $filteredTeachers2 = [];
+
         foreach ($teachers as $teacher) {
             // Controlla se il teacher ha una sponsorizzazione attiva
 
@@ -184,17 +186,28 @@ class ApiController extends Controller
 
                     // // Ottieni l'insegnante con la data di scadenza più lontana
                     $filteredTeachers = $filteredTeachers->values()->all();
-
-
-
                 }
             }
-
-
         }
 
+        //array teachers non sponsorizzati
+        foreach ($teachers as $teacher) {
+
+
+            $averageRating = $teacher->ratings()->avg('rating_id');
+
+            // Aggiungi la media dei voti all'insegnante
+            $teacher->average_rating = $averageRating;
+
+            // Aggiungi l'insegnante filtrato all'array dei risultati
+            $filteredTeachers2[] = $teacher;
+
+                
+        }
+
+
         // Invia una risposta JSON contenente i teachers con sponsorizzazioni attive
-        return response()->json(['teachers' => $filteredTeachers, 'subjects' => $subjects, "ratings" => $ratings]);
+        return response()->json(['teachers' => $filteredTeachers, 'subjects' => $subjects, "ratings" => $ratings,'teachers2' => $filteredTeachers2]);
     }
     public function filtered(Request $request)
     {
@@ -217,6 +230,7 @@ class ApiController extends Controller
         $sponsoredTeachers = [];
 
         foreach ($teachers as $teacher) {
+            
             // Controlla se il teacher ha tutte le materie specificate, se il parametro subject_id è presente
             if ($subject_id !== 0) {
                 if (!$teacher->subjects->pluck('id')->contains($subject_id)) {

@@ -3,12 +3,12 @@ import axios from "axios";
 import { store } from "../store";
 import jumbo from "./jumbo.vue";
 
-import Carousel from '../components/Carousel.vue';
+import Carousel from "../components/Carousel.vue";
 export default {
   name: "Home",
   components: {
     jumbo,
-    Carousel
+    Carousel,
   },
 
   data() {
@@ -34,13 +34,14 @@ export default {
           this.teachers = res.data.teachers;
           this.store.materie = res.data.subjects;
           this.store.valutazioni = res.data.ratings;
-          console.log(this.teachers);
+          store.List = res.data.teachers2;
+
+          console.log(store.List);
           this.loading = false;
         })
         .catch((error) => {
           console.error("Errore durante la richiesta API:", error);
         });
-
     },
 
     // funzione chiamata quando si clicca su un docente
@@ -56,13 +57,13 @@ export default {
     // funzione chiamata quando si clicca su un docente
     riempiRec() {
       event.preventDefault();
-      if(store.Subject != 0){
-      }else{
-        store.Subject='Tutte';
+      if (store.Subject != 0) {
+      } else {
+        store.Subject = "Tutte";
       }
       this.$router.push({
-          name: "filt",
-        })
+        name: "filt",
+      });
     },
     hasExpireDate(teacher) {
       if (teacher.sponsorships.length > 0) {
@@ -88,10 +89,6 @@ export default {
   },
 
   mounted() {
-    
-
-
-
     //setto a zero tutte le variabili dello store
 
     store.Rating = 0;
@@ -105,7 +102,6 @@ export default {
 
       // Chiamata iniziale per caricare i dati
       this.SearchProf();
-      
     }, 2300);
 
     // const text = document.querySelector(".sec-text");
@@ -183,7 +179,7 @@ export default {
         >
           <RouterLink
             :to="{ name: 'show', params: { id: teacher.user.name } }"
-            @click="riempiVet(teacher.id),store.view= 2"
+            @click="riempiVet(teacher.id), (store.view = 2)"
             class="text-decoration-none"
           >
             <div class="card pt-3 border-0 shadow on_hover">
@@ -265,14 +261,13 @@ export default {
   margin-top: 10px;
 }
 
-.on_hover{
-  
+.on_hover {
+  transition: all ease-in 0.5s;
+  transform: scale(1);
+
+  &:hover {
     transition: all ease-in 0.5s;
-    transform:scale(1);
-  
-  &:hover{
-    transition: all ease-in 0.5s;
-    transform:scale(1.08);
+    transform: scale(1.08);
   }
 }
 </style>
