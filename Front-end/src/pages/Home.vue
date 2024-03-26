@@ -197,6 +197,9 @@ export default {
               </div>
               <div class="card-body">
                 <h4>{{ teacher.user.name }} {{ teacher.user.lastname }}</h4>
+                <div v-if="store.List[teacher.id].average_rating > 2">
+                  {{ store.List[teacher.id].average_rating }}
+                </div>
               </div>
             </div>
           </RouterLink>
