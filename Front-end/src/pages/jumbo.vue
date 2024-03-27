@@ -85,7 +85,7 @@ textLoad(text); // Avvia la sequenza
   overflow: hidden;
   background-repeat: no-repeat;
   justify-content: center;
-  background-size: 70%;
+  background-size: 50%;
   background-position: 50% 50%;
   position: relative;
 }
@@ -118,10 +118,7 @@ textLoad(text); // Avvia la sequenza
 .container_jumbo .text.first-text {
   color: #fff;
 }
-#boh {
-  width: 80rem;
-  margin: 0 auto;
-}
+
 .text.sec-text:before{
     content: "";
     position: absolute;

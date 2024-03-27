@@ -252,9 +252,6 @@ export default {
   width: 60%;
 }
 
-#boh {
-  margin-top: 10px;
-}
 
 .on_hover {
   transition: all ease-in 0.5s;
