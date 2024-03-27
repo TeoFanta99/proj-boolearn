@@ -197,25 +197,21 @@ class MainController extends Controller
     public function messages($id)
     {
         
-        $teachers = Teacher::find($id);
+        $teacher = Teacher::find($id);
 
         $messages = Message::all();
 
-        $teacher = $messages->teacher()->first();
-
-        dd($teacher );
-
-        return view('pages.messages',compact('teacher'));
+        return view('pages.messages')->with('teacher', $teacher)->with('messages', $messages);
     }
 
     public function reviews($id)
     {
         
-        // $teachers = Teacher::find($id);
+        $teacher = Teacher::find($id);
 
-        // $messages = Message::all();
+        $reviews = Review::all();
 
-        return view('pages.reviews');
+        return view('pages.reviews')->with('teacher', $teacher)->with('reviews', $reviews);
     }
 
 
