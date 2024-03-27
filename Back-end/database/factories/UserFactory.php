@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use Faker\Provider\it_IT\Person;
-
+use Faker\Factory as FakerFactory;
 class UserFactory extends Factory
 {
     /**
@@ -20,7 +20,8 @@ class UserFactory extends Factory
         $this->faker->addProvider(new Person($this->faker));
         $gender = $this->faker->randomElement(['male', 'female']);
          $name = $this->faker->firstName($gender);
-        
+         $faker = FakerFactory::create('it_IT');
+         $city = $faker->city;
         return [
             'name' => $name,
             'email' => $this->faker->safeEmail(),
@@ -30,6 +31,7 @@ class UserFactory extends Factory
             'lastname' => $this->faker->lastName(),
             'date_of_birth' => $this->faker->dateTimeBetween('-60 years', '-18 years'),
             'gender' => $gender,
+            'city' =>$city,
         ];
     }
 

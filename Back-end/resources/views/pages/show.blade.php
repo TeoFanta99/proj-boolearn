@@ -35,7 +35,7 @@
                             <h3>INFORMAZIONI PERSONALI</h3>
                             <ul class="personal-list">
                                 <li><i class="fas fa-cake-candles "></i><span id="DateBirth">{{ $teacher->user->date_of_birth  }}</span></li>
-                                <li><i class="fas fa-map-marker-alt "></i><span>{{ $teacher->city }}</span></li>
+                                <li><i class="fas fa-map-marker-alt "></i><span>{{ $teacher->user->city }}</span></li>
                                  <li><i class="fas fa-briefcase "></i><span>Web Developer</span></li>
                                 <li><i class="far fa-envelope "></i><span>{{ $teacher->user->email }}</span></li>
                                 <li><i class="fas fa-mobile "></i><span>{{ $teacher->phone_number }}</span></li>

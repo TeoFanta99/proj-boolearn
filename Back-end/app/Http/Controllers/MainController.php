@@ -52,7 +52,6 @@ class MainController extends Controller
         $teacher->tax_id = $data['tax_id'];
         $teacher->biography = $data['biography'];
         $teacher->phone_number = $data['phone_number'];
-        $teacher->city = $data['city'];
         $teacher->motto = $data['motto'];
         $img = $data['image_url'];
         $img_path = Storage::disk('public')->put('images', $img);
@@ -121,11 +120,11 @@ class MainController extends Controller
         $data = $request->all();
         $user_id = $request->input('user_id');
         $user = User::find($user_id);
+       
         $teacher = $user->teacher()->first();
         $teacher->tax_id = $data['tax_id'];
         $teacher->biography = $data['biography'];
         $teacher->phone_number = $data['phone_number'];
-        $teacher->city = $data['city'];
         $teacher->motto = $data['motto'];
         if ($request->hasFile('image_url')) {
             // Carica l'immagine e salva il percorso
@@ -138,6 +137,10 @@ class MainController extends Controller
             $cv_path = $request->file('cv_url')->store('cvs', 'public');
             $teacher->cv_url = $cv_path;
         }
+
+        // Aggiorna la città direttamente sul modello dell'utente
+        $user->city = $data['city'];
+        $user->save();
 
 
         $teacher->user()->associate($user);

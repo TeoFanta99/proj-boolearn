@@ -30,6 +30,9 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+
+        // dd($request->city);
+
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'lastname' => ['required', 'string', 'max:255'], // Aggiungi questa regola
@@ -37,11 +40,13 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'date_of_birth' => ['required', 'date'],
             'gender' => ['nullable', 'string'],
+            'city' => ['required'],
         ]);
         $gender = $request->gender ?? array_rand(['male', 'female']);
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'city' => $request->city,
             'password' => Hash::make($request->password),
             'date_of_birth' => $request->date_of_birth,
             'lastname' => $request->lastname,

@@ -19,13 +19,11 @@ class TeacherFactory extends Factory
     {
         $faker = FakerFactory::create('it_IT');
         $phoneNumber = fake()->numerify('##########');
-        $city = $faker->city;
         return [
             'tax_id' => fake()->numberBetween(11111111111, 99999999999),
             'image_url' => fake()->imageUrl(640, 480, 'teachers', true),
             'cv_url' => '',
             'biography' => $faker->text(),
-            'city' =>$city,
             'phone_number' => $phoneNumber,
             'motto' => fake()->word(10),
         ];

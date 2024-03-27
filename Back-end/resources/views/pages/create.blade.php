@@ -48,16 +48,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                    <div class="form-group">
-                                        <div class="form-group">
-                                            <label for="city">CITTÀ <span style="color: red;  font-size: 1.5em;">*</span></label>
-                                            <select id="city" class="form-control" name="city">
-                                                <option value="">Seleziona la tua città</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                             <div class="row gutters">
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
@@ -119,35 +109,7 @@
     </form>
     {{-- @endauth --}}
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            getCities();
-
-            function populateCitySelect(cities) {
-                const select = document.getElementById("city");
-                cities.forEach(city => {
-                    const option = document.createElement("option");
-                    option.value = city.nome;
-                    option.textContent = city.nome;
-                    select.appendChild(option);
-                });
-            }
-
-            function getCities() {
-                fetch('https://axqvoqvbfjpaamphztgd.functions.supabase.co/comuni')
-                    .then(response => response.json())
-                    .then(data => {
-                        // Controlla se ci sono risultati
-                        if (Array.isArray(data) && data.length > 0) {
-                            populateCitySelect(data);
-                        } else {
-                            console.log("Nessuna città trovata.");
-                        }
-                    })
-                    .catch(error => {
-                        console.error("Si è verificato un errore:", error);
-                    });
-            }
-        });
+        
         document.getElementById("FormCreate").addEventListener("submit", function(event) {
             event.preventDefault();
             var teachers = <?php echo json_encode($teachers); ?>;

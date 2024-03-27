@@ -19,7 +19,6 @@ return new class extends Migration {
             $table->string('image_url')->nullable();
             $table->string('cv_url')->nullable(false);
             $table->text('biography')->nullable(false);
-            $table->string('city')->nullable(false);
             $table->string('phone_number')->unique();
             $table->string('motto')->nullable();
 

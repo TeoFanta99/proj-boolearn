@@ -23,7 +23,8 @@ return new class extends Migration
             $table->string('lastname');
             $table->date('date_of_birth');
             $table->string('gender')->nullable();
-
+            $table->string('city')->nullable(false);
+            
             $table->rememberToken();
             $table->timestamps();
         });
