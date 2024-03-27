@@ -83,7 +83,8 @@ export default {
 <template>
   <div v-if="store.view">
     <div class="row p-5 justify-content-center" style="width: 95%; margin: 0 auto">
-      <div class="col-12 col-md-5 col-xl-4 border border-success">
+      <div class="col-12 col-md-5 col-xl-4"
+        style="background-color: white; border: 5px solid green; border-radius: 20px;">
         <div class="card mb-4 left-profile-card border-0">
           <div class="card-body">
             <div class="text-center">
@@ -92,7 +93,7 @@ export default {
               </div>
               <div>
                 <div class="d-flex justify-content-center align-items-center mt-2 gap-2">
-                  <h2>
+                  <h2 style="font-weight: bold;">
                     {{ store.List.user.name }} {{ store.List.user.lastname }}
                   </h2>
                 </div>
@@ -151,8 +152,9 @@ export default {
         </div>
       </div>
       <!-- end col  -->
-      <div class="col-12 col-md-7 col-xl-8">
-        <div class="card border-success right-profile-card">
+      <div class="col-12 col-md-7 col-xl-8 p-2">
+        <div class="card border-success right-profile-card"
+          style="background-color: white; border: 5px solid green; border-radius: 20px;">
           <div class="card-header border-success" style="font-weight: bold; font-size: 30px; color: rgb(83, 83, 255)">
             ALTRE INFO
           </div>
@@ -179,7 +181,8 @@ export default {
             </button>
           </div>
         </div>
-        <div class="card border-success mt-3 right-profile-card">
+        <div class="card border-success mt-3 right-profile-card"
+          style="background-color: white; border: 5px solid green; border-radius: 20px;">
           <div class="card-header border-success" style="font-weight: bold; font-size: 30px; color: rgb(83, 83, 255)">
             RECENSIONI
           </div>

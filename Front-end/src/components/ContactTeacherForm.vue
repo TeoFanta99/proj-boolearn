@@ -83,7 +83,7 @@ export default {
 <style lang="scss" scoped>
 h2 {
   text-align: center;
-  font-size: 40px;
+  font-size: 30px;
   font-weight: 600;
   background-image: linear-gradient(to bottom left, #553c9a, #ee4b2b);
   color: transparent;

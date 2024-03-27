@@ -56,10 +56,10 @@ export default {
         placeholder="Inserisci la tua email" />
     </div>
     <label class="form-label">TESTO DELLA RECENSIONE</label>
-    <textarea v-model="store.EmailMessage" class="w-100 form-control" style="height: 200px" name="description"
+    <textarea v-model="store.EmailMessage" class="form-control" style="height: 200px" name="description"
       id="description" placeholder="Digita qui la tua recensione"></textarea>
     <div class="d-flex justify-content-center">
-      <input type="submit" class="mt-3 btn btn-primary w-75" value="AGGIUNGI RECENSIONE" />
+      <input type="submit" class="mt-3 mb-3 btn btn-primary w-75" value="AGGIUNGI RECENSIONE" />
     </div>
   </form>
 
@@ -71,7 +71,7 @@ export default {
 <style lang="scss" scoped>
 h2 {
   text-align: center;
-  font-size: 40px;
+  font-size: 30px;
   font-weight: 600;
   background-image: linear-gradient(45deg, #553c9a, #ee4b2b);
   color: transparent;
@@ -98,5 +98,11 @@ form {
 
 .form-label {
   font-weight: bold;
+  margin-left: 10px;
+}
+
+.form-control {
+  margin-left: 5px;
+  width: 95%;
 }
 </style>
