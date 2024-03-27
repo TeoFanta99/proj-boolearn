@@ -9,7 +9,7 @@
       >
         <div class="card h-100">
           <div class="card-body d-flex flex-column">
-            <h5 class="card-title mb-0">{{ review.name }}</h5>
+            <h5 class="card-title mb-0">{{ review.title }}</h5>
             <p class="card-text">{{ review.description }}</p>
             <p class="card-text">{{ review.date_of_review }}</p>
           </div>

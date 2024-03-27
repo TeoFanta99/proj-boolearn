@@ -17,7 +17,7 @@ class ReviewFactory extends Factory
     public function definition()
     {
         return [
-            'name' => fake() -> sentence(3),
+            'title' => fake() -> sentence(3),
             'description' => fake() -> paragraph(),
             'email' => fake() -> safeEmail(),
             'date_of_review' => fake() -> dateTime(),

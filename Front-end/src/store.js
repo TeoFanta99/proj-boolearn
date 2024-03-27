@@ -17,6 +17,7 @@ export const store = reactive({
   UserEmail: "",
   EmailTitle: "",
   EmailMessage: "",
+  ReviewTitle: "",
 
   // Pagina Home.vue
   Subject: "",

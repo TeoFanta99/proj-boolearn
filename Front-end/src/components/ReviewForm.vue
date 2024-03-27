@@ -16,7 +16,7 @@ export default {
   methods: {
     test() {
       const DatatoSend = {
-        user_name: store.NameSurname,
+        title: store.ReviewTitle,
         user_email: store.UserEmail,
         description: store.EmailMessage,
         teacher_id: store.List.user.id,
@@ -47,12 +47,12 @@ export default {
   <form @submit.prevent="test">
     <div class="mb-3">
       <input
-        v-model="store.NameSurname"
+        v-model="store.ReviewTitle"
         type="text"
-        name="user_name"
-        id="name_surname"
+        name="title"
+        id="title"
         class="form-control mt-2"
-        placeholder="Inserisci il tuo nome e cognome"
+        placeholder="Dai un titolo alla recensione"
       />
 
       <input

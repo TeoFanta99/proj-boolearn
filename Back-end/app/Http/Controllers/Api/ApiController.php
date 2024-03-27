@@ -101,7 +101,7 @@ class ApiController extends Controller
     public function getReview(Request $request)
     {
 
-        $user_name = $request->input('user_name');
+        $title = $request->input('title');
         $user_email = $request->input('user_email');
         $description = $request->input('description');
         $teacher_id = $request->input('teacher_id');
@@ -109,7 +109,7 @@ class ApiController extends Controller
         $teacher = Teacher::find($teacher_id);
 
         $new_review = new Review();
-        $new_review->name = $user_name;
+        $new_review->title = $title;
         $new_review->email = $user_email;
         $new_review->description = $description;
         $new_review->date_of_review = Carbon::now();
