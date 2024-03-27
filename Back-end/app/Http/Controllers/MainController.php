@@ -199,9 +199,9 @@ class MainController extends Controller
         
         $teacher = Teacher::find($id);
 
-        $messages = Message::all();
+        $messages = $teacher -> messages;
 
-        return view('pages.messages')->with('teacher', $teacher)->with('messages', $messages);
+        return view('pages.messages', compact('teacher', 'messages'));
     }
 
     public function reviews($id)
@@ -209,9 +209,9 @@ class MainController extends Controller
         
         $teacher = Teacher::find($id);
 
-        $reviews = Review::all();
+        $reviews = $teacher->reviews;
 
-        return view('pages.reviews')->with('teacher', $teacher)->with('reviews', $reviews);
+        return view('pages.reviews', compact('teacher', 'reviews'));
     }
 
 
