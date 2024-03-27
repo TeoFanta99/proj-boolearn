@@ -31,7 +31,7 @@ class Teacher extends Model
 
     public function sponsorships()
     {
-        return $this->belongsToMany(Sponsorship::class);
+        return $this->belongsToMany(Sponsorship::class)->withPivot('created_at', 'expire_date');
     }
 
     public function user()

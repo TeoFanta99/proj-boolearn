@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('sponsorship_teacher', function (Blueprint $table) {
             $table->id();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 

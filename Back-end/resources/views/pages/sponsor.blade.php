@@ -1,22 +1,46 @@
 @extends('layouts.app')
 @section('content')
-    <div id="dropin-container"></div>
-    <form id="payment-form">
-        @csrf
-        <!-- Aggiungi un campo nascosto per l'ID dell'insegnante -->
-        <input type="hidden" name="teacher_id" id="teacher_id" value="{{ $teacher->id }}">
-        <select name="product" id="product">
-            @foreach ($products as $product)
-                <option value="{{ $product->id }}">{{ $product->name }}</option>
+<div id="dropin-container"></div>
+<form id="payment-form">
+    @csrf
+    <!-- Aggiungi un campo nascosto per l'ID dell'insegnante -->
+    <input type="hidden" name="teacher_id" id="teacher_id" value="{{ $teacher->id }}">
+    <select name="product" id="product">
+        @foreach ($products as $product)
+        <option value="{{ $product->id }}">{{ $product->name }}</option>
+        @endforeach
+    </select>
+    <!-- Altri campi del modulo per il pagamento, ad esempio il token del pagamento -->
+    <button type="button" id="submit-button" onclick="CreateDrop_IN()">Paga</button>
+</form>
+
+<br><br><br>
+<div class="sponsorships-container">
+    <div class="row">
+        <h2>STORICO PAGAMENTI</h2>
+        <ul>
+            @foreach ($teacher->sponsorships as $sponsorship )
+            <li>
+                {{-- "Pivot" serve per accedere alla tabella ponte --}}
+                <span><b>Pacchetto acquistato: </b>{{$sponsorship -> name }}</span>
+                <br>
+                <span><b>Data di acquisto: </b> {{$sponsorship -> pivot -> created_at}}</span>
+                <br>
+                <span><b>Scadenza del pacchetto: </b>{{$sponsorship -> pivot -> expire_date}}</span>
+            </li>
+            <br><br>
             @endforeach
-        </select>
-        <!-- Altri campi del modulo per il pagamento, ad esempio il token del pagamento -->
-        <button type="button" id="submit-button" onclick="CreateDrop_IN()">Paga</button>
-    </form>
-    <script src="https://js.braintreegateway.com/web/dropin/1.31.0/js/dropin.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script>
-        var button = document.querySelector('#submit-button');
+        </ul>
+    </div>
+</div>
+
+
+
+
+<script src="https://js.braintreegateway.com/web/dropin/1.31.0/js/dropin.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    var button = document.querySelector('#submit-button');
 
         function CreateDrop_IN() {
             braintree.dropin.create({
@@ -69,5 +93,5 @@
                     console.error('Errore durante la richiesta:', error);
                 });
         }
-    </script>
+</script>
 @endsection
