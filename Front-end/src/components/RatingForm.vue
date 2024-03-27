@@ -47,44 +47,19 @@ export default {
       <div class="d-flex flex-column">
         <p>Dai il tuo voto:</p>
         <label class="radio-inline">
-          <input
-            type="radio"
-            name="optradio"
-            value="1"
-            v-model="store.Rating"
-          />Pessimo
+          <input type="radio" name="optradio" value="1" v-model="store.Rating" />Pessimo
         </label>
         <label class="radio-inline">
-          <input
-            type="radio"
-            name="optradio"
-            value="2"
-            v-model="store.Rating"
-          />Scarso
+          <input type="radio" name="optradio" value="2" v-model="store.Rating" />Scarso
         </label>
         <label class="radio-inline">
-          <input
-            type="radio"
-            name="optradio"
-            value="3"
-            v-model="store.Rating"
-          />Sufficiente
+          <input type="radio" name="optradio" value="3" v-model="store.Rating" />Sufficiente
         </label>
         <label class="radio-inline">
-          <input
-            type="radio"
-            name="optradio"
-            value="4"
-            v-model="store.Rating"
-          />Buono
+          <input type="radio" name="optradio" value="4" v-model="store.Rating" />Buono
         </label>
         <label class="radio-inline">
-          <input
-            type="radio"
-            name="optradio"
-            value="5"
-            v-model="store.Rating"
-          />Ottimo
+          <input type="radio" name="optradio" value="5" v-model="store.Rating" />Ottimo
         </label>
       </div>
     </div>
