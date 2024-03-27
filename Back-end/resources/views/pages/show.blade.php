@@ -80,7 +80,7 @@
         <div class="col">
             <div class="card border-success right-profile-card">
                 <div class="card-header border-success" style="font-weight: bold;">
-                    ALTRE INFO
+                    COLLEGAMENTI
                 </div>
                 <div class="card-body d-flex">
                     <button class="btn btn-primary me-3">
@@ -99,7 +99,7 @@
                         <!-- Campo nascosto per l'ID dell'insegnante -->
                         <input type="hidden" name="teacher_id" value="{{ $teacher->id }}">
                         <!-- Bottone per inviare il modulo -->
-                        <button class="btn btn-warning" type="submit" style="color: white">SPONSORIZZAZIONE</button>
+                        <button class="btn btn-warning" type="submit" style="color: white">SPONSORIZZAZIONI</button>
                     </form>
 
                 </div>
