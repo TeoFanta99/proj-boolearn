@@ -203,6 +203,16 @@ class MainController extends Controller
         return view('pages.messages');
     }
 
+    public function reviews($id)
+    {
+        
+        // $teachers = Teacher::find($id);
+
+        // $messages = Message::all();
+
+        return view('pages.reviews');
+    }
+
 
 
 }

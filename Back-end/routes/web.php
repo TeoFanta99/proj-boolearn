@@ -33,7 +33,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/teacher/edit', [MainController::class, 'edit'])->name('teacher.edit');
     Route::put('/user/update', [MainController::class, 'update'])->name('user.update');
 
-    Route::post('/messages/{id}', [MainController::class, 'messages'])->name('user.messages');
+
+    // bottoni che rimandano a pagina messaggi,reviews e sponsorizzazioni
+    Route::get('/messages/{id}', [MainController::class, 'messages'])->name('user.messages');
+
+    Route::get('/reviews/{id}', [MainController::class, 'reviews'])->name('user.reviews');
     
     Route::post('/sponsorship', [SponsorshipController::class, 'index'])
     ->name('user.sponsorship');

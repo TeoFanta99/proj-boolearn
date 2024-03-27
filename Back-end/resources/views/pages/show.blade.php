@@ -83,7 +83,7 @@
                         </div>
                        <div class="card-body">
                             <button class="btn btn-primary me-3"><a href="{{ route('user.messages', $teacher->id) }}" >MESSAGGI</a></button>
-                            <button class="btn btn-success me-3">RECENSIONI</button>
+                            <button class="btn btn-success me-3"><a href="{{ route('user.reviews', $teacher->id) }}" >RECENSIONI</a></button>
                             <button class="btn btn-warning me-3">SPONSORIZZAZIONI</button>
                        </div>
                     </div>
