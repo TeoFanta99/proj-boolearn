@@ -82,7 +82,7 @@
                 <div class="card-header border-success" style="font-weight: bold;">
                     ALTRE INFO
                 </div>
-                <div class="card-body">
+                <div class="card-body d-flex">
                     <button class="btn btn-primary me-3">
                         <a href="{{ route('user.messages', $teacher->id) }}"
                             style="text-decoration: none; color: white">
@@ -94,11 +94,14 @@
                             RECENSIONI
                         </a>
                     </button>
-                    <button class="btn btn-warning me-3">
-                        <a href="" style="text-decoration: none; color: white">
-                            SPONSORIZZAZIONI
-                        </a>
-                    </button>
+                    <form id="sponsorship-form" method="POST" action="{{ route('user.sponsorship') }}">
+                        @csrf
+                        <!-- Campo nascosto per l'ID dell'insegnante -->
+                        <input type="hidden" name="teacher_id" value="{{ $teacher->id }}">
+                        <!-- Bottone per inviare il modulo -->
+                        <button class="btn btn-warning" type="submit" style="color: white">SPONSORIZZAZIONE</button>
+                    </form>
+
                 </div>
             </div>
         </div>
