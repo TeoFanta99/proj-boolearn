@@ -51,4 +51,6 @@ Route::middleware('auth')->group(function () {
 // Route::post('/make-payment', [SponsorshipController::class, 'makePayments'])->name('make.payment');
 Route::get('/teacher/{id}', [TeacherController::class, 'index'])->name('teacher.index');
 Route::get('/user/{id}', [MainController::class, 'show'])->name('user.show');
+
+
 require __DIR__ . '/auth.php';

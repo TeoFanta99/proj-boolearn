@@ -31,7 +31,7 @@
         @if (Auth::user()->id == $teacher->user_id)
         {{-- STAMPO I SUOI PROFILI --}}
         <div class="col-3 p-2">
-            <a href="{{ route('user.show', $teacher->user->id) }}" class="text-decoration-none">
+            <a href="{{ route('user.show', $teacher->id) }}" class="text-decoration-none">
                 <div class="card pt-3 border-0 shadow">
                     <div class="d-flex justify-content-center align-items-center" style="height: 200px;">
                         <img class="object-fit-cover border rounded" style="height: 100%;"

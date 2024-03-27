@@ -86,8 +86,8 @@ class MainController extends Controller
      */
     public function show($id)
     {
-        $user = User::find($id);
-        $teacher = $user->teacher()->first();
+      
+        $teacher = Teacher::find($id);
         $ratings = Rating::all();
 
         return view('pages.show', compact('teacher', 'ratings'));
