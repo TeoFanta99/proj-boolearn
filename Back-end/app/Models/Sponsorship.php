@@ -8,8 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Sponsorship extends Model
 {
     use HasFactory;
-
-    public function teacher() {
-        return $this -> belongsToMany(Teacher :: class);
-    }
+    protected $dates = ['expire_date'];
+    public function teachers() {
+        return $this->belongsToMany(Teacher::class)->withPivot('expire_date');    }
 }
