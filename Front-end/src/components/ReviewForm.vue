@@ -41,42 +41,26 @@ export default {
 
 <template>
   <br /><br />
-  <h2>Lascia una recensione all'insegnante!</h2>
+  <h2>LASCIA UNA RECENSIONE!</h2>
   <br />
 
   <form @submit.prevent="test">
     <div class="mb-3">
-      <input
-        v-model="store.ReviewTitle"
-        type="text"
-        name="title"
-        id="title"
-        class="form-control mt-2"
-        placeholder="Dai un titolo alla recensione"
-      />
-
-      <input
-        v-model="store.UserEmail"
-        type="email"
-        name="user_email"
-        id="email"
-        class="form-control mt-2"
-        placeholder="Inserisci la tua email"
-      />
-
-      <textarea
-        v-model="store.EmailMessage"
-        class="w-100 mt-3"
-        style="height: 200px"
-        name="description"
-        id="description"
-      ></textarea>
+      <label class="form-label">TITOLO DELLA RECENSIONE</label>
+      <input v-model="store.ReviewTitle" type="text" name="title" id="title" class="form-control"
+        placeholder="Dai un titolo alla recensione" />
     </div>
-    <input
-      type="submit"
-      class="mt-3 btn btn-primary w-75"
-      value="AGGIUNGI RECENSIONE"
-    />
+    <div class="mb-3">
+      <label class="form-label">INDIRIZZO EMAIL</label>
+      <input v-model="store.UserEmail" type="email" name="user_email" id="email" class="form-control"
+        placeholder="Inserisci la tua email" />
+    </div>
+    <label class="form-label">TESTO DELLA RECENSIONE</label>
+    <textarea v-model="store.EmailMessage" class="w-100 form-control" style="height: 200px" name="description"
+      id="description" placeholder="Digita qui la tua recensione"></textarea>
+    <div class="d-flex justify-content-center">
+      <input type="submit" class="mt-3 btn btn-primary w-75" value="AGGIUNGI RECENSIONE" />
+    </div>
   </form>
 
   <div v-if="success" style="color: green">
@@ -85,6 +69,16 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+h2 {
+  text-align: center;
+  font-size: 40px;
+  font-weight: 600;
+  background-image: linear-gradient(45deg, #553c9a, #ee4b2b);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
 form {
   input {
     width: 100%;
@@ -100,5 +94,9 @@ form {
     color: #fff;
     cursor: pointer;
   }
+}
+
+.form-label {
+  font-weight: bold;
 }
 </style>
