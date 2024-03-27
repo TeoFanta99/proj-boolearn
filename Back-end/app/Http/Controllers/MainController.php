@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TeacherRequest;
 use App\Models\Message;
 use App\Models\Rating;
+use App\Models\Review;
 use App\Models\Subject;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
@@ -196,11 +197,15 @@ class MainController extends Controller
     public function messages($id)
     {
         
-        // $teachers = Teacher::find($id);
+        $teachers = Teacher::find($id);
 
-        // $messages = Message::all();
+        $messages = Message::all();
 
-        return view('pages.messages');
+        $teacher = $messages->teacher()->first();
+
+        dd($teacher );
+
+        return view('pages.messages',compact('teacher'));
     }
 
     public function reviews($id)
