@@ -11,7 +11,7 @@
     @if (session('error'))
         <div> {{ session('error') }}</div>
     @endif
-        <div class="row" style="width: 95%;">
+        <div class="row row-cols-2" style="width: 95%;">
             <div class="col-12 col-md-4 col-xl-3">
                 <div class="card border-success mb-4 left-profile-card">
                     <div class="card-body">
@@ -45,34 +45,51 @@
                     </div>
                 </div>
             </div>
-            <div class="col">
-                <div class="card border-success right-profile-card">
-                    <div class="card-header border-success" style="font-weight: bold;">
-                        ALTRE INFO
+
+            <div class="row flex-column flex-grow-1">
+                <div class="col">
+                    <div class="card border-success right-profile-card">
+                        <div class="card-header border-success" style="font-weight: bold;">
+                            ALTRE INFO
+                        </div>
+                        <div class="card-body">
+                            <h5>BIOGRAFIA</h5>
+                            <p class="text_wrap">{{ $teacher->biography }}</p>
+
+                            <h5>MATERIE</h5>
+                            <ul>
+                                @foreach ($teacher->subjects as $subject)
+                                    <li>{{ $subject->name }}</li>
+                                @endforeach
+                            </ul>
+
+                            <h5>MOTTO</h5>
+                            <p>{{ $teacher->motto }}</p>
+
+                            <h5>CV</h5>
+                            @if (!empty($teacher->cv_url))
+                                <a href="{{ route('teacher.index', $teacher->user->id) }}" target="_blank">CV</a>
+                            @else
+                                CV NON PRESENTE
+                            @endif
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <h5>BIOGRAFIA</h5>
-                        <p class="text_wrap">{{ $teacher->biography }}</p>
+                </div>
 
-                        <h5>MATERIE</h5>
-                        <ul>
-                            @foreach ($teacher->subjects as $subject)
-                                <li>{{ $subject->name }}</li>
-                            @endforeach
-                        </ul>
-
-                        <h5>MOTTO</h5>
-                        <p>{{ $teacher->motto }}</p>
-
-                        <h5>CV</h5>
-                        @if (!empty($teacher->cv_url))
-                            <a href="{{ route('teacher.index', $teacher->user->id) }}" target="_blank">CV</a>
-                        @else
-                            CV NON PRESENTE
-                        @endif
+                <div class="col">
+                    <div class="card border-success right-profile-card">
+                        <div class="card-header border-success" style="font-weight: bold;">
+                            ALTRE INFO
+                        </div>
+                       <div class="card-body">
+                            <button class="btn btn-primary me-3"><a href="{{ route('user.messages', $teacher->id) }}" >MESSAGGI</a></button>
+                            <button class="btn btn-success me-3">RECENSIONI</button>
+                            <button class="btn btn-warning me-3">SPONSORIZZAZIONI</button>
+                       </div>
                     </div>
                 </div>
             </div>
+            
         </div>
     <script>
         let data_nascita = document.getElementById('DateBirth');

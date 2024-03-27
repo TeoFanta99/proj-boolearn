@@ -32,6 +32,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::post('/teacher/edit', [MainController::class, 'edit'])->name('teacher.edit');
     Route::put('/user/update', [MainController::class, 'update'])->name('user.update');
+
+    Route::post('/messages/{id}', [MainController::class, 'messages'])->name('user.messages');
     
     Route::post('/sponsorship', [SponsorshipController::class, 'index'])
     ->name('user.sponsorship');

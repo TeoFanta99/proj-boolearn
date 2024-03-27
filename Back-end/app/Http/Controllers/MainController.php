@@ -190,4 +190,19 @@ class MainController extends Controller
         $teacher->delete();
         return redirect()->route('welcome');
     }
+
+    // Gestione messaggi,recensioni,sponsorizzazioni
+
+    public function messages($id)
+    {
+        
+        // $teachers = Teacher::find($id);
+
+        // $messages = Message::all();
+
+        return view('pages.messages');
+    }
+
+
+
 }
