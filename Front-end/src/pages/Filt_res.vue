@@ -161,7 +161,7 @@ export default {
   },
 
   mounted() {
-    this.store.valutazioni = JSON.parse(localStorage.getItem('valutazioni'));
+    this.store.valutazioni = JSON.parse(localStorage.getItem("valutazioni"));
     this.store.Subject = localStorage.getItem("materiaID");
     this.population();
   },
@@ -249,7 +249,9 @@ export default {
                 <div
                   v-if="teacher.sponsorships.length > 0"
                   class="position-absolute star_sponsor"
-                ><i class="fa-solid fa-star"></i></div>
+                >
+                  <i class="fa-solid fa-star"></i>
+                </div>
 
                 <h4>{{ teacher.user.name }} {{ teacher.user.lastname }}</h4>
               </div>

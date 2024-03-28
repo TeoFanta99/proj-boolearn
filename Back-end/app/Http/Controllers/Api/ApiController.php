@@ -274,7 +274,7 @@ class ApiController extends Controller
 
         $combinedTeachers = array_merge($sponsoredTeachers, $filteredTeachers);
 
-        $perPage = $request->input('perPage', 4);
+        $perPage = $request->input('perPage', 8);
 
         // Ottieni il numero di pagina corrente dalla richiesta
         $page = $request->input('page', 1);
