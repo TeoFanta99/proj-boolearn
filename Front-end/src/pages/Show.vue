@@ -238,7 +238,7 @@ export default {
           </div>
         </div>
         <div class="col-12">
-          <h5 class="mt-4">Recensioni</h5>
+          <h5 class="mt-4 text-center">Recensioni</h5>
           <Carousel />
         </div>
       </div>
