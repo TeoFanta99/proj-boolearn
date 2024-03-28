@@ -50,7 +50,7 @@
                             <div class="mb-4 row">
                                 <label for="date_of_birth"
                                     class="col-md-4 col-form-label text-md-right">{{ __('Data di
-                                                                    Nascita *') }}</label>
+                                                                                                        Nascita *') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="date_of_birth" type="date"
@@ -120,7 +120,7 @@
                             <div class="mb-4 row">
                                 <label for="password-confirm"
                                     class="col-md-4 col-form-label text-md-right">{{ __('Conferma
-                                                                    Password *') }}</label>
+                                                                                                        Password *') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="password-confirm" type="password" class="form-control"
@@ -144,6 +144,8 @@
             </div>
         </div>
     </div>
+
+
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             getCities();
@@ -160,11 +162,16 @@
 
             function getCities() {
                 setTimeout(() => {
-                    const options = {method: 'GET', headers: {accept: 'application/json'}};
-                    
-                    fetch('https://axqvoqvbfjpaamphztgd.functions.supabase.co/comuni',options)
-                        .then(response => response.json())
-                        .then(data => {
+                    const options = {
+                        method: 'GET',
+                        headers: {
+                            accept: 'application/json'
+                        }
+                    };
+
+                    axios.get('https://axqvoqvbfjpaamphztgd.functions.supabase.co/comuni', options)
+                        .then(response => {
+                            const data = response.data;
                             // Controlla se ci sono risultati
                             if (Array.isArray(data) && data.length > 0) {
                                 populateCitySelect(data);
