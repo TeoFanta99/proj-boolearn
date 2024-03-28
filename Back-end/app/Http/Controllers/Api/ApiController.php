@@ -174,9 +174,11 @@ class ApiController extends Controller
 
             // Aggiungi la media dei voti all'insegnante
             $teacher->average_rating = $averageRating;
-
+            $ratings= $teacher->ratings()->get();
+            
+            
             // Controlla se il teacher ha una sponsorizzazione attiva
-            if ($teacher->sponsorships->isNotEmpty()) {
+            if ($teacher->sponsorships->isNotEmpty() && !$ratings->isEmpty()) {
                 // Ottieni la sponsorizzazione più recente e la sua data di scadenza
                 $farthestExpireDate = $teacher->sponsorships()->max('expire_date');
 
@@ -185,6 +187,7 @@ class ApiController extends Controller
                     $filteredTeachers[] = $teacher;
                 }
             }
+            
         }
 
         // Ordina gli insegnanti in base alla data di scadenza più lontana delle sponsorizzazioni
