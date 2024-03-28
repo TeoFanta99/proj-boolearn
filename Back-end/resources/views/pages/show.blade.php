@@ -76,35 +76,6 @@
                 </div>
             </div>
         </div>
-
-        <div class="col">
-            <div class="card border-success right-profile-card">
-                <div class="card-header border-success" style="font-weight: bold;">
-                    COLLEGAMENTI
-                </div>
-                <div class="card-body d-flex">
-                    <button class="btn btn-primary me-3">
-                        <a href="{{ route('user.messages', $teacher->id) }}"
-                            style="text-decoration: none; color: white">
-                            MESSAGGI
-                        </a>
-                    </button>
-                    <button class="btn btn-success me-3">
-                        <a href="{{ route('user.reviews', $teacher->id) }}" style="text-decoration: none; color: white">
-                            RECENSIONI
-                        </a>
-                    </button>
-                    <form id="sponsorship-form" method="POST" action="{{ route('user.sponsorship') }}">
-                        @csrf
-                        <!-- Campo nascosto per l'ID dell'insegnante -->
-                        <input type="hidden" name="teacher_id" value="{{ $teacher->id }}">
-                        <!-- Bottone per inviare il modulo -->
-                        <button class="btn btn-warning" type="submit" style="color: white">SPONSORIZZAZIONI</button>
-                    </form>
-
-                </div>
-            </div>
-        </div>
     </div>
 
 </div>
