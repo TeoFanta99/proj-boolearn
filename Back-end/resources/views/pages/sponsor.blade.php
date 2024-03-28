@@ -78,7 +78,7 @@
             // Invia i dati al server per elaborare il pagamento
             axios.post('{{ route('make.payment') }}', {
                     token: paymentMethodNonce,
-                    product: teacherId, // Utilizza l'ID dell'insegnante
+                    product: selectedProduct, // Utilizza l'ID dell'insegnante
                     _token: '{{ csrf_token() }}'
                 })
                 .then(function(response) {

@@ -185,7 +185,7 @@ class MainController extends Controller
         }
 
         foreach ($sponsorships as $sponsorship) {
-            $sponsorship->teacher()->detach();
+            $sponsorship->teachers()->detach();
         }
 
         $teacher->delete();
