@@ -33,13 +33,19 @@ export default {
     };
   },
   mounted() {
+    
     setTimeout(() => {
+      
+      
       $(".your_class .slick-slider").slick({
         infinite: true,
         slidesToShow: 2,
         slidesToScroll: 1,
       });
-    }, 500);
+    }, 1500);
+    setTimeout(()=>{
+      this.store.recensioni = JSON.parse(localStorage.getItem('recensioni'));
+    },1000);
   },
   // Distruggi Slick Carousel al momento dello smontaggio del componente
   beforeUnmount() {
