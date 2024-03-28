@@ -35,7 +35,7 @@ export default {
           this.store.materie = res.data.subjects;
           this.store.valutazioni = res.data.ratings;
           // store.List = res.data.teachers2;;
-          // console.log(store.List);
+          console.log(this.teachers);
           this.loading = false;
         })
         .catch((error) => {
@@ -202,7 +202,8 @@ export default {
           :key="teacher.id"
         >
           <RouterLink
-          tag="div" :to="{ name: 'show', params: { id: teacher.user.name } } "
+            tag="div"
+            :to="{ name: 'show', params: { id: teacher.user.name } }"
             @click="riempiVet(teacher.id), (store.view = 2)"
             class="text-decoration-none"
           >
@@ -222,9 +223,11 @@ export default {
               <div class="card-body">
                 <h4>{{ teacher.user.name }} {{ teacher.user.lastname }}</h4>
                 <!-- <span>{{ getStars(store.List[teacher.id].average_rating) }}</span> -->
-                <!-- <div v-if="store.List[teacher.id].average_rating > 2">
-                  {{ store.List[teacher.id].average_rating }}
-                </div> -->
+                <div>
+                  <i class="fas fa-star" style="color: #ffd43b">
+                    {{ teacher.average_rating }}</i
+                  >
+                </div>
               </div>
             </div>
           </RouterLink>
@@ -294,7 +297,6 @@ export default {
 .img_circle {
   width: 60%;
 }
-
 
 .on_hover {
   transition: all ease-in 0.5s;
