@@ -192,14 +192,14 @@ export default {
             <button
               class="btn me-3"
               :class="!this.switchForm ? 'btn-primary' : 'btn-danger'"
-              @click="this.switchForm = !this.switchForm"
+              @click="toggleForms('contact')"
             >
               {{ this.switchForm ? "Annulla" : "CONTATTA" }}
             </button>
             <button
               class="btn"
               :class="!this.switchReviewForm ? 'btn-success' : 'btn-danger'"
-              @click="this.switchReviewForm = !this.switchReviewForm"
+              @click="toggleForms('review')"
             >
               {{ this.switchReviewForm ? "Annulla" : "RECENSISCI" }}
             </button>
