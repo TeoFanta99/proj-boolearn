@@ -153,7 +153,7 @@ export default {
                 </li>
                 <li>
                   <i class="fas fa-map-marker-alt"></i
-                  ><span class="text_info">{{ store.List.city }}</span>
+                  ><span class="text_info">{{ store.List.user.city }}</span>
                 </li>
                 <li>
                   <i class="fas fa-briefcase"></i
