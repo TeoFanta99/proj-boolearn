@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->id();
 
             $table->string('name')->nullable(false);
-            $table->string('duration', 12);
+            $table->time('duration');
             $table->decimal('price', 5, 2)->nullable(false);
 
             $table->timestamps();
