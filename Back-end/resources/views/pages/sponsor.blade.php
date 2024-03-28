@@ -22,6 +22,7 @@
         @foreach ($products as $product)
         <div class="card-sponsor" id="product_{{ $product->id }}" onclick="selectSponsor({{ $product->id }})">
             <h2>{{ $product->name }}</h2>
+            <h2>{{ $product->price }}</h2>
         </div>
         @endforeach
     </div>
@@ -96,9 +97,9 @@
                             })
                             .catch(function(error) {
                                 console.error('Errore durante la richiesta Axios:', error);
-                                alert("Errore durante l'associare la sponsorizzazione agli insegnanti.");
                             });
-                    } else {
+                        } else {
+                        alert("Errore durante l'associare la sponsorizzazione agli insegnanti.");
                         alert(data.message); // Mostra un messaggio di errore
                     }
                 })

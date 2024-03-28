@@ -47,6 +47,7 @@ export default {
         .then((response) => {
             // this.reviews = response.data.reviews;
             store.recensioni = response.data.reviews;
+            console.log(store.recensioni);
             if (this.store.recensioni) {
               this.store.view = localStorage.getItem("view", this.store.view);
               localStorage.setItem(

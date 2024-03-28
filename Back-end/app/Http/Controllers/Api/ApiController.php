@@ -142,7 +142,9 @@ class ApiController extends Controller
         $teacher_id = $request->input('teacher_id');
 
         // riferimento: slide 72 del 12/02/24, pagina 19
-        $reviews = Review::where('teacher_id', $teacher_id)->get();
+        $reviews = Review::where('teacher_id', $teacher_id)
+                ->orderByDesc('date_of_review')
+                ->get();
 
         return response()->json([
             'status' => 'success',
