@@ -1,5 +1,19 @@
 @extends('layouts.app')
 @section('content')
+<h2>STORICO PAGAMENTI</h2>
+        <ul>
+            @foreach ($teacher->sponsorships as $sponsorship )
+            <li>
+                {{-- "Pivot" serve per accedere alla tabella ponte --}}
+                <span><b>Pacchetto acquistato: </b>{{$sponsorship -> name }}</span>
+                <br>
+                <span><b>Data di acquisto: </b> {{$sponsorship -> pivot -> created_at}}</span>
+                <br>
+                <span><b>Scadenza del pacchetto: </b>{{$sponsorship -> pivot -> expire_date}}</span>
+            </li>
+            <br><br>
+            @endforeach
+        </ul>
     <form id="payment-form">
         @csrf
         <!-- Aggiungi un campo nascosto per l'ID dell'insegnante -->
@@ -11,6 +25,7 @@
                 </div>
             @endforeach
         </div>
+
         <!-- Altri campi del modulo per il pagamento, ad esempio il token del pagamento -->
     </form>
     <div id="dropin-container"></div>
