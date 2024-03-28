@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use Illuminate\Pagination\Paginator;
 use App\Http\Controllers\Controller;
 use App\Models\Message;
 use App\Models\Subject;
@@ -43,7 +44,7 @@ class ApiController extends Controller
             }
         }
 
-        if (empty ($risultato)) {
+        if (empty($risultato)) {
             return response()->json([
                 'messaggio' => 'Nessun insegnante trovato',
                 'teachers' => [],
@@ -185,7 +186,7 @@ class ApiController extends Controller
         }
 
         // Ordina gli insegnanti in base alla data di scadenza più lontana delle sponsorizzazioni
-        if (!empty ($filteredTeachers)) {
+        if (!empty($filteredTeachers)) {
             $filteredTeachers = collect($filteredTeachers)->sortByDesc(function ($teacher) {
                 return $teacher->sponsorships()->max('expire_date');
             })->values()->all();
@@ -225,10 +226,10 @@ class ApiController extends Controller
 
             $averageRating = $teacher->ratings()->avg('rating_id');
 
-            
-            $teacher->average_rating =intval(round($averageRating));
 
-            
+            $teacher->average_rating = intval(round($averageRating));
+
+
             if ($rating_id !== 0) {
                 if (round($averageRating) < $rating_id) {
                     continue;
@@ -248,7 +249,7 @@ class ApiController extends Controller
                 if ($farthestExpireDate > Carbon::now()) {
                     $sponsoredTeachers[] = $teacher;
                 }
-                if (!empty ($sponsoredTeachers)) {
+                if (!empty($sponsoredTeachers)) {
                     // Ordina gli insegnanti in base alla data di scadenza più lontana delle sponsorizzazioni
                     $sponsoredTeachers = collect($sponsoredTeachers)->sortByDesc(function ($teacher) {
                         return $teacher->sponsorships()->max('expire_date');
@@ -269,13 +270,28 @@ class ApiController extends Controller
         }
         $filteredTeachers = collect($filteredTeachers)->diff($sponsoredTeachers)->values()->all();
 
-        // Riunisci i teacher sponsorizzati all'inizio dell'array restituito
-        $filteredTeachers = array_merge($sponsoredTeachers, $filteredTeachers);
+        $combinedTeachers = array_merge($sponsoredTeachers, $filteredTeachers);
 
-        // dd($sponsoredTeachers);
-        // Invia una risposta JSON contenente i teachers filtrati
-        return response()->json($filteredTeachers);
+        $perPage = $request->input('perPage', 4);
 
+        // Ottieni il numero di pagina corrente dalla richiesta
+        $page = $request->input('page', 1);
+
+        // Calcola l'offset per la query dei dati
+        $offset = ($page - 1) * $perPage;
+
+        // Ottieni i dati dei docenti per la pagina corrente
+        $paginatedTeachers = array_slice($combinedTeachers, $offset, $perPage);
+
+        $totalPages = ceil(count($combinedTeachers) / $perPage);
+        // Invia una risposta JSON contenente i docenti paginati
+        return response()->json([
+            'teachers' => $paginatedTeachers,
+            'current_page' => $page,
+            'per_page' => $perPage,
+            'total_pages'=>$totalPages
+            // Altri dati di paginazione, se necessario
+        ]);
     }
 }
 

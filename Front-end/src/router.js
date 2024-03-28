@@ -45,14 +45,14 @@ const router = createRouter({
 });
 
 // Aggiungi un listener per l'evento load
-window.addEventListener("load", () => {
-  // Controlla l'URL corrente
-  const currentPath = window.location.pathname;
+// window.addEventListener("load", () => {
+//   // Controlla l'URL corrente
+//   const currentPath = window.location.pathname;
 
-  // Se l'URL è diverso dalla tua rotta principale, reimposta alle rotte originali
-  if (currentPath !== "/") {
-    router.push("/");
-  }
-});
+//   // Se l'URL è diverso dalla tua rotta principale, reimposta alle rotte originali
+//   if (currentPath !== "/") {
+//     router.push("/");
+//   }
+// });
 
 export { router };

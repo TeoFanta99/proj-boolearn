@@ -38,17 +38,20 @@ class SponsorshipTableSeeder extends Seeder
     
         foreach ($sponsorships as $sponsorshipData) {
             $sponsorship = new Sponsorship();
-            $sponsorship->price = $sponsorshipData['price'];
-            
-            $sponsorship->duration = $sponsorshipData['duration_hours'];
             $sponsorship->name = $sponsorshipData['name'];
-            
-            $teacher = Teacher::inRandomOrder()->first(); // Seleziona un insegnante casuale
-            sscanf($sponsorship->duration, '%d:%d:%d', $hours, $minutes, $seconds);
-            $expire_date = Carbon::now()->addHours($hours)->addMinutes($minutes)->addSeconds($seconds);
+            $sponsorship->duration = $sponsorshipData['duration_hours'];
+            $sponsorship->price = $sponsorshipData['price'];
             $sponsorship->save();
-            $sponsorship->teacher()->attach($teacher, ['expire_date' => $expire_date]);
-        
+            
+            // Seleziona un insegnante casuale
+            $teacher = Teacher::inRandomOrder()->first();
+            
+            // Calcola l'expire_date in base alla durata della sponsorizzazione
+            sscanf($sponsorshipData['duration_hours'], '%d:%d:%d', $hours, $minutes, $seconds);
+            $expireDate = Carbon::now()->addHours($hours)->addMinutes($minutes)->addSeconds($seconds);
+            
+            // Associa la sponsorizzazione all'insegnante con l'expire_date
+            $sponsorship->teachers()->attach($teacher, ['expire_date' => $expireDate]);
         }
         
     }

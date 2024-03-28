@@ -20,7 +20,7 @@ class ReviewFactory extends Factory
             'title' => fake() -> sentence(3),
             'description' => fake() -> paragraph(),
             'email' => fake() -> safeEmail(),
-            'date_of_review' => fake() -> dateTime(),
+            'date_of_review' => fake() -> dateTimeBetween('-1 year', 'now'),
         ];
     }
 }

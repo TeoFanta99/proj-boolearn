@@ -83,11 +83,13 @@ export default {
         </div>
       </div>
       <div class="home">
-        <a href="" class="d-block d-lg-none">
-          <img src="../../public/BL1.svg" alt="LOGO" class="logo-mobile" />
+        
+        <router-link :to="{ name: 'home' }" class="d-block d-lg-none">
+          <img src="../../BL1.svg" alt="LOGO" class="logo-mobile" />
+        </router-link>
           <!-- <span>BOOLEARN</span> -->
-        </a>
-        <a href="" class="d-none d-lg-block">
+        <router-link :to="{ name: 'home' }" class="d-none d-lg-block">
+       
           <div class="d-lg-flex justify-content-center logo-desktop">
             <img
               src="../../public/Crop_BooLEARN.svg"
@@ -95,7 +97,7 @@ export default {
               class="w-100 h-100 object-fit-contain"
             />
           </div>
-        </a>
+        </router-link>
       </div>
       <button
         class="navbar-toggler"

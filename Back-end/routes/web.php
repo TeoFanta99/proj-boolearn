@@ -20,7 +20,7 @@ use App\Http\Controllers\MainController;
 
 Route::get('/', [MainController::class, 'index'])->name('welcome');
 
-
+Route::get('/sponsor/thanks',[SponsorshipController::class,'thanks'])->name('sponsor.thanks');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -51,6 +51,5 @@ Route::middleware('auth')->group(function () {
 // Route::post('/make-payment', [SponsorshipController::class, 'makePayments'])->name('make.payment');
 Route::get('/teacher/{id}', [TeacherController::class, 'index'])->name('teacher.index');
 Route::get('/user/{id}', [MainController::class, 'show'])->name('user.show');
-
 
 require __DIR__ . '/auth.php';

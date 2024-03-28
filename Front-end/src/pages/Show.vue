@@ -41,28 +41,34 @@ export default {
     },
 
     getReviews() {
-      axios
-        .get(`http://127.0.0.1:8000/api/v1/review?teacher_id=${store.List.id}`)
+      // PRENDI IL TEACHER CLICCATO IN PRECEDENZA DAL SALVATAGGIO TRAMITE BROWSER
+      this.store.List = JSON.parse(localStorage.getItem('teacher'));
+      // SE IL TEACHER HA UNA CORRISPONDENZA ( NON È NULLO l 'ID' ) FAI LA CHIAMATA
+      if (store.List.id) {
+        axios.get(`http://127.0.0.1:8000/api/v1/review?teacher_id=${store.List.id}`)
         .then((response) => {
-          this.reviews = response.data.reviews;
+          // this.reviews = response.data.reviews;
           store.recensioni = response.data.reviews;
-          // console.log(response.data.reviews)
-        })
-        .catch((error) => {
-          console.error("Errore durante la richiesta API:", error);
-        });
+          if(this.store.recensioni){
+            this.store.view=localStorage.getItem('view', store.view);
+          }
+      // console.log(response.data.reviews)
+    })
+    .catch((error) => {
+      console.error("Errore durante la richiesta API:", error);
+    });
+} else {
+  console.error('ID del docente non definito. Impossibile effettuare la chiamata API.');
+}
 
-      let data_nascita = document.getElementById("DateBirth");
-
-      // DEBUG
-      // console.log(data_nascita)
-
+        
+    let data_nascita = document.getElementById('DateBirth');
+    if (data_nascita) {
       var dataNascita = new Date(data_nascita.textContent);
-
-      var dataFormattata = `${dataNascita.getDate()}/${dataNascita.getMonth() + 1
-        }/${dataNascita.getFullYear()}`;
-
+      var dataFormattata = `${dataNascita.getDate()}/${dataNascita.getMonth() + 1}/${dataNascita.getFullYear()}`;
       data_nascita.textContent = dataFormattata;
+    }
+  
     },
 
     getStars(num) {
@@ -74,8 +80,14 @@ export default {
   },
 
   mounted() {
-    this.getReviews();
-    console.log(store.List);
+    setTimeout(() => {
+      this.getReviews();
+      
+}, 200);
+    
+    // console.log(store.List);
+
+
   },
 };
 </script>
@@ -112,25 +124,8 @@ export default {
             <div class="personal-info mt-4">
               <h3>INFORMAZIONI PERSONALI</h3>
               <ul class="personal-list">
-                <li>
-                  <i class="fas fa-cake-candles"></i><span id="DateBirth">{{
-    store.List.user.date_of_birth
-  }}</span>
-                </li>
-                <li>
-                  <i class="fas fa-map-marker-alt"></i><span class="text_info">{{ store.List.city }}</span>
-                </li>
-                <li>
-                  <i class="fas fa-briefcase"></i><span class="text_info">Web Developer</span>
-                </li>
-                <li>
-                  <i class="far fa-envelope"></i><span class="text_info">{{ store.List.user.email }}</span>
-                </li>
-                <li>
-                  <i class="fas fa-mobile"></i><span class="text_info">{{ store.List.phone_number }}</span>
-                </li>
-                <li>
-                  <i class="fas fa-receipt"></i><span class="text_info">{{ store.List.tax_id }}</span>
+                <li><i class="fas fa-cake-candles "></i><span id="DateBirth">{{ store.List.user.date_of_birth ? store.List.user.date_of_birth : 'Data di nascita non disponibile' }}</span>
+
                 </li>
               </ul>
             </div>

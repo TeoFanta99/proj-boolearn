@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -16,9 +15,9 @@ return new class extends Migration
         Schema::create('sponsorships', function (Blueprint $table) {
             $table->id();
 
-            $table->string('name') -> nullable(false);
-            $table->time('duration', 2) -> nullable(false);
-            $table->decimal('price', 5, 2) -> nullable(false);
+            $table->string('name')->nullable(false);
+            $table->string('duration', 12);
+            $table->decimal('price', 5, 2)->nullable(false);
 
             $table->timestamps();
         });
