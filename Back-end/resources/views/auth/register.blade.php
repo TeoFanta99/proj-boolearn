@@ -152,19 +152,22 @@
             }
 
             function getCities() {
-                fetch('https://axqvoqvbfjpaamphztgd.functions.supabase.co/comuni')
-                    .then(response => response.json())
-                    .then(data => {
-                        // Controlla se ci sono risultati
-                        if (Array.isArray(data) && data.length > 0) {
-                            populateCitySelect(data);
-                        } else {
-                            console.log("Nessuna città trovata.");
-                        }
-                    })
-                    .catch(error => {
-                        console.error("Si è verificato un errore:", error);
-                    });
+                setTimeout(() => {
+                    
+                    fetch('https://axqvoqvbfjpaamphztgd.functions.supabase.co/comuni')
+                        .then(response => response.json())
+                        .then(data => {
+                            // Controlla se ci sono risultati
+                            if (Array.isArray(data) && data.length > 0) {
+                                populateCitySelect(data);
+                            } else {
+                                console.log("Nessuna città trovata.");
+                            }
+                        })
+                        .catch(error => {
+                            console.error("Si è verificato un errore:", error);
+                        });
+                }, 1000);
             }
         });
     document.getElementById("Form_register").addEventListener("submit", function(event) {
