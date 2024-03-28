@@ -125,7 +125,7 @@ export default {
   }}</span>
                 </li>
                 <li>
-                  <i class="fas fa-map-marker-alt"></i><span class="text_info">{{ store.List.city }}</span>
+                  <i class="fas fa-map-marker-alt"></i><span class="text_info">{{ store.List.user.city }}</span>
                 </li>
                 <li>
                   <i class="fas fa-briefcase"></i><span class="text_info">Web Developer</span>
@@ -211,7 +211,7 @@ export default {
     <!-- end row  -->
     </div>
     <!-- end row  -->
-  </div>
+
 </template>
 
 <style lang="scss">
