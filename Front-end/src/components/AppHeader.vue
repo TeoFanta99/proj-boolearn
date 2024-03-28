@@ -83,13 +83,11 @@ export default {
         </div>
       </div>
       <div class="home">
-        
         <router-link :to="{ name: 'home' }" class="d-block d-lg-none">
-          <img src="../../BL1.svg" alt="LOGO" class="logo-mobile" />
+          <img src="../../public/BL1.svg" alt="LOGO" class="logo-mobile" />
         </router-link>
-          <!-- <span>BOOLEARN</span> -->
+        <!-- <span>BOOLEARN</span> -->
         <router-link :to="{ name: 'home' }" class="d-none d-lg-block">
-       
           <div class="d-lg-flex justify-content-center logo-desktop">
             <img
               src="../../public/Crop_BooLEARN.svg"

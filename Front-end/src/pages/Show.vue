@@ -92,7 +92,11 @@ export default {
           <div class="card-body">
             <div class="text-center">
               <div class="img_container">
-                <img class="w-100 h-100" :src="getImageUrl(store.List)" alt="" />
+                <img
+                  class="w-100 h-100"
+                  :src="getImageUrl(store.List)"
+                  alt=""
+                />
               </div>
               <div>
                 <div class="d-flex justify-content-center align-items-center mt-2 gap-2">
@@ -139,12 +143,18 @@ export default {
             </div>
           </div>
           <div class="buttons-container d-flex justify-content-center mb-4">
-            <button class="btn me-3" :class="!this.switchForm ? 'btn-primary' : 'btn-danger'"
-              @click="this.switchForm = !this.switchForm">
+            <button
+              class="btn me-3"
+              :class="!this.switchForm ? 'btn-primary' : 'btn-danger'"
+              @click="this.switchForm = !this.switchForm"
+            >
               {{ this.switchForm ? "Annulla" : "CONTATTA" }}
             </button>
-            <button class="btn" :class="!this.switchReviewForm ? 'btn-success' : 'btn-danger'"
-              @click="this.switchReviewForm = !this.switchReviewForm">
+            <button
+              class="btn"
+              :class="!this.switchReviewForm ? 'btn-success' : 'btn-danger'"
+              @click="this.switchReviewForm = !this.switchReviewForm"
+            >
               {{ this.switchReviewForm ? "Annulla" : "RECENSISCI" }}
             </button>
           </div>
@@ -163,6 +173,9 @@ export default {
           </div>
           <div class="card-body">
             <h5>BIOGRAFIA</h5>
+            <p class="text_wrap" style="font-size: larger">
+              {{ store.List.biography }}
+            </p>
             <p class="text_wrap" style="font-size: larger">
               {{ store.List.biography }}
             </p>
@@ -194,6 +207,8 @@ export default {
           </div>
         </div>
       </div>
+    </div>
+    <!-- end row  -->
     </div>
     <!-- end row  -->
   </div>

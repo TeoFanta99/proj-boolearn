@@ -23,20 +23,19 @@
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="delete-account">Delete Account</h5>
+                    <h5 class="modal-title" id="delete-account">Cancella Account</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <h2 class="text-lg font-medium text-gray-900">
-                        {{ __('Are you sure you want to delete your account?') }}
+                        {{ __('Sei sicuro di voler cancellare il tuo Account?') }}
                     </h2>
                     <p class="mt-1 text-sm text-gray-600">
-                        {{ __('Once your account is deleted, all of its resources and data will be permanently deleted.
-                        Please enter your password to confirm you would like to permanently delete your account.') }}
+                        {{ __("Una volta cencellato l'account tutti i dati verranno eliminati definitivamente. Inserisci la tua password per confermare la cancellazione definitiva del tuo account") }}
                     </p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Elimina</button>
 
                     <form method="post" action="{{ route('profile.destroy') }}" class="p-6">
                         @csrf
@@ -57,7 +56,7 @@
 
 
                             <button type="submit" class="btn btn-danger">
-                                {{ __('Delete Account') }}
+                                {{ __('Elimina Account') }}
                             </button>
                             <!--  -->
                         </div>
