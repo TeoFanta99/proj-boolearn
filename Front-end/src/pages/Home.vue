@@ -153,7 +153,7 @@ export default {
 <template class="bg-light">
   <jumbo id="boh" />
 
-  <div class="container">
+  <div class="container" style="min-height: 900px;">
     <form class="d-flex align-items-center">
       <div class="col-12 col-md-2 me-3">
 
