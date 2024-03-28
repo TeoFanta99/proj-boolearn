@@ -68,29 +68,73 @@ export default {
 
         data_nascita.textContent = dataFormattata;
       }, 500);
+      // this.reviews = response.data.reviews;
+      store.recensioni = response.data.reviews;
+      console.log(store.recensioni);
+      if (this.store.recensioni) {
+        this.store.view = localStorage.getItem("view", this.store.view);
+        localStorage.setItem(
+          "recensioni",
+          JSON.stringify(this.store.recensioni)
+        );
+      }
+      // console.log(response.data.reviews)
+    });
+    setTimeout(() => {
+  let data_nascita = document.getElementById("DateBirth");
+
+  var dataNascita = new Date(data_nascita.textContent);
+
+  var dataFormattata = `${dataNascita.getDate()}/${dataNascita.getMonth() + 1
+    }/${dataNascita.getFullYear()}`;
+
+  data_nascita.textContent = dataFormattata;
+}, 500);
 
       // DEBUG
       // console.log(data_nascita)
     },
 
+toggleForms(formName) {
+  // Accende il form "messaggio al professore"
+  if (formName === "contact") {
+    this.switchForm = !this.switchForm;
+    this.switchReviewForm = false;
+    this.switchRatingForm = false;
 
+    // Accende il form "lascia una recensione"
+  } else if (formName === "review") {
+    this.switchReviewForm = !this.switchReviewForm;
+    this.switchForm = false;
+    this.switchRatingForm = false;
+
+    // Accende il form "vota l'insegnante"
+  } else if (formName === "rating") {
+    this.switchRatingForm = !this.switchRatingForm;
+    this.switchReviewForm = false;
+    this.switchForm = false;
+  }
+},
   },
 
-  mounted() {
-    setTimeout(() => {
-      this.getReviews();
-    }, 200);
+mounted() {
+  setTimeout(() => {
+    this.getReviews();
+  }, 200);
 
-    console.log(store.List);
-  },
+  console.log(store.List);
+},
 };
 </script>
 
 <template>
   <div v-if="store.view">
     <div class="row p-5 justify-content-center" style="width: 95%; margin: 0 auto">
-      <div class="col-12 col-md-5 col-xl-4"
-        style="background-color: white; border: 5px solid green; border-radius: 20px;">
+      <div class="col-12 col-md-5 col-xl-4" style="
+          background-color: white;
+          border: 5px solid green;
+          border-radius: 20px;
+        ">
         <div class="card mb-4 left-profile-card border-0">
           <div class="card-body">
             <div class="text-center">
@@ -99,7 +143,7 @@ export default {
               </div>
               <div>
                 <div class="d-flex justify-content-center align-items-center mt-2 gap-2">
-                  <h2 style="font-weight: bold;">
+                  <h2 style="font-weight: bold">
                     {{ store.List.user.name }} {{ store.List.user.lastname }}
                   </h2>
                 </div>
@@ -159,8 +203,11 @@ export default {
       </div>
       <!-- end col  -->
       <div class="col-12 col-md-7 col-xl-8 p-2">
-        <div class="card border-success right-profile-card"
-          style="background-color: white; border: 5px solid green; border-radius: 20px;">
+        <div class="card border-success right-profile-card" style="
+            background-color: white;
+            border: 5px solid green;
+            border-radius: 20px;
+          ">
           <div class="card-header border-success" style="font-weight: bold; font-size: 30px; color: rgb(83, 83, 255)">
             ALTRE INFO
           </div>
@@ -190,8 +237,11 @@ export default {
             </button>
           </div>
         </div>
-        <div class="card border-success mt-3 right-profile-card"
-          style="background-color: white; border: 5px solid green; border-radius: 20px;">
+        <div class="card border-success mt-3 right-profile-card" style="
+            background-color: white;
+            border: 5px solid green;
+            border-radius: 20px;
+          ">
           <div class="card-header border-success" style="font-weight: bold; font-size: 30px; color: rgb(83, 83, 255)">
             RECENSIONI
           </div>
@@ -204,7 +254,6 @@ export default {
     <!-- end row  -->
   </div>
   <!-- end row  -->
-
 </template>
 
 <style lang="scss">
