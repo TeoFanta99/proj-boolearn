@@ -228,9 +228,9 @@ class ApiController extends Controller
 
             $averageRating = $teacher->ratings()->avg('rating_id');
 
-
-            $teacher->average_rating = intval(round($averageRating));
-
+            $roundedNumber = number_format($averageRating, 2);
+            $teacher->average_rating = intval(round($roundedNumber));
+            
 
             if ($rating_id !== 0) {
                 if (round($averageRating) < $rating_id) {
