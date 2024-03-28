@@ -78,6 +78,10 @@ export default {
       }
     },
 
+    media(num) {
+      return parseFloat(num).toFixed(2);
+    },
+
     getStars(num) {
       const numStellePiene = Math.ceil(num / 2);
       const numStelleVuote = 5 - numStellePiene;
@@ -225,7 +229,7 @@ export default {
                 <!-- <span>{{ getStars(store.List[teacher.id].average_rating) }}</span> -->
                 <div>
                   <i class="fas fa-star" style="color: #ffd43b">
-                    {{ teacher.average_rating }}</i
+                    {{ media(teacher.average_rating) }}</i
                   >
                 </div>
               </div>
