@@ -92,7 +92,7 @@
                                 })
                             .then(function(response) {
                                 console.log(response.data);
-                                alert("Sponsorizzazione associata con successo agli insegnanti.");
+                                // alert("Sponsorizzazione associata con successo agli insegnanti.");
                                 window.location.href = '{{ route('sponsor.thanks') }}';
                             })
                             .catch(function(error) {
