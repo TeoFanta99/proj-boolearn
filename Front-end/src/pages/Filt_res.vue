@@ -175,7 +175,7 @@ export default {
 
 <template>
   <div class="container">
-    <h2>Materia: {{ store.Subject }}</h2>
+    <!-- <h2>Materia: {{ store.Subject }}</h2> -->
 
     <form class="d-flex mt-5 mb-5 justify-content-center">
 
@@ -254,9 +254,9 @@ export default {
       <button ref="nextButton" :disabled="currentPage === totalPages || disableButtons" @click="nextPage"
         @mousedown.prevent="disableButtonEvents" @mouseup="enableButtonEvents" @touchstart.prevent="disableButtonEvents"
         @touchend="enableButtonEvents" class="btn" :class="{
-      'btn-outline-primary': currentPage !== totalPages,
-      'btn-outline-secondary': currentPage === totalPages,
-    }">
+          'btn-outline-primary': currentPage !== totalPages,
+          'btn-outline-secondary': currentPage === totalPages,
+        }">
         Avanti
       </button>
     </div>
