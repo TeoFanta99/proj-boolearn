@@ -93,7 +93,7 @@ export default {
           setTimeout(() => {
             this.disableButtons = false;
             this.clickCount = 0;
-          }, 1000);
+          }, 2000);
         }
         this.population();
       }
