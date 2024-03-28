@@ -8,7 +8,7 @@
             <div class="row justify-content-center">
                 <h1>Amplia il tuo profilo qui!</h1>
                 <div class="col-md-4 col-sm-6 content-card">
-                     <div class="card-big-shadow">
+                    <div class="card-big-shadow">
                         <div class="card card-just-text" data-background="color" data-color="green" data-radius="none">
                             <div class="content">
                                 <div class="plus title radius">
@@ -18,8 +18,8 @@
                             </div>
                         </div> <!-- end card -->
                     </div>
-                </div>   
-            </div> 
+                </div>
+            </div>
         </div>
         @endif
         @endauth
@@ -50,17 +50,41 @@
         <div class="d-flex mt-2">
             <!-- Modifica profilo -->
             <div>
-                <button type="button" class="btn btn-warning" style="width: 200px"><a style="text-decoration: none; color:black" href="#" onclick="document.getElementById('profileForm').submit(); return false;">MODIFICA PROFILO</a></button>
+                <button type="button" class="btn btn-warning" style="width: 200px"><a
+                        style="text-decoration: none; color:black" href="#"
+                        onclick="document.getElementById('profileForm').submit(); return false;">MODIFICA
+                        PROFILO</a></button>
             </div>
             <div>
                 <!-- Cancellazione profilo -->
                 <form class="ms-3 d-block" action="{{ route('user.del', $teacher->user->id) }}" method="POST"
-                onsubmit="return confirm('Confermare?');">
+                    onsubmit="return confirm('Confermare?');">
                     @csrf
                     @method('DELETE')
                     <input class="btn btn-danger" type="submit" value="CANCELLA" style="color: black">
                 </form>
             </div>
+
+            {{-- Aggiungo gli altri 3 bottoni: messaggi, recensioni e sponsorizzazioni --}}
+            <button class="btn btn-primary me-3">
+                <a href="{{ route('user.messages', $teacher->id) }}" style="text-decoration: none; color: white">
+                    MESSAGGI
+                </a>
+            </button>
+            <button class="btn btn-success me-3">
+                <a href="{{ route('user.reviews', $teacher->id) }}" style="text-decoration: none; color: white">
+                    RECENSIONI
+                </a>
+            </button>
+            <form id="sponsorship-form" method="POST" action="{{ route('user.sponsorship') }}">
+                @csrf
+                <!-- Campo nascosto per l'ID dell'insegnante -->
+                <input type="hidden" name="teacher_id" value="{{ $teacher->id }}">
+                <!-- Bottone per inviare il modulo -->
+                <button class="btn btn-warning" type="submit" style="color: white">SPONSORIZZAZIONI</button>
+            </form>
+
+
         </div>
         @endif
         {{-- SE NESSUNO E' LOGGATO --}}
