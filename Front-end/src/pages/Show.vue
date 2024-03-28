@@ -45,35 +45,35 @@ export default {
       axios
         .get(`http://127.0.0.1:8000/api/v1/review?teacher_id=${store.List.id}`)
         .then((response) => {
-            // this.reviews = response.data.reviews;
-            store.recensioni = response.data.reviews;
-            console.log(store.recensioni);
-            if (this.store.recensioni) {
-              this.store.view = localStorage.getItem("view", this.store.view);
-              localStorage.setItem(
-                "recensioni",
-                JSON.stringify(this.store.recensioni)
-              );
-            }
-            // console.log(response.data.reviews)
-          })
-          setTimeout(()=>{
+          // this.reviews = response.data.reviews;
+          store.recensioni = response.data.reviews;
+          console.log(store.recensioni);
+          if (this.store.recensioni) {
+            this.store.view = localStorage.getItem("view", this.store.view);
+            localStorage.setItem(
+              "recensioni",
+              JSON.stringify(this.store.recensioni)
+            );
+          }
+          // console.log(response.data.reviews)
+        })
+      setTimeout(() => {
 
-            let data_nascita = document.getElementById("DateBirth");
-            
-                  var dataNascita = new Date(data_nascita.textContent);
-            
-                  var dataFormattata = `${dataNascita.getDate()}/${dataNascita.getMonth() + 1
-                    }/${dataNascita.getFullYear()}`;
-            
-                  data_nascita.textContent = dataFormattata;
-          },500);
+        let data_nascita = document.getElementById("DateBirth");
+
+        var dataNascita = new Date(data_nascita.textContent);
+
+        var dataFormattata = `${dataNascita.getDate()}/${dataNascita.getMonth() + 1
+          }/${dataNascita.getFullYear()}`;
+
+        data_nascita.textContent = dataFormattata;
+      }, 500);
 
       // DEBUG
       // console.log(data_nascita)
     },
 
-    
+
   },
 
   mounted() {
@@ -95,11 +95,7 @@ export default {
           <div class="card-body">
             <div class="text-center">
               <div class="img_container">
-                <img
-                  class="w-100 h-100"
-                  :src="getImageUrl(store.List)"
-                  alt=""
-                />
+                <img class="w-100 h-100" :src="getImageUrl(store.List)" alt="" />
               </div>
               <div>
                 <div class="d-flex justify-content-center align-items-center mt-2 gap-2">
@@ -145,19 +141,13 @@ export default {
               </ul>
             </div>
           </div>
-          <div class="buttons-container d-flex justify-content-center mb-4">
-            <button
-              class="btn me-3"
-              :class="!this.switchForm ? 'btn-primary' : 'btn-danger'"
-              @click="this.switchForm = !this.switchForm"
-            >
+          <div class="buttons-container d-flex justify-content-center mb-4 mt-5">
+            <button class="btn me-3" :class="!this.switchForm ? 'btn-primary' : 'btn-danger'"
+              @click="this.switchForm = !this.switchForm">
               {{ this.switchForm ? "Annulla" : "CONTATTA" }}
             </button>
-            <button
-              class="btn"
-              :class="!this.switchReviewForm ? 'btn-success' : 'btn-danger'"
-              @click="this.switchReviewForm = !this.switchReviewForm"
-            >
+            <button class="btn" :class="!this.switchReviewForm ? 'btn-success' : 'btn-danger'"
+              @click="this.switchReviewForm = !this.switchReviewForm">
               {{ this.switchReviewForm ? "Annulla" : "RECENSISCI" }}
             </button>
           </div>
@@ -212,8 +202,8 @@ export default {
       </div>
     </div>
     <!-- end row  -->
-    </div>
-    <!-- end row  -->
+  </div>
+  <!-- end row  -->
 
 </template>
 
