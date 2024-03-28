@@ -10,5 +10,6 @@ class Sponsorship extends Model
     use HasFactory;
     protected $dates = ['expire_date'];
     public function teachers() {
-        return $this->belongsToMany(Teacher::class)->withPivot('expire_date');    }
+        return $this->belongsToMany(Teacher::class)->withPivot('expire_date');   
+    }
 }
