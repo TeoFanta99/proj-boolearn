@@ -20,29 +20,23 @@ export default {
       //   console.log(store.EmailTitle);
       //   console.log(store.EmailMessage);
       //   console.log(store.List.user.id);
-      //   console.log(store.NameSurname);
-      //   console.log(store.UserEmail);
-      //   console.log(store.EmailTitle);
-      //   console.log(store.EmailMessage);
-      //   console.log(store.List.user.id);
       const DatatoSend = {
         user_name: store.NameSurname,
         user_email: store.UserEmail,
         email_title: store.EmailTitle,
         description: store.EmailMessage,
-        teacher_id: store.List.id,
+        teacher_id: store.List.user.id,
       };
-      console.log(DatatoSend);
-
-      axios
-        .post("http://127.0.0.1:8000/api/v1/message", DatatoSend)
+      axios.post("http://127.0.0.1:8000/api/v1/message", DatatoSend)
 
         .then((response) => {
           this.success = true;
-        })
-        .catch((error) => {
+
+        }).catch((error) => {
+
           console.error("Errore durante la richiesta API:", error);
         });
+
     },
   },
 
@@ -59,26 +53,28 @@ export default {
 
   <form @submit.prevent="test">
     <div class="mb-3">
-      <label for="name_surname" class="form-label">Nome e cognome</label>
+      <label for="name_surname" class="form-label">NOME E COGNOME</label>
       <input v-model="store.NameSurname" type="text" name="user_name" id="name_surname" class="form-control"
         placeholder="Inserisci il tuo nome e cognome" />
     </div>
     <div class="mb-3">
-      <label for="email" class="form-label">Indirizzo Email</label>
+      <label for="email" class="form-label">INDIRIZZO EMAIL</label>
       <input v-model="store.UserEmail" type="email" name="user_email" id="email" class="form-control"
         placeholder="Inserisci la tua email" />
     </div>
     <div class="mb-3">
-      <label for="email_title" class="form-label">Oggetto della mail</label>
+      <label for="email_title" class="form-label">OGGETTO</label>
       <input v-model="store.EmailTitle" type="text" name="email_title" id="email_title" class="form-control"
         placeholder="Oggetto della mail" />
     </div>
-    <label for="email_text" class="form-label">Contenuto della mail</label>
+    <label for="email_text" class="form-label">CONTENUTO DELLA MAIL</label>
     <textarea v-model="store.EmailMessage" name="description" id="email_text" class="form-control"
       placeholder="Scrivi un messaggio" style="width: 100%; height: 150px"></textarea>
     <!-- GLI SI PASSA IL PARAMETRO DALLO STORE.LIST CON L'ID DEL DOCENTE -->
     <!-- <input type="email" v-model="store.List.user.email" readonly /> -->
-    <input type="submit" class="mt-3 btn btn-primary w-75" value="INVIA MESSAGGIO" />
+    <div class="d-flex justify-content-center">
+      <input type="submit" class="mt-3 btn btn-primary w-75" value="INVIA MESSAGGIO" />
+    </div>
   </form>
 
   <div v-if="success" style="color: green">Messaggio inviato con successo!</div>
