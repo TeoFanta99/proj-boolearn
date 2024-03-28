@@ -57,18 +57,20 @@ export default {
             }
             // console.log(response.data.reviews)
           })
+          setTimeout(()=>{
 
-      let data_nascita = document.getElementById("DateBirth");
+            let data_nascita = document.getElementById("DateBirth");
+            
+                  var dataNascita = new Date(data_nascita.textContent);
+            
+                  var dataFormattata = `${dataNascita.getDate()}/${dataNascita.getMonth() + 1
+                    }/${dataNascita.getFullYear()}`;
+            
+                  data_nascita.textContent = dataFormattata;
+          },500);
 
       // DEBUG
       // console.log(data_nascita)
-
-      var dataNascita = new Date(data_nascita.textContent);
-
-      var dataFormattata = `${dataNascita.getDate()}/${dataNascita.getMonth() + 1
-        }/${dataNascita.getFullYear()}`;
-
-      data_nascita.textContent = dataFormattata;
     },
 
     
