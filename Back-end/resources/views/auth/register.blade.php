@@ -1,144 +1,151 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mt-4">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Registrati') }}</div>
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">{{ __('Registrati') }}</div>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}" id="Form_register">
-                        @csrf
+                    <div class="card-body">
+                        <form method="POST" action="{{ route('register') }}" id="Form_register">
+                            @csrf
 
-                        <div class="mb-4 row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nome *') }}</label>
+                            <div class="mb-4 row">
+                                <label for="name"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Nome *') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
-                                    name="name" value="{{ old('name') }}" autocomplete="name" autofocus>
+                                <div class="col-md-6">
+                                    <input id="name" type="text"
+                                        class="form-control @error('name') is-invalid @enderror" name="name"
+                                        value="{{ old('name') }}" autocomplete="name" autofocus>
 
-                                @error('name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong> Il Campo <i>Nome</i> &grave; obbligatorio </strong>
-                                </span>
-                                @enderror
-                                <span id="NameNo" class="d-none text-danger"></span>
+                                    @error('name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong> Il Campo <i>Nome</i> &grave; obbligatorio </strong>
+                                        </span>
+                                    @enderror
+                                    <span id="NameNo" class="d-none text-danger"></span>
+                                </div>
+
+                            </div>
+                            <div class="mb-4 row">
+                                <label for="lastname"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Cognome *') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="lastname" type="text"
+                                        class="form-control @error('lastname') is-invalid @enderror" name="lastname"
+                                        value="{{ old('lastname') }}" autocomplete="lastname" autofocus>
+
+                                    @error('lastname')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>Il Campo <i>Cognome</i> &grave; obbligatorio</strong>
+                                        </span>
+                                    @enderror
+                                    <span id="LastNameNo" class="d-none  text-danger"></span>
+                                </div>
                             </div>
 
-                        </div>
-                        <div class="mb-4 row">
-                            <label for="lastname" class="col-md-4 col-form-label text-md-right">{{ __('Cognome *')
-                                }}</label>
+                            <div class="mb-4 row">
+                                <label for="date_of_birth"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Data di
+                                                                    Nascita *') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="lastname" type="text"
-                                    class="form-control @error('lastname') is-invalid @enderror" name="lastname"
-                                    value="{{ old('lastname') }}" autocomplete="lastname" autofocus>
+                                <div class="col-md-6">
+                                    <input id="date_of_birth" type="date"
+                                        class="form-control @error('date_of_birth') is-invalid @enderror"
+                                        name="date_of_birth" value="{{ old('date_of_birth') }}">
 
-                                @error('lastname')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>Il Campo <i>Cognome</i> &grave; obbligatorio</strong>
-                                </span>
-                                @enderror
-                                <span id="LastNameNo" class="d-none  text-danger"></span>
+                                    @error('date_of_birth')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <span id="DateNo" class="d-none  text-danger"> Data di nascita non valida! Devi essere
+                                    maggiorenne!</span>
                             </div>
-                        </div>
 
-                        <div class="mb-4 row">
-                            <label for="date_of_birth" class="col-md-4 col-form-label text-md-right">{{ __('Data di
-                                Nascita *') }}</label>
+                            <div class="mb-4 row">
+                                <label for="city"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Città *') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="date_of_birth" type="date"
-                                    class="form-control @error('date_of_birth') is-invalid @enderror"
-                                    name="date_of_birth" value="{{ old('date_of_birth') }}">
-
-                                @error('date_of_birth')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
+                                <div class="col-md-6">
+                                    <select id="city" class="form-control" name="city" value="{{ old('city') }}">
+                                        <option value="">Seleziona la tua città</option>
+                                    </select>
+                                    @error('city')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <span id="DateNo" class="d-none  text-danger"> Seleziona una città per continuare!</span>
                             </div>
-                            <span id="DateNo" class="d-none  text-danger"> Data di nascita non valida! Devi essere maggiorenne!</span>
-                        </div>
 
-                        <div class="mb-4 row">
-                            <label for="city" class="col-md-4 col-form-label text-md-right">{{ __('Città *') }}</label>
+                            <div class="mb-4 row">
+                                <label for="email"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Indirizzo Email *') }}</label>
 
-                            <div class="col-md-6">
-                                <select id="city" class="form-control" name="city" value="{{ old('city') }}">
-                                   <option value="">Seleziona la tua città</option>
-                                </select>
-                                @error('city')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
+                                <div class="col-md-6">
+                                    <input id="email" type="email"
+                                        class="form-control @error('email') is-invalid @enderror" name="email"
+                                        value="{{ old('email') }}" autocomplete="email">
+                                    <span id="MailNo" class="d-none  text-danger"></span>
+                                    @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                             </div>
-                            <span id="DateNo" class="d-none  text-danger"> Seleziona una città per continuare!</span>
-                        </div>
+                            <div class="mb-4 row">
+                                <label for="password"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Password *') }}</label>
 
-                        <div class="mb-4 row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Indirizzo Email *')
-                                }}</label>
+                                <div class="col-md-6">
+                                    <input id="password" type="password"
+                                        class="form-control @error('password') is-invalid @enderror" name="password"
+                                        autocomplete="new-password">
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                                    name="email" value="{{ old('email') }}" autocomplete="email">
-                                <span id="MailNo" class="d-none  text-danger"></span>
-                                @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
+                                    @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                             </div>
-                        </div>
-                        <div class="mb-4 row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password *')
-                                }}</label>
 
-                            <div class="col-md-6">
-                                <input id="password" type="password"
-                                    class="form-control @error('password') is-invalid @enderror" name="password"
-                                    autocomplete="new-password">
+                            <div class="mb-4 row">
+                                <label for="password-confirm"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Conferma
+                                                                    Password *') }}</label>
 
-                                @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
+                                <div class="col-md-6">
+                                    <input id="password-confirm" type="password" class="form-control"
+                                        name="password_confirmation" autocomplete="new-password">
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="mb-4 row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Conferma
-                                Password *') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control"
-                                    name="password_confirmation" autocomplete="new-password">
+                            <span id="PassNo" class="d-none text-danger">Le password non corrispondono!</span>
+                            <div class="mb-4 row mb-0">
+                                <div class="col-md-6 offset-md-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        {{ __('Registrati') }}
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                        <span id="PassNo" class="d-none text-danger">Le password non corrispondono!</span>
-                        <div class="mb-4 row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Registrati') }}
-                                </button>
+                            <div class="mb-4 row mb-0">
+                                <h6>* <i>campi obbligatori</i></h6>
                             </div>
-                        </div>
-                        <div class="mb-4 row mb-0">
-                            <h6>* <i>campi obbligatori</i></h6>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
             getCities();
 
             function populateCitySelect(cities) {
@@ -153,8 +160,9 @@
 
             function getCities() {
                 setTimeout(() => {
+                    const options = {method: 'GET', headers: {accept: 'application/json'}};
                     
-                    fetch('https://axqvoqvbfjpaamphztgd.functions.supabase.co/comuni')
+                    fetch('https://axqvoqvbfjpaamphztgd.functions.supabase.co/comuni',options)
                         .then(response => response.json())
                         .then(data => {
                             // Controlla se ci sono risultati
@@ -170,7 +178,7 @@
                 }, 1000);
             }
         });
-    document.getElementById("Form_register").addEventListener("submit", function(event) {
+        document.getElementById("Form_register").addEventListener("submit", function(event) {
             event.preventDefault();
 
             let name = document.getElementById('name').value;
@@ -279,7 +287,7 @@
             }
 
             function checkMatchPass(pass1, pass2) {
-                let yesOrNo = true; 
+                let yesOrNo = true;
 
                 if (pass1.length === 0 || pass2.length === 0) {
                     // Se una delle password è vuota
@@ -302,8 +310,8 @@
                 }
 
                 return yesOrNo;
-                
+
             }
-    });
-</script>
+        });
+    </script>
 @endsection
