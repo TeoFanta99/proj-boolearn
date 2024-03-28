@@ -25,9 +25,11 @@ export default {
 </template>
 
 <style scoped lang="scss">
-main {
-  width: 100%;
 
+  main{
+
+    min-height: calc(100vh - 150px);
+  }
   .container {
     border: 1px solid black;
     margin-top: 50px;
@@ -35,5 +37,5 @@ main {
     padding-bottom: 50px;
     margin-bottom: 100px;
   }
-}
+
 </style>
