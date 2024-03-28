@@ -25,7 +25,6 @@ import $ from "jquery";
 
 import "slick-carousel";
 import { store } from "../store";
-import { onMounted, onUnmounted } from "vue";
 
 export default {
   data() {

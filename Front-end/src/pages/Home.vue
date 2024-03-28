@@ -48,7 +48,9 @@ export default {
       this.teachers.forEach((element) => {
         if (element.id == id) {
           store.List = element;
+          localStorage.setItem("teacher", JSON.stringify(store.List));
           store.view = 1;
+          localStorage.setItem("view", store.view);
         }
       });
     },
@@ -60,6 +62,12 @@ export default {
       } else {
         store.Subject = "Tutte";
       }
+      localStorage.setItem("materiaID", store.Subject);
+      localStorage.setItem(
+        "valutazioni",
+        JSON.stringify(this.store.valutazioni)
+      );
+
       this.$router.push({
         name: "filt",
       });
@@ -74,11 +82,18 @@ export default {
       const numStellePiene = Math.ceil(num / 2);
       const numStelleVuote = 5 - numStellePiene;
 
-      const stellePiene = '★'.repeat(numStellePiene);
-      const stelleVuote = '☆'.repeat(numStelleVuote);
+      const stellePiene = "★".repeat(numStellePiene);
+      const stelleVuote = "☆".repeat(numStelleVuote);
 
-      return stellePiene + stelleVuote
-    }
+      return stellePiene + stelleVuote;
+    },
+    handleClick(teacher) {
+      // Esegui qualsiasi operazione necessaria prima di salvare i dati nel localStorage
+      // Ad esempio, puoi modificare teacher o accedere ad altri dati
+
+      // Salva i dati nel localStorage
+      localStorage.setItem("teacherData", JSON.stringify(teacher));
+    },
   },
 
   watch: {
@@ -144,35 +159,65 @@ export default {
         <h4>Scegli la materia</h4>
 
         <!-- Sezione Select -->
-        <select v-model="store.Subject" class="form-select w-75" id="selected-Subject">
-          <option v-for="subject in store.materie" :key="subject.id" :value="subject.name"
-            :selected="store.Subject === subject.name ? 'selected' : ''">
+        <select
+          v-model="store.Subject"
+          class="form-select w-75"
+          id="selected-Subject"
+        >
+          <option
+            v-for="subject in store.materie"
+            :key="subject.id"
+            :value="subject.name"
+            :selected="store.Subject === subject.name ? 'selected' : ''"
+          >
             {{ subject.name }}
           </option>
         </select>
       </div>
 
-      <button type="submit" form="nameform" value="Submit" class="btn btn-danger h-50 mt-4" @click="riempiRec()">
+      <button
+        type="submit"
+        form="nameform"
+        value="Submit"
+        class="btn btn-danger h-50 mt-4"
+        @click="riempiRec()"
+      >
         Ricerca
       </button>
     </form>
 
     <!-- Sezione icone teachers -->
     <div v-if="loading" class="loading-gif">
-      <img src="https://media1.tenor.com/m/_dGu36t3VNEAAAAC/loading-buffering.gif" alt="Caricamento..."
-        class="loading-image" />
+      <img
+        src="https://media1.tenor.com/m/_dGu36t3VNEAAAAC/loading-buffering.gif"
+        alt="Caricamento..."
+        class="loading-image"
+      />
     </div>
     <div v-else-if="teachers.length > 0">
       <div class="row mt-4">
-        <div class="col-12 col-md-4 col-lg-3 p-2" v-for="teacher in teachers" :key="teacher.id">
-          <RouterLink :to="{ name: 'show', params: { id: teacher.user.name } }"
-            @click="riempiVet(teacher.id), (store.view = 2)" class="text-decoration-none">
+        <div
+          class="col-12 col-md-4 col-lg-3 p-2"
+          v-for="teacher in teachers"
+          :key="teacher.id"
+        >
+          <RouterLink
+          tag="div" :to="{ name: 'show', params: { id: teacher.user.name } } "
+            @click="riempiVet(teacher.id), (store.view = 2)"
+            class="text-decoration-none"
+          >
             <div class="card pt-3 border-0 shadow on_hover">
               <div class="position-absolute star_sponsor">
                 <i class="fa-solid fa-star"></i>
               </div>
-              <div class="d-flex justify-content-center align-items-center img_circle mx-auto height_img_query">
-                <img class="w-100 h-100 rounded-circle" :src="getImageUrl(teacher)" alt="" />
+              <div
+                class="d-flex justify-content-center align-items-center img_circle mx-auto height_img_query"
+              >
+                <img
+                  class="w-100 h-100 rounded-circle"
+                  :src="getImageUrl(teacher)"
+                  alt=""
+                />
               </div>
               <div class="card-body">
                 <h4>{{ teacher.user.name }} {{ teacher.user.lastname }}</h4>
@@ -212,7 +257,6 @@ export default {
 }
 
 @keyframes fadeInOut {
-
   0%,
   100% {
     opacity: 0;
@@ -224,7 +268,6 @@ export default {
 }
 
 @keyframes zoomInOut {
-
   0%,
   100% {
     transform: scale(0.7);

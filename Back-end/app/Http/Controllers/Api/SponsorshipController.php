@@ -20,6 +20,9 @@ class SponsorshipController extends Controller
         $teacher = Teacher::find($request->teacher_id);
         return view('pages.sponsor', compact('products', 'teacher'));
     }
+    public function thanks(){
+        return view('pages.sponsor_thanks');
+    }
     public function generate(Request $request, Gateway $gateway)
     {
         $data = [
