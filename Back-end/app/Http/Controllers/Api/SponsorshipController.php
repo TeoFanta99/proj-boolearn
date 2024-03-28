@@ -14,25 +14,30 @@ use Braintree\Gateway;
 
 class SponsorshipController extends Controller
 {
+    // Metodo per visualizzare i prodotti di sponsorizzazione e selezionare un insegnante
     public function index(Request $request)
     {
         $products = Sponsorship::all();
         $teacher = Teacher::find($request->teacher_id);
         return view('pages.sponsor', compact('products', 'teacher'));
     }
+
+    // Metodo per la pagina di ringraziamento dopo l'acquisto della sponsorizzazione
     public function thanks(){
         return view('pages.sponsor_thanks');
     }
+
+    // Metodo per generare un token di pagamento tramite Braintree
     public function generate(Request $request, Gateway $gateway)
     {
         $data = [
             'success' => true,
             'token' => $gateway->clientToken()->generate(),
         ];
-        // dd($gateway->clientToken()->generate());
         return response()->json([$data]);
-        // return 'generate, 200';
     }
+
+    // Metodo per effettuare il pagamento tramite Braintree
     public function makePayments(OrderRequest $request, Gateway $gateway)
     {
         $product = Sponsorship::find($request->product);
@@ -44,7 +49,6 @@ class SponsorshipController extends Controller
             'amount' => $product->price,
             'paymentMethodNonce' => $request->token,
             'options' => [
-
                 'submitForSettlement' => true
             ]
         ]);
@@ -63,6 +67,8 @@ class SponsorshipController extends Controller
             return response()->json($data, 401);
         }
     }
+
+    // Metodo per associare una sponsorizzazione a un insegnante
     public function storeSponsorship(Request $request)
     {
         // Validazione dei dati in ingresso
@@ -70,66 +76,46 @@ class SponsorshipController extends Controller
             'sponsorship_id' => 'required|exists:sponsorships,id', // Verifica che l'ID della sponsorizzazione esista nella tabella delle sponsorizzazioni
             'teacher_id' => 'required|exists:teachers,id', // Verifica che l'ID dell'insegnante esista nella tabella degli insegnanti
         ]);
-
+    
         if ($validator->fails()) {
             return response()->json(['success' => false, 'message' => 'ID non trovato'], 404);
         }
-
+    
         $teacher = Teacher::findOrFail($request->teacher_id);
-
-        // Recupera la sponsorizzazione associata all'insegnante
-
-        // Recupera la data di scadenza esistente
-        $existingSponsorship = $teacher->sponsorships()->first();
-
+    
+        // Recupera tutte le sponsorizzazioni attive dell'insegnante
+        $activeSponsorships = $teacher->sponsorships()
+            ->where('expire_date', '>', Carbon::now())
+            ->get();
+    
+        // Trova la sponsorizzazione attiva con la data di scadenza più lontana
+        $farthestExpiryDate = $activeSponsorships->max('pivot.expire_date');
+    
         $sponsorship = Sponsorship::findOrFail($request->sponsorship_id);
-
-        if ($existingSponsorship) {
-            // Recupera la data di scadenza esistente
-            $existingExpireDate = $existingSponsorship->pivot->expire_date;
-            $existingExpireDate = Carbon::parse($existingExpireDate);
-
-            // Ottieni la durata della nuova sponsorizzazione
-            $durationString = $sponsorship->duration;
-            sscanf($durationString, '%d:%d:%d', $hours, $minutes, $seconds);
-
-            // Calcola la data di inizio della nuova sponsorizzazione
-            $start_date = Carbon::now();
-
-            if ($existingExpireDate > $start_date) {
-                // Se c'è una sponsorizzazione attiva, la nuova sponsorizzazione inizia subito dopo la scadenza della sponsorizzazione attiva
-                $start_date = $existingExpireDate;
-            }
-
-            // Calcola la nuova data di scadenza
-            $expire_date = $start_date->copy()->addHours($hours)->addMinutes($minutes)->addSeconds($seconds);
-
-            // Aggiorna la sponsorizzazione dell'insegnante con la nuova data di scadenza
-            $teacher->sponsorships()->attach($sponsorship, [
-                'start_date' => $start_date,
-                'expire_date' => $expire_date
-            ]);
+    
+        // Calcola la durata della nuova sponsorizzazione
+        sscanf($sponsorship->duration, '%d:%d:%d', $hours, $minutes, $seconds);
+        $newDurationInSeconds = $hours * 3600 + $minutes * 60 + $seconds;
+    
+        if ($farthestExpiryDate) {
+            // La nuova sponsorizzazione inizia immediatamente dopo la scadenza della sponsorizzazione attiva più lontana
+            $start_date = Carbon::parse($farthestExpiryDate)->addSeconds(1); // 1 secondo per garantire che inizi dopo la scadenza
         } else {
             // Se non ci sono sponsorizzazioni attive, la nuova sponsorizzazione inizia immediatamente
             $start_date = Carbon::now();
-
-            // Ottieni la durata della nuova sponsorizzazione
-            $durationString = $sponsorship->duration;
-            sscanf($durationString, '%d:%d:%d', $hours, $minutes, $seconds);
-
-            // Calcola la nuova data di scadenza
-            $expire_date = $start_date->copy()->addHours($hours)->addMinutes($minutes)->addSeconds($seconds);
-
-            // Aggiungi la nuova sponsorizzazione
-            $teacher->sponsorships()->attach($sponsorship, [
-                'start_date' => $start_date,
-                'expire_date' => $expire_date
-            ]);
         }
-
+    
+        // Nuova data di scadenza
+        $expire_date = $start_date->copy()->addSeconds($newDurationInSeconds);
+    
+        // Associazione della nuova sponsorizzazione all'insegnante
+        $teacher->sponsorships()->attach($sponsorship, [
+            'start_date' => $start_date,
+            'expire_date' => $expire_date
+        ]);
+    
         // Ritorna una risposta di successo
-        return response()->json(['success' => true, 'message' => 'Sponsorizzazione associata all\'insegnante con successo'], 200);
-
-
+        return response()->json(['success' => true, 'message' => 
+        "Sponsorizzazione associata all'insegnante con successo"], 200);
     }
-}
+    }
