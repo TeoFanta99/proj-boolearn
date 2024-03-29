@@ -8,50 +8,50 @@ export default {
 
   data() {
     return {
-     
+
     };
   },
-  methods:{
+  methods: {
 
   },
 
   mounted() {
 
     const text = document.querySelector(".sec-text");
-   
+
     const textLoad = (text) => {
-  // Array di oggetti contenenti il testo e il colore per ciascun elemento
-  const texts = [
-    { singleText: "HTML", color: "#e5532d" },
-    { singleText: "CSS", color: "#254bdd" },
-    { singleText: "JS", color: "#efd81d" },
-    { singleText: "PHP", color: "#254bdd" },
-    { singleText: "LARAVEL", color: "#ff554d" },
-    { singleText: "VueJS", color: "#3fb27f" }
-  ];
+      // Array di oggetti contenenti il testo e il colore per ciascun elemento
+      const texts = [
+        { singleText: "HTML", color: "#e5532d" },
+        { singleText: "CSS", color: "#254bdd" },
+        { singleText: "JS", color: "#efd81d" },
+        { singleText: "PHP", color: "#254bdd" },
+        { singleText: "LARAVEL", color: "#ff554d" },
+        { singleText: "VueJS", color: "#3fb27f" }
+      ];
 
-  const setTextAndColor = (index) => {
-    // Ottieni il testo e il colore dall'array
-    const { singleText, color } = texts[index];
-    
-    // Imposta il testo e il colore
-    text.textContent = singleText;
-    text.style.color = color;
-    
-    // Incrementa l'indice, se è oltre la lunghezza dell'array, torna a 0
-    const nextIndex = (index + 1) % texts.length;
-    
-    // Richiama ricorsivamente la funzione per il prossimo testo dopo un ritardo
-    setTimeout(() => {
-      setTextAndColor(nextIndex); // Passa l'indice successivo
-    }, 4500); // Ritardo tra ogni testo in millisecondi
-  };
+      const setTextAndColor = (index) => {
+        // Ottieni il testo e il colore dall'array
+        const { singleText, color } = texts[index];
 
-  // Avvia il processo impostando il testo e il colore per il primo elemento nell'array
-  setTextAndColor(0);
-};
+        // Imposta il testo e il colore
+        text.textContent = singleText;
+        text.style.color = color;
 
-textLoad(text); // Avvia la sequenza
+        // Incrementa l'indice, se è oltre la lunghezza dell'array, torna a 0
+        const nextIndex = (index + 1) % texts.length;
+
+        // Richiama ricorsivamente la funzione per il prossimo testo dopo un ritardo
+        setTimeout(() => {
+          setTextAndColor(nextIndex); // Passa l'indice successivo
+        }, 4500); // Ritardo tra ogni testo in millisecondi
+      };
+
+      // Avvia il processo impostando il testo e il colore per il primo elemento nell'array
+      setTextAndColor(0);
+    };
+
+    textLoad(text); // Avvia la sequenza
 
 
 
@@ -60,33 +60,33 @@ textLoad(text); // Avvia la sequenza
 </script>
 
 <template class="bg-light">
-  <div class="container-fluid bg-dark overflow-hidden">
-    
-      <div class="body-jumbo">
-        <div class="opacity-50 bg-black position-absolute op_jumbo"></div>
-        <div class="container_jumbo">
-          <span class="text first-text">Voglio imparare </span>
-          <span class="text sec-text">HTML</span>
-        </div>
+  <div class="container-fluid p-0 bg-dark overflow-hidden">
+
+    <div class="body-jumbo">
+      <div class="opacity-75 bg-black position-absolute op_jumbo"></div>
+      <div class="container_jumbo">
+        <span class="text first-text">VOGLIO IMPARARE </span>
+        <span class="text sec-text">HTML</span>
       </div>
-    
+    </div>
+
   </div>
-  
+
 </template>
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap");
 
 
 .body-jumbo {
-  background-image: url('https://media1.tenor.com/m/FIcvxhgc1sgAAAAd/dit-is-een-code-blok-code.gif');
-  min-height: 25rem;
+  background-image: url('https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHR3cTZ3cjBqYTZidjNnZGFybTRqN2I3YWd2ZWJuYTRnN3ZtYWhpbSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26tn33aiTi1jkl6H6/giphy.gif');
+  min-height: 30rem;
   display: flex;
   align-items: center;
   overflow: hidden;
   background-repeat: no-repeat;
   justify-content: center;
-  background-size: 50%;
-  background-position: 50% 50%;
+  background-size: 100%;
+  /* background-position: 70% 50%; */
   position: relative;
 }
 
@@ -96,6 +96,7 @@ textLoad(text); // Avvia la sequenza
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
+  padding-bottom: 30px;
 }
 
 
@@ -104,31 +105,31 @@ textLoad(text); // Avvia la sequenza
 }
 
 .op_jumbo {
-  width: 70%;
+  width: 100%;
   height: 100%;
 }
 
-.container_jumbo .text{
-    position: relative;
-    color: #1ce6b4;
-    font-size: 30px;
-    font-weight: 600;
+.container_jumbo .text {
+  position: relative;
+  color: #1ce6b4;
+  font-size: 52px;
+  font-weight: 600;
 }
 
 .container_jumbo .text.first-text {
   color: #fff;
 }
 
-.text.sec-text:before{
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+.text.sec-text:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
   border-left: 2px solid #011d24;
-  animation: animate 4s  infinite;
+  animation: animate 4s infinite;
 }
 
 .text.sec-text::after {
@@ -136,11 +137,13 @@ textLoad(text); // Avvia la sequenza
 }
 
 @keyframes animate {
+
   40%,
   60% {
     left: calc(95% + 4px);
     width: 0%;
   }
+
   100% {
     left: 0%;
   }
@@ -156,12 +159,13 @@ textLoad(text); // Avvia la sequenza
     width: 35%;
     background-position: 40%;
   }
-  .op_jumbo{
+
+  .op_jumbo {
     margin-left: 0;
     margin-right: 27px;
   }
 
-  #boh{
+  #boh {
     margin-bottom: 0;
     padding: 20px 0px;
   }
@@ -171,9 +175,10 @@ textLoad(text); // Avvia la sequenza
 @media (min-width: 576px) and (max-width: 767.98px) {
   .body-jumbo {
     min-height: 20rem;
-    width: 55%; 
+    width: 55%;
     background-position: 40%;
   }
+
   .op_jumbo {
     margin-right: 29px;
   }
@@ -183,9 +188,10 @@ textLoad(text); // Avvia la sequenza
 @media (min-width: 768px) and (max-width: 991.98px) {
 
   .body-jumbo {
-    width: 60%; 
+    width: 60%;
   }
-  .op_jumbo{
+
+  .op_jumbo {
     margin-right: 0;
     margin-left: 0;
   }
@@ -194,11 +200,8 @@ textLoad(text); // Avvia la sequenza
 
 @media (min-width: 992px) and (max-width: 1199.98px) {
   .body-jumbo {
-    width: 80%; 
+    width: 80%;
     background-position: 50%;
   }
 }
-
-
-
 </style>
