@@ -171,7 +171,7 @@
     <div class="row justify-content-end">
         <div class="sidebar col-2">
             <ul class="row justify-content-center w-100">
-                <li class="w-100"><a href="{{ url('/') }}">{{ __('Home') }}</a></li>
+                <li><a href="{{ url('/') }}">{{ __('Home') }}</a></li>
                 @guest
                     <li><a href="{{ route('login') }}">{{ __('Accedi') }}</a></li>
                     @if (Route::has('register'))

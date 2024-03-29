@@ -35,9 +35,9 @@ Route::middleware('auth')->group(function () {
 
 
     // bottoni che rimandano a pagina messaggi,reviews e sponsorizzazioni
-    Route::get('/messages/{id}', [MainController::class, 'messages'])->name('user.messages');
+    Route::post('/messages', [MainController::class, 'messages'])->name('user.messages');
 
-    Route::get('/reviews/{id}', [MainController::class, 'reviews'])->name('user.reviews');
+    Route::post('/reviews', [MainController::class, 'reviews'])->name('user.reviews');
     
     Route::post('/sponsorship', [SponsorshipController::class, 'index'])
     ->name('user.sponsorship');
@@ -47,9 +47,9 @@ Route::middleware('auth')->group(function () {
     ->name('user.del');  
     Route::get('/user/create', [MainController::class, 'create'])
     ->name('user.create');
+    Route::post('/teacher/show', [MainController::class, 'show'])->name('user.show');
 });
 // Route::post('/make-payment', [SponsorshipController::class, 'makePayments'])->name('make.payment');
 Route::get('/teacher/{id}', [TeacherController::class, 'index'])->name('teacher.index');
-Route::get('/user/{id}', [MainController::class, 'show'])->name('user.show');
 
 require __DIR__ . '/auth.php';

@@ -84,13 +84,13 @@ class MainController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-      
-        $teacher = Teacher::find($id);
-        $ratings = Rating::all();
+        $user = User::find($request->user_id);
 
-        return view('pages.show', compact('teacher', 'ratings'));
+        $teacher = $user->teacher()->first();
+        $rating = $teacher->ratings()->avg('rating_id');
+        return view('pages.show', compact('teacher', 'rating'));
     }
 
     /**
@@ -121,7 +121,7 @@ class MainController extends Controller
         $data = $request->all();
         $user_id = $request->input('user_id');
         $user = User::find($user_id);
-       
+
         $teacher = $user->teacher()->first();
         $teacher->tax_id = $data['tax_id'];
         $teacher->biography = $data['biography'];
@@ -194,20 +194,21 @@ class MainController extends Controller
 
     // Gestione messaggi,recensioni,sponsorizzazioni
 
-    public function messages($id)
+    public function messages(Request $request)
     {
-        
-        $teacher = Teacher::find($id);
+        $user = User::find($request->user_id);
 
-        $messages = $teacher -> messages;
+        $teacher = $user->teacher()->first();
+
+        $messages = $teacher->messages;
 
         return view('pages.messages', compact('teacher', 'messages'));
     }
 
-    public function reviews($id)
+    public function reviews(Request $request)
     {
-        
-        $teacher = Teacher::find($id);
+        $user = User::find($request->user_id);
+        $teacher = $user->teacher()->first();
 
         $reviews = $teacher->reviews;
 

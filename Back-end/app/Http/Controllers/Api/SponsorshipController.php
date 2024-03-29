@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Order\OrderRequest;
 
 use App\Models\Teacher;
+use App\Models\User;
 use Carbon\Carbon;
 use Braintree\Gateway;
 
@@ -17,8 +18,9 @@ class SponsorshipController extends Controller
     // Metodo per visualizzare i prodotti di sponsorizzazione e selezionare un insegnante
     public function index(Request $request)
     {
+        $user = User::find($request->user_id);
+        $teacher = $user->teacher()->first();
         $products = Sponsorship::all();
-        $teacher = Teacher::find($request->teacher_id);
         return view('pages.sponsor', compact('products', 'teacher'));
     }
 

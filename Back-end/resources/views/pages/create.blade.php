@@ -1,5 +1,5 @@
-@extends('layouts.app')
-@section('content')
+@extends('dashboard')
+@section('sezione')
     <h1>IL TUO Profilo</h1>
     {{-- @auth --}}
     @if ($errors->any())

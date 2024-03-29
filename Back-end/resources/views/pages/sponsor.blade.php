@@ -1,35 +1,39 @@
-@extends('layouts.app')
-@section('content')
-<h2>STORICO PAGAMENTI</h2>
-<ul>
-    @foreach ($teacher->sponsorships as $sponsorship )
-    <li>
-        {{-- "Pivot" serve per accedere alla tabella ponte --}}
-        <span><b>Pacchetto acquistato: </b>{{$sponsorship -> name }}</span>
-        <br>
-        <span><b>Data di acquisto: </b> {{$sponsorship -> pivot -> start_date}}</span>
-        <br>
-        <span><b>Scadenza del pacchetto: </b>{{$sponsorship -> pivot -> expire_date}}</span>
-    </li>
-    <br><br>
-    @endforeach
-</ul>
-<form id="payment-form">
-    @csrf
-    <!-- Aggiungi un campo nascosto per l'ID dell'insegnante -->
-    <input type="hidden" name="teacher_id" id="teacher_id" value="{{ $teacher->id }}">
-    <div class="row gap-4">
-        @foreach ($products as $product)
-        <div class="card-sponsor" id="product_{{ $product->id }}" onclick="selectSponsor({{ $product->id }})">
-            <h2>{{ $product->name }}</h2>
-            <h2>{{ $product->price }}</h2>
-        </div>
+@extends('dashboard')
+@section('sezione')
+<div class="row ms-4">
+    <h2>STORICO PAGAMENTI</h2>
+    <ul class="list-unstyled">
+        @foreach ($teacher->sponsorships as $sponsorship )
+        <li>
+            {{-- "Pivot" serve per accedere alla tabella ponte --}}
+            <span><b>Pacchetto acquistato: </b>{{$sponsorship -> name }}</span>
+            <br>
+            <span><b>Data di acquisto: </b> {{$sponsorship -> pivot -> start_date}}</span>
+            <br>
+            <span><b>Scadenza del pacchetto: </b>{{$sponsorship -> pivot -> expire_date}}</span>
+        </li>
+        <br><br>
         @endforeach
-    </div>
-
-    <!-- Altri campi del modulo per il pagamento, ad esempio il token del pagamento -->
-</form>
-<div id="dropin-container"></div>
+    </ul>
+    <form id="payment-form">
+        @csrf
+        <!-- Aggiungi un campo nascosto per l'ID dell'insegnante -->
+        <input type="hidden" name="teacher_id" id="teacher_id" value="{{ $teacher->id }}">
+        <div class="row gap-4">
+            @foreach ($products as $product)
+            <div class="col-12 col-md-3">
+                <div class="card-sponsor" id="product_{{ $product->id }}" onclick="selectSponsor({{ $product->id }})">
+                    <h2>{{ $product->name }}</h2>
+                    <h2>{{ $product->price }}</h2>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    
+        <!-- Altri campi del modulo per il pagamento, ad esempio il token del pagamento -->
+    </form>
+    <div id="dropin-container"></div>
+</div>
 <button type="button" id="submit-button" class=" btn btn-success d-none" onclick="CreateDrop_IN()">Paga</button>
 <script src="https://js.braintreegateway.com/web/dropin/1.31.0/js/dropin.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
