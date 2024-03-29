@@ -157,56 +157,82 @@ export default {
 <template class="bg-light">
   <jumbo id="boh" />
 
-  <div class="container" style="min-height: 900px;">
+  <div class="container" style="min-height: 900px">
     <form class="d-flex align-items-center">
       <div class="col-12 col-md-2 me-3">
-
         <!-- Sezione Select -->
-        <select v-model="store.Subject" class="mt-5 form-select w-100" id="selected-Subject">
+        <select
+          v-model="store.Subject"
+          class="mt-5 form-select w-100"
+          id="selected-Subject"
+        >
           <option disabled value="">Scegli una materia...</option>
-          <option v-for="subject in store.materie" :key="subject.id" :value="subject.name"
-            :selected="store.Subject === subject.name ? 'selected' : ''">
+          <option
+            v-for="subject in store.materie"
+            :key="subject.id"
+            :value="subject.name"
+            :selected="store.Subject === subject.name ? 'selected' : ''"
+          >
             {{ subject.name }}
           </option>
         </select>
       </div>
 
-      <button type="submit" form="nameform" value="Submit" style="width: 10%;" class="btn btn-info h-50 mt-5"
-        @click="riempiRec()">
-        <i class="fas fa-search" style="color: white;"></i>
+      <button
+        type="submit"
+        form="nameform"
+        value="Submit"
+        style="width: 10%"
+        class="btn btn-info h-50 mt-5"
+        @click="riempiRec()"
+      >
+        <i class="fas fa-search" style="color: white"></i>
       </button>
     </form>
 
     <!-- Sezione icone teachers -->
     <div v-if="loading" class="loading-gif">
-      <img src="https://media1.tenor.com/m/_dGu36t3VNEAAAAC/loading-buffering.gif" alt="Caricamento..."
-        class="loading-image" />
+      <img
+        src="https://media1.tenor.com/m/_dGu36t3VNEAAAAC/loading-buffering.gif"
+        alt="Caricamento..."
+        class="loading-image"
+      />
     </div>
     <div v-else-if="teachers.length > 0">
       <div class="row mt-4">
-        <div class="col-12 col-md-4 col-lg-3 p-2" v-for="teacher in teachers" :key="teacher.id">
-          <RouterLink tag="div" :to="{ name: 'show', params: { id: teacher.user.name } }"
-            @click="riempiVet(teacher.id), (store.view = 2)" class="text-decoration-none">
-            <div class="col-12 col-md-4 col-lg-3 p-2" v-for="teacher in teachers" :key="teacher.id">
-              <RouterLink tag="div" :to="{ name: 'show', params: { id: teacher.user.name } }"
-                @click="riempiVet(teacher.id), (store.view = 2)" class="text-decoration-none">
-                <div class="card pt-3 border-0 shadow on_hover">
-                  <div class="position-absolute star_sponsor">
-                    <i class="fa-solid fa-star"></i>
-                  </div>
-                  <div class="d-flex justify-content-center align-items-center img_circle mx-auto height_img_query">
-                    <img class="w-100 h-100 rounded-circle" :src="getImageUrl(teacher)" alt="" />
-                  </div>
-                  <div class="card-body">
-                    <h4>{{ teacher.user.name }} {{ teacher.user.lastname }}</h4>
-                    <!-- <span>{{ getStars(store.List[teacher.id].average_rating) }}</span> -->
-                    <div>
-                      <i class="fas fa-star" style="color: #ffd43b">
-                        {{ media(teacher.average_rating) }}</i>
-                    </div>
-                  </div>
+        <div
+          class="col-12 col-md-4 col-lg-3 p-2"
+          v-for="teacher in teachers"
+          :key="teacher.id"
+        >
+          <RouterLink
+            tag="div"
+            :to="{ name: 'show', params: { id: teacher.user.name } }"
+            @click="riempiVet(teacher.id), (store.view = 2)"
+            class="text-decoration-none"
+          >
+            <div class="card pt-3 border-0 shadow on_hover">
+              <div class="position-absolute star_sponsor">
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <div
+                class="d-flex justify-content-center align-items-center img_circle mx-auto height_img_query"
+              >
+                <img
+                  class="w-100 h-100 rounded-circle"
+                  :src="getImageUrl(teacher)"
+                  alt=""
+                />
+              </div>
+              <div class="card-body">
+                <h4>{{ teacher.user.name }} {{ teacher.user.lastname }}</h4>
+                <!-- <span>{{ getStars(store.List[teacher.id].average_rating) }}</span> -->
+                <div>
+                  <i class="fas fa-star" style="color: #ffd43b">
+                    {{ media(teacher.average_rating) }}</i
+                  >
                 </div>
-              </RouterLink>
+              </div>
             </div>
           </RouterLink>
         </div>
@@ -238,7 +264,6 @@ export default {
 }
 
 @keyframes fadeInOut {
-
   0%,
   100% {
     opacity: 0;
@@ -250,7 +275,6 @@ export default {
 }
 
 @keyframes zoomInOut {
-
   0%,
   100% {
     transform: scale(0.7);
