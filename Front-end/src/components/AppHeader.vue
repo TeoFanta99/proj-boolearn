@@ -84,7 +84,7 @@ export default {
       </div>
       <div class="home">
         <router-link :to="{ name: 'home' }" class="d-block d-lg-none">
-          <img src="../../public/BL1.svg" alt="LOGO" class="logo-mobile" />
+          <img src="../../public/BLearn.svg" alt="LOGO" class="logo-mobile" />
         </router-link>
         <!-- <span>BOOLEARN</span> -->
         <router-link :to="{ name: 'home' }" class="d-none d-lg-block">
@@ -137,10 +137,6 @@ export default {
           </li>
         </ul>
       </div>
-
-      <!-- <div class="d-none d-md-block link">
-
-                    </div> -->
     </nav>
   </header>
 </template>
@@ -148,13 +144,4 @@ export default {
 <style lang="scss" scoped>
 @use "../styles/header.scss";
 @use "../styles/general.scss";
-
-header {
-  height: 100px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  z-index: 99999;
-}
 </style>

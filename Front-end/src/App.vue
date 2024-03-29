@@ -61,7 +61,8 @@ export default {
 @use "./styles/partials/variables";
 
 #preloader {
-  background: url("https://media1.tenor.com/m/_dGu36t3VNEAAAAC/loading-buffering.gif") no-repeat;
+  background: url("https://media1.tenor.com/m/_dGu36t3VNEAAAAC/loading-buffering.gif")
+    no-repeat;
   position: fixed;
   z-index: 100;
   width: 100vw;
@@ -74,7 +75,6 @@ export default {
 }
 
 .main_views {
-  margin-top: 100px;
   height: calc(100vh - 100px);
   /* Altezza della finestra meno l'altezza dell'header */
   overflow-y: auto;
