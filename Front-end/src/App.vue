@@ -75,7 +75,7 @@ export default {
 }
 
 .main_views {
-  height: calc(100vh - 100px);
+  height: calc(100vh - 166px);
   /* Altezza della finestra meno l'altezza dell'header */
   overflow-y: auto;
   /* Abilita lo scrolling verticale quando necessario */
