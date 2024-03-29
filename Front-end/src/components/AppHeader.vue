@@ -26,72 +26,28 @@ export default {
 
 <template>
   <header>
-    <!-- <nav class="navbar navbar-expand-lg bg-body-tertiary d-flex justify-content-between h-100">
-      <div class="d-flex gap-2">
-        <a href="http://localhost:8000/login" class="d-lg-block d-none ms-4" target="_blank"><i
-            class="fa-solid fa-circle-user" style="color: #b3b3b3; font-size: 40px"></i></a>
-        <a href="http://localhost:8000/register" class="d-lg-block d-none mt-1 ms-4" target="_blank"><i
-            class="fa-solid fa-user-plus" style="color: rgb(83, 83, 255); font-size: 30px"></i></a>
-      </div>
-
-
-
-
-      <div>
-        <button class="btn d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
-          aria-controls="offcanvasRight">
-          <i class="fa-solid fa-circle-user" style="color: #b3b3b3; font-size: 40px"></i>
-        </button>
-      </div>
-
-
-
-      
-
-      <div class="offcanvas offcanvas-start offcanvas-lg d-lg-none" tabindex="-1" id="offcanvasRight"
-        aria-labelledby="offcanvasRightLabel">
-        <div class="offcanvas-header border-bottom border-1">
-          Login/Registrazione
-          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-          <a href="http://localhost:8000/login" class="btn btn-primary d-block w-50">Login</a>
-          <a href="http://localhost:8000/register" class="btn btn-primary d-block w-50 mt-2">Registrazione</a>
-        </div>
-      </div>
-      
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
-        aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse d-lg-none" id="navbarText">
-
-      </div>
-    </nav> -->
-
-
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid d-flex justify-content-lg-between justify-content-around">
 
         <!-- BOTTONI LOGIN E REGISTER -->
         <div class="d-flex gap-2">
           <a @click="handleLoginClick" href="http://localhost:8000/login" class="d-lg-inline-block ms-4" target="_blank"
-            data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"><i
+            data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i
               class="fa-solid fa-circle-user" style="color: #b3b3b3; font-size: 40px"></i></a>
           <a href="http://localhost:8000/register" class="d-lg-inline-block d-none mt-1 ms-4" target="_blank"><i
               class="fa-solid fa-user-plus" style="color: rgb(83, 83, 255); font-size: 30px"></i></a>
         </div>
 
         <!-- OFFCANVAS -->
-        <div class="offcanvas offcanvas-start d-none" tabindex="-1" id="offcanvasExample"
-          aria-labelledby="offcanvasExampleLabel" :class="{ 'show': showOffcanvas }">
-          <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
-            <button type="button" class="btn-close text-reset" @click="closeOffcanvas" data-bs-dismiss="offcanvas"
-              aria-label="Close"></button>
+        <div class="offcanvas offcanvas-start offcanvas-lg d-lg-none" tabindex="-1" id="offcanvasRight"
+          aria-labelledby="offcanvasRightLabel">
+          <div class="offcanvas-header border-bottom border-1">
+            Login/Registrazione
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
           <div class="offcanvas-body">
-            Contenuto dell'offcanvas...
+            <a href="http://localhost:8000/login" class="btn btn-primary d-block w-50">Effettua il Login</a>
+            <a href="http://localhost:8000/register" class="btn btn-primary d-block w-50 mt-2">Registrazione</a>
           </div>
         </div>
 
