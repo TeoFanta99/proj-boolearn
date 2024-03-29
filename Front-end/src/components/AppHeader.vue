@@ -41,7 +41,7 @@ export default {
         <!-- OFFCANVAS -->
         <div class="offcanvas offcanvas-start offcanvas-lg d-lg-none" tabindex="-1" id="offcanvasRight"
           aria-labelledby="offcanvasRightLabel">
-          <div class="offcanvas-header border-bottom border-1">
+          <div class="offcanvas-header">
             Login/Registrazione
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
@@ -98,25 +98,26 @@ export default {
 
 
 .offcanvas-header {
-  background-color: #656565;
+  background-color: white;
   font-size: 25px;
-  color: white;
+  color: rgb(83, 83, 255);
 
 }
 
 .offcanvas-body {
-  background-color: #9b9b9b;
+  background-color: white;
 
   .ms_btn {
-    background-color: #c7c7c7;
-    color: #656565;
+    background-color: rgb(25, 207, 86);
+    color: rgb(83, 83, 255);
     padding-top: 10px;
     padding-bottom: 10px;
     padding-left: 10px;
 
     &:hover {
-      color: white;
-      transition: color 0.3s ease;
+      color: rgb(25, 207, 86);
+      background-color: rgb(83, 83, 255);
+      transition: color 0.5s ease;
     }
   }
 }
