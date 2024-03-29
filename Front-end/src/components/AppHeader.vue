@@ -46,8 +46,8 @@ export default {
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
           <div class="offcanvas-body">
-            <a href="http://localhost:8000/login" class="btn btn-primary d-block w-50">Effettua il Login</a>
-            <a href="http://localhost:8000/register" class="btn btn-primary d-block w-50 mt-2">Registrazione</a>
+            <a href="http://localhost:8000/login" class="ms_btn d-block w-50">Effettua il Login</a>
+            <a href="http://localhost:8000/register" class="ms_btn d-block w-50 mt-2">Registrazione</a>
           </div>
         </div>
 
@@ -95,4 +95,29 @@ export default {
 <style lang="scss" scoped>
 @use "../styles/header.scss";
 @use "../styles/general.scss";
+
+
+.offcanvas-header {
+  background-color: #656565;
+  font-size: 25px;
+  color: white;
+
+}
+
+.offcanvas-body {
+  background-color: #9b9b9b;
+
+  .ms_btn {
+    background-color: #c7c7c7;
+    color: #656565;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+
+    &:hover {
+      color: white;
+      transition: color 0.3s ease;
+    }
+  }
+}
 </style>
