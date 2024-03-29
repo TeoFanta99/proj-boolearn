@@ -158,12 +158,12 @@ export default {
   <jumbo id="boh" />
 
   <div class="container" style="min-height: 900px">
-    <form class="d-flex align-items-center">
-      <div class="col-12 col-md-2 me-3">
+    <form class="d-flex justify-content-center">
+      <div class="me-2">
         <!-- Sezione Select -->
         <select
           v-model="store.Subject"
-          class="mt-5 form-select w-100"
+          class="mt-5 form-select"
           id="selected-Subject"
         >
           <option disabled value="">Scegli una materia...</option>
@@ -183,7 +183,7 @@ export default {
         form="nameform"
         value="Submit"
         style="width: 10%"
-        class="btn btn-info h-50 mt-5"
+        class="btn btn-info h-50 mt-5 col-md-2"
         @click="riempiRec()"
       >
         <i class="fas fa-search" style="color: white"></i>
