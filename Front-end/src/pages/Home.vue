@@ -208,6 +208,7 @@ export default {
                 </div>
               </RouterLink>
             </div>
+          </RouterLink>
         </div>
 
         <div v-if="teachers.length == 0">
@@ -215,6 +216,7 @@ export default {
         </div>
       </div>
     </div>
+  </div>
 </template>
 <style lang="scss">
 .loading-gif {
