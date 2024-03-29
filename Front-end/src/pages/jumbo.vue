@@ -63,7 +63,7 @@ export default {
   <div class="container-fluid p-0 bg-dark overflow-hidden">
 
     <div class="body-jumbo">
-      <div class="opacity-50 bg-black position-absolute op_jumbo"></div>
+      <div class="opacity-75 bg-black position-absolute op_jumbo"></div>
       <div class="container_jumbo">
         <span class="text first-text">VOGLIO IMPARARE </span>
         <span class="text sec-text">HTML</span>
@@ -96,6 +96,7 @@ export default {
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
+  padding-bottom: 30px;
 }
 
 
@@ -111,7 +112,7 @@ export default {
 .container_jumbo .text {
   position: relative;
   color: #1ce6b4;
-  font-size: 30px;
+  font-size: 52px;
   font-weight: 600;
 }
 
