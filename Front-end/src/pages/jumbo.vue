@@ -7,16 +7,11 @@ export default {
   name: "jumbo",
 
   data() {
-    return {
-
-    };
+    return {};
   },
-  methods: {
-
-  },
+  methods: {},
 
   mounted() {
-
     const text = document.querySelector(".sec-text");
 
     const textLoad = (text) => {
@@ -27,7 +22,7 @@ export default {
         { singleText: "JS", color: "#efd81d" },
         { singleText: "PHP", color: "#254bdd" },
         { singleText: "LARAVEL", color: "#ff554d" },
-        { singleText: "VueJS", color: "#3fb27f" }
+        { singleText: "VueJS", color: "#3fb27f" },
       ];
 
       const setTextAndColor = (index) => {
@@ -52,16 +47,12 @@ export default {
     };
 
     textLoad(text); // Avvia la sequenza
-
-
-
   },
 };
 </script>
 
 <template class="bg-light">
   <div class="container-fluid p-0 bg-dark overflow-hidden">
-
     <div class="body-jumbo">
       <div class="opacity-75 bg-black position-absolute op_jumbo"></div>
       <div class="container_jumbo">
@@ -69,16 +60,13 @@ export default {
         <span class="text sec-text">HTML</span>
       </div>
     </div>
-
   </div>
-
 </template>
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap");
 
-
 .body-jumbo {
-  background-image: url('https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHR3cTZ3cjBqYTZidjNnZGFybTRqN2I3YWd2ZWJuYTRnN3ZtYWhpbSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26tn33aiTi1jkl6H6/giphy.gif');
+  background-image: url("https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHR3cTZ3cjBqYTZidjNnZGFybTRqN2I3YWd2ZWJuYTRnN3ZtYWhpbSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26tn33aiTi1jkl6H6/giphy.gif");
   min-height: 30rem;
   display: flex;
   align-items: center;
@@ -92,13 +80,13 @@ export default {
 
 .container_jumbo {
   position: absolute;
+  width: 100%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
   padding-bottom: 30px;
 }
-
 
 .text.first-text {
   color: #fff;
@@ -137,7 +125,6 @@ export default {
 }
 
 @keyframes animate {
-
   40%,
   60% {
     left: calc(95% + 4px);
@@ -149,15 +136,19 @@ export default {
   }
 }
 
-
-
 /* MEDIA QUERY PER LA JUMBOTRUN */
 
 @media (max-width: 575.98px) {
   .body-jumbo {
     min-height: 15rem;
-    width: 35%;
+    /* width: 35%; */
     background-position: 40%;
+
+    .container_jumbo {
+      span {
+        font-size: 30px;
+      }
+    }
   }
 
   .op_jumbo {
@@ -171,12 +162,17 @@ export default {
   }
 }
 
-
 @media (min-width: 576px) and (max-width: 767.98px) {
   .body-jumbo {
     min-height: 20rem;
-    width: 55%;
+    /* width: 55%; */
     background-position: 40%;
+
+    .container_jumbo {
+      span {
+        font-size: 40px;
+      }
+    }
   }
 
   .op_jumbo {
@@ -184,11 +180,14 @@ export default {
   }
 }
 
-
 @media (min-width: 768px) and (max-width: 991.98px) {
-
   .body-jumbo {
-    width: 60%;
+    /* width: 60%; */
+    .container_jumbo {
+      span {
+        font-size: 40px;
+      }
+    }
   }
 
   .op_jumbo {
@@ -197,10 +196,9 @@ export default {
   }
 }
 
-
 @media (min-width: 992px) and (max-width: 1199.98px) {
   .body-jumbo {
-    width: 80%;
+    /* width: 100%; */
     background-position: 50%;
   }
 }
