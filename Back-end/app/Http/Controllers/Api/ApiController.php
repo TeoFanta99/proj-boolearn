@@ -287,14 +287,19 @@ class ApiController extends Controller
         // Ottieni i dati dei docenti per la pagina corrente
         $paginatedTeachers = array_slice($combinedTeachers, $offset, $perPage);
 
+        //ottengo numero totale teachers (sponsorizzati e non ) in base ai filtri usati
         $totalPages = ceil(count($combinedTeachers) / $perPage);
         // Invia una risposta JSON contenente i docenti paginati
+
+        $totTeachers=count($filteredTeachers)+count($sponsoredTeachers);
+
         return response()->json([
             'teachers' => $paginatedTeachers,
             'current_page' => $page,
             'per_page' => $perPage,
-            'total_pages'=>$totalPages
+            'total_pages'=>$totalPages,
             // Altri dati di paginazione, se necessario
+            'Tot_teachers'=>$totTeachers
         ]);
     }
 }

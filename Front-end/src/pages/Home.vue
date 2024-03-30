@@ -35,7 +35,7 @@ export default {
           this.store.materie = res.data.subjects;
           this.store.valutazioni = res.data.ratings;
           // store.List = res.data.teachers2;;
-          console.log(this.teachers);
+          console.log(res.data.ratings);
           this.loading = false;
         })
         .catch((error) => {
@@ -78,6 +78,7 @@ export default {
       }
     },
 
+    //media recensioni arrotondata alla seconda unità
     media(num) {
       return parseFloat(num).toFixed(2);
     },
@@ -227,10 +228,11 @@ export default {
               <div class="card-body">
                 <h4>{{ teacher.user.name }} {{ teacher.user.lastname }}</h4>
                 <!-- <span>{{ getStars(store.List[teacher.id].average_rating) }}</span> -->
-                <div>
+                <div class="med_rec">
                   <i class="fas fa-star" style="color: #ffd43b">
                     {{ media(teacher.average_rating) }}</i
                   >
+                  <span>N.recensioni: {{ teacher.reviews.length }}</span>
                 </div>
               </div>
             </div>
@@ -310,5 +312,11 @@ export default {
     transition: all ease-in 0.5s;
     transform: scale(1.08);
   }
+}
+
+.med_rec {
+  display: flex;
+  justify-content: space-between;
+  line-height: 1;
 }
 </style>
