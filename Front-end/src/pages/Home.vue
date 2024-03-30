@@ -35,7 +35,7 @@ export default {
           this.store.materie = res.data.subjects;
           this.store.valutazioni = res.data.ratings;
           // store.List = res.data.teachers2;;
-          console.log(res.data.ratings);
+          console.log(store.materie);
           this.loading = false;
         })
         .catch((error) => {

@@ -159,7 +159,11 @@ class ApiController extends Controller
     public function results(Request $request)
     {
         $subjects = Subject::all();
+ 
         $ratings = Rating::all();
+
+        //ottengo tutte le valutazioni presenti nel DB
+        $Allratings = $ratings;
 
         // Ottieni tutti i teachers con le relazioni pre-caricate
         $teachers = Teacher::with(['user', 'subjects', 'ratings', 'reviews', 'sponsorships'])->get();
@@ -198,7 +202,7 @@ class ApiController extends Controller
         }
 
         // Invia una risposta JSON contenente i teachers con sponsorizzazioni attive
-        return response()->json(['teachers' => $filteredTeachers, 'subjects' => $subjects, 'ratings' => $ratings]);
+        return response()->json(['teachers' => $filteredTeachers, 'subjects' => $subjects, 'ratings' => $Allratings]);
     }
     public function filtered(Request $request)
     {

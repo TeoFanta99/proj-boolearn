@@ -47,7 +47,7 @@ export default {
           //ottengo numero tatale insegnanti
           this.totalTeachers = response.data.Tot_teachers;
 
-          console.log(store.valutazioni);
+          console.log(this.teachers);
           this.currentPage = response.data.current_page;
           if (this.currentPage > this.totalPages) {
             this.currentPage = 1; // Riporta la pagina corrente alla prima pagina
@@ -190,54 +190,59 @@ export default {
       <h2>Riusltati Trovati:{{ totalTeachers }}</h2>
     </div>
 
-    <form class="d-flex mt-5 mb-5 justify-content-center">
-      <div class="col-12 col-md-4">
-        <select
-          v-model="store.Subject"
-          class="form-select w-75"
-          id="selected-Subject"
-        >
-          <option disabled value="">Scegli una materia...</option>
-          <option
-            v-for="subject in store.materie"
-            :key="subject.id"
-            :value="subject.name"
-            :selected="store.Subject === subject.name ? 'selected' : ''"
+    <form>
+      <div class="row row-cols-lg-3 mt-5 mb-5 justify-content-center">
+        <div class="col-12 col-md-4">
+          <h4>Materie disponibili:</h4>
+          <select
+            v-model="store.Subject"
+            class="form-select w-75"
+            id="selected-Subject"
           >
-            {{ subject.name }}
-          </option>
-        </select>
-      </div>
+            <option disabled value="">Scegli una materia...</option>
+            <option
+              v-for="subject in store.materie"
+              :key="subject.id"
+              :value="subject.name"
+              :selected="store.Subject === subject.name ? 'selected' : ''"
+            >
+              {{ subject.name }}
+            </option>
+          </select>
+        </div>
 
-      <div class="col-12 col-md-4">
-        <select
-          v-model="store.Rating"
-          class="form-select w-75"
-          id="selected-Rating"
-        >
-          <option disabled value="">Filtra per voto</option>
-          <option
-            v-for="rating in store.valutazioni"
-            :key="rating.id"
-            :value="rating.id"
+        <div class="col-12 col-md-4">
+          <h4>media valutazioni:</h4>
+          <select
+            v-model="store.Rating"
+            class="form-select w-75"
+            id="selected-Rating"
           >
-            {{ store.valutazioni }}
-          </option>
-        </select>
-      </div>
+            <option disabled value="">Filtra per voto</option>
+            <option
+              v-for="rating in store.valutazioni"
+              :key="rating.id"
+              :value="rating.id"
+            >
+              {{ rating.name }} in su
+            </option>
+          </select>
+        </div>
 
-      <div class="col-12 col-md-4">
-        <select
-          v-model="store.Review"
-          class="form-select w-75"
-          id="selected-Review"
-        >
-          <option disabled value="">Filtra per numero di recensioni</option>
-          <option value="0">Qualsiasi</option>
-          <option value="5">Minimo 5 recensioni</option>
-          <option value="10">Minimo 10 recensioni</option>
-          <option value="12">Minimo 12 recensioni</option>
-        </select>
+        <div class="col-12 col-md-4">
+          <h4>Tot recensioni:</h4>
+          <select
+            v-model="store.Review"
+            class="form-select w-75"
+            id="selected-Review"
+          >
+            <option disabled value="">Filtra per numero di recensioni</option>
+            <option value="0">Qualsiasi</option>
+            <option value="5">Minimo 5 recensioni</option>
+            <option value="10">Minimo 10 recensioni</option>
+            <option value="12">Minimo 12 recensioni</option>
+          </select>
+        </div>
       </div>
 
       <button
