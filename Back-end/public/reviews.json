@@ -1,0 +1,64 @@
+{
+    "Reviews": [
+        {
+            "nome": "Ottimo",
+            "descrizione": "è un esperto nel campo della programmazione. Grazie alla sua vasta esperienza, è in grado di guidare gli studenti attraverso concetti fondamentali e avanzati di programmazione, fornendo una solida base per lo sviluppo di applicazioni web moderne e scalabili.",
+            "mail": "freeda24@example.org",
+            "data": "2023-09-14 11:03:34"
+        },
+        {
+            "nome": "Esperienza di Apprendimento Unica",
+            "descrizione": "L'argomento è stato presentato in modo chiaro e conciso, rendendo facile la comprensione anche per chi non ha esperienza pregressa. Le spiegazioni dettagliate e gli esempi pratici hanno reso l'apprendimento piacevole e interessante. Consiglio vivamente questo corso a chiunque voglia approfondire le proprie conoscenze in informatica",
+            "mail": "olebsack@example.org",
+            "data": "2023-12-14 12:22:41"
+        },
+        {
+            "nome": "Esperienza negativa",
+            "descrizione": "Sono rimasto deluso dalla mancanza di approfondimento su alcune tematiche cruciali. Troppo spesso il professore si è limitato a elencare concetti senza approfondirli adeguatamente. Inoltre, la struttura del corso era confusa e poco organizzata, rendendo difficile seguire il filo logico delle lezioni.",
+            "mail": "nvon@example.org",
+            "data": "2023-05-25 23:11:00"
+        },
+        {
+            "nome": "Estremamente utile",
+            "descrizione": "Ho trovato questo corso estremamente utile e informativo. Il professore è riuscito a trasmettere con chiarezza concetti complessi, rendendo l'argomento accessibile anche ai meno esperti. Le risorse aggiuntive fornite, come esercizi pratici e materiale didattico, hanno arricchito l'esperienza di apprendimento.",
+            "mail": "runolfsdottir.aidan@ex",
+            "data": "2023-09-22 08:17:51"
+        },
+        {
+            "nome": "Troppa superiorità e tanta arroganza:bocciato",
+            "descrizione": "Sono rimasto deluso dalla superficialità con cui sono stati trattati alcuni argomenti fondamentali. Le spiegazioni erano vaghe e poco esaustive, lasciando molte domande senza risposta. Mi aspettavo di più da questo corso e spero che in futuro venga migliorato.",
+            "mail": "araceli.leffler@example.com",
+            "data": "2023-07-26 23:42:00"
+        },
+        {
+            "nome": "Piacevole sorpresa",
+            "descrizione": "Il corso è stato una piacevole sorpresa! Il professore è appassionato e competente, e ciò si riflette nella qualità delle lezioni. Ho imparato molto e mi sento più sicuro nell'affrontare le sfide dell'informatica grazie alle conoscenze acquisite. Consiglio vivamente questo corso a tutti gli appassionati del settore.",
+            "mail": "doyle.judah@example.net",
+            "data": "2019-12-14 11:50:00"
+        },
+        {
+            "nome": "Poco coinvolgente",
+            "descrizione": "Mi aspettavo di più da questo corso. Le lezioni erano noiose e poco coinvolgenti, e ho faticato a mantenermi concentrato. Inoltre, la struttura del corso era poco chiara e le risorse didattiche fornite erano insufficienti. Sono rimasto deluso dall'esperienza complessiva e non lo consiglierei.",
+            "mail": "araceli.leffler@example.com",
+            "data": "2007-07-12 15:02:00"
+        },
+        {
+            "nome": "Promosso a pieni voti",
+            "descrizione": "Il corso ha superato di gran lunga le mie aspettative! Il professore è stato in grado di spiegare concetti complessi in modo chiaro e accessibile, rendendo l'apprendimento un'esperienza piacevole. Le lezioni sono state arricchite da esempi pratici e attività interattive che hanno consolidato le mie conoscenze.",
+            "mail": "olebsack@example.org",
+            "data": "2012-12-12 13:09:00"
+        },
+        {
+            "nome": "Consigliato",
+            "descrizione": "Il corso è stato un'esperienza formativa incredibile! Il professore è stato coinvolgente e competente, e le lezioni sono state arricchite da esempi pratici e casi studio reali. Ho imparato tanto e mi sento più preparato per affrontare le sfide del settore informatico grazie alle conoscenze acquisite.",
+            "mail": "freeda24@example.org",
+            "data": "2017-05-02 13:20:00"
+        },
+        {
+            "nome": "Pessimo",
+            "descrizione": "Lezioni noiose e ripetitive, poco utili e facilmente reperibili online in qualsiasi sito di streaming,sconsigliato.",
+            "mail": "freeda24@example.org",
+            "data": "2014-09-20 17:20:00"
+        }
+    ]
+}
