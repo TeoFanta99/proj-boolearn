@@ -28,12 +28,12 @@ class ReviewTableSeeder extends Seeder
 
             foreach ($reviewsJSON as $reviews) {
 
+                // Creare un array per memorizzare gli insegnanti associati a titoli di recensioni
+                $assignedTeachers = [];
+                    
                 // Ciclo su ciascuna materia della categoria
                 foreach ($reviews as $review) {
-                    
-                    // Creare un array per memorizzare gli insegnanti associati a titoli di recensioni
-                    $assignedTeachers = [];
-                    
+                     
                     // Cerca un insegnante non associato alla recensione attuale
                     $teacher = Teacher::inRandomOrder()->whereNotIn('id', $assignedTeachers)->first();
 
