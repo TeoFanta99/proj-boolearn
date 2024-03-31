@@ -120,10 +120,9 @@
             let phone = document.getElementById('phone_number');
 
             validation += checkTaxID(taxID, teacher); // Non è necessario passare teacher qui
-        
             validation += checkPhone(phone_number);
 
-            if (validation == 3) {
+            if (validation == 2) {
                 this.submit();
             }
 
