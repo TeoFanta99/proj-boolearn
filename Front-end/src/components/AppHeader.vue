@@ -61,7 +61,7 @@ export default {
         <div class="home">
 
           <a href="http://localhost:5174/">
-            <img src="../../public/BL1.svg" alt="LOGO" class="logo-mobile" />
+            <img src="../../public/BLearn.svg" alt="LOGO" class="logo-mobile" />
             <img src="../../public/BLnew2.svg" alt="LOGO" class="logo-big" />
           </a>
           <!-- <router-link :to="{ name: 'home' }"> -->
