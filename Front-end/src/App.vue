@@ -44,7 +44,9 @@ export default {
 
 <template>
   <div class="back_gif" id="loader">
-    <div id="preloader"></div>
+    <div id="preloader">
+      <i class="ex-10-icon fas fa-circle-notch"></i>
+    </div>
   </div>
   <div class="d-none" id="main-container">
     <AppHeader />
@@ -61,19 +63,27 @@ export default {
 @use "./styles/partials/variables";
 
 #preloader {
-  background: url("https://media1.tenor.com/m/_dGu36t3VNEAAAAC/loading-buffering.gif")
-    no-repeat;
+
   position: fixed;
   z-index: 100;
   width: 100vw;
   height: 800px;
-  background-size: cover;
-  background-position: center;
-  transform: translate(-50%, -50%) scale(0.2);
   top: 50%;
   left: 50%;
 }
 
+.ex-10-icon {
+    font-size: 60px;
+    color: #18e6b7;
+}
+.ex-10-icon{
+    animation: spin 0.5s linear infinite;
+}
+@keyframes spin {
+    0%{
+        transform: rotate(360deg);
+    }
+}
 .main_views {
   height: calc(100vh - 166px);
   /* Altezza della finestra meno l'altezza dell'header */

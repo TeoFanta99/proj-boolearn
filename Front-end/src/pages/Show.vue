@@ -179,7 +179,7 @@ export default {
         </div>
       </div>
       <!-- end col  -->
-      <div class="col-12 col-md-7 col-xl-8 other_info " style="padding-top: 10px;">
+      <div class="col-12 col-md-7 col-xl-8 other_info pt-4 pt-md-0" >
         <div class="card border-success right-profile-card" style="
             background-color: white;
             border: 5px solid green;

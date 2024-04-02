@@ -179,8 +179,8 @@ export default {
 
     <!-- Sezione icone teachers -->
     <div v-if="loading" class="loading-gif">
-      <img src="https://media1.tenor.com/m/_dGu36t3VNEAAAAC/loading-buffering.gif" alt="Caricamento..."
-        class="loading-image" />
+
+        <i class="ex-10-icon fas fa-circle-notch"></i>
     </div>
     <div v-else-if="teachers.length > 0">
       <div class="row mt-4">
