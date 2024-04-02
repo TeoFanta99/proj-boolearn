@@ -186,51 +186,56 @@ export default {
 <template>
   <div class="container">
     <div class="Gen_result d-flex flex-column align-items-center d-md-block pt-5">
-      <span class="d-block"><b>MATERIA SELEZIONATA: </b>{{ store.Subject }}</span>
+      <span class="d-block filt_text w-80 p-2"><b>MATERIA SELEZIONATA: </b>{{ store.Subject }}</span>
       <br>
-      <span style="margin-top: 10px" class="d-block"><b>RISULTATI TROVATI: </b>{{ totalTeachers }}</span>
+      <span style="margin-top: 20px" class="d-block filt_text w-80 p-2"><b>RISULTATI TROVATI: </b>{{ totalTeachers
+        }}</span>
     </div>
 
-    <form class="text-center text-md-start">
-      <div class="row row-cols-lg-3 mt-2 mt-md-5 mb-5 justify-content-center">
-        <div class="col-12 col-md-4 d-flex flex-column d-md-block align-items-center mt-3 mt-md-0">
-          <span style="font-size: 15px; font-weight: bold">MATERIE DISPONIBILI:</span>
-          <select v-model="store.Subject" class="form-select w-75" id="selected-Subject">
-            <option disabled value="">Scegli una materia...</option>
-            <option v-for="subject in store.materie" :key="subject.id" :value="subject.name"
-              :selected="store.Subject === subject.name ? 'selected' : ''">
-              {{ subject.name }}
-            </option>
-          </select>
+    <div class="mt-5">
+      <form class="text-center text-md-start">
+        <div class="row row-cols-lg-3 mt-2 mt-md-5 mb-5 justify-content-center">
+          <div class="col-12 col-md-4 d-flex flex-column d-md-block align-items-center mt-3 mt-md-0">
+            <span class="md-font">MATERIE DISPONIBILI</span>
+            <select v-model="store.Subject" class="form-select w-75" id="selected-Subject">
+              <option disabled value="">Scegli una materia...</option>
+              <option v-for="subject in store.materie" :key="subject.id" :value="subject.name"
+                :selected="store.Subject === subject.name ? 'selected' : ''">
+                {{ subject.name }}
+              </option>
+            </select>
+          </div>
+
+          <div class="col-12 col-md-4 d-flex flex-column d-md-block align-items-center mt-3 mt-md-0">
+            <span class="md-font">MEDIA VALUTAZIONI</span>
+            <select v-model="store.Rating" class="form-select w-75" id="selected-Rating">
+              <option disabled value="">Filtra per voto</option>
+              <option v-for="rating in store.valutazioni" :key="rating.id" :value="rating.id">
+                {{ rating.name }} in su
+              </option>
+            </select>
+          </div>
+
+          <div class="col-12 col-md-4 d-flex flex-column d-md-block align-items-center mt-3 mt-md-0">
+            <span class="md-font">N° MIN. RECENSIONI</span>
+            <select v-model="store.Review" class="form-select w-75" id="selected-Review">
+              <option disabled value="">Filtra per numero di recensioni</option>
+              <option value="0">Qualsiasi</option>
+              <option value="5">Minimo 5 recensioni</option>
+              <option value="10">Minimo 10 recensioni</option>
+              <option value="12">Minimo 12 recensioni</option>
+            </select>
+          </div>
         </div>
 
-        <div class="col-12 col-md-4 d-flex flex-column d-md-block align-items-center mt-3 mt-md-0">
-          <span style="font-size: 15px; font-weight: bold;">MEDIA VALUTAZIONI:</span>
-          <select v-model="store.Rating" class="form-select w-75" id="selected-Rating">
-            <option disabled value="">Filtra per voto</option>
-            <option v-for="rating in store.valutazioni" :key="rating.id" :value="rating.id">
-              {{ rating.name }} in su
-            </option>
-          </select>
-        </div>
+        <button type="submit" form="nameform" value="Submit" style="padding: 10px 70px" class="btn h-50 btn-info"
+          @click="population()">
+          <i class="fas fa-search" style="color: white"></i>
+        </button>
+      </form>
 
-        <div class="col-12 col-md-4 d-flex flex-column d-md-block align-items-center mt-3 mt-md-0">
-          <span style="font-size: 15px; font-weight: bold">N° MIN. RECENSIONI:</span>
-          <select v-model="store.Review" class="form-select w-75" id="selected-Review">
-            <option disabled value="">Filtra per numero di recensioni</option>
-            <option value="0">Qualsiasi</option>
-            <option value="5">Minimo 5 recensioni</option>
-            <option value="10">Minimo 10 recensioni</option>
-            <option value="12">Minimo 12 recensioni</option>
-          </select>
-        </div>
-      </div>
+    </div>
 
-      <button type="submit" form="nameform" value="Submit" style="padding: 10px 70px" class="btn h-50 btn-info"
-        @click="population()">
-        <i class="fas fa-search" style="color: white"></i>
-      </button>
-    </form>
 
     <div v-if="loading">
       <h3>CARICAMENTO...</h3>
@@ -319,5 +324,29 @@ export default {
 .selected-text {
   font-weight: bold;
   color: white;
+}
+
+.filt_text {
+  margin: 0 auto;
+  text-align: center;
+  font-size: 35px;
+  font-weight: 600;
+  color: black;
+  box-shadow: 6px 6px 10px -1px rgba(252, 252, 252, 0.863),
+    -6px -6px 10px -1px rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+  text-shadow: 2px 6px 4px rgba(82, 243, 189, 0.692);
+}
+
+.md-font {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+@media all and (min-width: 768px) and (max-width: 991px) {
+  .md-font {
+    font-size: 15px;
+    font-weight: bold;
+  }
 }
 </style>

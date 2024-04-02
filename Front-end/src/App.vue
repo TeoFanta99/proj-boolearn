@@ -73,24 +73,27 @@ export default {
 }
 
 .ex-10-icon {
-    font-size: 60px;
-    color: #18e6b7;
+  font-size: 60px;
+  color: #18e6b7;
 }
-.ex-10-icon{
-    animation: spin 0.5s linear infinite;
+
+.ex-10-icon {
+  animation: spin 0.5s linear infinite;
 }
+
 @keyframes spin {
-    0%{
-        transform: rotate(360deg);
-    }
+  0% {
+    transform: rotate(360deg);
+  }
 }
-.main_views {
-  height: calc(100vh - 166px);
-  /* Altezza della finestra meno l'altezza dell'header */
-  overflow-y: auto;
-  /* Abilita lo scrolling verticale quando necessario */
-  position: relative;
-}
+
+// .main_views {
+//   height: calc(100vh - 90px);
+//   /* Altezza della finestra meno l'altezza dell'header */
+//   overflow-y: auto;
+//   /* Abilita lo scrolling verticale quando necessario */
+//   position: relative;
+// }
 
 .back_gif {
   position: relative;
