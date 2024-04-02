@@ -180,18 +180,18 @@ export default {
     <!-- Sezione icone teachers -->
     <div v-if="loading" class="loading-gif">
 
-        <i class="ex-10-icon fas fa-circle-notch"></i>
+      <i class="ex-10-icon fas fa-circle-notch"></i>
     </div>
     <div v-else-if="teachers.length > 0">
       <div class="row mt-4">
-        <div class="col-12 col-md-4 col-lg-3 p-2" v-for="teacher in teachers" :key="teacher.id">
+        <div class="col-12 col-md-6 col-xl-3 p-2" v-for="teacher in teachers" :key="teacher.id">
           <RouterLink tag="div" :to="{ name: 'show', params: { id: teacher.user.name } }"
             @click="riempiVet(teacher.id), (store.view = 2)" class="text-decoration-none">
             <div class="card pt-3 border-0 shadow on_hover">
               <div class="position-absolute star_sponsor">
                 <i class="fa-solid fa-star"></i>
               </div>
-              <div class="d-flex justify-content-center align-items-center img_circle mx-auto height_img_query">
+              <div class="d-flex justify-content-center align-items-center img_circle mx-auto">
                 <img class="w-100 h-100 rounded-circle" :src="getImageUrl(teacher)" alt="" />
               </div>
               <div class="card-body">
