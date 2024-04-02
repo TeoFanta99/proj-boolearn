@@ -53,9 +53,13 @@ export default {
 
         <!-- LOGO HOME -->
         <div class="home">
-          <router-link :to="{ name: 'home' }">
+
+          <a href="http://localhost:5174/">
             <img src="../../public/BLearn.svg" alt="LOGO" class="logo-mobile" />
-          </router-link>
+          </a>
+          <!-- <router-link :to="{ name: 'home' }"> -->
+
+          <!-- </router-link> -->
         </div>
 
         <!-- BOTTONE ESPANDIBILE (HAMBURGER MENU) -->

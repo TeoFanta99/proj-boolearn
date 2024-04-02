@@ -266,24 +266,27 @@ export default {
     <div v-else>
       <h3 class="my-4">NESSUN RISULTATO TROVATO!</h3>
     </div>
-    <div class="pagination mt-4">
+    <div class="pagination mt-4 mb-4">
       <button ref="prevButton" :disabled="currentPage === 1" @click="prevPage" @mousedown.prevent="disableButtonEvents"
         @mouseup="enableButtonEvents" @touchstart.prevent="disableButtonEvents" @touchend="enableButtonEvents"
-        class="btn btn-outline-primary">
-        Indietro
+        class="btn pagination-btn border-dark">
+        <div class="d-flex justify-content-center align-items-center">
+          <i class="fa-solid fa-circle-left" style="font-size: 20px"></i>
+        </div>
+
       </button>
       <button v-for="page in totalPages" :key="page" @click="goToPage(page)"
-        :disabled="currentPage === page || disableButtons" class="btn btn-primary"
-        :class="page == currentPage ? 'text-danger' : ''">
+        :disabled="currentPage === page || disableButtons" class="btn pagination-btn border-dark"
+        :class="page == currentPage ? 'selected-text' : ''">
         {{ page }}
       </button>
       <button ref="nextButton" :disabled="currentPage === totalPages || disableButtons" @click="nextPage"
         @mousedown.prevent="disableButtonEvents" @mouseup="enableButtonEvents" @touchstart.prevent="disableButtonEvents"
-        @touchend="enableButtonEvents" class="btn" :class="{
-        'btn-outline-primary': currentPage !== totalPages,
-        'btn-outline-secondary': currentPage === totalPages,
-      }">
-        Avanti
+        @touchend="enableButtonEvents" class="btn pagination-btn border-dark">
+        <div class="d-flex justify-content-center align-items-center">
+          <i class="fa-solid fa-circle-right" style="font-size: 20px"></i>
+        </div>
+
       </button>
     </div>
   </div>
@@ -299,5 +302,21 @@ export default {
   display: flex;
   justify-content: space-between;
   line-height: 1;
+}
+
+.pagination-btn {
+  background-image: linear-gradient(90deg, #00bf63, #0a73b0);
+  margin-right: 10px;
+  color: black;
+}
+
+.pagination-btn:hover {
+  background-image: linear-gradient(90deg, #0a4ab0, #00bf63);
+  color: white;
+}
+
+.selected-text {
+  font-weight: bold;
+  color: white;
 }
 </style>
