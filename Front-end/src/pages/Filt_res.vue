@@ -185,13 +185,14 @@ export default {
 
 <template>
   <div class="container">
-    <div class="Gen_result">
-      <h2>MATERIA: {{ store.Subject }}</h2>
-      <h2>RISULTATI TROVATI: {{ totalTeachers }}</h2>
+    <div class="Gen_result d-flex flex-column align-items-center d-md-block pt-5">
+      <span class="d-block"><b>MATERIA SELEZIONATA: </b>{{ store.Subject }}</span>
+      <br>
+      <span style="margin-top: 10px" class="d-block"><b>RISULTATI TROVATI: </b>{{ totalTeachers }}</span>
     </div>
 
     <form class="text-center text-md-start">
-      <div class="row row-cols-lg-3 mt-5 mb-5 justify-content-center">
+      <div class="row row-cols-lg-3 mt-2 mt-md-5 mb-5 justify-content-center">
         <div class="col-12 col-md-4 d-flex flex-column d-md-block align-items-center mt-3 mt-md-0">
           <span style="font-size: 15px; font-weight: bold">MATERIE DISPONIBILI:</span>
           <select v-model="store.Subject" class="form-select w-75" id="selected-Subject">
