@@ -228,10 +228,13 @@ export default {
           </div>
         </div>
 
-        <button type="submit" form="nameform" value="Submit" style="padding: 10px 70px" class="btn h-50 btn-info"
+        <div class="w-100 d-flex justify-content-center">
+          <button type="submit" form="nameform" value="Submit" style="padding: 10px 70px" class="btn h-50 btn-info"
           @click="population()">
           <i class="fas fa-search" style="color: white"></i>
         </button>
+        </div>
+
       </form>
 
     </div>

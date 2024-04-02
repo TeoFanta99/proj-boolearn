@@ -61,7 +61,8 @@ export default {
         <div class="home">
 
           <a href="http://localhost:5174/">
-            <img src="../../public/BLnew2.svg" alt="LOGO" class="logo-mobile" />
+            <img src="../../public/BL1.svg" alt="LOGO" class="logo-mobile" />
+            <img src="../../public/BLnew2.svg" alt="LOGO" class="logo-big" />
           </a>
           <!-- <router-link :to="{ name: 'home' }"> -->
 
@@ -132,6 +133,28 @@ export default {
       background-color: rgb(83, 83, 255);
       transition: color 0.5s ease;
     }
+  }
+}
+
+.logo-mobile {
+  display: block;
+  max-width: 80px;
+}
+
+/* Stili per l'immagine desktop */
+.logo-big {
+  display: none;
+}
+
+@media screen and (min-width: 638px) {
+
+  /* Modifica i stili per l'immagine desktop quando lo schermo è grande */
+  .logo-mobile {
+    display: none;
+  }
+
+  .logo-big {
+    display: block;
   }
 }
 </style>
