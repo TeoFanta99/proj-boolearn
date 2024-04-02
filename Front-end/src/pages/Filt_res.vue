@@ -190,10 +190,10 @@ export default {
       <h2>RISULTATI TROVATI: {{ totalTeachers }}</h2>
     </div>
 
-    <form>
+    <form class="text-center text-md-start">
       <div class="row row-cols-lg-3 mt-5 mb-5 justify-content-center">
-        <div class="col-12 col-md-4">
-          <h4>MATERIE DISPONIBILI:</h4>
+        <div class="col-12 col-md-4 d-flex flex-column d-md-block align-items-center mt-3 mt-md-0">
+          <span style="font-size: 15px; font-weight: bold">MATERIE DISPONIBILI:</span>
           <select v-model="store.Subject" class="form-select w-75" id="selected-Subject">
             <option disabled value="">Scegli una materia...</option>
             <option v-for="subject in store.materie" :key="subject.id" :value="subject.name"
@@ -203,8 +203,8 @@ export default {
           </select>
         </div>
 
-        <div class="col-12 col-md-4">
-          <h4>MEDIA VALUTAZIONI:</h4>
+        <div class="col-12 col-md-4 d-flex flex-column d-md-block align-items-center mt-3 mt-md-0">
+          <span style="font-size: 15px; font-weight: bold;">MEDIA VALUTAZIONI:</span>
           <select v-model="store.Rating" class="form-select w-75" id="selected-Rating">
             <option disabled value="">Filtra per voto</option>
             <option v-for="rating in store.valutazioni" :key="rating.id" :value="rating.id">
@@ -213,8 +213,8 @@ export default {
           </select>
         </div>
 
-        <div class="col-12 col-md-4">
-          <h4>N° MIN. RECENSIONI:</h4>
+        <div class="col-12 col-md-4 d-flex flex-column d-md-block align-items-center mt-3 mt-md-0">
+          <span style="font-size: 15px; font-weight: bold">N° MIN. RECENSIONI:</span>
           <select v-model="store.Review" class="form-select w-75" id="selected-Review">
             <option disabled value="">Filtra per numero di recensioni</option>
             <option value="0">Qualsiasi</option>
@@ -225,7 +225,7 @@ export default {
         </div>
       </div>
 
-      <button type="submit" form="nameform" value="Submit" style="width: 10%" class="btn h-50 btn-info"
+      <button type="submit" form="nameform" value="Submit" style="padding: 10px 70px" class="btn h-50 btn-info"
         @click="population()">
         <i class="fas fa-search" style="color: white"></i>
       </button>
@@ -236,11 +236,11 @@ export default {
     </div>
     <div v-else-if="teachers.length > 0">
       <div class="row mt-4">
-        <div class="col-12 col-md-4 col-lg-3 p-2" v-for="teacher in teachers" :key="teacher.id">
+        <div class="col-12 col-md-6 col-xl-3 p-2" v-for="teacher in teachers" :key="teacher.id">
           <RouterLink :to="{ name: 'show', params: { id: teacher.user.name } }" @click="riempiVet(teacher.id)"
             class="text-decoration-none">
             <div class="card pt-3 border-0 shadow">
-              <div class="d-flex justify-content-center align-items-center img_circle mx-auto height_img_query">
+              <div class="d-flex justify-content-center align-items-center img_circle mx-auto">
                 <img class="w-100 h-100 rounded-circle" :src="getImageUrl(teacher)" alt="" />
               </div>
               <div class="card-body">
