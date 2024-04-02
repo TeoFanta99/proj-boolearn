@@ -186,56 +186,36 @@ export default {
 <template>
   <div class="container">
     <div class="Gen_result">
-      <h2>Materia: {{ store.Subject }}</h2>
-      <h2>Risultati Trovati:{{ totalTeachers }}</h2>
+      <h2>MATERIA: {{ store.Subject }}</h2>
+      <h2>RISULTATI TROVATI:{{ totalTeachers }}</h2>
     </div>
 
     <form>
       <div class="row row-cols-lg-3 mt-5 mb-5 justify-content-center">
         <div class="col-12 col-md-4">
-          <h4>Materie disponibili:</h4>
-          <select
-            v-model="store.Subject"
-            class="form-select w-75"
-            id="selected-Subject"
-          >
+          <h4>MATERIE DISPONIBILI:</h4>
+          <select v-model="store.Subject" class="form-select w-75" id="selected-Subject">
             <option disabled value="">Scegli una materia...</option>
-            <option
-              v-for="subject in store.materie"
-              :key="subject.id"
-              :value="subject.name"
-              :selected="store.Subject === subject.name ? 'selected' : ''"
-            >
+            <option v-for="subject in store.materie" :key="subject.id" :value="subject.name"
+              :selected="store.Subject === subject.name ? 'selected' : ''">
               {{ subject.name }}
             </option>
           </select>
         </div>
 
         <div class="col-12 col-md-4">
-          <h4>Media valutazioni:</h4>
-          <select
-            v-model="store.Rating"
-            class="form-select w-75"
-            id="selected-Rating"
-          >
+          <h4>MEDIA VALUTAZIONI:</h4>
+          <select v-model="store.Rating" class="form-select w-75" id="selected-Rating">
             <option disabled value="">Filtra per voto</option>
-            <option
-              v-for="rating in store.valutazioni"
-              :key="rating.id"
-              :value="rating.id"
-            >
+            <option v-for="rating in store.valutazioni" :key="rating.id" :value="rating.id">
               {{ rating.name }} in su
             </option>
           </select>
         </div>
 
         <div class="col-12 col-md-4">
-          <h4>Num. min. recensioni:</h4>
-          <select
-            v-model="store.Review"
-            class="form-select w-75"
-            id="selected-Review"
-          >
+          <h4>N° MIN. RECENSIONI:</h4>
+          <select v-model="store.Review" class="form-select w-75" id="selected-Review">
             <option disabled value="">Filtra per numero di recensioni</option>
             <option value="0">Qualsiasi</option>
             <option value="5">Minimo 5 recensioni</option>
@@ -245,57 +225,37 @@ export default {
         </div>
       </div>
 
-      <button
-        type="submit"
-        form="nameform"
-        value="Submit"
-        style="width: 10%"
-        class="btn h-50 btn-info"
-        @click="population()"
-      >
+      <button type="submit" form="nameform" value="Submit" style="width: 10%" class="btn h-50 btn-info"
+        @click="population()">
         <i class="fas fa-search" style="color: white"></i>
       </button>
     </form>
 
     <div v-if="loading">
-      <h3>Caricamento...</h3>
+      <h3>CARICAMENTO...</h3>
     </div>
     <div v-else-if="teachers.length > 0">
       <div class="row mt-4">
-        <div
-          class="col-12 col-md-4 col-lg-3 p-2"
-          v-for="teacher in teachers"
-          :key="teacher.id"
-        >
-          <RouterLink
-            :to="{ name: 'show', params: { id: teacher.user.name } }"
-            @click="riempiVet(teacher.id)"
-            class="text-decoration-none"
-          >
+        <div class="col-12 col-md-4 col-lg-3 p-2" v-for="teacher in teachers" :key="teacher.id">
+          <RouterLink :to="{ name: 'show', params: { id: teacher.user.name } }" @click="riempiVet(teacher.id)"
+            class="text-decoration-none">
             <div class="card pt-3 border-0 shadow">
-              <div
-                class="d-flex justify-content-center align-items-center img_circle mx-auto height_img_query"
-              >
-                <img
-                  class="w-100 h-100 rounded-circle"
-                  :src="getImageUrl(teacher)"
-                  alt=""
-                />
+              <div class="d-flex justify-content-center align-items-center img_circle mx-auto height_img_query">
+                <img class="w-100 h-100 rounded-circle" :src="getImageUrl(teacher)" alt="" />
               </div>
               <div class="card-body">
-                <div
-                  v-if="teacher.sponsorships.length > 0"
-                  class="position-absolute star_sponsor"
-                >
+                <div v-if="teacher.sponsorships.length > 0" class="position-absolute star_sponsor">
                   <i class="fa-solid fa-star"></i>
                 </div>
 
-                <h4>{{ teacher.user.name }} {{ teacher.user.lastname }}</h4>
+                <h4 style="font-weight: bold;">{{ teacher.user.name }} {{ teacher.user.lastname }}</h4>
                 <div class="med_rec">
-                  <i class="fas fa-star" style="color: #ffd43b">
-                    {{ media(teacher.average_rating) }}</i
-                  >
-                  <span>N.recensioni: {{ teacher.reviews.length }}</span>
+                  <div>
+                    <i class="fas fa-star" style="color: #ffd43b"></i>
+                    <span class="ps-2" style="color: #ffd43b; font-weight: bold;">{{ media(teacher.average_rating)
+                      }}</span>
+                  </div>
+                  <span style="font-weight: bold; font-size: 15px;">N° RECENSIONI: {{ teacher.reviews.length }}</span>
                 </div>
               </div>
             </div>
@@ -304,45 +264,25 @@ export default {
       </div>
     </div>
     <div v-else>
-      <h3 class="my-4">Nessun risultato trovato!</h3>
+      <h3 class="my-4">NESSUN RISULTATO TROVATO!</h3>
     </div>
     <div class="pagination mt-4">
-      <button
-        ref="prevButton"
-        :disabled="currentPage === 1"
-        @click="prevPage"
-        @mousedown.prevent="disableButtonEvents"
-        @mouseup="enableButtonEvents"
-        @touchstart.prevent="disableButtonEvents"
-        @touchend="enableButtonEvents"
-        class="btn btn-outline-primary"
-      >
+      <button ref="prevButton" :disabled="currentPage === 1" @click="prevPage" @mousedown.prevent="disableButtonEvents"
+        @mouseup="enableButtonEvents" @touchstart.prevent="disableButtonEvents" @touchend="enableButtonEvents"
+        class="btn btn-outline-primary">
         Indietro
       </button>
-      <button
-        v-for="page in totalPages"
-        :key="page"
-        @click="goToPage(page)"
-        :disabled="currentPage === page || disableButtons"
-        class="btn btn-primary"
-        :class="page == currentPage ? 'text-danger' : ''"
-      >
+      <button v-for="page in totalPages" :key="page" @click="goToPage(page)"
+        :disabled="currentPage === page || disableButtons" class="btn btn-primary"
+        :class="page == currentPage ? 'text-danger' : ''">
         {{ page }}
       </button>
-      <button
-        ref="nextButton"
-        :disabled="currentPage === totalPages || disableButtons"
-        @click="nextPage"
-        @mousedown.prevent="disableButtonEvents"
-        @mouseup="enableButtonEvents"
-        @touchstart.prevent="disableButtonEvents"
-        @touchend="enableButtonEvents"
-        class="btn"
-        :class="{
-          'btn-outline-primary': currentPage !== totalPages,
-          'btn-outline-secondary': currentPage === totalPages,
-        }"
-      >
+      <button ref="nextButton" :disabled="currentPage === totalPages || disableButtons" @click="nextPage"
+        @mousedown.prevent="disableButtonEvents" @mouseup="enableButtonEvents" @touchstart.prevent="disableButtonEvents"
+        @touchend="enableButtonEvents" class="btn" :class="{
+        'btn-outline-primary': currentPage !== totalPages,
+        'btn-outline-secondary': currentPage === totalPages,
+      }">
         Avanti
       </button>
     </div>
@@ -354,6 +294,7 @@ export default {
   justify-content: space-between;
   line-height: 1;
 }
+
 .med_rec {
   display: flex;
   justify-content: space-between;

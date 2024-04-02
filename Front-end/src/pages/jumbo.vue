@@ -85,7 +85,7 @@ export default {
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  padding-bottom: 30px;
+  padding: 0;
 }
 
 .text.first-text {
@@ -125,6 +125,7 @@ export default {
 }
 
 @keyframes animate {
+
   40%,
   60% {
     left: calc(95% + 4px);
@@ -145,15 +146,12 @@ export default {
     background-position: 40%;
 
     .container_jumbo {
+      padding: 0;
+
       span {
-        font-size: 30px;
+        font-size: 25px;
       }
     }
-  }
-
-  .op_jumbo {
-    margin-left: 0;
-    margin-right: 27px;
   }
 
   #boh {
@@ -169,19 +167,18 @@ export default {
     background-position: 40%;
 
     .container_jumbo {
+      padding: 0;
+
       span {
         font-size: 40px;
       }
     }
   }
-
-  .op_jumbo {
-    margin-right: 29px;
-  }
 }
 
 @media (min-width: 768px) and (max-width: 991.98px) {
   .body-jumbo {
+
     /* width: 60%; */
     .container_jumbo {
       span {

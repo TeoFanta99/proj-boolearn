@@ -63,8 +63,9 @@ export default {
     </div>
   </form>
 
-  <div v-if="success" style="color: green">
-    Recensione aggiunta con successo!
+  <div class="d-flex justify-content-center mt-4" v-if="success"
+    style="color: green; font-weight: bolder; font-size: 25px; text-align: center;">
+    RECENSIONE INVIATA CON SUCCESSO!
   </div>
 </template>
 
