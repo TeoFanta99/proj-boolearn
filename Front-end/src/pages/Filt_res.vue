@@ -187,7 +187,7 @@ export default {
   <div class="container">
     <div class="Gen_result">
       <h2>MATERIA: {{ store.Subject }}</h2>
-      <h2>RISULTATI TROVATI:{{ totalTeachers }}</h2>
+      <h2>RISULTATI TROVATI: {{ totalTeachers }}</h2>
     </div>
 
     <form>
