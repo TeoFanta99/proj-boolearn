@@ -32,14 +32,20 @@ export default {
         <!-- BOTTONI LOGIN E REGISTER -->
         <div class="d-flex gap-2">
           <a @click="handleLoginClick" href="http://localhost:8000/login" class="d-lg-inline-block ms-4" target="_blank"
-            data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i
-              class="fa-solid fa-circle-user" style="color: #b3b3b3; font-size: 40px"></i></a>
-          <a href="http://localhost:8000/register" class="d-lg-inline-block d-none mt-1 ms-4" target="_blank"><i
-              class="fa-solid fa-user-plus" style="color: rgb(83, 83, 255); font-size: 30px"></i></a>
+            data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" style="text-decoration: none;"
+            aria-controls="offcanvasRight"><i class="fa-solid fa-circle-user me-2"
+              style="color: #b3b3b3; font-size: 40px; vertical-align: sub;"></i><span
+              class="d-none d-sm-none d-md-none d-lg-inline-block"
+              style="font-size: 20px; color: rgb(83, 83, 255); font-weight: bold;">LOGIN</span>
+          </a>
+          <a href="http://localhost:8000/register" class="d-lg-inline-block d-none mt-1 ms-4"
+            style="text-decoration: none;" target="_blank"><i class="fa-solid fa-user-plus  me-2"
+              style="color: rgb(83, 83, 255); font-size: 30px;"></i> <span
+              style="font-size: 20px; color: rgb(83, 83, 255); font-weight: bold;">REGISTRATI</span></a>
         </div>
 
         <!-- OFFCANVAS -->
-        <div class="offcanvas offcanvas-start offcanvas-lg d-lg-none" tabindex="-1" id="offcanvasRight"
+        <div class=" offcanvas offcanvas-start offcanvas-lg d-lg-none" tabindex="-1" id="offcanvasRight"
           aria-labelledby="offcanvasRightLabel">
           <div class="offcanvas-header">
             Login/Registrazione
@@ -78,13 +84,16 @@ export default {
             <li class="nav-item">
               <a class="nav-link text-center" href="#">
                 <router-link :to="{ name: 'faq' }"><i class="fa-solid fa-question fa-lg me-2"></i>
-                  F.A.Q</router-link>
+                  <span style="font-size: 20px; color: rgb(83, 83, 255); font-weight: bold;">F.A.Q</span>
+                </router-link>
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link text-center me-3" href="#">
                 <router-link :to="{ name: 'contact' }">
-                  <i class="fa-solid fa-comments fa-lg me-2"></i> CONTATTACI
+                  <i class="fa-solid fa-comments fa-lg me-2">
+                  </i>
+                  <span style="font-size: 20px; color: rgb(83, 83, 255); font-weight: bold;">CONTATTACI</span>
                 </router-link>
               </a>
             </li>
