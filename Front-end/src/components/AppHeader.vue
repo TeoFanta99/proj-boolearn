@@ -1,141 +1,92 @@
 <script>
 export default {
   name: "AppHeader",
+  data() {
+    return {
+      showOffcanvas: false
+    }
+  },
+
+  methods: {
+    handleLoginClick() {
+      if (window.innerWidth <= 992) {
+        // Apri l'offcanvas solo su schermi piccoli
+        this.showOffcanvas = true;
+      } else {
+        // Apri la pagina di login su schermi grandi
+        window.open("http://localhost:8000/login", "_blank");
+      }
+    },
+    closeOffcanvas() {
+      this.showOffcanvas = false; // Chiudi l'offcanvas
+    }
+  },
 };
 </script>
 
 <template>
   <header>
-    <nav
-      class="navbar navbar-expand-lg bg-body-tertiary d-flex justify-content-between h-100"
-    >
-      <div class="d-flex gap-2">
-        <a
-          href="http://localhost:8000/login"
-          class="d-lg-block d-none ms-4"
-          target="_blank"
-          ><i
-            class="fa-solid fa-circle-user"
-            style="color: #b3b3b3; font-size: 40px"
-          ></i
-        ></a>
-        <a
-          href="http://localhost:8000/register"
-          class="d-lg-block d-none mt-1 ms-4"
-          target="_blank"
-          ><i
-            class="fa-solid fa-user-plus"
-            style="color: rgb(83, 83, 255); font-size: 30px"
-          ></i
-        ></a>
-      </div>
-      <div>
-        <button
-          class="btn d-lg-none"
-          type="button"
-          data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvasRight"
-          aria-controls="offcanvasRight"
-        >
-          <i
-            class="fa-solid fa-circle-user"
-            style="color: #b3b3b3; font-size: 40px"
-          ></i>
-        </button>
-      </div>
-      <!-- Off-canvas -->
-      <div
-        class="offcanvas offcanvas-start offcanvas-lg d-lg-none"
-        tabindex="-1"
-        id="offcanvasRight"
-        aria-labelledby="offcanvasRightLabel"
-      >
-        <div class="offcanvas-header border-bottom border-1">
-          Login/Registrazione
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="offcanvas"
-            aria-label="Close"
-          ></button>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid d-flex justify-content-lg-between justify-content-around">
+
+        <!-- BOTTONI LOGIN E REGISTER -->
+        <div class="d-flex gap-2">
+          <a @click="handleLoginClick" href="http://localhost:8000/login" class="d-lg-inline-block ms-4" target="_blank"
+            data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i
+              class="fa-solid fa-circle-user" style="color: #b3b3b3; font-size: 40px"></i></a>
+          <a href="http://localhost:8000/register" class="d-lg-inline-block d-none mt-1 ms-4" target="_blank"><i
+              class="fa-solid fa-user-plus" style="color: rgb(83, 83, 255); font-size: 30px"></i></a>
         </div>
-        <div class="offcanvas-body">
-          <a
-            href="http://localhost:8000/login"
-            class="btn btn-primary d-block w-50"
-            >Login</a
-          >
-          <a
-            href="http://localhost:8000/register"
-            class="btn btn-primary d-block w-50 mt-2"
-            >Registrazione</a
-          >
-          <a
-            href="http://localhost:8000/login"
-            class="btn btn-primary d-block w-50"
-            >Login</a
-          >
-          <a
-            href="http://localhost:8000/register"
-            class="btn btn-primary d-block w-50 mt-2"
-            >Registrazione</a
-          >
-        </div>
-      </div>
-      <div class="home">
-        <router-link :to="{ name: 'home' }" class="d-block d-lg-none">
-          <img src="../../public/BLearn.svg" alt="LOGO" class="logo-mobile" />
-        </router-link>
-        <!-- <span>BOOLEARN</span> -->
-        <router-link :to="{ name: 'home' }" class="d-none d-lg-block">
-          <div class="d-lg-flex justify-content-center logo-desktop">
-            <img
-              src="../../public/Crop_BooLEARN.svg"
-              alt="LOGO DESKTOP"
-              class="w-100 h-100 object-fit-contain"
-            />
+
+        <!-- OFFCANVAS -->
+        <div class="offcanvas offcanvas-start offcanvas-lg d-lg-none" tabindex="-1" id="offcanvasRight"
+          aria-labelledby="offcanvasRightLabel">
+          <div class="offcanvas-header">
+            Login/Registrazione
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
-        </router-link>
-      </div>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarText"
-        aria-controls="navbarText"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse d-lg-none" id="navbarText">
-        <ul
-          class="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-center justify-content-lg-end"
-        >
-          <li class="nav-item">
-            <a class="nav-link text-center" href="#">
-              <router-link :to="{ name: 'about' }"
-                ><i class="fa-solid fa-people-group fa-lg me-2"></i>IL NOSTRO
-                TEAM</router-link
-              >
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-center" href="#">
-              <router-link :to="{ name: 'faq' }"
-                ><i class="fa-solid fa-question fa-lg me-2"></i>
-                F.A.Q</router-link
-              >
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-center me-3" href="#">
-              <router-link :to="{ name: 'contact' }">
-                <i class="fa-solid fa-comments fa-lg me-2"></i> CONTATTACI
-              </router-link>
-            </a>
-          </li>
-        </ul>
+          <div class="offcanvas-body">
+            <a href="http://localhost:8000/login" class="ms_btn d-block w-50">Effettua il Login</a>
+            <a href="http://localhost:8000/register" class="ms_btn d-block w-50 mt-2">Registrazione</a>
+          </div>
+        </div>
+
+        <!-- LOGO HOME -->
+        <div class="home">
+          <router-link :to="{ name: 'home' }">
+            <img src="../../public/BLearn.svg" alt="LOGO" class="logo-mobile" />
+          </router-link>
+        </div>
+
+        <!-- BOTTONE ESPANDIBILE (HAMBURGER MENU) -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse flex-grow-0" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link text-center" href="#">
+                <router-link :to="{ name: 'about' }"><i class="fa-solid fa-people-group fa-lg me-2"></i>IL NOSTRO
+                  TEAM</router-link>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-center" href="#">
+                <router-link :to="{ name: 'faq' }"><i class="fa-solid fa-question fa-lg me-2"></i>
+                  F.A.Q</router-link>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-center me-3" href="#">
+                <router-link :to="{ name: 'contact' }">
+                  <i class="fa-solid fa-comments fa-lg me-2"></i> CONTATTACI
+                </router-link>
+              </a>
+            </li>
+          </ul>
+
+        </div>
       </div>
     </nav>
   </header>
@@ -144,4 +95,30 @@ export default {
 <style lang="scss" scoped>
 @use "../styles/header.scss";
 @use "../styles/general.scss";
+
+
+.offcanvas-header {
+  background-color: white;
+  font-size: 25px;
+  color: rgb(83, 83, 255);
+
+}
+
+.offcanvas-body {
+  background-color: white;
+
+  .ms_btn {
+    background-color: rgb(25, 207, 86);
+    color: rgb(83, 83, 255);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+
+    &:hover {
+      color: rgb(25, 207, 86);
+      background-color: rgb(83, 83, 255);
+      transition: color 0.5s ease;
+    }
+  }
+}
 </style>
