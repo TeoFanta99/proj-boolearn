@@ -55,7 +55,7 @@ export default {
         <div class="home">
 
           <a href="http://localhost:5174/">
-            <img src="../../public/BLearn.svg" alt="LOGO" class="logo-mobile" />
+            <img src="../../public/BLnew2.svg" alt="LOGO" class="logo-mobile" />
           </a>
           <!-- <router-link :to="{ name: 'home' }"> -->
 
@@ -69,12 +69,12 @@ export default {
         </button>
         <div class="collapse navbar-collapse flex-grow-0" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a class="nav-link text-center" href="#">
                 <router-link :to="{ name: 'about' }"><i class="fa-solid fa-people-group fa-lg me-2"></i>IL NOSTRO
                   TEAM</router-link>
               </a>
-            </li>
+            </li> -->
             <li class="nav-item">
               <a class="nav-link text-center" href="#">
                 <router-link :to="{ name: 'faq' }"><i class="fa-solid fa-question fa-lg me-2"></i>
