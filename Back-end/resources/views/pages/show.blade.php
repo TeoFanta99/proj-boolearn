@@ -8,7 +8,7 @@
     <div class="background_show" id="main">
         <img src="{{ asset('sl_021821_40890_06.jpg') }}" class="w-100 h-100 position-absolute z-index-1" alt=""
             id="sfondo">
-        <h1 class="dashboard-title">GESTIONE Profilo</h1>
+        <h1 class="dashboard-title mx-auto">GESTIONE Profilo</h1>
         <br>
         @if (session('error'))
             <div> {{ session('error') }}</div>
@@ -36,16 +36,14 @@
                 </div>
             </div>
             <!-- Page content -->
-            <div class="container-fluid mt--7">
+            <div class="container mt--7">
                 <div class="row">
                     <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
                         <div class="card card-profile shadow">
                             <div class="row justify-content-center">
                                 <div class="col-lg-3 order-lg-2">
                                     <div class="card-profile-image">
-                                        <a href="#">
-                                            <img src="{{ asset('storage/' . $teacher->image_url) }}" class="rounded-circle">
-                                        </a>
+                                        <img src="{{ asset('storage/' . $teacher->image_url) }}" class="rounded-circle">
                                     </div>
                                 </div>
                             </div>
@@ -93,12 +91,12 @@
                                     <ul class="list-unstyled">
                                         @foreach ($teacher->subjects as $subject)
                                             <li>
-                                                {{$subject->name}}
+                                                {{ $subject->name }}
                                             </li>
                                         @endforeach
                                     </ul>
                                     </p>
-                                    
+
                                 </div>
                             </div>
                         </div>

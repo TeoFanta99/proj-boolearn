@@ -209,8 +209,9 @@ class MainController extends Controller
     {
         $user = User::find($request->user_id);
         $teacher = $user->teacher()->first();
-
-        $reviews = $teacher->reviews;
+        $reviews = Review::where('teacher_id', $teacher->id)
+                ->orderByDesc('date_of_review')
+                ->get();
 
         return view('pages.reviews', compact('teacher', 'reviews'));
     }

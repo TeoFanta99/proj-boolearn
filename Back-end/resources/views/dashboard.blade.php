@@ -9,7 +9,7 @@
     }
 </style>
 
-<body class="overflow-hidden">
+<body class="overflow-hidden" >
 
     <div class="hide"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
             <symbol viewBox="-167.4 267.7 257.7 257.7" id="facebook">
@@ -61,7 +61,7 @@
             <nav class="head-nav h-100">
                 <ul class="menu d-flex flex-column h-100">
                     <li>
-                        <a href="{{ route('dashboard') }}"><img src="{{ asset('/BL1.svg') }}" style="width:40px;"
+                        <a href="{{ route('dashboard') }}"><img src="{{ asset('/BL.svg') }}" class="justify-content-center" style="width:60px;"
                                 alt=""></a>
                     </li>
                     <li>
@@ -145,6 +145,15 @@
 
 </body>
 <script>
+    // OPZIONI PER CARICAMENTO LENTO DI BOOTSTRAP SU LARAVEL
+    //  document.addEventListener("DOMContentLoaded", function() {
+    //     // Imposta un ritardo di 2 secondi prima di eseguire questa parte di codice
+    //     setTimeout(function() {
+    //         // Visualizza il corpo della pagina impostando la visibilità su "visible"
+    //         document.body.style.display = "block";
+    //         document.body.style.opacity = "1";
+    //     }, 200); // 2000 millisecondi = 2 secondi
+    // });
     let dropdownOpen = false;
 
     // Funzione per gestire il dropdown
@@ -174,7 +183,7 @@
         dropdownMenu.classList.remove('show');
         dropdownOpen = false; // Chiudi il dropdown quando il cursore esce
     });
-
+    
     function submitFormShow() {
         document.getElementById("ShowForm").submit();
     };

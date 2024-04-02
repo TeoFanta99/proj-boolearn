@@ -6,6 +6,7 @@ $pad:     0.925rem;
   }
   .head-nav {
     li{
+        color: white;
       &:hover{
           background-color: $color-1;
           &:before{
@@ -13,10 +14,10 @@ $pad:     0.925rem;
           }
           svg{
               background: $color-1;
-              fill: #2e2e5c;
+              fill: #b5b5d6;
           }
           a{
-            color: #2e2e5c;
+            color: black;
           }
       }
       &:before{
@@ -26,7 +27,7 @@ $pad:     0.925rem;
           width: $pad;
           height: 100%;
           content: "";
-          background: #2e2e5c;
+          background: #b5b5d6;
           z-index: 1;
           transition: background 400ms;
       }
@@ -63,6 +64,9 @@ $pad:     0.925rem;
             white-space: nowrap;
             transition: text-indent 400ms ease-in-out;
         }
+        &:has(> img) {
+            justify-content: center;
+        }
     }
     svg{
         position: relative;
@@ -70,7 +74,7 @@ $pad:     0.925rem;
         max-height: 30px;
         z-index: 1;
         fill: $color-2;
-        background: #2e2e5c;
+        background: #b5b5d6;
         transition: 400ms;
     }
     @media screen and (max: 768px){
@@ -88,7 +92,7 @@ $pad:     0.925rem;
     width: 83px;
     height: 100%;
     z-index: 1;
-    background: #2e2e5c;
+    background: #b5b5d6;
     transition: width 400ms;
     &:hover{
         width: 436px;
