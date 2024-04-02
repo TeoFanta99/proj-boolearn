@@ -37,6 +37,8 @@ class ReviewTableSeeder extends Seeder
                     // Cerca un insegnante non associato alla recensione attuale
                     $teacher = Teacher::inRandomOrder()->whereNotIn('id', $assignedTeachers)->first();
 
+                    
+
                     // Crea una nuova istanza di Subject e la salva nel database
                     $newReview = new Review();
                     $newReview->title = $review['nome'];

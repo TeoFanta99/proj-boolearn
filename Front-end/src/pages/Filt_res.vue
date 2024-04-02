@@ -187,7 +187,7 @@ export default {
   <div class="container">
     <div class="Gen_result">
       <h2>Materia: {{ store.Subject }}</h2>
-      <h2>Riusltati Trovati:{{ totalTeachers }}</h2>
+      <h2>Risultati Trovati:{{ totalTeachers }}</h2>
     </div>
 
     <form>
@@ -212,7 +212,7 @@ export default {
         </div>
 
         <div class="col-12 col-md-4">
-          <h4>media valutazioni:</h4>
+          <h4>Media valutazioni:</h4>
           <select
             v-model="store.Rating"
             class="form-select w-75"
@@ -230,7 +230,7 @@ export default {
         </div>
 
         <div class="col-12 col-md-4">
-          <h4>Tot recensioni:</h4>
+          <h4>Num. min. recensioni:</h4>
           <select
             v-model="store.Review"
             class="form-select w-75"
