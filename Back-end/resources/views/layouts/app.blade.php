@@ -9,7 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Boolearn</title>
-    
+
     <link rel="icon" href="{{ Vite::asset('public/BL1.svg') }}" type="image/png">
 
 
@@ -29,7 +29,7 @@
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
                     <div class="logo_header">
-                        <img src="{{ Vite::asset('public/BL1.svg') }}" alt="">
+                        <img src="{{ Vite::asset('public/BLearn.svg') }}" alt="">
                     </div>
                     {{-- config('app.name', 'Laravel') --}}
                 </a>
