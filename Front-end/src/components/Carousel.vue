@@ -1,9 +1,13 @@
 <template>
   <div class="your_class">
     <div class="slick-slider" style="display: flex; flex-wrap: wrap">
-      <div class="slick-slide" v-for="review in store.recensioni" :key="review.id"
-        style="flex: 0 0 calc(50% - 15px); margin-right: 15px">
-        <div class="card h-100">
+      <div
+        class="slick-slide"
+        v-for="review in store.recensioni"
+        :key="review.id"
+        style="flex: 0 0 calc(50% - 15px); margin-right: 15px"
+      >
+        <div class="card" style="min-height: 400px">
           <div class="card-body d-flex flex-column">
             <h5 class="card-title mb-0">{{ review.title }}</h5>
             <p class="card-text">{{ review.description }}</p>
@@ -29,10 +33,7 @@ export default {
     };
   },
   mounted() {
-
     setTimeout(() => {
-
-
       $(".your_class .slick-slider").slick({
         infinite: true,
         slidesToShow: 2,
@@ -40,7 +41,7 @@ export default {
       });
     }, 1500);
     setTimeout(() => {
-      this.store.recensioni = JSON.parse(localStorage.getItem('recensioni'));
+      this.store.recensioni = JSON.parse(localStorage.getItem("recensioni"));
     }, 1000);
   },
   // Distruggi Slick Carousel al momento dello smontaggio del componente
@@ -63,7 +64,7 @@ export default {
     // Flexbox non è più necessario qui
     // flex: 0 0 auto;
     // margin-right: 15px;
-    height: 400px; // Altezza fissa delle card
+    min-height: 400px; // Altezza fissa delle card
   }
 }
 

@@ -190,14 +190,14 @@
             var teachers = <?php echo json_encode($teachers); ?>;
             var teacherSingle = <?php echo json_encode($teacher); ?>;
             let taxID = document.getElementById('tax_id').value;
-            let bio = document.getElementById('biography').value;
+      
             let phone = document.getElementById('phone_number');
 
             validation += checkTaxID(taxID, teachers, teacherSingle); // Non è necessario passare teacher qui
-            validation += checkBio(bio);
+           
             validation += checkPhone(phone_number, teacherSingle);
 
-            if (validation == 3) {
+            if (validation == 2) {
                 this.submit();
             }
 
@@ -227,24 +227,6 @@
 
                 }
                 return isUnique;
-            }
-
-            function checkBio(bio) {
-                let yesOrNo;
-                console.log(bio);
-                if (bio.length > 500) {
-                    document.getElementById('bioNo').classList.remove('d-none');
-                    document.getElementById('bioNo').innerHTML =
-                        'La Biografia deve essere massimo di 500 caratteri!';
-                } else if (bio.length < 200) {
-                    document.getElementById('bioNo').classList.remove('d-none');
-                    document.getElementById('bioNo').innerHTML =
-                        'La Biografia deve essere almeno di 200 caratteri!';
-                } else {
-                    document.getElementById('bioNo').classList.add('d-none');
-                    yesOrNo = true;
-                }
-                return yesOrNo;
             }
 
             function checkTaxID(taxID, teachers, teacher) {
