@@ -30,7 +30,12 @@
                             <p class="text-white mt-0 mb-5">Questa è la tua pagina dove puoi vedere tutte le tue
                                 informazioni che saranno visualizzate dall'utente. Se desideri modificarne qualcuno, clicca
                                 su *<strong>Modifica Profilo</strong>*</p>
-                            <a href="#!" class="btn btn-info">Modifica Profilo</a>
+                            <a onclick="submitFormEdit()" class="btn btn-info text-light">Modifica Profilo</a>
+                            <form id="EditForm" action="{{ route('teacher.edit') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="user_id" value="{{ $teacher->user->id }}">
+                                
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -228,5 +233,8 @@
                 }
             }, 1000); // Ritardo di 1 secondo (1000 millisecondi)
         });
+        function submitFormEdit() {
+        document.getElementById("EditForm").submit();
+    };
     </script>
 @endsection

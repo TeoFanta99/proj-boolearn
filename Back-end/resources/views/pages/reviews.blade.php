@@ -1,8 +1,6 @@
 @extends('dashboard')
 @section('sezione')
 
-<h1>Recensioni</h1>
-
 {{-- <div class="reviews-container">
   <div class="row ms-4">
     @foreach ($reviews as $review)

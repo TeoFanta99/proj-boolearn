@@ -97,8 +97,8 @@ $pad:     0.925rem;
     &:hover{
         width: 436px;
         & + .wrap-all-the-things{
-            transform: translateX(310px);
-            max-width: 85%;
+            transform: translateX(10rem);
+            max-width: 100%;
             opacity: 0.8;
             .background_show{
                 overflow: hidden;

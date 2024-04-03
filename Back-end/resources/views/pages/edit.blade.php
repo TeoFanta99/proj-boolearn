@@ -15,7 +15,7 @@
     <form id="sponsorship-form" method="POST" action="{{ route('user.sponsorship') }}">
         @csrf
         <!-- Campo nascosto per l'ID dell'insegnante -->
-        <input type="hidden" name="teacher_id" value="{{ $teacher->id }}">
+        <input type="hidden" name="teacher_id" value="{{ Auth::user()->teacher->id }}">
         <!-- Bottone per inviare il modulo -->
         <button type="submit">Sponsorizzazione</button>
     </form>
