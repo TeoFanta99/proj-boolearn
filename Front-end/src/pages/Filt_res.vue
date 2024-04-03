@@ -199,6 +199,7 @@ export default {
             <span class="md-font">MATERIE DISPONIBILI</span>
             <select v-model="store.Subject" class="form-select w-75" id="selected-Subject">
               <option disabled value="">Scegli una materia...</option>
+              <option value=""><b>Tutte le materie</b></option>
               <option v-for="subject in store.materie" :key="subject.id" :value="subject.name"
                 :selected="store.Subject === subject.name ? 'selected' : ''">
                 {{ subject.name }}
@@ -230,9 +231,9 @@ export default {
 
         <div class="w-100 d-flex justify-content-center">
           <button type="submit" form="nameform" value="Submit" style="padding: 10px 70px" class="btn h-50 btn-info"
-          @click="population()">
-          <i class="fas fa-search" style="color: white"></i>
-        </button>
+            @click="population()">
+            <i class="fas fa-search" style="color: white"></i>
+          </button>
         </div>
 
       </form>

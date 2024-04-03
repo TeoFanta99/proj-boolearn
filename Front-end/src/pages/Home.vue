@@ -157,13 +157,13 @@ export default {
 
 <template class="bg-light">
   <jumbo id="boh" />
-
   <div class="container" style="min-height: 900px">
     <form class="d-flex justify-content-center">
       <div class="me-2">
         <!-- Sezione Select -->
         <select v-model="store.Subject" class="mt-5 form-select" id="selected-Subject">
           <option disabled value="">Scegli una materia...</option>
+          <option value=""><b>Tutte le materie</b></option>
           <option v-for="subject in store.materie" :key="subject.id" :value="subject.name"
             :selected="store.Subject === subject.name ? 'selected' : ''">
             {{ subject.name }}
