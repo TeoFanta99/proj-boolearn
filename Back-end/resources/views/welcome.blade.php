@@ -51,7 +51,7 @@
                 </form>
                 <div class="d-flex mt-2 flex-column">
                     <!-- Modifica profilo -->
-                    <div>
+                    <div class="mt-2">
                         <button type="button" class="btn btn-warning" style="width: 200px"><a
                                 style="text-decoration: none; color:black" href="#"
                                 onclick="document.getElementById('profileForm').submit(); return false;">MODIFICA
@@ -59,7 +59,7 @@
                     </div>
                     <div>
                         <!-- Cancellazione profilo -->
-                        <form class="" action="{{ route('user.del', $teacher->user->id) }}" method="POST"
+                        <form class="mt-2" action="{{ route('user.del', $teacher->user->id) }}" method="POST"
                             onsubmit="return confirm('Confermare?');">
                             @csrf
                             @method('DELETE')
@@ -68,13 +68,13 @@
                     </div>
 
                     {{-- Aggiungo gli altri 3 bottoni: messaggi, recensioni e sponsorizzazioni --}}
-                    <button class="btn btn-primary me-3 w-100">
+                    <button class="btn btn-primary me-3 mt-2 w-100">
                         <a href="{{ route('user.messages', $teacher->id) }}"
                             style="text-decoration: none; color: white">
                             MESSAGGI
                         </a>
                     </button>
-                    <button class="btn btn-success me-3 w-100">
+                    <button class="btn btn-success me-3 mt-2 w-100">
                         <a href="{{ route('user.reviews', $teacher->id) }}" style="text-decoration: none; color: white">
                             RECENSIONI
                         </a>
@@ -84,7 +84,8 @@
                         <!-- Campo nascosto per l'ID dell'insegnante -->
                         <input type="hidden" name="teacher_id" value="{{ $teacher->id }}">
                         <!-- Bottone per inviare il modulo -->
-                        <button class="btn w-100" type="submit" style="color: white">SPONSORIZZAZIONI</button>
+                        <button class="btn btn-orange w-100 mt-2" type="submit"
+                            style="color: white">SPONSORIZZAZIONI</button>
                     </form>
 
 
