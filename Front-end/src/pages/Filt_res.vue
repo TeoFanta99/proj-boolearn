@@ -243,11 +243,65 @@ export default {
     <div v-else-if="teachers.length > 0" class="row-container">
       <div class="row mt-4">
         <div class="col-12 col-md-4 col-xl-3 p-2" v-for="teacher in teachers" :key="teacher.id">
-          <div v-if="teacher.sponsorships.length > 0" class="card">
 
+          <!-- Teacher sponsorizzato -->
+          <div v-if="teacher.sponsorships.length > 0">
+            <RouterLink :to="{ name: 'show', params: { id: teacher.user.name } }" @click="riempiVet(teacher.id)"
+              class="text-decoration-none">
+              <div class="card pt-3 border-0 shadow sponsored-teacher-card">
+                <div class="d-flex justify-content-center align-items-center w-75 mx-auto">
+                  <img class="w-100 h-100 rounded-circle" :src="getImageUrl(teacher)" alt="" />
+                </div>
+                <div class="card-body">
+                  <div v-if="teacher.sponsorships.length > 0" class="star_sponsor">
+                    <i class="fa-solid fa-star"></i>
+                  </div>
+
+                  <h4 class="teacher-name" style="font-weight: bold;">{{ teacher.user.name }} {{ teacher.user.lastname
+                    }}
+                  </h4>
+                  <div class="med_rec">
+                    <div>
+                      <i class="fas fa-star" style="color: #5353ff"></i>
+                      <span class="ps-2 rating-and-review" style="color: #5353ff; font-weight: bold;">{{
+        media(teacher.average_rating)
+      }}</span>
+                      <span class="ms-2 rating-and-review" style="color: #5353ff">({{ teacher.reviews.length }})</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </RouterLink>
           </div>
+
+          <!-- Teacher NON sponsorizzato -->
           <div v-else>
-            teacher non sponsorizzato
+            <RouterLink :to="{ name: 'show', params: { id: teacher.user.name } }" @click="riempiVet(teacher.id)"
+              class="text-decoration-none">
+              <div class="card pt-3 border-0 shadow unsponsored_background">
+                <div class="d-flex justify-content-center align-items-center w-75 mx-auto">
+                  <img class="w-100 h-100 rounded-circle" :src="getImageUrl(teacher)" alt="" />
+                </div>
+                <div class="card-body">
+                  <div v-if="teacher.sponsorships.length > 0" class="star_sponsor">
+                    <i class="fa-solid fa-star"></i>
+                  </div>
+
+                  <h4 class="teacher-name" style="font-weight: bold;">{{ teacher.user.name }} {{ teacher.user.lastname
+                    }}
+                  </h4>
+                  <div class="med_rec">
+                    <div>
+                      <i class="fas fa-star" style="color: #5353ff"></i>
+                      <span class="ps-2 rating-and-review" style="color: #5353ff; font-weight: bold;">{{
+        media(teacher.average_rating)
+      }}</span>
+                      <span class="ms-2 rating-and-review" style="color: #5353ff">({{ teacher.reviews.length }})</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </RouterLink>
           </div>
         </div>
       </div>
@@ -286,7 +340,9 @@ export default {
     </div>
   </div>
 </template>
-<style>
+
+
+<style lang="scss" scoped>
 .Gen_result {
   display: flex;
   justify-content: space-between;
@@ -363,6 +419,7 @@ export default {
 
 .card {
   transition: transform ease-out 0.2s;
+  border-radius: 10px;
 
   &:hover {
     transition: all ease-in 0.2s;
@@ -370,10 +427,11 @@ export default {
   }
 }
 
-.sponsored-background {
+.sponsored-teacher-card {
   background: linear-gradient(315deg, #ffea74 40%, #cbcbcb 60%);
   background-size: 400% 400%;
   background-attachment: fixed;
+  animation: gradient 7s ease infinite;
 }
 
 .unsponsored-background {
