@@ -253,10 +253,6 @@ export default {
                   <img class="w-100 h-100 rounded-circle" :src="getImageUrl(teacher)" alt="" />
                 </div>
                 <div class="card-body">
-                  <div v-if="teacher.sponsorships.length > 0" class="star_sponsor">
-                    <i class="fa-solid fa-star"></i>
-                  </div>
-
                   <h4 class="teacher-name" style="font-weight: bold;">{{ teacher.user.name }} {{ teacher.user.lastname
                     }}
                   </h4>
@@ -283,10 +279,6 @@ export default {
                   <img class="w-100 h-100 rounded-circle" :src="getImageUrl(teacher)" alt="" />
                 </div>
                 <div class="card-body">
-                  <div v-if="teacher.sponsorships.length > 0" class="star_sponsor">
-                    <i class="fa-solid fa-star"></i>
-                  </div>
-
                   <h4 class="teacher-name" style="font-weight: bold;">{{ teacher.user.name }} {{ teacher.user.lastname
                     }}
                   </h4>
@@ -428,10 +420,14 @@ export default {
 }
 
 .sponsored-teacher-card {
-  background: linear-gradient(315deg, #ffea74 40%, #cbcbcb 60%);
+  background-color: #cbcbcb;
   background-size: 400% 400%;
   background-attachment: fixed;
   animation: gradient 7s ease infinite;
+
+  &:hover {
+    background-color: #ffea74;
+  }
 }
 
 .unsponsored-background {

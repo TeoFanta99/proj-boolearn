@@ -164,9 +164,6 @@ export default {
           <RouterLink tag="div" :to="{ name: 'show', params: { id: teacher.user.name } }"
             @click="riempiVet(teacher.id), (store.view = 2)" class="text-decoration-none">
             <div class="card pt-3 border-0 shadow">
-              <div class="star_sponsor">
-                <i class="fa-solid fa-star"></i>
-              </div>
               <div class="d-flex justify-content-center align-items-center w-75 mx-auto">
                 <img class="w-100 h-100 rounded-circle" :src="getImageUrl(teacher)" alt="" />
               </div>
@@ -246,17 +243,17 @@ export default {
 .card {
   margin: auto;
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  background: linear-gradient(315deg, #ffea74 40%, #cbcbcb 60%);
+  background-color: #cbcbcb;
   animation: gradient 7s ease infinite;
   background-size: 400% 400%;
   background-attachment: fixed;
   border-radius: 10px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   transition: all ease-out 0.2s;
 
   &:hover {
     transition: all ease-in 0.2s;
     transform: scale(1.05);
+    background-color: #ffea74;
   }
 }
 
@@ -288,17 +285,5 @@ export default {
 form {
   width: 88%;
   margin: 0 auto;
-}
-
-.card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
-
 }
 </style>
