@@ -233,47 +233,34 @@ export default {
 
     </div>
 
-
+    <!-- CARICAMENTO PAGINA -->
     <div v-if="loading">
       <h3>CARICAMENTO...</h3>
     </div>
+
 
     <!-- CARD DEL TEACHER -->
     <div v-else-if="teachers.length > 0" class="row-container">
       <div class="row mt-4">
         <div class="col-12 col-md-4 col-xl-3 p-2" v-for="teacher in teachers" :key="teacher.id">
-          <RouterLink :to="{ name: 'show', params: { id: teacher.user.name } }" @click="riempiVet(teacher.id)"
-            class="text-decoration-none">
-            <div
-              :class="['card pt-3 border-0 shadow', teacher.sponsorships.length > 0 ? 'sponsored_background' : 'unsponsored_background']">
-              <div class="d-flex justify-content-center align-items-center w-75 mx-auto">
-                <img class="w-100 h-100 rounded-circle" :src="getImageUrl(teacher)" alt="" />
-              </div>
-              <div class="card-body">
-                <div v-if="teacher.sponsorships.length > 0" class="star_sponsor">
-                  <i class="fa-solid fa-star"></i>
-                </div>
+          <div v-if="teacher.sponsorships.length > 0" class="card">
 
-                <h4 class="teacher-name" style="font-weight: bold;">{{ teacher.user.name }} {{ teacher.user.lastname }}
-                </h4>
-                <div class="med_rec">
-                  <div>
-                    <i class="fas fa-star" style="color: #ffd43b"></i>
-                    <span class="ps-2 rating-and-review" style="color: #ffd43b; font-weight: bold;">{{
-        media(teacher.average_rating)
-      }}</span>
-                    <span class="ms-2 rating-and-review">({{ teacher.reviews.length }})</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </RouterLink>
+          </div>
+          <div v-else>
+            teacher non sponsorizzato
+          </div>
         </div>
       </div>
     </div>
+
+
+    <!-- NESSUN RISULTATO -->
     <div v-else>
       <h3 class="my-4">NESSUN RISULTATO TROVATO!</h3>
     </div>
+
+
+    <!-- PAGINAZIONE -->
     <div class="pagination mt-4 mb-4">
       <button ref="prevButton" :disabled="currentPage === 1" @click="prevPage" @mousedown.prevent="disableButtonEvents"
         @mouseup="enableButtonEvents" @touchstart.prevent="disableButtonEvents" @touchend="enableButtonEvents"
