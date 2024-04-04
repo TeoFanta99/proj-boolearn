@@ -1,13 +1,13 @@
 <script>
 import axios from "axios";
 import { store } from "../store";
-import jumbo from "./jumbo.vue";
+import Jumbo from "../components/Jumbo.vue";
 
 import Carousel from "../components/Carousel.vue";
 export default {
   name: "Home",
   components: {
-    jumbo,
+    Jumbo,
     Carousel,
   },
 
@@ -26,7 +26,6 @@ export default {
       return `http://localhost:8000/storage/${teacher.image_url}`;
     },
 
-    // funzione chiamata appena la pagina viene caricata dal browser
     SearchProf() {
       axios
         .post("http://127.0.0.1:8000/api/v1/result")
@@ -34,7 +33,6 @@ export default {
           this.teachers = res.data.teachers;
           this.store.materie = res.data.subjects;
           this.store.valutazioni = res.data.ratings;
-          // store.List = res.data.teachers2;;
           console.log(store.materie);
           this.loading = false;
         })
@@ -93,20 +91,16 @@ export default {
       return stellePiene + stelleVuote;
     },
     handleClick(teacher) {
-      // Esegui qualsiasi operazione necessaria prima di salvare i dati nel localStorage
-      // Ad esempio, puoi modificare teacher o accedere ad altri dati
-
       // Salva i dati nel localStorage
       localStorage.setItem("teacherData", JSON.stringify(teacher));
     },
   },
 
   watch: {
-    // Osserva le modifiche nella variabile SubjectSelect
     SubjectSelect: function (newVal, oldVal) {
-      // Quando SubjectSelect cambia, chiama la funzione SearchProf
       this.SearchProf();
     },
+
     teachers: {
       deep: true,
       handler(newTeachers) {
@@ -118,8 +112,6 @@ export default {
   },
 
   mounted() {
-    //setto a zero tutte le variabili dello store
-    // console.log(store.List);
     store.Rating = 0;
     store.Review = 0;
 
@@ -132,35 +124,20 @@ export default {
       // Chiamata iniziale per caricare i dati
       this.SearchProf();
     }, 2300);
-
-    // const text = document.querySelector(".sec-text");
-
-    // const textLoad = () => {
-    //   setTimeout(() => {
-    //     text.textContent = "HTML";
-    //     text.style.color = "#e5532d";
-    //   }, 0);
-    //   setTimeout(() => {
-    //     text.textContent = "CSS";
-    //     text.style.color = "#254bdd";
-    //   }, 4500);
-    //   setTimeout(() => {
-    //     text.textContent = "JS";
-    //     text.style.color = "#efd81d";
-    //   }, 9000);
-    // };
-    // textLoad();
-    // setInterval(textLoad, 13500);
   },
 };
 </script>
 
+
+
+
 <template class="bg-light">
-  <jumbo id="boh" />
+  <Jumbo id="boh" />
+
+  <!-- SELECT DELLE MATERIE -->
   <div class="container" style="min-height: 900px">
-    <form class="d-flex justify-content-center">
-      <div class="me-2">
-        <!-- Sezione Select -->
+    <form class="d-flex justify-content-center w-90">
+      <div class="me-2" style="width: 100%;">
         <select v-model="store.Subject" class="mt-5 form-select" id="selected-Subject">
           <option disabled value="">Scegli una materia...</option>
           <option value=""><b>Tutte le materie</b></option>
@@ -177,14 +154,13 @@ export default {
       </button>
     </form>
 
-    <!-- Sezione icone teachers -->
+    <!-- CARD TEACHERS -->
     <div v-if="loading" class="loading-gif">
-
       <i class="ex-10-icon fas fa-circle-notch"></i>
     </div>
-    <div v-else-if="teachers.length > 0">
-      <div class="row mt-4">
-        <div class="col-12 col-md-6 col-xl-3 p-2" v-for="teacher in teachers" :key="teacher.id">
+    <div v-else-if="teachers.length > 0" class="row-container">
+      <div class="row mt-4 mb-4">
+        <div class="col-12 col-md-4 col-xl-3 p-2" v-for="teacher in teachers" :key="teacher.id">
           <RouterLink tag="div" :to="{ name: 'show', params: { id: teacher.user.name } }"
             @click="riempiVet(teacher.id), (store.view = 2)" class="text-decoration-none">
             <div class="card pt-3 border-0 shadow on_hover">
@@ -195,22 +171,23 @@ export default {
                 <img class="w-100 h-100 rounded-circle" :src="getImageUrl(teacher)" alt="" />
               </div>
               <div class="card-body">
-                <h4 style="font-weight: bolder;">{{ teacher.user.name }} {{ teacher.user.lastname }}</h4>
-                <!-- <span>{{ getStars(store.List[teacher.id].average_rating) }}</span> -->
-                <div class="med_rec">
+                <h4 style="font-weight: bolder;" class="teacher-name">{{ teacher.user.name }} {{ teacher.user.lastname
+                  }}</h4>
+                <div class="med_rec mt-3">
                   <div>
-                    <i class="fas fa-star" style="color: #ffd43b"></i>
-                    <span class="ps-2" style="color: #ffd43b; font-weight: bold;">{{ media(teacher.average_rating)
-                      }}</span>
+                    <i class="fas fa-star" style="color: #00bf63"></i>
+                    <span class="ps-2 rating-and-review" style="color: #00bf63; font-weight: bold;">{{
+          media(teacher.average_rating) }}</span>
+                    <span class="ms-2 rating-and-review" style="color: lightgreen">({{ teacher.reviews.length
+                      }})</span>
                   </div>
-                  <span style="font-weight: bold; font-size: 15px;">N° RECENSIONI: {{ teacher.reviews.length }}</span>
                 </div>
               </div>
             </div>
           </RouterLink>
         </div>
 
-        <div v-if="teachers.length == 0">
+        <div v-if="teachers.length==0">
           <h3 class="my-4">NESSUN RISULTATO TROVATO!</h3>
         </div>
       </div>
@@ -223,16 +200,13 @@ export default {
   justify-content: center;
   align-items: center;
   height: 100px;
-  /* Regola l'altezza secondo le tue preferenze */
   width: 100px;
-  /* Regola la larghezza secondo le tue preferenze */
   opacity: 0;
   animation: fadeInOut 1.5s ease-in-out forwards;
 }
 
 .loading-image {
   width: 100%;
-  /* Per adattare l'immagine alla grandezza del contenitore */
   animation: zoomInOut 1.5s ease-in-out infinite;
 }
 
@@ -291,5 +265,53 @@ export default {
   display: flex;
   justify-content: space-between;
   line-height: 1;
+}
+
+@media all and (min-width: 768px) and (max-width: 1399px) {
+  .teacher-name {
+    font-size: 18px;
+  }
+
+  .rating-and-review {
+    font-size: 16px;
+  }
+}
+
+.row-container {
+  display: flex;
+  justify-content: center;
+
+  .row {
+    width: 90%;
+  }
+}
+
+form {
+  width: 88%;
+  margin: 0 auto;
+}
+
+.card {
+  margin: auto;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  background: linear-gradient(315deg, #f8f862 49%, rgba(60, 132, 206, 1) 98%);
+  animation: gradient 15s ease infinite;
+  background-size: 400% 400%;
+  background-attachment: fixed;
+  border-radius: 10px;
+  /* Aggiungi bordi arrotondati */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+
 }
 </style>

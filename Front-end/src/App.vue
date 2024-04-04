@@ -87,14 +87,6 @@ export default {
   }
 }
 
-// .main_views {
-//   height: calc(100vh - 90px);
-//   /* Altezza della finestra meno l'altezza dell'header */
-//   overflow-y: auto;
-//   /* Abilita lo scrolling verticale quando necessario */
-//   position: relative;
-// }
-
 .back_gif {
   position: relative;
   height: 100vh;

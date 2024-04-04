@@ -4,7 +4,7 @@ import { store } from "../store";
 import { useAttrs } from "vue";
 
 export default {
-  name: "jumbo",
+  name: "Jumbo",
 
   data() {
     return {};
@@ -51,23 +51,29 @@ export default {
 };
 </script>
 
+
+
 <template class="bg-light">
   <div class="container-fluid p-0 bg-dark overflow-hidden">
     <div class="body-jumbo">
       <div class="opacity-75 bg-black position-absolute op_jumbo"></div>
       <div class="container_jumbo">
-        <span class="text first-text">VOGLIO IMPARARE </span>
+        <span class="text first-text">VOGLIO STUDIARE </span>
         <span class="text sec-text">HTML</span>
       </div>
     </div>
   </div>
 </template>
+
+
+
+
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap");
 
 .body-jumbo {
   background-image: url("https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHR3cTZ3cjBqYTZidjNnZGFybTRqN2I3YWd2ZWJuYTRnN3ZtYWhpbSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26tn33aiTi1jkl6H6/giphy.gif");
-  min-height: 30rem;
+  min-height: 250px;
   display: flex;
   align-items: center;
   overflow: hidden;

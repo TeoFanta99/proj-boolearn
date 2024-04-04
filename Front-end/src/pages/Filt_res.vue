@@ -244,9 +244,9 @@ export default {
     <div v-if="loading">
       <h3>CARICAMENTO...</h3>
     </div>
-    <div v-else-if="teachers.length > 0">
+    <div v-else-if="teachers.length > 0" class="row-container">
       <div class="row mt-4">
-        <div class="col-12 col-md-6 col-xl-3 p-2" v-for="teacher in teachers" :key="teacher.id">
+        <div class="col-12 col-md-4 col-xl-3 p-2" v-for="teacher in teachers" :key="teacher.id">
           <RouterLink :to="{ name: 'show', params: { id: teacher.user.name } }" @click="riempiVet(teacher.id)"
             class="text-decoration-none">
             <div class="card pt-3 border-0 shadow">
@@ -258,14 +258,15 @@ export default {
                   <i class="fa-solid fa-star"></i>
                 </div>
 
-                <h4 style="font-weight: bold;">{{ teacher.user.name }} {{ teacher.user.lastname }}</h4>
+                <h4 class="teacher-name" style="font-weight: bold;">{{ teacher.user.name }} {{ teacher.user.lastname }}
+                </h4>
                 <div class="med_rec">
                   <div>
                     <i class="fas fa-star" style="color: #ffd43b"></i>
                     <span class="ps-2" style="color: #ffd43b; font-weight: bold;">{{ media(teacher.average_rating)
                       }}</span>
+                    <span class="ms-2">({{ teacher.reviews.length }})</span>
                   </div>
-                  <span style="font-weight: bold; font-size: 15px;">N° RECENSIONI: {{ teacher.reviews.length }}</span>
                 </div>
               </div>
             </div>
@@ -351,6 +352,19 @@ export default {
   .md-font {
     font-size: 15px;
     font-weight: bold;
+  }
+
+  .teacher-name {
+    font-size: 15px;
+  }
+}
+
+.row-container {
+  display: flex;
+  justify-content: center;
+
+  .row {
+    width: 90%;
   }
 }
 </style>
