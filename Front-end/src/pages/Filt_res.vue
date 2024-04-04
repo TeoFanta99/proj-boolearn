@@ -44,7 +44,7 @@ export default {
           this.totalPages = response.data.total_pages;
           this.teachers = response.data.teachers;
 
-          //ottengo numero tatale insegnanti
+          //ottengo numero totale insegnanti
           this.totalTeachers = response.data.Tot_teachers;
 
           console.log(this.teachers);
@@ -56,10 +56,8 @@ export default {
         })
         .catch((error) => {
           if (error.response && error.response.status === 500) {
-            // Gestisci l'errore 500
             console.error("Errore interno del server (500)");
           } else {
-            // Gestisci altri errori
             console.error("Errore durante la richiesta API:", error);
           }
         });
