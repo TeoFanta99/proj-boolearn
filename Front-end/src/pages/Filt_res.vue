@@ -40,14 +40,12 @@ export default {
           dataToSend
         )
         .then((response) => {
-          console.log(response.data);
           this.totalPages = response.data.total_pages;
           this.teachers = response.data.teachers;
 
           //ottengo numero totale insegnanti
           this.totalTeachers = response.data.Tot_teachers;
 
-          console.log(this.teachers);
           this.currentPage = response.data.current_page;
           if (this.currentPage > this.totalPages) {
             this.currentPage = 1;
@@ -188,11 +186,12 @@ export default {
     <div class="mt-5">
       <form class="text-center text-md-start">
         <div class="row row-cols-lg-3 mt-2 mt-md-5 mb-5 justify-content-center">
+
+          <!-- FILTRO MATERIE -->
           <div class="col-12 col-md-4 d-flex flex-column d-md-block align-items-center mt-3 mt-md-0">
             <span class="md-font">MATERIE DISPONIBILI</span>
             <select v-model="store.Subject" class="form-select w-75" id="selected-Subject">
               <option disabled value="">Scegli una materia...</option>
-              <option value=""><b>Tutte le materie</b></option>
               <option v-for="subject in store.materie" :key="subject.id" :value="subject.name"
                 :selected="store.Subject === subject.name ? 'selected' : ''">
                 {{ subject.name }}
@@ -200,20 +199,21 @@ export default {
             </select>
           </div>
 
+          <!-- FILTRO VALUTAZIONE -->
           <div class="col-12 col-md-4 d-flex flex-column d-md-block align-items-center mt-3 mt-md-0">
             <span class="md-font">MEDIA VALUTAZIONI</span>
             <select v-model="store.Rating" class="form-select w-75" id="selected-Rating">
-              <option disabled value="">Filtra per voto</option>
+              <option value="0">Qualsiasi</option>
               <option v-for="rating in store.valutazioni" :key="rating.id" :value="rating.id">
                 {{ rating.name }} in su
               </option>
             </select>
           </div>
 
+          <!-- FILTRO N. DI RECENSIONI -->
           <div class="col-12 col-md-4 d-flex flex-column d-md-block align-items-center mt-3 mt-md-0">
             <span class="md-font">N° MIN. RECENSIONI</span>
             <select v-model="store.Review" class="form-select w-75" id="selected-Review">
-              <option disabled value="">Filtra per numero di recensioni</option>
               <option value="0">Qualsiasi</option>
               <option value="5">Minimo 5 recensioni</option>
               <option value="10">Minimo 10 recensioni</option>

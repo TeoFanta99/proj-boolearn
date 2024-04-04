@@ -33,7 +33,6 @@ export default {
           this.teachers = res.data.teachers;
           this.store.materie = res.data.subjects;
           this.store.valutazioni = res.data.ratings;
-          console.log(store.materie);
           this.loading = false;
         })
         .catch((error) => {
