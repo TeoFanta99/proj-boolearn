@@ -50,13 +50,8 @@ export default {
           console.log(this.teachers);
           this.currentPage = response.data.current_page;
           if (this.currentPage > this.totalPages) {
-            this.currentPage = 1; // Riporta la pagina corrente alla prima pagina
+            this.currentPage = 1;
           }
-          // console.log(this.currentPage);
-          // DEBUG
-          // console.log(response.data);
-          // console.log(this.teachers);
-          // CONFERMO LA FINE DEL CARICAMENTO DEGLI INSEGNANTI
           this.loading = false;
         })
         .catch((error) => {
@@ -244,17 +239,20 @@ export default {
     <div v-if="loading">
       <h3>CARICAMENTO...</h3>
     </div>
+
+    <!-- CARD DEL TEACHER -->
     <div v-else-if="teachers.length > 0" class="row-container">
       <div class="row mt-4">
         <div class="col-12 col-md-4 col-xl-3 p-2" v-for="teacher in teachers" :key="teacher.id">
           <RouterLink :to="{ name: 'show', params: { id: teacher.user.name } }" @click="riempiVet(teacher.id)"
             class="text-decoration-none">
-            <div class="card pt-3 border-0 shadow">
-              <div class="d-flex justify-content-center align-items-center img_circle mx-auto">
+            <div
+              :class="['card pt-3 border-0 shadow', teacher.sponsorships.length > 0 ? 'sponsored_background' : 'unsponsored_background']">
+              <div class="d-flex justify-content-center align-items-center w-75 mx-auto">
                 <img class="w-100 h-100 rounded-circle" :src="getImageUrl(teacher)" alt="" />
               </div>
               <div class="card-body">
-                <div v-if="teacher.sponsorships.length > 0" class="position-absolute star_sponsor">
+                <div v-if="teacher.sponsorships.length > 0" class="star_sponsor">
                   <i class="fa-solid fa-star"></i>
                 </div>
 
@@ -263,9 +261,10 @@ export default {
                 <div class="med_rec">
                   <div>
                     <i class="fas fa-star" style="color: #ffd43b"></i>
-                    <span class="ps-2" style="color: #ffd43b; font-weight: bold;">{{ media(teacher.average_rating)
-                      }}</span>
-                    <span class="ms-2">({{ teacher.reviews.length }})</span>
+                    <span class="ps-2 rating-and-review" style="color: #ffd43b; font-weight: bold;">{{
+        media(teacher.average_rating)
+      }}</span>
+                    <span class="ms-2 rating-and-review">({{ teacher.reviews.length }})</span>
                   </div>
                 </div>
               </div>
@@ -348,14 +347,13 @@ export default {
   font-weight: bold;
 }
 
-@media all and (min-width: 768px) and (max-width: 991px) {
-  .md-font {
-    font-size: 15px;
-    font-weight: bold;
+@media all and (min-width: 768px) and (max-width: 1399px) {
+  .teacher-name {
+    font-size: 18px;
   }
 
-  .teacher-name {
-    font-size: 15px;
+  .rating-and-review {
+    font-size: 16px;
   }
 }
 
@@ -366,5 +364,34 @@ export default {
   .row {
     width: 90%;
   }
+}
+
+.star_sponsor {
+  position: absolute;
+  top: 10%;
+  right: 5%;
+
+  .fa-star {
+    color: #5353ff;
+  }
+}
+
+.card {
+  transition: transform ease-out 0.2s;
+
+  &:hover {
+    transition: all ease-in 0.2s;
+    transform: scale(1.05);
+  }
+}
+
+.sponsored-background {
+  background: linear-gradient(315deg, #ffea74 40%, #cbcbcb 60%);
+  background-size: 400% 400%;
+  background-attachment: fixed;
+}
+
+.unsponsored-background {
+  background-color: white;
 }
 </style>

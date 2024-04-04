@@ -163,11 +163,11 @@ export default {
         <div class="col-12 col-md-4 col-xl-3 p-2" v-for="teacher in teachers" :key="teacher.id">
           <RouterLink tag="div" :to="{ name: 'show', params: { id: teacher.user.name } }"
             @click="riempiVet(teacher.id), (store.view = 2)" class="text-decoration-none">
-            <div class="card pt-3 border-0 shadow on_hover">
-              <div class="position-absolute star_sponsor">
+            <div class="card pt-3 border-0 shadow">
+              <div class="star_sponsor">
                 <i class="fa-solid fa-star"></i>
               </div>
-              <div class="d-flex justify-content-center align-items-center img_circle mx-auto">
+              <div class="d-flex justify-content-center align-items-center w-75 mx-auto">
                 <img class="w-100 h-100 rounded-circle" :src="getImageUrl(teacher)" alt="" />
               </div>
               <div class="card-body">
@@ -175,10 +175,10 @@ export default {
                   }}</h4>
                 <div class="med_rec mt-3">
                   <div>
-                    <i class="fas fa-star" style="color: #00bf63"></i>
-                    <span class="ps-2 rating-and-review" style="color: #00bf63; font-weight: bold;">{{
+                    <i class="fas fa-star" style="color: #5353ff;"></i>
+                    <span class="ps-2 rating-and-review" style="color: #5353ff;; font-weight: bold;">{{
           media(teacher.average_rating) }}</span>
-                    <span class="ms-2 rating-and-review" style="color: lightgreen">({{ teacher.reviews.length
+                    <span class="ms-2 rating-and-review" style="color: #5353ff;">({{ teacher.reviews.length
                       }})</span>
                   </div>
                 </div>
@@ -194,7 +194,10 @@ export default {
     </div>
   </div>
 </template>
-<style lang="scss">
+
+
+
+<style lang="scss" scoped>
 .loading-gif {
   display: flex;
   justify-content: center;
@@ -203,11 +206,6 @@ export default {
   width: 100px;
   opacity: 0;
   animation: fadeInOut 1.5s ease-in-out forwards;
-}
-
-.loading-image {
-  width: 100%;
-  animation: zoomInOut 1.5s ease-in-out infinite;
 }
 
 @keyframes fadeInOut {
@@ -235,6 +233,7 @@ export default {
 }
 
 .star_sponsor {
+  position: absolute;
   top: 10%;
   right: 5%;
 
@@ -243,21 +242,21 @@ export default {
   }
 }
 
-.testo-rosso {
-  color: red;
-}
 
-.img_circle {
-  width: 60%;
-}
-
-.on_hover {
-  transition: all ease-in 0.5s;
-  transform: scale(1);
+.card {
+  margin: auto;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  background: linear-gradient(315deg, #ffea74 40%, #cbcbcb 60%);
+  animation: gradient 7s ease infinite;
+  background-size: 400% 400%;
+  background-attachment: fixed;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all ease-out 0.2s;
 
   &:hover {
-    transition: all ease-in 0.5s;
-    transform: scale(1.08);
+    transition: all ease-in 0.2s;
+    transform: scale(1.05);
   }
 }
 
@@ -289,18 +288,6 @@ export default {
 form {
   width: 88%;
   margin: 0 auto;
-}
-
-.card {
-  margin: auto;
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  background: linear-gradient(315deg, #f8f862 49%, rgba(60, 132, 206, 1) 98%);
-  animation: gradient 15s ease infinite;
-  background-size: 400% 400%;
-  background-attachment: fixed;
-  border-radius: 10px;
-  /* Aggiungi bordi arrotondati */
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .card::before {
