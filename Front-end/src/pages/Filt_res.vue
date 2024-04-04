@@ -176,60 +176,69 @@ export default {
 
 <template>
   <div class="container">
-    <div class="Gen_result d-flex flex-column align-items-center d-md-block pt-5">
-      <span class="d-block filt_text w-80 p-2"><b>MATERIA SELEZIONATA: </b>{{ store.Subject }}</span>
-      <br>
-      <span style="margin-top: 20px" class="d-block filt_text w-80 p-2"><b>RISULTATI TROVATI: </b>{{ totalTeachers
-        }}</span>
-    </div>
 
-    <div class="mt-5">
-      <form class="text-center text-md-start">
-        <div class="row row-cols-lg-3 mt-2 mt-md-5 mb-5 justify-content-center">
+    <!-- CONTENITORE DELLA STAMPA RISULTATI + 3 FILTRI + BOTTONE -->
+    <div class="d-flex justify-content-between">
 
-          <!-- FILTRO MATERIE -->
-          <div class="col-12 col-md-4 d-flex flex-column d-md-block align-items-center mt-3 mt-md-0">
-            <span class="md-font">MATERIE DISPONIBILI</span>
-            <select v-model="store.Subject" class="form-select w-75" id="selected-Subject">
-              <option disabled value="">Scegli una materia...</option>
-              <option v-for="subject in store.materie" :key="subject.id" :value="subject.name"
-                :selected="store.Subject === subject.name ? 'selected' : ''">
-                {{ subject.name }}
-              </option>
-            </select>
+      <!-- STAMPA RISULTATI -->
+      <div class="pt-5" style="width: 30%">
+        <span class="d-block filt_text w-80">Materia: <b>{{ store.Subject }}</b></span>
+        <span style="margin-top: 20px" class="d-block filt_text w-80">Risultati: <b>{{ totalTeachers
+            }}</b></span>
+      </div>
+
+
+      <!-- CONTENITORE DEI 3 FILTRI + BOTTONE -->
+      <div class="mt-5" style="border: 1px solid black; width: 70%">
+        <form class="text-center">
+          <div class="row">
+
+            <!-- FILTRO MATERIE -->
+            <div class="col-4">
+              <span class="md-font">Materie</span>
+              <select v-model="store.Subject" class="form-select" id="selected-Subject">
+                <option disabled value="">Scegli una materia...</option>
+                <option v-for="subject in store.materie" :key="subject.id" :value="subject.name"
+                  :selected="store.Subject === subject.name ? 'selected' : ''">
+                  {{ subject.name }}
+                </option>
+              </select>
+            </div>
+
+            <!-- FILTRO VALUTAZIONE -->
+            <div class="col-4">
+              <span class="md-font">Media voti</span>
+              <select v-model="store.Rating" class="form-select" id="selected-Rating">
+                <option value="0">Qualsiasi</option>
+                <option v-for="rating in store.valutazioni" :key="rating.id" :value="rating.id">
+                  {{ rating.name }} in su
+                </option>
+              </select>
+            </div>
+
+            <!-- FILTRO N. DI RECENSIONI -->
+            <div class="col-4">
+              <span class="md-font">N° recensioni</span>
+              <select v-model="store.Review" class="form-select" id="selected-Review">
+                <option value="0">Qualsiasi</option>
+                <option value="5">Minimo 5 recensioni</option>
+                <option value="10">Minimo 10 recensioni</option>
+                <option value="12">Minimo 12 recensioni</option>
+              </select>
+            </div>
           </div>
 
-          <!-- FILTRO VALUTAZIONE -->
-          <div class="col-12 col-md-4 d-flex flex-column d-md-block align-items-center mt-3 mt-md-0">
-            <span class="md-font">MEDIA VALUTAZIONI</span>
-            <select v-model="store.Rating" class="form-select w-75" id="selected-Rating">
-              <option value="0">Qualsiasi</option>
-              <option v-for="rating in store.valutazioni" :key="rating.id" :value="rating.id">
-                {{ rating.name }} in su
-              </option>
-            </select>
+          <!-- BOTTONE AVVIO RICERCA -->
+          <div class="w-100 d-flex justify-content-center">
+            <button type="submit" form="nameform" value="Submit" style="padding: 10px 70px" class="btn h-50 btn-info"
+              @click="population()">
+              <i class="fas fa-search" style="color: white"></i>
+            </button>
           </div>
 
-          <!-- FILTRO N. DI RECENSIONI -->
-          <div class="col-12 col-md-4 d-flex flex-column d-md-block align-items-center mt-3 mt-md-0">
-            <span class="md-font">N° MIN. RECENSIONI</span>
-            <select v-model="store.Review" class="form-select w-75" id="selected-Review">
-              <option value="0">Qualsiasi</option>
-              <option value="5">Minimo 5 recensioni</option>
-              <option value="10">Minimo 10 recensioni</option>
-              <option value="12">Minimo 12 recensioni</option>
-            </select>
-          </div>
-        </div>
+        </form>
 
-        <div class="w-100 d-flex justify-content-center">
-          <button type="submit" form="nameform" value="Submit" style="padding: 10px 70px" class="btn h-50 btn-info"
-            @click="population()">
-            <i class="fas fa-search" style="color: white"></i>
-          </button>
-        </div>
-
-      </form>
+      </div>
 
     </div>
 
@@ -260,8 +269,8 @@ export default {
                     <div>
                       <i class="fas fa-star" style="color: #5353ff"></i>
                       <span class="ps-2 rating-and-review" style="color: #5353ff; font-weight: bold;">{{
-        media(teacher.average_rating)
-      }}</span>
+          media(teacher.average_rating)
+        }}</span>
                       <span class="ms-2 rating-and-review" style="color: #5353ff">({{ teacher.reviews.length }})</span>
                     </div>
                   </div>
@@ -286,8 +295,8 @@ export default {
                     <div>
                       <i class="fas fa-star" style="color: #5353ff"></i>
                       <span class="ps-2 rating-and-review" style="color: #5353ff; font-weight: bold;">{{
-        media(teacher.average_rating)
-      }}</span>
+          media(teacher.average_rating)
+        }}</span>
                       <span class="ms-2 rating-and-review" style="color: #5353ff">({{ teacher.reviews.length }})</span>
                     </div>
                   </div>
@@ -335,12 +344,6 @@ export default {
 
 
 <style lang="scss" scoped>
-.Gen_result {
-  display: flex;
-  justify-content: space-between;
-  line-height: 1;
-}
-
 .med_rec {
   display: flex;
   justify-content: space-between;
@@ -364,30 +367,9 @@ export default {
 }
 
 .filt_text {
-  margin: 0 auto;
-  text-align: center;
   font-size: 35px;
   font-weight: 600;
   color: black;
-  box-shadow: 6px 6px 10px -1px rgba(252, 252, 252, 0.863),
-    -6px -6px 10px -1px rgba(0, 0, 0, 0.7);
-  border-radius: 10px;
-  text-shadow: 2px 6px 4px rgba(82, 243, 189, 0.692);
-}
-
-.md-font {
-  font-size: 20px;
-  font-weight: bold;
-}
-
-@media all and (min-width: 768px) and (max-width: 1399px) {
-  .teacher-name {
-    font-size: 18px;
-  }
-
-  .rating-and-review {
-    font-size: 16px;
-  }
 }
 
 .row-container {
@@ -432,5 +414,18 @@ export default {
 
 .unsponsored-background {
   background-color: white;
+}
+
+
+
+// MEDIA QUERY
+@media all and (min-width: 768px) and (max-width: 1399px) {
+  .teacher-name {
+    font-size: 18px;
+  }
+
+  .rating-and-review {
+    font-size: 16px;
+  }
 }
 </style>
