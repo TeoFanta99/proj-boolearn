@@ -402,19 +402,25 @@ export default {
 }
 
 .sponsored-teacher-card {
-  background-color: #cbcbcb;
+  background: linear-gradient(to top left, rgb(249, 255, 132) 0%, rgb(123, 248, 255) 100%);
   background-size: 400% 400%;
-  background-attachment: fixed;
-  animation: gradient 7s ease infinite;
 
   &:hover {
-    background-color: #ffea74;
+    transition: all ease-in 0.2s;
+    transform: scale(1.05);
+    background: linear-gradient(to top left, rgb(247, 255, 95) 0%, rgb(82, 246, 255) 100%);
   }
 }
 
 .unsponsored-background {
   background-color: white;
 }
+
+.card {
+  filter: brightness(1);
+}
+
+
 
 
 

@@ -242,19 +242,19 @@ export default {
 .card {
   margin: auto;
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  background-color: #cbcbcb;
-  animation: gradient 7s ease infinite;
+  background: linear-gradient(to top left, rgb(249, 255, 132) 0%, rgb(123, 248, 255) 100%);
   background-size: 400% 400%;
-  background-attachment: fixed;
   border-radius: 10px;
   transition: all ease-out 0.2s;
+
 
   &:hover {
     transition: all ease-in 0.2s;
     transform: scale(1.05);
-    background-color: #ffea74;
+    background: linear-gradient(to top left, rgb(247, 255, 95) 0%, rgb(82, 246, 255) 100%);
   }
 }
+
 
 .med_rec {
   display: flex;
